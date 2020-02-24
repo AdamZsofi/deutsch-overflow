@@ -2,6 +2,17 @@
 
 title Eisfeld - Class Diagram 
 
+Interface IControllable {
+    void step(Direction dir) 
+    void pickUp(Item i) 
+    void clearSnow() 
+    void digItemUp() 
+    void savePlayers(Direction dir) 
+    void putSignalTogether(SignalFlare) 
+    void passRound() 
+}
+Player ..|> IControllable
+
 abstract class Player { 
     int BodyHeat 
     int ID 
