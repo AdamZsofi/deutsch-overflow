@@ -1,0 +1,178 @@
+@startuml 
+
+title Eisfeld - Class Diagram 
+
+abstract class Player { 
+    int BodyHeat 
+    int ID 
+    int workPoints 
+    boolean inWater 
+    Item inHand 
+    Item wearing 
+    void startRound() 
+    void step(Direction dir) 
+    void pickUp(Item i) 
+    void clearSnow() 
+    void digItemUp() 
+    void savePlayers(Direction dir) 
+    void putSignalTogether(SignalFlare) 
+    void passRound() 
+    void fallInWater() 
+    void ateFood() 
+    void changeBodyHeat(signed int thisMuch) 
+    void wear(DivingSuit suit) 
+    -boolean hasEnoughWorkPoints(int cost) 
+} 
+
+class Eskimo { 
+    int BodyHeat = 5 
+    void buildIglu() 
+} 
+
+class Researcher { 
+    int BodyHeat = 4 
+    void detectCapacity() 
+} 
+
+Player --> Direction 
+
+class PlayerContainer { 
+    Player getPlayer(int pid) 
+} 
+
+PlayerContainer "pid" *-- Player 
+Player <|-- Eskimo 
+Player <|-- Researcher 
+
+class SnowStorm { 
+    tryStorm() 
+} 
+
+enum Activities { 
+    savingPeople 
+    clearingSnow 
+    puttingOnSuit 
+    eatingFood 
+} 
+
+abstract class Item { 
+    thrownDown() 
+    pickedUp(Player Picker) 
+    diggedUp() 
+    void used(Player, Activity) 
+} 
+
+class Food { 
+    void used(Player, Activity) <<override>> 
+} 
+
+class Rope { 
+    void used(Player, Activity) <<override>> 
+} 
+
+class Shovel { 
+    void used(Player, Activity) <<override>> 
+} 
+
+class DivingSuit { 
+    void used(Player, Activity) <<override>> 
+} 
+
+class SignalFlarePart { 
+    int partID 
+    void used(Player, Activity) <<override>> 
+} 
+
+Item <|-- SignalFlarePart 
+Item <|-left- Food 
+Item <|-left- Rope 
+Item <|-left- Shovel 
+Item <|-left- DivingSuit 
+
+class SignalFlare { 
+    putTogether(RoundController rc) 
+} 
+
+SignalFlarePart "3"--* SignalFlare 
+SignalFlare ..> RoundController 
+SignalFlare --> PositionLUT 
+
+abstract class Tile { 
+    int x 
+    int y 
+    int snow 
+    +boolean igluOn 
+    steppedOn(Player p) 
+    steppedOff(Direction dir) 
+    int changeSnow(signed int thisMuch) 
+    Tile getNeighbour(Direction dir) 
+} 
+
+class StableTile 
+class UnstableTile { 
+    int capacity 
+    int standingHere 
+} 
+
+class SnowyHole
+
+Tile <|-- StableTile 
+Tile <|-- UnstableTile 
+Tile <|-- SnowyHole 
+Tile ..> Player 
+
+enum Direction { 
+    up 
+    down 
+    left 
+    right 
+} 
+
+enum ItemState { 
+    frozen 
+    inHand 
+    thrownDown 
+} 
+
+Item -down-> ItemState 
+Tile --> Direction 
+Item ..> Player 
+Player --> Activities 
+
+class PositionLUT << (S,#FF7700) Singleton >> { 
+    Tile getPosition(Player p) 
+    Tile getPosition(Item i) 
+    Player[] getPlayersOnTile(Tile t) 
+    Item[] getItemsOnTile(Tile t) 
+    Tile getTile(int x, int y) 
+    void setPosition(Player p) 
+    void setPosition(Item i) 
+} 
+
+PositionLUT "playerMap\n3..6" o--> Player 
+PositionLUT "tilePlayerMap\n3..6" o--> Player 
+PositionLUT "tileList\n36" *-- Tile 
+PositionLUT "itemMap\n0..7" o-- Item 
+PositionLUT "tileItemMap\n0..7" o-- Item 
+
+class RoundController { 
+    int curID 
+    void init(int playerNum) 
+    nextRound() 
+    void lose(String cause) 
+    void win() 
+    PlayerContainer getPlayerContainer() 
+} 
+
+RoundController --> SnowStorm 
+RoundController --> PlayerContainer 
+RoundController --> Item 
+RoundController --> Tile 
+RoundController --> SignalFlare 
+RoundController --> PlayerContainer 
+Player --> RoundController 
+RoundController --> SnowStorm 
+SnowStorm --> PositionLUT 
+SnowStorm ..> Player 
+
+@enduml 
