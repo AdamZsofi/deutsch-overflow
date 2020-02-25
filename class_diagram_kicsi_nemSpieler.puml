@@ -35,10 +35,10 @@ class SignalFlarePart {
 } 
 
 Item <|-- SignalFlarePart 
-Item <|-left- Food 
-Item <|-left- Rope 
-Item <|-left- Shovel 
-Item <|-left- DivingSuit 
+Item <|-- Food 
+Item <|-- Rope 
+Item <|-- Shovel 
+Item <|-- DivingSuit 
 
 class SignalFlare { 
     void putTogether(RoundController rc) 
@@ -118,6 +118,6 @@ RoundController --> "ss"SnowStorm
 RoundController --> "it"Item 
 RoundController --> "t"Tile 
 RoundController --> "sg"SignalFlare
-SnowStorm -right-> PositionLUT 
+SnowStorm --> PositionLUT 
 
 @enduml
