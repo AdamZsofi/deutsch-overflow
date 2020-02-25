@@ -3,45 +3,45 @@
 title Eisfeld - Class Diagram 
 
 Interface IControllable {
-    void step(Direction dir) 
-    void pickUp(Item i) 
-    void clearSnow() 
-    void digItemUp() 
-    void savePlayers(Direction dir) 
-    void putSignalTogether(SignalFlare sg) 
-    void passRound() 
+    +void step(Direction dir) 
+    +void pickUp(Item i) 
+    +void clearSnow() 
+    +void digItemUp() 
+    +void savePlayers(Direction dir) 
+    +void putSignalTogether(SignalFlare sg) 
+    +void passRound() 
 }
 Player ..|> IControllable
 
 abstract class Player { 
-    int BodyHeat 
-    int ID 
-    int workPoints 
-    boolean inWater 
-    Item inHand 
-    Item wearing 
-    void startRound() 
-    void fallInWater() 
-    void ateFood() 
-    void changeBodyHeat(signed int thisMuch) 
-    void wear(DivingSuit suit) 
+    -int BodyHeat 
+    -int ID 
+    -int workPoints 
+    -boolean inWater 
+    -Item inHand 
+    -Item wearing 
+    +void startRound() 
+    +void fallInWater() 
+    +void ateFood() 
+    +void changeBodyHeat(signed int thisMuch) 
+    +void wear(DivingSuit suit) 
     -boolean hasEnoughWorkPoints(int cost) 
 } 
 
 class Eskimo { 
-    int BodyHeat = 5 
-    void buildIglu() 
+    -int BodyHeat = 5 
+    -void buildIglu() 
 } 
 
 class Researcher { 
-    int BodyHeat = 4 
-    void detectCapacity() 
+    -int BodyHeat = 4 
+    -void detectCapacity() 
 } 
 
 Player --> Direction 
 
 class PlayerContainer { 
-    Player getPlayer(int pid) 
+    +Player getPlayer(int pid) 
 } 
 
 PlayerContainer "pid" *-- Player 
@@ -49,7 +49,7 @@ Player <|-- Eskimo
 Player <|-- Researcher 
 
 class SnowStorm { 
-    tryStorm() 
+    +void tryStorm() 
 } 
 
 enum Activities { 
@@ -60,31 +60,31 @@ enum Activities {
 } 
 
 abstract class Item { 
-    thrownDown() 
-    pickedUp(Player Picker) 
-    diggedUp() 
-    void used(Player p, Activity a) 
+    +void thrownDown() 
+    +void pickedUp(Player Picker) 
+    +void diggedUp() 
+    +void used(Player p, Activity a) 
 } 
 
 class Food { 
-    void used(Player p, Activity a) <<override>> 
+    +void used(Player p, Activity a) <<override>> 
 } 
 
 class Rope { 
-    void used(Player p, Activity a) <<override>> 
+    +void used(Player p, Activity a) <<override>> 
 } 
 
 class Shovel { 
-    void used(Player p, Activity a) <<override>> 
+    +void used(Player p, Activity a) <<override>> 
 } 
 
 class DivingSuit { 
-    void used(Player p, Activity a) <<override>> 
+    +void used(Player p, Activity a) <<override>> 
 } 
 
 class SignalFlarePart { 
-    int partID 
-    void used(Player p, Activity a) <<override>> 
+    -int partID 
+    +void used(Player p, Activity a) <<override>> 
 } 
 
 Item <|-- SignalFlarePart 
@@ -94,7 +94,7 @@ Item <|-left- Shovel
 Item <|-left- DivingSuit 
 
 class SignalFlare { 
-    putTogether(RoundController rc) 
+    void putTogether(RoundController rc) 
 } 
 
 SignalFlarePart "3"--* SignalFlare 
@@ -102,22 +102,22 @@ SignalFlare ..> RoundController
 SignalFlare --> PositionLUT 
 
 abstract class Tile { 
-    int x 
-    int y 
-    int snow 
+    #int x 
+    #int y 
+    #int snow 
     -boolean igluOn 
-    steppedOn(Player p) 
-    steppedOff(Direction dir) 
-    int changeSnow(signed int thisMuch) 
-    Tile getNeighbour(Direction dir)
-    void destroyIglu()
-    void buildIglu()
+    +void steppedOn(Player p) 
+    +void steppedOff(Direction dir) 
+    +int changeSnow(signed int thisMuch) 
+    +Tile getNeighbour(Direction dir)
+    +void destroyIglu()
+    +void buildIglu()
 } 
 
 class StableTile 
 class UnstableTile { 
-    int capacity 
-    int standingHere 
+    -int capacity 
+    +int standingHere 
 } 
 
 class SnowyHole
@@ -146,13 +146,13 @@ Item ..> Player
 Player --> Activities 
 
 class PositionLUT << (S,#FF7700) Singleton >> { 
-    Tile getPosition(Player p) 
-    Tile getPosition(Item i) 
-    Player[] getPlayersOnTile(Tile t) 
-    Item[] getItemsOnTile(Tile t) 
-    Tile getTile(int x, int y) 
-    void setPosition(Player p) 
-    void setPosition(Item i) 
+    +Tile getPosition(Player p) 
+    +Tile getPosition(Item i) 
+    +Player[] getPlayersOnTile(Tile t) 
+    +Item[] getItemsOnTile(Tile t) 
+    +Tile getTile(int x, int y) 
+    +void setPosition(Player p) 
+    +void setPosition(Item i) 
 } 
 
 PositionLUT "\tplayerTileMap        \n\t3..6        " o--> Player 
@@ -162,13 +162,13 @@ PositionLUT "itemTileMap\t\n0..7\t\t" o-- Item
 PositionLUT "tileItemMap\n0..7" o-- Item 
 
 class RoundController { 
-    int curID 
-    void init(int playerNum) 
-    void startNextRound() 
-    void endLastRound()
-    void lose(String cause) 
-    void win() 
-    PlayerContainer getPlayerContainer() 
+    -int curID 
+    +void init(int playerNum) 
+    +void startNextRound() 
+    +void endLastRound()
+    +void lose(String cause) 
+    +void win() 
+    +PlayerContainer getPlayerContainer() 
 } 
 
 RoundController --> "ss"SnowStorm 
