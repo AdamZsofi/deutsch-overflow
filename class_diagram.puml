@@ -1,3 +1,4 @@
+ 
 @startuml 
 
 title Eisfeld - Class Diagram 
@@ -30,12 +31,12 @@ abstract class Player {
 
 class Eskimo { 
     -int BodyHeat = 5 
-    -void buildIglu() 
+    +void buildIglu() 
 } 
 
 class Researcher { 
     -int BodyHeat = 4 
-    -void detectCapacity() 
+    +void detectCapacity(Direction dir) 
 } 
 
 Player --> Direction 
@@ -180,4 +181,4 @@ Player "roundController"--> RoundController
 SnowStorm --> PositionLUT 
 SnowStorm ..> Player 
 
-@enduml 
+@enduml
