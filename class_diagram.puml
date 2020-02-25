@@ -21,13 +21,6 @@ abstract class Player {
     Item inHand 
     Item wearing 
     void startRound() 
-    void step(Direction dir) 
-    void pickUp(Item i) 
-    void clearSnow() 
-    void digItemUp() 
-    void savePlayers(Direction dir) 
-    void putSignalTogether(SignalFlare) 
-    void passRound() 
     void fallInWater() 
     void ateFood() 
     void changeBodyHeat(signed int thisMuch) 
@@ -112,11 +105,13 @@ abstract class Tile {
     int x 
     int y 
     int snow 
-    +boolean igluOn 
+    -boolean igluOn 
     steppedOn(Player p) 
     steppedOff(Direction dir) 
     int changeSnow(signed int thisMuch) 
-    Tile getNeighbour(Direction dir) 
+    Tile getNeighbour(Direction dir)
+    void destroyIglu()
+    void buildIglu()
 } 
 
 class StableTile 
@@ -160,16 +155,17 @@ class PositionLUT << (S,#FF7700) Singleton >> {
     void setPosition(Item i) 
 } 
 
-PositionLUT "playerMap\n3..6" o--> Player 
+PositionLUT "playerTileMap\n3..6" o--> Player 
 PositionLUT "tilePlayerMap\n3..6" o--> Player 
 PositionLUT "tileList\n36" *-- Tile 
-PositionLUT "itemMap\n0..7" o-- Item 
+PositionLUT "itemTileMap\n0..7" o-- Item 
 PositionLUT "tileItemMap\n0..7" o-- Item 
 
 class RoundController { 
     int curID 
     void init(int playerNum) 
-    nextRound() 
+    void startNextRound() 
+    void endLastRound()
     void lose(String cause) 
     void win() 
     PlayerContainer getPlayerContainer() 
@@ -181,8 +177,7 @@ RoundController --> Item
 RoundController --> Tile 
 RoundController --> SignalFlare 
 RoundController --> PlayerContainer 
-Player --> RoundController 
-RoundController --> SnowStorm 
+Player "roundController"--> RoundController 
 SnowStorm --> PositionLUT 
 SnowStorm ..> Player 
 
