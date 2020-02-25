@@ -8,7 +8,7 @@ Interface IControllable {
     void clearSnow() 
     void digItemUp() 
     void savePlayers(Direction dir) 
-    void putSignalTogether(SignalFlare) 
+    void putSignalTogether(SignalFlare sg) 
     void passRound() 
 }
 Player ..|> IControllable
@@ -63,28 +63,28 @@ abstract class Item {
     thrownDown() 
     pickedUp(Player Picker) 
     diggedUp() 
-    void used(Player, Activity) 
+    void used(Player p, Activity a) 
 } 
 
 class Food { 
-    void used(Player, Activity) <<override>> 
+    void used(Player p, Activity a) <<override>> 
 } 
 
 class Rope { 
-    void used(Player, Activity) <<override>> 
+    void used(Player p, Activity a) <<override>> 
 } 
 
 class Shovel { 
-    void used(Player, Activity) <<override>> 
+    void used(Player p, Activity a) <<override>> 
 } 
 
 class DivingSuit { 
-    void used(Player, Activity) <<override>> 
+    void used(Player p, Activity a) <<override>> 
 } 
 
 class SignalFlarePart { 
     int partID 
-    void used(Player, Activity) <<override>> 
+    void used(Player p, Activity a) <<override>> 
 } 
 
 Item <|-- SignalFlarePart 
@@ -155,10 +155,10 @@ class PositionLUT << (S,#FF7700) Singleton >> {
     void setPosition(Item i) 
 } 
 
-PositionLUT "playerTileMap\n3..6" o--> Player 
-PositionLUT "tilePlayerMap\n3..6" o--> Player 
+PositionLUT "\tplayerTileMap        \n\t3..6        " o--> Player 
+PositionLUT "\t\ttilePlayerMap   \n\t\t3..6   " o--> Player 
 PositionLUT "tileList\n36" *-- Tile 
-PositionLUT "itemTileMap\n0..7" o-- Item 
+PositionLUT "itemTileMap\t\n0..7\t\t" o-- Item 
 PositionLUT "tileItemMap\n0..7" o-- Item 
 
 class RoundController { 
@@ -171,11 +171,11 @@ class RoundController {
     PlayerContainer getPlayerContainer() 
 } 
 
-RoundController --> SnowStorm 
-RoundController --> PlayerContainer 
-RoundController --> Item 
-RoundController --> Tile 
-RoundController --> SignalFlare
+RoundController --> "ss"SnowStorm 
+RoundController --> "pc"PlayerContainer 
+RoundController --> "it"Item 
+RoundController --> "t"Tile 
+RoundController --> "sg"SignalFlare
 Player "roundController"--> RoundController 
 SnowStorm --> PositionLUT 
 SnowStorm ..> Player 
