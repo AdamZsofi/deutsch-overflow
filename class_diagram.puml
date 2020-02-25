@@ -175,8 +175,7 @@ RoundController --> SnowStorm
 RoundController --> PlayerContainer 
 RoundController --> Item 
 RoundController --> Tile 
-RoundController --> SignalFlare 
-RoundController --> PlayerContainer 
+RoundController --> SignalFlare
 Player "roundController"--> RoundController 
 SnowStorm --> PositionLUT 
 SnowStorm ..> Player 
