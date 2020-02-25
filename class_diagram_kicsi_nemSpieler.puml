@@ -1,0 +1,123 @@
+@startuml 
+
+title Felder, Gegenstände, Schneesturm - Class Diagram Teil2
+
+class SnowStorm { 
+    +void tryStorm() 
+} 
+
+abstract class Item { 
+    +void thrownDown() 
+    +void pickedUp(Player Picker) 
+    +void diggedUp() 
+    +void used(Player p, Activity a) 
+} 
+
+class Food { 
+    +void used(Player p, Activity a) <<override>> 
+} 
+
+class Rope { 
+    +void used(Player p, Activity a) <<override>> 
+} 
+
+class Shovel { 
+    +void used(Player p, Activity a) <<override>> 
+} 
+
+class DivingSuit { 
+    +void used(Player p, Activity a) <<override>> 
+} 
+
+class SignalFlarePart { 
+    -int partID 
+    +void used(Player p, Activity a) <<override>> 
+} 
+
+Item <|-- SignalFlarePart 
+Item <|-left- Food 
+Item <|-left- Rope 
+Item <|-left- Shovel 
+Item <|-left- DivingSuit 
+
+class SignalFlare { 
+    void putTogether(RoundController rc) 
+} 
+
+SignalFlarePart "3"--* SignalFlare 
+SignalFlare ..> RoundController 
+SignalFlare --> PositionLUT 
+
+abstract class Tile { 
+    #int x 
+    #int y 
+    #int snow 
+    -boolean igluOn 
+    +void steppedOn(Player p) 
+    +void steppedOff(Direction dir) 
+    +int changeSnow(signed int thisMuch) 
+    +Tile getNeighbour(Direction dir)
+    +void destroyIglu()
+    +void buildIglu()
+} 
+
+class StableTile 
+class UnstableTile { 
+    -int capacity 
+    +int standingHere 
+} 
+
+class SnowyHole
+
+Tile <|-- StableTile 
+Tile <|-- UnstableTile 
+Tile <|-- SnowyHole 
+
+
+enum ItemState { 
+    frozen 
+    inHand 
+    thrownDown 
+} 
+
+enum Direction { 
+    up 
+    down 
+    left 
+    right 
+} 
+
+Item -down-> ItemState 
+Tile --> Direction
+
+class PositionLUT << (S,#FF7700) Singleton >> { 
+    +Tile getPosition(Player p) 
+    +Tile getPosition(Item i) 
+    +Player[] getPlayersOnTile(Tile t) 
+    +Item[] getItemsOnTile(Tile t) 
+    +Tile getTile(int x, int y) 
+    +void setPosition(Player p) 
+    +void setPosition(Item i) 
+} 
+
+PositionLUT "tileList\n36" *-- Tile 
+PositionLUT "itemTileMap\n0..7" o-- Item 
+PositionLUT "tileItemMap\n0..7" o-- Item 
+
+class RoundController { 
+    -int curID 
+    +void init(int playerNum) 
+    +void startNextRound() 
+    +void endLastRound()
+    +void lose(String cause) 
+    +void win() 
+    +PlayerContainer getPlayerContainer() 
+} 
+
+RoundController --> "ss"SnowStorm 
+RoundController --> "it"Item 
+RoundController --> "t"Tile 
+RoundController --> "sg"SignalFlare
+SnowStorm -right-> PositionLUT 
+
+@enduml
