@@ -14,19 +14,20 @@ Interface IControllable {
 Player ..|> IControllable
 
 abstract class Player { 
-    -int BodyHeat 
-    -int ID 
-    -int workPoints 
-    -boolean inWater 
-    -Item inHand 
-    -Item wearing 
+    #int BodyHeat 
+    #int ID 
+    #int workPoints 
+    #boolean inWater 
+    #Item inHand 
+    #Item wearing 
     +void startRound() 
     +void fallInWater() 
     +void ateFood() 
     +void changeBodyHeat(signed int thisMuch) 
     +void wear(DivingSuit suit) 
-    -boolean hasEnoughWorkPoints(int cost) 
-} 
+    #boolean hasEnoughWorkPoints(int cost) 
+}
+Player o-- "inHand\n0..1" Item
 
 class Eskimo { 
     -int BodyHeat = 5 
