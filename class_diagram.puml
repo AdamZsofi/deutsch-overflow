@@ -96,7 +96,7 @@ Item <|-left- Shovel
 Item <|-left- DivingSuit 
 
 class SignalFlare { 
-    void putTogether(RoundController rc) 
+    +void putTogether(RoundController rc) 
 } 
 
 SignalFlarePart "3"--* SignalFlare 
