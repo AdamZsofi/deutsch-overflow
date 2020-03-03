@@ -30,12 +30,10 @@ abstract class Player {
 Player o-- "inHand\n0..1" Item
 
 class Eskimo { 
-    -int BodyHeat = 5 
     +void buildIglu() 
 } 
 
 class Researcher { 
-    -int BodyHeat = 4 
     +void detectCapacity(Direction dir) 
 } 
 
