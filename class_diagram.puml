@@ -31,12 +31,10 @@ abstract class Player {
 Player o-- "inHand\n0..1" Item
 
 class Eskimo { 
-    -int BodyHeat = 5 
     +void buildIglu() 
 } 
 
 class Researcher { 
-    -int BodyHeat = 4 
     +void detectCapacity(Direction dir) 
 } 
 
@@ -159,7 +157,7 @@ class PositionLUT << (S,#FF7700) Singleton >> {
 
 PositionLUT "\tplayerTileMap        \n\t3..6        " o--> Player 
 PositionLUT "\t\ttilePlayerMap   \n\t\t3..6   " o--> Player 
-PositionLUT "tileList\n36" *-- Tile 
+PositionLUT "tileList\nTILESNUM" *-- Tile 
 PositionLUT "itemTileMap\t\n0..7\t\t" o-- Item 
 PositionLUT "tileItemMap\n0..7" o-- Item 
 
