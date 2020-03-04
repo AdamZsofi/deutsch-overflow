@@ -15,27 +15,26 @@ Interface IControllable {
 Player ..|> IControllable
 
 abstract class Player { 
-    -int BodyHeat 
-    -int ID 
-    -int workPoints 
-    -boolean inWater 
-    -Item inHand 
-    -Item wearing 
+    #int BodyHeat 
+    #int ID 
+    #int workPoints 
+    #boolean inWater 
+    #Item wearing 
     +void startRound() 
     +void fallInWater() 
     +void ateFood() 
     +void changeBodyHeat(signed int thisMuch) 
     +void wear(DivingSuit suit) 
-    -boolean hasEnoughWorkPoints(int cost) 
-} 
+    #boolean hasEnoughWorkPoints(int cost) 
+}
+
+Player o-- "inHand\n0..1" Item
 
 class Eskimo { 
-    -int BodyHeat = 5 
     +void buildIglu() 
 } 
 
 class Researcher { 
-    -int BodyHeat = 4 
     +void detectCapacity(Direction dir) 
 } 
 
@@ -95,7 +94,7 @@ Item <|-left- Shovel
 Item <|-left- DivingSuit 
 
 class SignalFlare { 
-    void putTogether(RoundController rc) 
+    +void putTogether(RoundController rc) 
 } 
 
 SignalFlarePart "3"--* SignalFlare 
@@ -158,7 +157,7 @@ class PositionLUT << (S,#FF7700) Singleton >> {
 
 PositionLUT "\tplayerTileMap        \n\t3..6        " o--> Player 
 PositionLUT "\t\ttilePlayerMap   \n\t\t3..6   " o--> Player 
-PositionLUT "tileList\n36" *-- Tile 
+PositionLUT "tileList\nTILESNUM" *-- Tile 
 PositionLUT "itemTileMap\t\n0..7\t\t" o-- Item 
 PositionLUT "tileItemMap\n0..7" o-- Item 
 

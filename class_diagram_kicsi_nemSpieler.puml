@@ -100,7 +100,7 @@ class PositionLUT << (S,#FF7700) Singleton >> {
     +void setPosition(Item i) 
 } 
 
-PositionLUT "tileList\n36" *-- Tile 
+PositionLUT "tileList\nTILESNUM" *-- Tile 
 PositionLUT "itemTileMap\n0..7" o-- Item 
 PositionLUT "tileItemMap\n0..7" o-- Item 
 
