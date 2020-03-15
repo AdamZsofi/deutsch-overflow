@@ -1,6 +1,6 @@
 public class RoundController {
 
-    private int curID,
+    private int curID;
     public SignalFlare sg;
     public SnowStorm ss;
     public PlayerContainer pc;
