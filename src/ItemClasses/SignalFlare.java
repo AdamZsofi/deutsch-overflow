@@ -1,3 +1,5 @@
+package ItemClasses;
+
 import java.util.ArrayList;
 
 public class SignalFlare {

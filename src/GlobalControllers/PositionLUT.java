@@ -1,3 +1,9 @@
+package GlobalControllers;
+
+import ItemClasses.Item;
+import PlayerClasses.Player;
+import TileClasses.Tile;
+
 import java.util.ArrayList;
 
 public class PositionLUT {

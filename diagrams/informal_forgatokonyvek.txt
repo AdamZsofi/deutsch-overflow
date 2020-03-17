@@ -1,6 +1,6 @@
 Előzetes forgatókönyvek: 
 
-RoundController Init 
+GlobalControllers.RoundController Init
 
 Elkér a konténertől egy játékost 
 
@@ -40,7 +40,7 @@ storm visszatér
 
  
 
-RoundController köv. játékos lépését hívja 
+GlobalControllers.RoundController köv. játékos lépését hívja
 
  
 
@@ -68,9 +68,9 @@ játékos lépések:
 
         steppedOff visszaadja a tilet, ahova lépni akar player 
 
-    player setPosition(Player)-t hív LUT-on 
+    player setPosition(PlayerClasses.Player)-t hív LUT-on
 
-    player steppedOn(Player)-t hív ezen a tileon 
+    player steppedOn(PlayerClasses.Player)-t hív ezen a tileon
 
     tile típusától függően lereagálja ezt 
 
@@ -90,7 +90,7 @@ játékos lépések:
 
         azt ledobjuk (ledobást hívunk rajta, item megfelelően beállítja magát és berakja magát LUT-ba) 
 
-        újat kézbe veszi player (inHand), azon pickUp(Player Picker)-t hívunk, új kézbeli item is beállítja magát, kiveszi magát LUT-ból 
+        újat kézbe veszi player (inHand), azon pickUp(PlayerClasses.Player Picker)-t hívunk, új kézbeli item is beállítja magát, kiveszi magát LUT-ból
 
             ha divingSuit - felveszi magát, ha tudja, ha nem, a földön marad 
 
@@ -102,7 +102,7 @@ játékos lépések:
 
     digUpItem: costs 1, jégbe fagyott cuccot ás ki 
 
-        Player lekéri LUT-tól az alatta lévő tilet, 
+        PlayerClasses.Player lekéri LUT-tól az alatta lévő tilet,
 
         majd lekéri a tileon az itemeket 
 
@@ -122,7 +122,7 @@ játékos lépések:
 
             a következő körig kimentik -> lásd mentés 
 
-            ha nem: meghal, loset hív RoundControlleren (cause: "Player x fell in the icy water") 
+            ha nem: meghal, loset hív RoundControlleren (cause: "PlayerClasses.Player x fell in the icy water")
 
         ha van, adunk +1 work point-t (step miattit kiegyenlítendő) és a playernek küldünk GUI-ra egy lehetőséget, hogy hova léphet (várunk rá), ekkor a player 
 
@@ -134,7 +134,7 @@ játékos lépések:
 
         Tfh. h adott játékos ott van mellette (előtte step-k, stb.) 
 
-        kapunk egy savePlayers(Direction dir)-t 
+        kapunk egy savePlayers(TileClasses.Direction dir)-t
 
         Van-e játékosnál kötél? -  
 
@@ -160,17 +160,17 @@ játékos lépések:
 
     nyerés: 
 
-        A SignalFlare funkciója ellenőrizni, hogy lehetséges-e ez a mozdulat, 
+        A ItemClasses.SignalFlare funkciója ellenőrizni, hogy lehetséges-e ez a mozdulat,
 
-        vagyis ha a user hív playeren egy putSignalTogether(SignalFlare)-t, akkor  
+        vagyis ha a user hív playeren egy putSignalTogether(ItemClasses.SignalFlare)-t, akkor
 
-        a player SignalFlare-n hív egy put together(RoundController)-t, az siker esetén (leellenőrzi, hogy minden item inHand-e és minden játékos egy mezőn áll-e) RoundController-nek küld egy win()-t, amúgy visszatér (küld egy sikertelen hibaüzenetet max, de az már GUI) 
-
- 
+        a player ItemClasses.SignalFlare-n hív egy put together(GlobalControllers.RoundController)-t, az siker esetén (leellenőrzi, hogy minden item inHand-e és minden játékos egy mezőn áll-e) GlobalControllers.RoundController-nek küld egy win()-t, amúgy visszatér (küld egy sikertelen hibaüzenetet max, de az már GUI)
 
  
 
-used(Activity, Player)-ról: Trükkös a helyzet, hogy ne kelljen instanceof()-t hívni, egy flaget állítunk be (activity enum), 
+ 
+
+used(ItemClasses.Activity, PlayerClasses.Player)-ról: Trükkös a helyzet, hogy ne kelljen instanceof()-t hívni, egy flaget állítunk be (activity enum),
 
 ami alapján a tárgy tudja, hogy ő most azt a tevékenységet el tudja-e végezni (ha menteni akarunk ásóval, az nem fog semmit csinálni), viszont fontos, hogy a megfelelő check-eket (divingSuit fel tudja-e venni magát pl), 
 

@@ -1,3 +1,7 @@
+package TileClasses;
+
+import PlayerClasses.Player;
+
 public abstract class Tile {
     protected int x,y,snow;
     private boolean igluOn;

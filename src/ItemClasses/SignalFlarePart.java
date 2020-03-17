@@ -1,3 +1,7 @@
+package ItemClasses;
+
+import PlayerClasses.Player;
+
 public class SignalFlarePart extends Item {
 
     private int partID;

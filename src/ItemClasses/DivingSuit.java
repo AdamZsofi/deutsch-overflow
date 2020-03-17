@@ -1,3 +1,7 @@
+package ItemClasses;
+
+import PlayerClasses.Player;
+
 public class DivingSuit extends Item{
 
     @Override

@@ -2,50 +2,50 @@
 
 title Spieler - Class Diagram Teil 1
 
-Interface IControllable {
-    +void step(Direction dir) 
-    +void pickUp(Item i) 
+Interface PlayerClasses.IControllable {
+    +void step(TileClasses.Direction dir)
+    +void pickUp(ItemClasses.Item i)
     +void clearSnow() 
     +void digItemUp() 
-    +void savePlayers(Direction dir) 
-    +void putSignalTogether(SignalFlare sg) 
+    +void savePlayers(TileClasses.Direction dir)
+    +void putSignalTogether(ItemClasses.SignalFlare sg)
     +void passRound() 
 }
-Player ..|> IControllable
+PlayerClasses.Player ..|> PlayerClasses.IControllable
 
-abstract class Player { 
+abstract class PlayerClasses.Player {
     #int BodyHeat 
     #int ID 
     #int workPoints 
     #boolean inWater 
-    #Item inHand 
-    #Item wearing 
+    #ItemClasses.Item inHand
+    #ItemClasses.Item wearing
     +void startRound() 
     +void fallInWater() 
     +void ateFood() 
     +void changeBodyHeat(signed int thisMuch) 
-    +void wear(DivingSuit suit) 
+    +void wear(ItemClasses.DivingSuit suit)
     #boolean hasEnoughWorkPoints(int cost) 
 }
-Player o-- "inHand\n0..1" Item
+PlayerClasses.Player o-- "inHand\n0..1" ItemClasses.Item
 
-class Eskimo { 
+class PlayerClasses.Eskimo {
     +void buildIglu() 
 } 
 
-class Researcher { 
-    +void detectCapacity(Direction dir) 
+class PlayerClasses.Researcher {
+    +void detectCapacity(TileClasses.Direction dir)
 } 
 
-Player --> Direction 
+PlayerClasses.Player --> TileClasses.Direction
 
-class PlayerContainer { 
-    +Player getPlayer(int pid) 
+class PlayerClasses.PlayerContainer {
+    +PlayerClasses.Player getPlayer(int pid)
 } 
 
-PlayerContainer "pid" *-- Player 
-Player <|-- Eskimo 
-Player <|-- Researcher 
+PlayerClasses.PlayerContainer "pid" *-- PlayerClasses.Player
+PlayerClasses.Player <|-- PlayerClasses.Eskimo
+PlayerClasses.Player <|-- PlayerClasses.Researcher
 
 enum Activities { 
     savingPeople 
@@ -55,39 +55,39 @@ enum Activities {
 } 
 
 
-enum Direction { 
+enum TileClasses.Direction {
     up 
     down 
     left 
     right 
 } 
 
-Player --> Activities 
+PlayerClasses.Player --> Activities
 
-class PositionLUT << (S,#FF7700) Singleton >> { 
-    +Tile getPosition(Player p) 
-    +Tile getPosition(Item i) 
-    +Player[] getPlayersOnTile(Tile t) 
-    +Item[] getItemsOnTile(Tile t) 
-    +Tile getTile(int x, int y) 
-    +void setPosition(Player p) 
-    +void setPosition(Item i) 
+class GlobalControllers.PositionLUT << (S,#FF7700) Singleton >> {
+    +TileClasses.Tile getPosition(PlayerClasses.Player p)
+    +TileClasses.Tile getPosition(ItemClasses.Item i)
+    +PlayerClasses.Player[] getPlayersOnTile(TileClasses.Tile t)
+    +ItemClasses.Item[] getItemsOnTile(TileClasses.Tile t)
+    +TileClasses.Tile getTile(int x, int y)
+    +void setPosition(PlayerClasses.Player p)
+    +void setPosition(ItemClasses.Item i)
 } 
 
-PositionLUT "\tplayerTileMap        \n\t3..6        " o--> Player 
-PositionLUT "\t\ttilePlayerMap   \n\t\t3..6   " o--> Player 
+GlobalControllers.PositionLUT "\tplayerTileMap        \n\t3..6        " o--> PlayerClasses.Player
+GlobalControllers.PositionLUT "\t\ttilePlayerMap   \n\t\t3..6   " o--> PlayerClasses.Player
 
-class RoundController { 
+class GlobalControllers.RoundController {
     -int curID 
     +void init(int playerNum) 
     +void startNextRound() 
     +void endLastRound()
     +void lose(String cause) 
     +void win() 
-    +PlayerContainer getPlayerContainer() 
+    +PlayerClasses.PlayerContainer getPlayerContainer()
 } 
 
-RoundController --> "pc"PlayerContainer 
-Player "roundController"--> RoundController 
+GlobalControllers.RoundController --> "pc"PlayerClasses.PlayerContainer
+PlayerClasses.Player "roundController"--> GlobalControllers.RoundController
 
 @enduml
