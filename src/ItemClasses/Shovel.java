@@ -12,7 +12,7 @@ public class Shovel extends Item{
 
 
         if(a == Activity.clearingSnow){
-            Tile t = PositionLUT.i.getPosition(p);
+            Tile t = PositionLUT.pLUT.getPosition(p);
             t.changeSnow(-1);//csak egy, mert a Player.clearSnowbol jön, ott már egyet alapbol ás az áson kivul.
         }
     }

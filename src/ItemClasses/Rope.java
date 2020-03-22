@@ -15,10 +15,10 @@ public class Rope extends Item{
 
 
         if(a == Activity.savingPeople) {
-            Tile currentTile = PositionLUT.i.getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
+            Tile currentTile = PositionLUT.pLUT.getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
             Direction dir = getDir();//csak egy gyors pelda
             Tile waterTile = currentTile.getNeighbour(dir);
-            ArrayList<Player> inWaterPlayers = PositionLUT.i.getPlayersOnTile(waterTile);
+            ArrayList<Player> inWaterPlayers = PositionLUT.pLUT.getPlayersOnTile(waterTile);
             for (Player iwp:inWaterPlayers) {
                 if(iwp.inWater){
                     dir = getDir();

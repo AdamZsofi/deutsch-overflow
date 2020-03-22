@@ -42,20 +42,20 @@ public abstract class Player {
 
         BodyHeat += thisMuch;
     }; // signed helyett( error volt nekem)
-
     public void wear(DivingSuit suit) {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("wear(ItemClasses.DivingSuit)");
 
         wearing = suit;
     };
-
     protected boolean hasEnoughWorkPoints(int cost) { //van munka, ami több pontba kerül?(lehetne default = 1)
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("hasEnoughWorkPoints("+cost+")");
 
-        if(cost>workPoints) return false;
-        else return true;
+        if(cost>workPoints)
+            return false;
+        workPoints -= cost;
+        return true;
     };
 
     // IControllable implementations:

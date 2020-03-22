@@ -3,11 +3,23 @@ package TileClasses;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 
+import java.util.Random;
+
 public abstract class Tile {
-    protected int x,y,snow;
+    protected int x,y; //x, y final lehetne --> public is lehetne
+    protected int snow;
     private boolean igluOn;
 
-    public void steppedOn(Player p){
+    public Tile(int x, int y){
+        this.x = x;
+        this.y = y;
+        igluOn = false;
+        Random r = new Random();
+        snow = r.nextInt(4) + 1 ;//snow lehet: 1, 2, 3, 4
+    }
+
+
+    public void steppedOn(Player p){ //class diagramban void seq-ben Tile a return
 //todo
     }
     public void steppedOff(Direction dir) {
@@ -17,7 +29,10 @@ public abstract class Tile {
         System.out.println("TileClasses.Tile.changeSnow(): " + thisMuch);
 
 
-        snow += thisMuch;//todo ne lehessen túlásni.
+        if(snow+thisMuch>0)
+            snow += thisMuch;
+        else
+            snow = 0;
         return snow;
     }
     public Tile getNeighbour(Direction dir){
@@ -41,7 +56,7 @@ public abstract class Tile {
             default:
                 nx= x; ny= y;
         }
-        return PositionLUT.i.getTile(nx, ny);//todo kéne rossz indexelest nezni
+        return PositionLUT.pLUT.getTile(nx, ny);//todo kéne rossz indexelest nezni
     }
     public void destroyIglu(){
         System.out.println("TileClasses.Tile.destroyIglu()");
