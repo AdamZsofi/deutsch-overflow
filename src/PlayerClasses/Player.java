@@ -17,6 +17,7 @@ public abstract class Player {
     protected Item wearing; //lehetne DivingSuit is vagy csak egy boolean, ugyse csinalunk mar vele semmit
 
     public void startRound() {
+        workPoints = 4;
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("startRound()");
         System.out.println("Waiting for player input...");
@@ -52,7 +53,7 @@ public abstract class Player {
                         savePlayers(Direction.up);
                         break;
                     case 5:
-                        putSignalTogether(RoundController.rc.sg);
+                        putSignalTogether(RoundController.getInstance().sg);
                     case 6:
                         passRound();
                         break;
@@ -157,13 +158,13 @@ public abstract class Player {
         System.out.print("(IControllable) Player:");
         System.out.println("putSignalTogether("+sg+")");
 
-        sg.putTogether(RoundController.rc);
+        sg.putTogether(RoundController.getInstance());
     };
     void passRound() {
         System.out.print("(IControllable) Player:");
         System.out.println("passRound()");
 
-        RoundController.rc.endLastRound();
+        RoundController.getInstance().endLastRound();
     };
     // Done with IControllable Implementations
 }

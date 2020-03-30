@@ -17,16 +17,25 @@ public class RoundController {
     // pc skeletonban nem itt.
     public Item it;
 
-    public static RoundController getInstance(PlayerContainer pc) {
+    public static RoundController getInstance() {
         // TODO paraméterek - mi az, amit kap, mi az, amit magának hoz létre? (Kb mi az, amit posLUT és mi az, amit ő hoz létre)
+        // Megj.: Ha bármit kap paraméterben, akkor kell egy init fgv és egy getInstance külön, ahol getInstance nem kap paramétert
+        // hogy pl. Player működését itt a paraméterek ne nyírják ki
         if(rc == null) {
-            rc = new RoundController(pc);
+            throw new NullPointerException("RoundController wasn't initialized");
         }
         return rc;
     }
 
-    private RoundController(PlayerContainer pc) {
-        // TODO befejezni - lásd feljebb
+    public static RoundController initializeInstance() { // TODO put parameters here and in c'tor
+        if(rc == null) {
+
+        }
+        return rc;
+    }
+
+    private RoundController() {
+        // TODO befejezni - lásd init-ben
     }
 
     public void init(int playerNum){
