@@ -6,11 +6,10 @@ import SnowStorm.SnowStorm;
 import java.util.Scanner;
 
 public class SkeletonMain {
-    // TODO RoundController init here, ha kell bárkinek, Stormhoz nem kell
-    static PositionLUT positionLUT = PositionLUT.getInstance();
 
     public static void main(String[] args) {
-
+        // TODO RoundController init here
+        PositionLUT.getInstance();
         // nem rakok ide végtelen ciklust, egy lefutás = egy scene tesztje
         System.out.println("Choose a scene you want to test:");
         System.out.println("(0) Example test");
@@ -38,11 +37,11 @@ public class SkeletonMain {
     }
 
     static void testStorm() { // Storm tesztje, az aleseteket a tryStorm-ban választjuk ki
-        SnowStorm ss = new SnowStorm(positionLUT);
+        SnowStorm ss = new SnowStorm();
         // In case of an igloo destroying storm, we need an igloo first, we initialize that here
         // This is a "syntetic use" of our classes, normally you don't build an igloo outside of the round of an eskimo
         System.out.println("Initializing an Igloo for the test case 'destroying igloo'...");
-        positionLUT.getTile(2,1).buildIglu();
+        PositionLUT.getInstance().getTile(2,1).buildIglu();
         ss.tryStorm();
     }
 }
