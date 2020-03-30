@@ -15,7 +15,14 @@ import java.util.Random;
 
 public class PositionLUT {//todo a containerek feltöltése adattal, itemek legyenek mind initelve. kellene majd egy init method
     public static PositionLUT pLUT = new PositionLUT(); //singleton, 1 peldany kell
-/*
+
+    public static PositionLUT getInstance() {
+        if(pLUT == null) {
+            pLUT = new PositionLUT();
+        }
+        return pLUT;
+    }
+    /*
     private PositionLUT(){
         itemTileMap = new HashMap<>();
         tileItemMap = new HashMap<>();
@@ -129,7 +136,6 @@ public class PositionLUT {//todo a containerek feltöltése adattal, itemek legy
 
 
     }
-
 
     public Tile getPosition(Player p){
         System.out.println("GlobalControllers.PositionLUT.getPosition(Player p)");
