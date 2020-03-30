@@ -6,5 +6,6 @@ public class Eskimo extends Player {
         System.out.print("PlayerClasses.Eskimo, ID"+ID+":");
         System.out.println("buildIgloo()");
         // TODO
+
     };
 }
