@@ -35,6 +35,9 @@ public abstract class Tile {
             snow = 0;
         return snow;
     }
+    public int getSnow(){
+        return snow;
+    }
     public Tile getNeighbour(Direction dir){
         System.out.println("TileClasses.Tile.getNeighbour(): " + dir);
 
