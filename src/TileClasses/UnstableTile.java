@@ -14,8 +14,7 @@ public class UnstableTile extends Tile {
 
     public UnstableTile(int x, int y) {
         super(x, y);
-        Random r = new Random();
-        capacity = r.nextInt(RoundController.rc.pc.players.size()) + 1 ;
+        capacity = 1 ;
     }
 
     @Override
@@ -32,6 +31,7 @@ public class UnstableTile extends Tile {
             ArrayList<Player> players = PositionLUT.pLUT.tilePlayerMap.get(t);
             for (Player player: players) {
                 player.fallInWater();
+                
             }
         }
     }

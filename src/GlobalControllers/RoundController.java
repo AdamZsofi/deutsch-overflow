@@ -19,7 +19,7 @@ public class RoundController {
         System.out.println("GlobalControllers.init("+ playerNum+")");
 
 
-        pc = new PlayerContainer(playerNum);
+        //pc = new PlayerContainer(playerNum);
     }
     public void startNextRound(){
         System.out.println("GlobalControllers.startNextRound()");

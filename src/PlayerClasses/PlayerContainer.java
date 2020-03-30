@@ -1,21 +1,23 @@
 package PlayerClasses;
 
+import GlobalControllers.RoundController;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayerContainer {
 
+    public static PlayerContainer pc = new PlayerContainer(4);
+
     public ArrayList<Player> players;
 
     public PlayerContainer(int num){
         players = new ArrayList<Player>();
-        Random random = new Random();
-        for(int i = 0; i<num; i ++){
-            if(random.nextInt(100) + 1  <= 70 )//70%os esellyel lesz kutato (random szam 1-100 <= 70)
-                players.add(new Researcher());
-            else
-                players.add(new Eskimo());
-        }
+        players.add(new Eskimo());
+        players.add(new Eskimo());
+        players.add(new Researcher());
+        players.add(new Researcher());
+
     }
 
     public Player getPlayer(int pid) {  //voiddadl tert vissza
