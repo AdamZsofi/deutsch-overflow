@@ -40,8 +40,6 @@ public abstract class Tile {
     }
     public Tile getNeighbour(Direction dir){
         System.out.println("TileClasses.Tile.getNeighbour(): " + dir);
-
-
         int nx, ny;
         switch (dir) {
             case down:
@@ -59,18 +57,14 @@ public abstract class Tile {
             default:
                 nx= x; ny= y;
         }
-        return PositionLUT.pLUT.getTile(nx, ny);//todo kéne rossz indexelest nezni
+        return PositionLUT.getInstance().getTile(nx, ny);//todo kéne rossz indexelest nezni
     }
     public void destroyIglu(){
         System.out.println("TileClasses.Tile.destroyIglu()");
-
-
         igluOn = false;
     }
     public void buildIglu(){
         System.out.println("TileClasses.Tile.buildIglu()");
-
-
         igluOn = true;
     }
 }

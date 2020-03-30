@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class PositionLUT {//todo a containerek feltöltése adattal, itemek legyenek mind initelve. kellene majd egy init method
-    public static PositionLUT pLUT = new PositionLUT(); //singleton, 1 peldany kell
+    private static PositionLUT pLUT; //singleton, 1 peldany kell
 
     public static PositionLUT getInstance() {
         if(pLUT == null) {
