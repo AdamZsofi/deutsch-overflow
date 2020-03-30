@@ -9,16 +9,17 @@ import java.util.Scanner;
 
 public class Rope extends Item{
 
+    // Tile's getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
     @Override
     public void used(Player p, Activity a){
         System.out.println("ItemClasses.Rope.used()");
 
 
         if(a == Activity.savingPeople) {
-            Tile currentTile = PositionLUT.pLUT.getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
+            Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
             Direction dir = getDir();//csak egy gyors pelda
             Tile waterTile = currentTile.getNeighbour(dir);
-            ArrayList<Player> inWaterPlayers = PositionLUT.pLUT.getPlayersOnTile(waterTile);
+            ArrayList<Player> inWaterPlayers = PositionLUT.getInstance().getPlayersOnTile(waterTile);
             for (Player iwp:inWaterPlayers) {
                 if(iwp.inWater){
                     dir = getDir();

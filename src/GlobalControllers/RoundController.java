@@ -13,8 +13,6 @@ public class RoundController {
     private int curID; //current player ID, player ID: pc.players arrayban az indexszáma
     public SignalFlare sg;
     public SnowStorm ss;
-    //public  PlayerContainer pc; //ötlet: pc lehetne final, init
-    // pc skeletonban nem itt.
     public Item it;
 
     public static RoundController getInstance() {
@@ -49,12 +47,12 @@ public class RoundController {
         System.out.println("GlobalControllers.RoundController.startNextRound()");
 
 
-        PlayerContainer.pc.getPlayer(curID).startRound();
+        PlayerContainer.getInstance().getPlayer(curID).startRound();
     }
     public void endLastRound(){
         System.out.println("GlobalControllers.RoundController.endLastRound()");
 
-        curID = (curID + 1) % PlayerContainer.pc.players.size();
+        curID = (curID + 1) % PlayerContainer.getInstance().getPlayerNum();
 
     }
     public void lose(String cause){
@@ -66,13 +64,6 @@ public class RoundController {
         System.out.println("GlobalControllers.RoundController.win()");
 
         System.exit(0);
-    }
-
-    public PlayerContainer getPlayerContainer(){ //publicnak minek getter? felolem lehet privat tag, de pc egy static final osztaly kene legyen.
-        System.out.println("GlobalControllers.RoundController.getPlayerContainer()");
-
-
-        return PlayerContainer.pc;
     }
 
 }

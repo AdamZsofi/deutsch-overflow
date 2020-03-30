@@ -6,12 +6,28 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayerContainer {
+    private int playerNum;
 
-    public static PlayerContainer pc = new PlayerContainer(4);
+    private static PlayerContainer pc = new PlayerContainer(4);
 
-    public ArrayList<Player> players;
+    public static PlayerContainer getInstance() {
+        if(pc == null) throw new NullPointerException("PlayerContainer should be initialized");
+        return pc;
+    }
 
-    public PlayerContainer(int num){
+    public static void Initialize(int num) {
+        if(pc == null) {
+            pc = new PlayerContainer(num);
+        }
+    }
+
+    private ArrayList<Player> players;
+
+    public int getPlayerNum() {
+        return playerNum;
+    }
+
+    private PlayerContainer(int num){
         players = new ArrayList<Player>();
         players.add(new Eskimo());
         players.add(new Eskimo());
@@ -20,15 +36,11 @@ public class PlayerContainer {
 
     }
 
-    public Player getPlayer(int pid) {  //voiddadl tert vissza
+    public Player getPlayer(int pid) { // pid = players-ben az adott player indexe
         System.out.print("PlayerContainer:");
         System.out.println("getPlayer("+pid+")");
 
-
-        for (Player p:players) {
-            if(p.ID == pid)
-                return p;
-        }
-        return null;
+        if(pid>playerNum) throw new NullPointerException("Player with that pid does not exist");
+        else return players.get(pid);
     };
 }

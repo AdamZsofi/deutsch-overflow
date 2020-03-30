@@ -63,11 +63,11 @@ public class PositionLUT {//todo a containerek feltöltése adattal, itemek legy
         }
     }
 */
-    public HashMap<Item, Tile> itemTileMap;
-    public HashMap<Tile, ArrayList<Item>> tileItemMap; //kövezzetek meg, jo lesz karbantartani 🙂👍 init után put nem lesz ajanlott
-    public HashMap<Player, Tile> playerTileMap;
-    public HashMap<Tile, ArrayList<Player>> tilePlayerMap;//🙂👍
-    public ArrayList<ArrayList<Tile>> tileList;//y: array index, x: Tile index
+    private HashMap<Item, Tile> itemTileMap;
+    private HashMap<Tile, ArrayList<Item>> tileItemMap; //kövezzetek meg, jo lesz karbantartani 🙂👍 init után put nem lesz ajanlott
+    private HashMap<Player, Tile> playerTileMap;
+    private HashMap<Tile, ArrayList<Player>> tilePlayerMap;//🙂👍
+    private ArrayList<ArrayList<Tile>> tileList;//y: array index, x: Tile index
 
     private PositionLUT(){
         tileList = new ArrayList<>();
@@ -114,27 +114,24 @@ public class PositionLUT {//todo a containerek feltöltése adattal, itemek legy
         itemTileMap.put(items4.get(0), getTile(0, 2));
 
         playerTileMap = new HashMap<>();
-        playerTileMap.put(PlayerContainer.pc.players.get(0),  getTile(2,0));//eskimo1
-        playerTileMap.put(PlayerContainer.pc.players.get(1),  getTile(3,1));//eskimo2
-        playerTileMap.put(PlayerContainer.pc.players.get(2),  getTile(0,0));//researcher1
-        playerTileMap.put(PlayerContainer.pc.players.get(3),  getTile(0,3));//researcher2
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(0),  getTile(2,0));//eskimo1
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(1),  getTile(3,1));//eskimo2
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(2),  getTile(0,0));//researcher1
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(3),  getTile(0,3));//researcher2
 
         tilePlayerMap = new HashMap<>();
         ArrayList player1 = new ArrayList();
-        player1.add(PlayerContainer.pc.players.get(0));
+        player1.add(PlayerContainer.getInstance().getPlayer(0));
         tilePlayerMap.put(getTile(2,0), player1);
         ArrayList player2 = new ArrayList();
-        player1.add(PlayerContainer.pc.players.get(1));
+        player1.add(PlayerContainer.getInstance().getPlayer(1));
         tilePlayerMap.put(getTile(3,1), player2);
         ArrayList player3 = new ArrayList();
-        player1.add(PlayerContainer.pc.players.get(2));
+        player1.add(PlayerContainer.getInstance().getPlayer(2));
         tilePlayerMap.put(getTile(0,0), player3);
         ArrayList player4 = new ArrayList();
-        player1.add(PlayerContainer.pc.players.get(3));
+        player1.add(PlayerContainer.getInstance().getPlayer(3));
         tilePlayerMap.put(getTile(0,3), player4);
-
-
-
     }
 
     public Tile getPosition(Player p){
@@ -144,7 +141,6 @@ public class PositionLUT {//todo a containerek feltöltése adattal, itemek legy
     }
     public Tile getPosition(Item i){
         System.out.println("GlobalControllers.PositionLUT.getPosition(Item i)");
-
 
         return itemTileMap.get(i);
     }

@@ -3,6 +3,7 @@ package PlayerClasses;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 import TileClasses.Direction;
+import TileClasses.Tile;
 
 public class Researcher extends Player {
 
@@ -10,8 +11,10 @@ public class Researcher extends Player {
         System.out.print("ResearcherID "+ID+":");
         System.out.println("detectCapacity("+dir+")");
 
-        TileClasses.Tile tile = PositionLUT.pLUT.playerTileMap.get(this);
-        int capacity = tile.getSnow();
+        // getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
+        Tile thisTile = PositionLUT.getInstance().getPosition(this);
+        Tile checkedTile = thisTile.getNeighbour(dir);
+        int capacity = checkedTile.getCapacity();
         System.out.println("Tile capacity: "+capacity);
     };
 }

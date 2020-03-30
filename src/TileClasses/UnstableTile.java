@@ -9,29 +9,26 @@ import java.util.Random;
 
 public class UnstableTile extends Tile {
 
-    private int capacity;  ///sztem jobb lenne a Tile ban, igy egyszerubb, overridekj nelkul és a kutató is egyszerubben nezheti meg az egeszet
-    public int standingHere;//ennyi erovel ez is mehetne oda.
-
     public UnstableTile(int x, int y) {
         super(x, y);
-        capacity = 1 ;
+        capacity = 1 ; // ez majd random lesz élesben
     }
 
     @Override
-    public void steppedOff(Direction dir) {//todo ha sokan beleestek es megmentettek oket, visszalehet ide jonni? nincs lekezelve
-        super.steppedOff(dir);
+    public void steppedOff(Direction dir) {
+        System.out.println("TileClasses.UnstableTile.steppedOff()");
         standingHere--;
     }
 
     @Override
     public void steppedOn(Player p) {
-        super.steppedOn(p);
+        System.out.println("TileClasses.UnstableTile.steppedOn()");
+        standingHere++;
         if(capacity-standingHere<0){
-            Tile t = PositionLUT.pLUT.playerTileMap.get(p);
-            ArrayList<Player> players = PositionLUT.pLUT.tilePlayerMap.get(t);
+            Tile t = PositionLUT.getInstance().getPosition(p);
+            ArrayList<Player> players = PositionLUT.getInstance().getPlayersOnTile(t);
             for (Player player: players) {
                 player.fallInWater();
-                
             }
         }
     }
