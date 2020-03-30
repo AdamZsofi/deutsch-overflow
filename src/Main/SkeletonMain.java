@@ -1,12 +1,12 @@
 package Main;
 
 import GlobalControllers.PositionLUT;
+import PlayerClasses.Eskimo;
 import SnowStorm.SnowStorm;
-
 import java.util.Scanner;
 
 public class SkeletonMain {
-    // TODO RoundController init here
+    // TODO RoundController init here, ha kell bárkinek, Stormhoz nem kell
     static PositionLUT positionLUT = PositionLUT.getInstance();
 
     public static void main(String[] args) {
@@ -39,6 +39,11 @@ public class SkeletonMain {
 
     static void testStorm() { // Storm tesztje, az aleseteket a tryStorm-ban választjuk ki
         SnowStorm ss = new SnowStorm(positionLUT);
+        // In case of an igloo destroying storm, we need an igloo first, we initialize that here
+        // This is a "syntetic use" of our classes, normally you don't build an igloo outside of the round of an eskimo
+        System.out.println("Initializing an Igloo for the test case 'destroying igloo'...");
+        positionLUT.getTile(2,1).buildIglu();
+        ss.tryStorm();
     }
 }
 

@@ -20,7 +20,7 @@ public abstract class Player {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("startRound()");
         System.out.println("Waiting for player input...");
-
+        workPoints = 4;
         // TODO: lehetséges inputokat kérni a tesztelőtől (for step press (1) ...)
         //Válasz: inkabb a RoundControllerben kene
     };
