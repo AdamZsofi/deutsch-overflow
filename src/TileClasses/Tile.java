@@ -36,7 +36,7 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
     public void changeSnow(int thisMuch) {
         System.out.println("TileClasses.Tile.changeSnow(): " + thisMuch);
 
-        if(snow+thisMuch>0 && snow+thisMuch<=4)
+        if(snow+thisMuch>-4 && snow+thisMuch<=4)
             snow += thisMuch;
     }
     public int getSnow(){

@@ -16,6 +16,7 @@ public class Rope extends Item{
 
 
         if(a == Activity.savingPeople) {
+
             Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
             Direction dir = getDir();//csak egy gyors pelda
             Tile waterTile = currentTile.getNeighbour(dir);

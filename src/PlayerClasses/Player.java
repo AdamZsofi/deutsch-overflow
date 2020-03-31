@@ -117,17 +117,18 @@ public abstract class Player {
     public void pickUp(Item i) {
         System.out.print("(IControllable) Player:");
         System.out.println("pickUp("+i+")"); // TODO: Item toString?
-
-        Tile position= PositionLUT.getInstance().getPosition(i);
-        int snow= position.getSnow();
+        Tile position = PositionLUT.getInstance().getPosition(i);
+        int snow = position.getSnow();
         if(snow==0) {
+            System.out.println("SNOW0");
             if (inHand.getState() == ItemState.thrownDown) {
                 inHand.diggedUp();
             } else {
                 inHand.thrownDown();
             }
             i.pickedUp(this);
-        }
+        };
+        if (inHand!= null) System.out.println("PICKKKK");
         workPoints--;
     }
     //atirni protectedre
