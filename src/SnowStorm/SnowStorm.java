@@ -16,7 +16,7 @@ public class SnowStorm {
         System.out.println("(2) Put snow on a tile");
         Scanner scan = new Scanner(System.in);
         int choice = scan.nextInt();
-        //scan.close();
+        scan.close();
 
         switch (choice) {
             case 0:
