@@ -54,16 +54,16 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
         int nx = this.x, ny = this.y;
         switch (dir) {
             case down:
-                nx = x; ny = y-1;
+                nx = x; ny = y - 1;
                 break;
             case left:
                 nx = x-1; ny = y;
                 break;
             case up:
-                nx = x; ny = y+1;
+                nx = x; ny = y + 1;
                 break;
             case right:
-                nx = x+1; ny = y;
+                nx = x + 1; ny = y;
                 break;
             case here:
                 return this;
