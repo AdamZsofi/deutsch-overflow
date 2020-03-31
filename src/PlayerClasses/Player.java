@@ -163,7 +163,6 @@ public abstract class Player {
             System.out.println("You can't save yourself");
             return;
         }
-
         inHand.used(this,Activity.savingPeople);
         workPoints--;
     }
