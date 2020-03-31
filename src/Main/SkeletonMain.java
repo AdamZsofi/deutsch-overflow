@@ -32,7 +32,7 @@ public class SkeletonMain {
         System.out.println("(10) PlayerAteFood");
         System.out.println("(11) PlayerWearsDivingSuit");
         System.out.println("(12) RoundPassing");
-        System.out.println("(13) SnowStorimg");
+        System.out.println("(13) SnowStoring");
         System.out.println("(14) EskimoBuildsIglu");
         System.out.println("(15) ResearcherDetectsCapacity");
 
@@ -158,6 +158,10 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(0,0);  //Tile (0, 0)
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t); //Items on Tile(0, 0)
         Player p = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
+        while(t.getSnow()>0) {
+            t.changeSnow(-1);
+        }
+        System.out.println(t.getSnow());
         System.out.println("#Player picks item up");
         p.pickUp(its.get(0)); //researcher1 gets showel
     }
@@ -166,6 +170,7 @@ public class SkeletonMain {
         System.out.println("@Player clears snow");
         System.out.println("#Init");
         Tile t = PositionLUT.getInstance().getTile(0,0);  //Tile (0, 0)
+
         //a)
         System.out.println("#Init(1)");
         Player p = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
@@ -187,13 +192,12 @@ public class SkeletonMain {
         eskimo1.step(Direction.right);
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(3,0));
         eskimo1.pickUp(its.get(0)); //eskimo1 picks up Rope
+        if (its.size()>0) System.out.println("YU{");
+
         Player eskimo2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(3,2)).get(0);
         eskimo2.step(Direction.down); //eskimo2 steps in snowyhole
         System.out.println("#Player saves players");
         eskimo1.savePlayers(Direction.up);
-        System.out.println("----");
-        if (PositionLUT.getInstance().getPosition(eskimo2) == PositionLUT.getInstance().getPosition(eskimo1))
-            System.out.println("#Passed");
     }
 
     static void putSignalFlareTogetherSEQ() {
@@ -209,13 +213,21 @@ public class SkeletonMain {
 
         Player eskimo2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(3,2)).get(0);
         eskimo2.step(Direction.left);
-        ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(2,2));
+        Tile t2 = PositionLUT.getInstance().getTile(2,2);
+        ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(t2);
+        while(t2.getSnow()>0) {
+            t2.changeSnow(-1);
+        }
         eskimo2.pickUp(sgf2.get(0)); // one sgf collected
         eskimo2.step(Direction.down); //eskimo2 to Tile (2, 1)
 
         Player researcher2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,2)).get(0);
         researcher2.step(Direction.right);
-        ArrayList<Item> sgf1 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(1,2));
+        Tile t1 = PositionLUT.getInstance().getTile(1,2);
+        ArrayList<Item> sgf1 = PositionLUT.getInstance().getItemOnTile(t1);
+        while(t1.getSnow()>0) {
+            t1.changeSnow(-1);
+        }
         researcher2.pickUp(sgf1.get(0)); // one sgf collected
         researcher2.step(Direction.right);
         researcher2.step(Direction.down); //researcher2 to Tile (2, 1)
@@ -225,8 +237,6 @@ public class SkeletonMain {
 
         System.out.println("#Put SignalFlare together");
         researcher1.putSignalTogether(RoundController.getInstance().sg);
-        System.out.println("----");
-        if (pls.size()==4) System.out.println("#Passed");//meg mast is kell ellenorizni!!!
     }
 
     static void playerAteFoodSEQ() {
@@ -235,16 +245,22 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(0,2);
         Player researcher2 = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t);
+        researcher2.pickUp(its.get(0));
         System.out.println("#Player ate food");
-        researcher2.pickUp(its.get(0)); // researcher2 ates apple
+        researcher2.ateFood();// researcher2 ates apple
     }
 
     static void playerWearsDivingSuitSEQ() {
         System.out.println("@Player wears DivingSuit");
         System.out.println("#Init");
-        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(1,0)); // divingsuit
+        Tile t = PositionLUT.getInstance().getTile(1,0);
+        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t); // divingsuit
         Player researcher1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
         researcher1.step(Direction.right);
+
+        while(t.getSnow()>0) {
+            t.changeSnow(-1);
+        }
         System.out.println("#Player wears DivingSuit");
         researcher1.pickUp(its.get(0)); //researcher1 steps (right) a tile and picks DivingSuitUp
     }
