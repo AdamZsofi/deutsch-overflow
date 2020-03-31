@@ -190,7 +190,11 @@ public class SkeletonMain {
         System.out.println("#Init");
         Player eskimo1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,0)).get(0);
         eskimo1.step(Direction.right);
-        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(3,0));
+        Tile t = PositionLUT.getInstance().getTile(3,0);
+        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t);
+        if(t.getSnow()>0) {
+            t.changeSnow(-t.getSnow());
+        }
         eskimo1.pickUp(its.get(0)); //eskimo1 picks up Rope
         if (its.size()>0) System.out.println("YU{");
 
