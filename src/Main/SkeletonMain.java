@@ -245,6 +245,9 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(0,2);
         Player researcher2 = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t);
+        while(t.getSnow()>0) {
+           t.changeSnow(-1);
+        }
         researcher2.pickUp(its.get(0));
         System.out.println("#Player ate food");
         researcher2.ateFood();// researcher2 ates apple
