@@ -11,33 +11,32 @@ public class RoundController {
     private int curID; //current player ID, player ID: pc.players arrayban az indexszáma
     public SignalFlare sg;
     public SnowStorm ss;
-    public Item it; //ez itt ami a játékos kezében van?
+    //public Item it; //ez itt ami a játékos kezében van?
 
     public static RoundController getInstance() {
         // TODO review
         // paraméterek - mi az, amit kap, mi az, amit magának hoz létre? (Kb mi az, amit posLUT és mi az, amit ő hoz létre)
         // Megj.: Ha bármit kap paraméterben, akkor kell egy init fgv és egy getInstance külön, ahol getInstance nem kap paramétert
         // hogy pl. Player működését itt a paraméterek ne nyírják ki
-        //
-        if(rc == null) {
-            throw new NullPointerException("RoundController wasn't initialized");
-        }
-        return rc;
-    }
-
-    public static RoundController initializeInstance() { //ilyen formában összevonható a getInstance-val, nem kap parametert
+        //egyenlore nem latom hogy lenne külon
         if(rc == null) {
             rc = new RoundController();
         }
         return rc;
     }
 
+    /*
+    public static RoundController initializeInstance() { //ilyen formában összevonható a getInstance-val, nem kap parametert
+        if(rc == null) {
+            rc = new RoundController();
+        }
+        return rc;
+    }*/
+
     private RoundController() {
         ss = new SnowStorm();
-        sg = new SignalFlare();
+        sg = new SignalFlare();//feltölti itemekkel a sajat ArrrayList-ét, posLUT initnél mapon is ott lesz.
         // TODO review
-        //sg: még a benne lévő ArrayList<Item> nincs feltoltve, skeletonba ha nem teszteljuk akkor talan nem is kell.
-        //de ha foltoltjuk, akkor a PositionLUT-ba is bele kell tenni
     }
 
     public void init(int playerNum){ //a játékot inicializálja

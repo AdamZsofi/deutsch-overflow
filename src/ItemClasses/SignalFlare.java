@@ -8,6 +8,14 @@ import java.util.ArrayList;
 public class SignalFlare {
 
     public ArrayList<SignalFlarePart> signalFlareParts;
+    //3 db alkatrész
+
+    public SignalFlare(){
+        signalFlareParts = new ArrayList<>();
+        signalFlareParts.add(new SignalFlarePart(0));
+        signalFlareParts.add(new SignalFlarePart(1));
+        signalFlareParts.add(new SignalFlarePart(2));
+    }
 
     public void putTogether(RoundController rc){
         System.out.println("ItemClasses.SignalFlare.putTogether()");

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class SkeletonMain {
 
     public static void main(String[] args) {
-        RoundController.initializeInstance();
+        RoundController.getInstance(); //letrehoz
         PositionLUT.getInstance();
         // nem rakok ide végtelen ciklust, egy lefutás = egy scene tesztje
         System.out.println("Choose a scene you want to test:");

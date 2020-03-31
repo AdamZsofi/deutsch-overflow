@@ -53,6 +53,7 @@ public class PositionLUT {
         tileList.add(row2);
         tileList.add(row3);
 
+
         tileItemMap = new HashMap<>();
         ArrayList<Item> items1 = new ArrayList<>();
         items1.add(new Shovel());
@@ -67,11 +68,30 @@ public class PositionLUT {
         items1.add(new Food());
         tileItemMap.put(getTile(0,2),items4 );//alma, 1 tagu lista
 
+        //benne vannak a signalflarepartok is.
+        ArrayList<Item> sf1 = new ArrayList<>();
+        items1.add(RoundController.getInstance().sg.signalFlareParts.get(0));
+        tileItemMap.put(getTile(1,2),sf1 );//signalflarepart 0ID
+        ArrayList<Item> sf2 = new ArrayList<>();
+        items1.add(RoundController.getInstance().sg.signalFlareParts.get(1));
+        tileItemMap.put(getTile(2,2),sf2 );//signalflarepart 1ID
+        ArrayList<Item> sf3 = new ArrayList<>();
+        items1.add(RoundController.getInstance().sg.signalFlareParts.get(2));
+        tileItemMap.put(getTile(2,1),sf3 );//signalflarepart 2ID
+
+
         itemTileMap = new HashMap<>();
         itemTileMap.put(items1.get(0), getTile(0, 0));
         itemTileMap.put(items2.get(0), getTile(1, 0));
         itemTileMap.put(items3.get(0), getTile(3, 0));
         itemTileMap.put(items4.get(0), getTile(0, 2));
+
+        itemTileMap.put(RoundController.getInstance().sg.signalFlareParts.get(0), getTile(1,2));
+        itemTileMap.put(RoundController.getInstance().sg.signalFlareParts.get(1), getTile(2,2));
+        itemTileMap.put(RoundController.getInstance().sg.signalFlareParts.get(2), getTile(2,1));
+
+
+
 
         playerTileMap = new HashMap<>();
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(0),  getTile(2,0));//eskimo1
@@ -92,6 +112,8 @@ public class PositionLUT {
         ArrayList player4 = new ArrayList();
         player1.add(PlayerContainer.getInstance().getPlayer(3));
         tilePlayerMap.put(getTile(0,3), player4);
+
+
     }
 
     public Tile getPosition(Player p){
