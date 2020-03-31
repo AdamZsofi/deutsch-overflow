@@ -160,7 +160,6 @@ public class PositionLUT {
         tilePlayerMap.get(t).add(p);//uj hely add
         playerTileMap.put(p, t);//put folulirja az elozot
         //todo megnezni jo e?
-
     }//kell frissiteni: tilePlayerMap, playerTileMap más osztalyokban kell? remelem nem
     public void setPosition(Item i, Tile t){
         System.out.println("GlobalControllers.PositionLUT.setPosition(Item i, Tile t)");

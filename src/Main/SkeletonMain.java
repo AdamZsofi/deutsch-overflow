@@ -38,7 +38,7 @@ public class SkeletonMain {
 
         Scanner scan = new Scanner(System.in);
         int choice = scan.nextInt();
-        scan.close();
+        //scan.close();
 
         switch (choice) {
             case 0:
