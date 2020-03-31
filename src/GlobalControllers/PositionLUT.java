@@ -95,7 +95,7 @@ public class PositionLUT {
 
         playerTileMap = new HashMap<>();
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(0),  getTile(2,0));//eskimo1
-        playerTileMap.put(PlayerContainer.getInstance().getPlayer(1),  getTile(3,1));//eskimo2
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(1),  getTile(3,2));//eskimo2
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(2),  getTile(0,0));//researcher1
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(3),  getTile(0,3));//researcher2
 

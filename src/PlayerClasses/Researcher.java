@@ -16,5 +16,5 @@ public class Researcher extends Player {
         Tile checkedTile = thisTile.getNeighbour(dir);
         int capacity = checkedTile.getCapacity();
         System.out.println("Tile capacity: "+capacity);
-    };
+    }
 }

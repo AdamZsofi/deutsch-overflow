@@ -62,32 +62,32 @@ public abstract class Player {
             }
         }
         passRound(); // ha elfogy a workPoint, akkor automatikus pass
-    };
+    }
     public void fallInWater() {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("fallInWater()");
 
         inWater = true;
-    };
+    }
     public void ateFood() {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("ateFood()");
 
         inHand.used(this, Activity.eatingFood);
-    };
+    }
     public void changeBodyHeat(int thisMuch) {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("changeBodyHeat("+thisMuch+")");
 
         BodyHeat += thisMuch;
-    };
+    }
     public void wear(DivingSuit suit) {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("wear(ItemClasses.DivingSuit)");
 
         suit.used(this,Activity.puttingOnSuit);
         wearing = suit;
-    };
+    }
 
     // IControllable implementations:
     // TODO: none of these implementations are done
@@ -113,7 +113,7 @@ public abstract class Player {
             return;
         }
         workPoints--;
-    };
+    }
     void pickUp(Item i) {
         System.out.print("(IControllable) Player:");
         System.out.println("pickUp("+i+")"); // TODO: Item toString?
@@ -129,7 +129,7 @@ public abstract class Player {
             i.pickedUp(this);
         }
         workPoints--;
-    };
+    }
     void clearSnow() {
         System.out.print("(IControllable) Player:");
         System.out.println("clearSnow()");
@@ -149,7 +149,7 @@ public abstract class Player {
 
         i.diggedUp();
         workPoints--;
-    };
+    }
     void savePlayers(Direction dir) {
         System.out.print("(IControllable) Player:");
         System.out.println("savePlayers("+dir+")");
@@ -160,18 +160,18 @@ public abstract class Player {
 
         inHand.used(this,Activity.savingPeople);
         workPoints--;
-    };
+    }
     void putSignalTogether(SignalFlare sg) {
         System.out.print("(IControllable) Player:");
         System.out.println("putSignalTogether("+sg+")");
 
         sg.putTogether(RoundController.getInstance());
-    };
+    }
     void passRound() {
         System.out.print("(IControllable) Player:");
         System.out.println("passRound()");
 
         RoundController.getInstance().endLastRound();
-    };
+    }
     // Done with IControllable Implementations
 }

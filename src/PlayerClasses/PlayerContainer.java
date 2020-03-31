@@ -42,5 +42,5 @@ public class PlayerContainer {
 
         if(pid>playerNum) throw new NullPointerException("Player with that pid does not exist");
         else return players.get(pid);
-    };
+    }
 }
