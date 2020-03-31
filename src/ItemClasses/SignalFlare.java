@@ -2,6 +2,8 @@ package ItemClasses;
 
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
+import PlayerClasses.Player;
+import PlayerClasses.PlayerContainer;
 
 import java.util.ArrayList;
 
@@ -20,13 +22,19 @@ public class SignalFlare {
     public void putTogether(RoundController rc){
         System.out.println("ItemClasses.SignalFlare.putTogether()");
 
+        TileClasses.Tile t1=PositionLUT.getInstance().getPosition(signalFlareParts.get(0));
 
-        for (SignalFlarePart sfp: signalFlareParts) {//lehetne átláthatóbban csinalni
-            if(!PositionLUT.getInstance().getPosition(signalFlareParts.get(0)).equals(PositionLUT.getInstance().getPosition(sfp)))
-                return;
-            if(!(sfp.state == ItemState.inHand))
+        int playerNum=PlayerContainer.getInstance().getPlayerNum();
+
+        ArrayList<Player> players=PositionLUT.getInstance().getPlayersOnTile(t1);
+
+        if(players.size()<playerNum)return;
+
+        for (int i=0;i<3;i++) {
+            if(!(PositionLUT.getInstance().getPosition(signalFlareParts.get(i)).equals(t1)))
                 return;
         }
-        RoundController.getInstance().win();
+
+        rc.win();
     }
 }
