@@ -15,7 +15,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PositionLUT {
-    public static PositionLUT pLUT; //singleton, 1 peldany kell
+    protected static PositionLUT pLUT; //singleton, 1 peldany kell
     //public ConcurrentHashMap<Object, Object> playerTileMap;
 
     public static PositionLUT getInstance() {

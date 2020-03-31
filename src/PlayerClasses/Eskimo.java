@@ -8,7 +8,7 @@ public class Eskimo extends Player {
     public void buildIgloo() {
         System.out.print("PlayerClasses.Eskimo, ID"+ID+":");
         System.out.println("buildIgloo()");
-        Tile tile = PositionLUT.pLUT.getPosition(this);
+        Tile tile = PositionLUT.getInstance().getPosition(this);
         tile.buildIglu();
     }
 }

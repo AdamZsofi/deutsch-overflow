@@ -180,25 +180,16 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(0,0);  //Tile (0, 0)
         //a)
         System.out.println("#Init(1)");
-        int before1 = t.getCapacity();
-        System.out.println("Player clears snow without shovel");
-        PositionLUT.getInstance().getPlayersOnTile(t).get(0).clearSnow();
-        System.out.println("----");
-        int after1 = t.getCapacity();
-        if (after1 + 1 == before1)
-            System.out.println("#Passed");
+        Player p = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
+        System.out.println("#Player clears snow without shovel");
+        p.clearSnow();
 
         //b
         System.out.println("#Init(2)");
-        int before2 = t.getCapacity();
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t);
         PositionLUT.getInstance().getPlayersOnTile(t).get(0).pickUp(its.get(0)); //researcher1 gets showel
-        System.out.println("Player clears snow with shovel");
+        System.out.println("#Player clears snow with shovel");
         PositionLUT.getInstance().getPlayersOnTile(t).get(0).clearSnow();
-        System.out.println("----");
-        int after2 = t.getCapacity();
-        if (after2 + 2 == before2)
-            System.out.println("#Passed");
     }
 
     static void playerSavesPlayersSEQ() {

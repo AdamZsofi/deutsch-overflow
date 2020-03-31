@@ -136,10 +136,13 @@ public abstract class Player {
         System.out.println("clearSnow()");
 
         int thismuch=-1;
-        if(inHand.getState()==ItemState.inHand){
-            inHand.used(this,Activity.clearingSnow);
-            thismuch=-2;
+        if (inHand != null) {
+            if(inHand.getState()==ItemState.inHand){
+                inHand.used(this,Activity.clearingSnow);
+                thismuch=-2;
+            }
         }
+
         Tile position= PositionLUT.getInstance().getPosition(this);
         position.changeSnow(thismuch);
         workPoints--;
