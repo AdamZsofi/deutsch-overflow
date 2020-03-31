@@ -14,11 +14,11 @@ public class SignalFlare {
 
 
         for (SignalFlarePart sfp: signalFlareParts) {//lehetne átláthatóbban csinalni
-            if(!PositionLUT.pLUT.getPosition(signalFlareParts.get(0)).equals(PositionLUT.pLUT.getPosition(sfp)))
+            if(!PositionLUT.getInstance().getPosition(signalFlareParts.get(0)).equals(PositionLUT.getInstance().getPosition(sfp)))
                 return;
             if(!(sfp.state == ItemState.inHand))
                 return;
         }
-        RoundController.rc.win();
+        RoundController.getInstance().win();
     }
 }

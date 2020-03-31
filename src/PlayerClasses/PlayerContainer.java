@@ -8,7 +8,7 @@ import java.util.Random;
 public class PlayerContainer {
     private int playerNum;
 
-    private static PlayerContainer pc = new PlayerContainer(4);
+    private static PlayerContainer pc;
 
     public static PlayerContainer getInstance() {
         if(pc == null) throw new NullPointerException("PlayerContainer should be initialized");

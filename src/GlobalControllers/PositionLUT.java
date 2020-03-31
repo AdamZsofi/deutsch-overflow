@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-public class PositionLUT {//todo a containerek feltöltése adattal, itemek legyenek mind initelve. kellene majd egy init method
+public class PositionLUT {
     private static PositionLUT pLUT; //singleton, 1 peldany kell
 
     public static PositionLUT getInstance() {
@@ -22,47 +22,7 @@ public class PositionLUT {//todo a containerek feltöltése adattal, itemek legy
         }
         return pLUT;
     }
-    /*
-    private PositionLUT(){
-        itemTileMap = new HashMap<>();
-        tileItemMap = new HashMap<>();
-        playerTileMap = new HashMap<>();
-        tilePlayerMap = new HashMap<>();
-        tileList = new ArrayList<>();
-        int [][] spawnMatrix = new int[6][6]; //segedmatrix, h ne rakjunk lyukra embert meg itemet, konstruktoron kivulre is mehet
 
-        Random random = new Random();
-        for(int y = 0; y<6; y++){               //tileList feltöltése.
-            tileList.add(new ArrayList<>());
-            for(int x = 0; x<6; x++ ){
-                int randNum = random.nextInt(100) + 1;//randNum :1-100
-                if( randNum <= 50 ) {
-                    tileList.get(y).add(new StableTile(x, y));//50%
-                    spawnMatrix[y][x] = 1;
-                }else if(randNum<=80) {
-                    tileList.get(y).add(new UnstableTile(x, y));//30%
-                    spawnMatrix[y][x] = 1;
-                }else {
-                    tileList.get(y).add(new SnowyHole(x, y));//20%
-                    spawnMatrix[y][x] = 0;
-                }
-            }
-        }
-
-        //itt most 36 hosszu, eleg sok a fölösleg, később lehet finomitani, csak akkor az áthelyezéseket kell fokozottan figyelni.
-        for(int y = 0; y<6; y++){               //tileItemMap feltöltése. egyenlore uresek az itemek, kezdetben mindenhova max 1
-            for(int x = 0; x<6; x++ ){
-                tileItemMap.put(tileList.get(y).get(x), new ArrayList<>());
-            }
-        }
-
-        for(int y = 0; y<6; y++){               //tilePlayerMap feltöltése. egyenlore uresek a playerek, kezdetben mindenhova max 1
-            for(int x = 0; x<6; x++ ){
-                tilePlayerMap.put(tileList.get(y).get(x), new ArrayList<>());
-            }
-        }
-    }
-*/
     private HashMap<Item, Tile> itemTileMap;
     private HashMap<Tile, ArrayList<Item>> tileItemMap; //kövezzetek meg, jo lesz karbantartani 🙂👍 init után put nem lesz ajanlott
     private HashMap<Player, Tile> playerTileMap;

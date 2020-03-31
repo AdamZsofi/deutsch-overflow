@@ -7,40 +7,44 @@ import SnowStorm.SnowStorm;
 
 public class RoundController {
 
-    // TODO nem jó, az attr.-t init-elni kéne, kapott getInstancet, kéne neki private c'tor
-    // public static RoundController rc = new RoundController(); //singleton, 1 peldany kell, asszem nem volt leirva a doksiba
     private static RoundController rc;
     private int curID; //current player ID, player ID: pc.players arrayban az indexszáma
     public SignalFlare sg;
     public SnowStorm ss;
-    public Item it;
+    public Item it; //ez itt ami a játékos kezében van?
 
     public static RoundController getInstance() {
-        // TODO paraméterek - mi az, amit kap, mi az, amit magának hoz létre? (Kb mi az, amit posLUT és mi az, amit ő hoz létre)
+        // TODO review
+        // paraméterek - mi az, amit kap, mi az, amit magának hoz létre? (Kb mi az, amit posLUT és mi az, amit ő hoz létre)
         // Megj.: Ha bármit kap paraméterben, akkor kell egy init fgv és egy getInstance külön, ahol getInstance nem kap paramétert
         // hogy pl. Player működését itt a paraméterek ne nyírják ki
+        //
         if(rc == null) {
             throw new NullPointerException("RoundController wasn't initialized");
         }
         return rc;
     }
 
-    public static RoundController initializeInstance() { // TODO put parameters here and in c'tor
+    public static RoundController initializeInstance() { //ilyen formában összevonható a getInstance-val, nem kap parametert
         if(rc == null) {
-
+            rc = new RoundController();
         }
         return rc;
     }
 
     private RoundController() {
-        // TODO befejezni - lásd init-ben
+        ss = new SnowStorm();
+        sg = new SignalFlare();
+        // TODO review
+        //sg: még a benne lévő ArrayList<Item> nincs feltoltve, skeletonba ha nem teszteljuk akkor talan nem is kell.
+        //de ha foltoltjuk, akkor a PositionLUT-ba is bele kell tenni
     }
 
-    public void init(int playerNum){
+    public void init(int playerNum){ //a játékot inicializálja
         System.out.println("GlobalControllers.RoundController.init("+ playerNum+")");
 
-
-        //pc = new PlayerContainer(playerNum);
+        //playercontainer itt init (skeletonban a playerNum nem játszik szerepet, minig 4 lesz)
+        PlayerContainer.Initialize(playerNum);
         curID = 0;
     }
     public void startNextRound(){
@@ -53,7 +57,7 @@ public class RoundController {
         System.out.println("GlobalControllers.RoundController.endLastRound()");
 
         curID = (curID + 1) % PlayerContainer.getInstance().getPlayerNum();
-
+        ss.tryStorm();
     }
     public void lose(String cause){
         System.out.println("GlobalControllers.RoundController.lose(" + cause + ")");

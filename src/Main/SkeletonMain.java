@@ -1,6 +1,7 @@
 package Main;
 
 import GlobalControllers.PositionLUT;
+import GlobalControllers.RoundController;
 import PlayerClasses.Eskimo;
 import SnowStorm.SnowStorm;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 public class SkeletonMain {
 
     public static void main(String[] args) {
-        // TODO RoundController init here
+        RoundController.initializeInstance();
         PositionLUT.getInstance();
         // nem rakok ide végtelen ciklust, egy lefutás = egy scene tesztje
         System.out.println("Choose a scene you want to test:");
