@@ -24,6 +24,9 @@ public abstract class Item {
 
         state = ItemState.thrownDown;
     }
+    public ItemState getState(){
+        return state;
+    }
     public void used(Player p, Activity a){}    // ItemClasses.Activity lett ( enum vs paraméter más a osztály diagrammon)
                                                 // igazabol ha bemegy az used if agaban, akkor kene playerWorkpoints--
 }

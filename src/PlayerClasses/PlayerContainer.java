@@ -1,32 +1,46 @@
 package PlayerClasses;
 
+import GlobalControllers.RoundController;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayerContainer {
+    private int playerNum;
 
-    public ArrayList<Player> players;
+    private static PlayerContainer pc;
 
-    public PlayerContainer(int num){
-        players = new ArrayList<Player>();
-        Random random = new Random();
-        for(int i = 0; i<num; i ++){
-            if(random.nextInt(100) + 1  <= 70 )//70%os esellyel lesz kutato (random szam 1-100 <= 70)
-                players.add(new Researcher());
-            else
-                players.add(new Eskimo());
+    public static PlayerContainer getInstance() {
+        if(pc == null) throw new NullPointerException("PlayerContainer should be initialized");
+        return pc;
+    }
+
+    public static void Initialize(int num) {
+        if(pc == null) {
+            pc = new PlayerContainer(num);
         }
     }
 
-    public Player getPlayer(int pid) {  //voiddadl tert vissza
+    private ArrayList<Player> players;
+
+    public int getPlayerNum() {
+        return playerNum;
+    }
+
+    private PlayerContainer(int num){
+        players = new ArrayList<Player>();
+        players.add(new Eskimo());
+        players.add(new Eskimo());
+        players.add(new Researcher());
+        players.add(new Researcher());
+
+    }
+
+    public Player getPlayer(int pid) { // pid = players-ben az adott player indexe
         System.out.print("PlayerContainer:");
         System.out.println("getPlayer("+pid+")");
 
-
-        for (Player p:players) {
-            if(p.ID == pid)
-                return p;
-        }
-        return null;
+        if(pid>playerNum) throw new NullPointerException("Player with that pid does not exist");
+        else return players.get(pid);
     };
 }
