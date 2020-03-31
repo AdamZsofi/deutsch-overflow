@@ -114,7 +114,7 @@ public abstract class Player {
         }
         workPoints--;
     }
-    void pickUp(Item i) {
+    public void pickUp(Item i) {
         System.out.print("(IControllable) Player:");
         System.out.println("pickUp("+i+")"); // TODO: Item toString?
 
@@ -130,7 +130,8 @@ public abstract class Player {
         }
         workPoints--;
     }
-    void clearSnow() {
+    //atirni protectedre
+    public void clearSnow() {
         System.out.print("(IControllable) Player:");
         System.out.println("clearSnow()");
 
@@ -142,7 +143,8 @@ public abstract class Player {
         Tile position= PositionLUT.getInstance().getPosition(this);
         position.changeSnow(thismuch);
         workPoints--;
-    };
+    }
+    //atirni protectedre
     void digItemUp(Item i) {
         System.out.print("(IControllable) Player:");
         System.out.println("digItemUp()");
@@ -150,7 +152,8 @@ public abstract class Player {
         i.diggedUp();
         workPoints--;
     }
-    void savePlayers(Direction dir) {
+    //atirni protectedre
+    public void savePlayers(Direction dir) {
         System.out.print("(IControllable) Player:");
         System.out.println("savePlayers("+dir+")");
         if(dir==Direction.here) {
@@ -161,13 +164,15 @@ public abstract class Player {
         inHand.used(this,Activity.savingPeople);
         workPoints--;
     }
-    void putSignalTogether(SignalFlare sg) {
+    //atirni protectedre
+    public void putSignalTogether(SignalFlare sg) {
         System.out.print("(IControllable) Player:");
         System.out.println("putSignalTogether("+sg+")");
 
         sg.putTogether(RoundController.getInstance());
     }
-    void passRound() {
+    //atirni protectedre
+    public void passRound() {
         System.out.print("(IControllable) Player:");
         System.out.println("passRound()");
 

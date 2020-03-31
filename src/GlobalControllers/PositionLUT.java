@@ -12,9 +12,11 @@ import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PositionLUT {
-    private static PositionLUT pLUT; //singleton, 1 peldany kell
+    public static PositionLUT pLUT; //singleton, 1 peldany kell
+    //public ConcurrentHashMap<Object, Object> playerTileMap;
 
     public static PositionLUT getInstance() {
         if(pLUT == null) {
@@ -59,13 +61,13 @@ public class PositionLUT {
         items1.add(new Shovel());
         tileItemMap.put(getTile(0,0),items1 );//shovels, 1 tagu lista
         ArrayList<Item> items2 = new ArrayList<>();
-        items1.add(new DivingSuit());
+        items2.add(new DivingSuit());
         tileItemMap.put(getTile(1,0),items2 );//buvarruha, 1 tagu lista
         ArrayList<Item> items3 = new ArrayList<>();
-        items1.add(new Rope());
+        items3.add(new Rope());
         tileItemMap.put(getTile(3,0),items3 );//kotel, 1 tagu lista
         ArrayList<Item> items4 = new ArrayList<>();
-        items1.add(new Food());
+        items4.add(new Food());
         tileItemMap.put(getTile(0,2),items4 );//alma, 1 tagu lista
 
         //benne vannak a signalflarepartok is.
@@ -97,21 +99,21 @@ public class PositionLUT {
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(0),  getTile(2,0));//eskimo1
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(1),  getTile(3,2));//eskimo2
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(2),  getTile(0,0));//researcher1
-        playerTileMap.put(PlayerContainer.getInstance().getPlayer(3),  getTile(0,3));//researcher2
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(3),  getTile(0,2));//researcher2
 
         tilePlayerMap = new HashMap<>();
         ArrayList player1 = new ArrayList();
         player1.add(PlayerContainer.getInstance().getPlayer(0));
         tilePlayerMap.put(getTile(2,0), player1);
         ArrayList player2 = new ArrayList();
-        player1.add(PlayerContainer.getInstance().getPlayer(1));
-        tilePlayerMap.put(getTile(3,1), player2);
+        player2.add(PlayerContainer.getInstance().getPlayer(1));
+        tilePlayerMap.put(getTile(3,2), player2);
         ArrayList player3 = new ArrayList();
-        player1.add(PlayerContainer.getInstance().getPlayer(2));
+        player3.add(PlayerContainer.getInstance().getPlayer(2));
         tilePlayerMap.put(getTile(0,0), player3);
         ArrayList player4 = new ArrayList();
-        player1.add(PlayerContainer.getInstance().getPlayer(3));
-        tilePlayerMap.put(getTile(0,3), player4);
+        player4.add(PlayerContainer.getInstance().getPlayer(3));
+        tilePlayerMap.put(getTile(0,2), player4);
 
 
     }

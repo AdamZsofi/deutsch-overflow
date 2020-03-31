@@ -21,6 +21,8 @@ public class PlayerContainer {
         }
     }
 
+
+
     private ArrayList<Player> players;
 
     public int getPlayerNum() {
@@ -33,6 +35,7 @@ public class PlayerContainer {
         players.add(new Eskimo());
         players.add(new Researcher());
         players.add(new Researcher());
+        playerNum = num;
 
     }
 
