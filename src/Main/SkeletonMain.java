@@ -158,8 +158,8 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(0,0);  //Tile (0, 0)
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t); //Items on Tile(0, 0)
         Player p = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
-        while(t.getSnow()>0) {
-            t.changeSnow(-1);
+        if(t.getSnow()>0) {
+            t.changeSnow(-t.getSnow());
         }
         System.out.println(t.getSnow());
         System.out.println("#Player picks item up");
@@ -190,7 +190,11 @@ public class SkeletonMain {
         System.out.println("#Init");
         Player eskimo1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,0)).get(0);
         eskimo1.step(Direction.right);
-        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(3,0));
+        Tile t = PositionLUT.getInstance().getTile(3,0);
+        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t);
+        if(t.getSnow()>0) {
+            t.changeSnow(-t.getSnow());
+        }
         eskimo1.pickUp(its.get(0)); //eskimo1 picks up Rope
         if (its.size()>0) System.out.println("YU{");
 
@@ -215,8 +219,8 @@ public class SkeletonMain {
         eskimo2.step(Direction.left);
         Tile t2 = PositionLUT.getInstance().getTile(2,2);
         ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(t2);
-        while(t2.getSnow()>0) {
-            t2.changeSnow(-1);
+        if(t2.getSnow()>0) {
+            t2.changeSnow(-t2.getSnow());
         }
         eskimo2.pickUp(sgf2.get(0)); // one sgf collected
         eskimo2.step(Direction.down); //eskimo2 to Tile (2, 1)
@@ -225,8 +229,8 @@ public class SkeletonMain {
         researcher2.step(Direction.right);
         Tile t1 = PositionLUT.getInstance().getTile(1,2);
         ArrayList<Item> sgf1 = PositionLUT.getInstance().getItemOnTile(t1);
-        while(t1.getSnow()>0) {
-            t1.changeSnow(-1);
+        if(t1.getSnow()>0) {
+            t1.changeSnow(-t1.getSnow());
         }
         researcher2.pickUp(sgf1.get(0)); // one sgf collected
         researcher2.step(Direction.right);
@@ -245,6 +249,9 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(0,2);
         Player researcher2 = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t);
+        if(t.getSnow()>0) {
+           t.changeSnow(-t.getSnow());
+        }
         researcher2.pickUp(its.get(0));
         System.out.println("#Player ate food");
         researcher2.ateFood();// researcher2 ates apple
@@ -258,8 +265,8 @@ public class SkeletonMain {
         Player researcher1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
         researcher1.step(Direction.right);
 
-        while(t.getSnow()>0) {
-            t.changeSnow(-1);
+        if(t.getSnow()>0) {
+            t.changeSnow(-t.getSnow());
         }
         System.out.println("#Player wears DivingSuit");
         researcher1.pickUp(its.get(0)); //researcher1 steps (right) a tile and picks DivingSuitUp
