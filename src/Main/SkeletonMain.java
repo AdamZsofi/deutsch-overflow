@@ -159,7 +159,7 @@ public class SkeletonMain {
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t); //Items on Tile(0, 0)
         Player p = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
         while(t.getSnow()>0) {
-            p.clearSnow();
+            t.changeSnow(-1);
         }
         System.out.println(t.getSnow());
         System.out.println("#Player picks item up");
@@ -213,13 +213,21 @@ public class SkeletonMain {
 
         Player eskimo2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(3,2)).get(0);
         eskimo2.step(Direction.left);
-        ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(2,2));
+        Tile t2 = PositionLUT.getInstance().getTile(2,2);
+        ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(t2);
+        while(t2.getSnow()>0) {
+            t2.changeSnow(-1);
+        }
         eskimo2.pickUp(sgf2.get(0)); // one sgf collected
         eskimo2.step(Direction.down); //eskimo2 to Tile (2, 1)
 
         Player researcher2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,2)).get(0);
         researcher2.step(Direction.right);
-        ArrayList<Item> sgf1 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(1,2));
+        Tile t1 = PositionLUT.getInstance().getTile(1,2);
+        ArrayList<Item> sgf1 = PositionLUT.getInstance().getItemOnTile(t1);
+        while(t1.getSnow()>0) {
+            t1.changeSnow(-1);
+        }
         researcher2.pickUp(sgf1.get(0)); // one sgf collected
         researcher2.step(Direction.right);
         researcher2.step(Direction.down); //researcher2 to Tile (2, 1)
@@ -245,9 +253,14 @@ public class SkeletonMain {
     static void playerWearsDivingSuitSEQ() {
         System.out.println("@Player wears DivingSuit");
         System.out.println("#Init");
-        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(1,0)); // divingsuit
+        Tile t = PositionLUT.getInstance().getTile(1,0);
+        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t); // divingsuit
         Player researcher1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
         researcher1.step(Direction.right);
+
+        while(t.getSnow()>0) {
+            t.changeSnow(-1);
+        }
         System.out.println("#Player wears DivingSuit");
         researcher1.pickUp(its.get(0)); //researcher1 steps (right) a tile and picks DivingSuitUp
     }

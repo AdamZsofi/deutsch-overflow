@@ -120,15 +120,16 @@ public abstract class Player {
         Tile position = PositionLUT.getInstance().getPosition(i);
         int snow = position.getSnow();
         if(snow==0) {
-            System.out.println("SNOW0");
-            if (inHand.getState() == ItemState.thrownDown) {
-                inHand.diggedUp();
-            } else {
-                inHand.thrownDown();
+            if (inHand != null) {
+                if (inHand.getState() == ItemState.thrownDown) {
+                    inHand.diggedUp();
+                } else {
+                    inHand.thrownDown();
+                }
             }
             i.pickedUp(this);
+            inHand = i;//EZ JO ITT?
         };
-        if (inHand!= null) System.out.println("PICKKKK");
         workPoints--;
     }
     //atirni protectedre
