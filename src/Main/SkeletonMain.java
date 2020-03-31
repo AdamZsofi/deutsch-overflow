@@ -210,6 +210,8 @@ public class SkeletonMain {
 
         Player eskimo2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(3,2)).get(0);
         eskimo2.step(Direction.left);
+        ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(2,2));
+        eskimo2.pickUp(sgf2.get(0)); // one sgf collected
         eskimo2.step(Direction.down); //eskimo2 to Tile (2, 1)
 
         Player researcher2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,2)).get(0);
@@ -217,8 +219,6 @@ public class SkeletonMain {
         ArrayList<Item> sgf1 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(1,2));
         researcher2.pickUp(sgf1.get(0)); // one sgf collected
         researcher2.step(Direction.right);
-        ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(2,2));
-        researcher2.pickUp(sgf2.get(0)); // one sgf collected
         researcher2.step(Direction.down); //researcher2 to Tile (2, 1)
         //one sgf is on Tile (2, 1) thwrownDown
 
