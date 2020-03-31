@@ -55,8 +55,18 @@ public class PositionLUT {
         tileList.add(row2);
         tileList.add(row3);
 
-
         tileItemMap = new HashMap<>();
+        tilePlayerMap = new HashMap<>();
+        for(int y = 0; y<3; y++){//init, h mindenhol legyen
+            for(int x = 0; x< 4; x++){
+                tilePlayerMap.put(getTile(x,y),new ArrayList<>() );
+                tileItemMap.put(getTile(x,y),new ArrayList<>() );
+            }
+        }
+
+
+
+
         ArrayList<Item> items1 = new ArrayList<>();
         items1.add(new Shovel());
         tileItemMap.put(getTile(0,0),items1 );//shovels, 1 tagu lista
@@ -101,7 +111,7 @@ public class PositionLUT {
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(2),  getTile(0,0));//researcher1
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(3),  getTile(0,2));//researcher2
 
-        tilePlayerMap = new HashMap<>();
+
         ArrayList player1 = new ArrayList();
         player1.add(PlayerContainer.getInstance().getPlayer(0));
         tilePlayerMap.put(getTile(2,0), player1);
