@@ -104,7 +104,6 @@ public abstract class Player {
         Tile position= PositionLUT.getInstance().getPosition(this);
         try {
             Tile next_tile = position.getNeighbour(dir);
-
             position.steppedOff(dir);
             PositionLUT.getInstance().setPosition(this, next_tile);
             next_tile.steppedOn(this);
@@ -129,7 +128,7 @@ public abstract class Player {
             }
             i.pickedUp(this);
             inHand = i;//EZ JO ITT?
-        };
+        }
         workPoints--;
     }
     //atirni protectedre

@@ -197,7 +197,6 @@ public class SkeletonMain {
         }
         eskimo1.pickUp(its.get(0)); //eskimo1 picks up Rope
         if (its.size()>0) System.out.println("YU{");
-
         Player eskimo2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(3,2)).get(0);
         eskimo2.step(Direction.down); //eskimo2 steps in snowyhole
         System.out.println("#Player saves players");
@@ -214,6 +213,7 @@ public class SkeletonMain {
         researcher1.step(Direction.right);
         researcher1.step(Direction.right);
         researcher1.step(Direction.up);  //researcher1 to Tile (2, 1)
+        Tile til= PositionLUT.getInstance().getPosition(researcher1);
 
         Player eskimo2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(3,2)).get(0);
         eskimo2.step(Direction.left);
