@@ -48,7 +48,7 @@ public class SkeletonMain {
                 playerStepsSEQ();
                 break;
             case 2:
-                //tileSteppedOffSEQ();
+                tileSteppedOffSEQ(); //NEM SOK MINDENT CSINAL DE LEGYEN
                 break;
             case 3:
                 snowyHoleSteppedOnSEQ();
@@ -116,19 +116,15 @@ public class SkeletonMain {
         System.out.println("#Player steps down");
         eskimo1.step(Direction.down);
     }
-        /*
+
     static void tileSteppedOffSEQ() {
         System.out.println("@TileSteppedOff");
         System.out.println("#Init");
         Tile t = PositionLUT.getInstance().getTile(2,0);
-        Player p = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
         System.out.println("#TileSteppedOff");
-        t.steppedOff(p);
-        System.out.println("-----");
-        ArrayList<Player> plys = PositionLUT.getInstance().getPlayersOnTile(t);
-        if (plys == null) System.out.println("#Passed");
+        t.steppedOff(Direction.up);
     }
-*/
+
     static void snowyHoleSteppedOnSEQ() {
         System.out.println("@SnowyHole SteppedOn");
         System.out.println("#Init");
@@ -136,9 +132,6 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(1,1);
         System.out.println("#SnowyHole SteppedOn");
         t.steppedOn(p);
-        System.out.println("-----");
-        ArrayList<Player> plys = PositionLUT.getInstance().getPlayersOnTile(t);
-        if (plys.size() == 1) System.out.println("#Passed");
     }
 
     static void unstableTileSteppedOnSEQ() {
@@ -148,9 +141,6 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(0,1);
         System.out.println("#Unstable Tile SteppedOn");
         t.steppedOn(p);
-        System.out.println("-----");
-        ArrayList<Player> plys = PositionLUT.getInstance().getPlayersOnTile(t);
-        if (plys.size() == 1) System.out.println("#Passed");
     }
     static void stableTileSteppedOnSEQ() {
         System.out.println("@Stable Tile SteppedOn");
@@ -159,9 +149,7 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(2,1);
         System.out.println("#Stable Tile SteppedOn");
         t.steppedOn(p);
-        System.out.println("-----");
-        ArrayList<Player> plys = PositionLUT.getInstance().getPlayersOnTile(t);
-        if (plys.size() == 1) System.out.println("#Passed");
+
     }
 
     static void playerPickItemUpSEQ() {
@@ -229,7 +217,7 @@ public class SkeletonMain {
         ArrayList<Item> sgf1 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(1,2));
         researcher2.pickUp(sgf1.get(0)); // one sgf collected
         researcher2.step(Direction.right);
-        ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(1,2));
+        ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(2,2));
         researcher2.pickUp(sgf2.get(0)); // one sgf collected
         researcher2.step(Direction.down); //researcher2 to Tile (2, 1)
         //one sgf is on Tile (2, 1) thwrownDown
@@ -255,7 +243,7 @@ public class SkeletonMain {
     static void playerWearsDivingSuitSEQ() {
         System.out.println("@Player wears DivingSuit");
         System.out.println("#Init");
-        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(2,1)); // divingsuit
+        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(1,0)); // divingsuit
         Player researcher1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
         researcher1.step(Direction.right);
         System.out.println("#Player wears DivingSuit");

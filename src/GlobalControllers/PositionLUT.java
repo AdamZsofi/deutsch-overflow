@@ -82,13 +82,13 @@ public class PositionLUT {
 
         //benne vannak a signalflarepartok is.
         ArrayList<Item> sf1 = new ArrayList<>();
-        items1.add(RoundController.getInstance().sg.signalFlareParts.get(0));
+        sf1.add(RoundController.getInstance().sg.signalFlareParts.get(0));
         tileItemMap.put(getTile(1,2),sf1 );//signalflarepart 0ID
         ArrayList<Item> sf2 = new ArrayList<>();
-        items1.add(RoundController.getInstance().sg.signalFlareParts.get(1));
+        sf2.add(RoundController.getInstance().sg.signalFlareParts.get(1));
         tileItemMap.put(getTile(2,2),sf2 );//signalflarepart 1ID
         ArrayList<Item> sf3 = new ArrayList<>();
-        items1.add(RoundController.getInstance().sg.signalFlareParts.get(2));
+        sf3.add(RoundController.getInstance().sg.signalFlareParts.get(2));
         tileItemMap.put(getTile(2,1),sf3 );//signalflarepart 2ID
 
 
