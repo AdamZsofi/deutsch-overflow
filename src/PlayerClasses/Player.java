@@ -105,6 +105,10 @@ public abstract class Player {
             Tile next_tile = position.getNeighbour(dir);
             position.steppedOff(dir);
             PositionLUT.getInstance().setPosition(this, next_tile);
+            Item player_item= this.inHand;
+            if(inHand!=null){ // ez nem biztos hogy jó, ha nincs a kezében semmi akkor InHand=null?
+               PositionLUT.getInstance().setPosition(player_item,next_tile); // megy a karakterrel az item is
+            }
             next_tile.steppedOn(this);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You can't go that way");
