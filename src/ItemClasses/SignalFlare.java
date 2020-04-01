@@ -23,14 +23,11 @@ public class SignalFlare {
         System.out.println("ItemClasses.SignalFlare.putTogether()");
 
         TileClasses.Tile t1 = PositionLUT.getInstance().getPosition(signalFlareParts.get(0));
-        t1.DISPLAY();
         int playerNum = PlayerContainer.getInstance().getPlayerNum();
 
         ArrayList<Player> players = PositionLUT.getInstance().getPlayersOnTile(t1);
 
-        System.out.println("PLSITZE:"+ players.size() + "PLAYERNUM" + playerNum);
         if(players.size()<playerNum)return;
-        System.out.println("CHANCE");
         for (int i=0;i<3;i++) {
             if(!(PositionLUT.getInstance().getPosition(signalFlareParts.get(i)).equals(t1)))
                 return;

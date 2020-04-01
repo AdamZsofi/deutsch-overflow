@@ -83,6 +83,4 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
         System.out.println("TileClasses.Tile.buildIglu()");
         igluOn = true;
     }
-    //KISZEDNI
-    public void DISPLAY() {System.out.println("x:"+this.x + "y:"+ this.y);}
 }
