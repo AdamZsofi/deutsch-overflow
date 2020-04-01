@@ -198,11 +198,10 @@ public class SkeletonMain {
                 p3.step(Direction.up);
                 Tile t3_2 = PositionLUT.getInstance().getTile(0,2);  //Tile (0, 2)
                 ArrayList<Item> its3_2 = PositionLUT.getInstance().getItemOnTile(t3_2); //Items on Tile(0, 2)
-                Player p3_2 = PositionLUT.getInstance().getPlayersOnTile(t3_2).get(0);
                 t3_2.changeSnow(-t3_2.getSnow());
                 System.out.println();
                 System.out.println("#      (3)         Player picks item up and throws the item down, which already picked up");
-                p3_2.pickUp(its3_2.get(0)); //researcher1 gets apple
+                p3.pickUp(its3_2.get(0)); //researcher1 gets apple
                 break;
         }
     }
@@ -282,7 +281,7 @@ public class SkeletonMain {
         researcher2.step(Direction.right);
         researcher2.step(Direction.down); //researcher2 to Tile (2, 1)
         //one sgf is on Tile (2, 1) thwrownDown
-        
+
         System.out.println();
         System.out.println("#   Put SignalFlare together");
         researcher1.putSignalTogether(RoundController.getInstance().sg);
