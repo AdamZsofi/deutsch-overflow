@@ -137,10 +137,12 @@ public class SkeletonMain {
     static void unstableTileSteppedOnSEQ() {
         System.out.println("@Unstable Tile SteppedOn");
         System.out.println("#Init");
-        Player p = new Researcher();
+        Player p = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
+        Player p2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,2)).get(0);
         Tile t = PositionLUT.getInstance().getTile(0,1);
+        p.step(Direction.up);
         System.out.println("#Unstable Tile SteppedOn");
-        t.steppedOn(p);
+        p2.step(Direction.down);
     }
     static void stableTileSteppedOnSEQ() {
         System.out.println("@Stable Tile SteppedOn");

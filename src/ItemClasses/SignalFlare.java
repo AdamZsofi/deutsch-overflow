@@ -28,13 +28,13 @@ public class SignalFlare {
 
         ArrayList<Player> players=PositionLUT.getInstance().getPlayersOnTile(t1);
 
+
         if(players.size()<playerNum)return;
 
         for (int i=0;i<3;i++) {
             if(!(PositionLUT.getInstance().getPosition(signalFlareParts.get(i)).equals(t1)))
                 return;
         }
-
         rc.win();
     }
 }
