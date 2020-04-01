@@ -3,30 +3,26 @@ package ItemClasses;
 import PlayerClasses.Player;
 
 public abstract class Item {
+    ItemState state;
 
-    ItemState state; //nincs leirva a dokumentacioba, konsturkornal: state = ItemState.thrownDown
+    Item() {
+        state = ItemState.frozen;
+    }
 
     public void thrownDown(){
         System.out.println("ItemClasses.Item.thrownDown");
-
-
         state =  ItemState.thrownDown;
     }
     public void pickedUp(Player Picker){
         System.out.println("ItemClasses.Item.pickedUp");
-
-
         state = ItemState.inHand;
     }
     public void diggedUp(){
         System.out.println("ItemClasses.Item.diggedUp");
-
-
         state = ItemState.thrownDown;
     }
     public ItemState getState(){
         return state;
     }
-    public void used(Player p, Activity a){ }    // ItemClasses.Activity lett ( enum vs paraméter más a osztály diagrammon)
-                                                // igazabol ha bemegy az used if agaban, akkor kene playerWorkpoints--
+    public void used(Player p, Activity a){ }
 }

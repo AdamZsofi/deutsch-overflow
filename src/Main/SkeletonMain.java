@@ -6,6 +6,7 @@ import SnowStorm.*;
 import ItemClasses.*;
 import TileClasses.*;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,10 +17,7 @@ public class SkeletonMain {
         RoundController.getInstance(); //letrehoz
         PositionLUT.getInstance();
 
-
-
         System.out.println("Choose a scene you want to test:");
-        System.out.println("(0) ");
         System.out.println("(1) PlayerSteps");
         System.out.println("(2) TileSteppedOff");
         System.out.println("(3) SnowyHoleSteppedOn");
@@ -41,9 +39,6 @@ public class SkeletonMain {
         //scan.close();
 
         switch (scan.nextInt()) {
-            case 0:
-                ///
-                break;
             case 1:
                 playerStepsSEQ();
                 break;
@@ -203,6 +198,7 @@ public class SkeletonMain {
                 System.out.println("#      (3)         Player picks item up and throws the item down, which already picked up");
                 p3.pickUp(its3_2.get(0)); //researcher1 gets apple
                 break;
+
         }
     }
 
@@ -288,7 +284,7 @@ public class SkeletonMain {
     }
 
     static void playerAteFoodSEQ() {
-        System.out.println("@Player ate food");
+        System.out.println("@Player picks up and automatically eats food");
         System.out.println("#Init");
         Tile t = PositionLUT.getInstance().getTile(0,2);
         Player p = PositionLUT.getInstance().getPlayersOnTile(t).get(0);
@@ -297,11 +293,10 @@ public class SkeletonMain {
         p.pickUp(its.get(0));
         System.out.println();
         System.out.println("#       Player ate food");
-        p.ateFood();// researcher2 ates apple
     }
 
     static void playerWearsDivingSuitSEQ() {
-        System.out.println("@Player wears DivingSuit");
+        System.out.println("@Player picks up and automatically wears DivingSuit");
         System.out.println("#Init");
         Tile t = PositionLUT.getInstance().getTile(1,0);
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t); // divingsuit
@@ -311,7 +306,6 @@ public class SkeletonMain {
         p.pickUp(its.get(0));
         System.out.println();
         System.out.println("#       Player wears DivingSuit");
-        p.wear((DivingSuit) its.get(0)); //researcher1 steps (right) a tile and picks DivingSuitUp
     }
 
     static void roundPassingSEQ() {

@@ -4,12 +4,12 @@ import PlayerClasses.Player;
 
 public class DivingSuit extends Item{
 
+    /**
+     * automatically worn, if picked up
+     * */
     @Override
-    public void used(Player p, Activity a){
+    public void pickedUp(Player p){
         System.out.println("ItemClasses.DivingSuit.used");
-
-
-        //if(a == Activity.puttingOnSuit)
-            //p.wear(this);
+        p.wear(this);
     }
 }

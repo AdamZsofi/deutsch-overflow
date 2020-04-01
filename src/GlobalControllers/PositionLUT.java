@@ -14,9 +14,11 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * A singleton Look-Up-Table
+ * */
 public class PositionLUT {
-    protected static PositionLUT pLUT; //singleton, 1 peldany kell
-    //public ConcurrentHashMap<Object, Object> playerTileMap;
+    protected static PositionLUT pLUT;
 
     public static PositionLUT getInstance() {
         if(pLUT == null) {
@@ -31,6 +33,10 @@ public class PositionLUT {
     private HashMap<Tile, ArrayList<Player>> tilePlayerMap;//🙂👍
     private ArrayList<ArrayList<Tile>> tileList;//y: array index, x: Tile index
 
+    /**
+     * Randomly generated fields are omitted in skeleton, we have a hardcoded map
+     * at this phase of testing for the scenarios
+     * */
     private PositionLUT(){
         tileList = new ArrayList<>();
         ArrayList<Tile> row1= new ArrayList<>();
@@ -64,9 +70,6 @@ public class PositionLUT {
             }
         }
 
-
-
-
         ArrayList<Item> items1 = new ArrayList<>();
         items1.add(new Shovel());
         tileItemMap.put(getTile(0,0),items1 );//shovels, 1 tagu lista
@@ -91,7 +94,6 @@ public class PositionLUT {
         sf3.add(RoundController.getInstance().sg.signalFlareParts.get(2));
         tileItemMap.put(getTile(2,1),sf3 );//signalflarepart 2ID
 
-
         itemTileMap = new HashMap<>();
         itemTileMap.put(items1.get(0), getTile(0, 0));
         itemTileMap.put(items2.get(0), getTile(1, 0));
@@ -101,8 +103,6 @@ public class PositionLUT {
         itemTileMap.put(RoundController.getInstance().sg.signalFlareParts.get(0), getTile(1,2));
         itemTileMap.put(RoundController.getInstance().sg.signalFlareParts.get(1), getTile(2,2));
         itemTileMap.put(RoundController.getInstance().sg.signalFlareParts.get(2), getTile(2,1));
-
-
 
 
         playerTileMap = new HashMap<>();
@@ -168,5 +168,4 @@ public class PositionLUT {
         tileItemMap.get(t).add(i);//uj hely add
         itemTileMap.put(i, t);//put folulirja az elozot
     }
-
 }

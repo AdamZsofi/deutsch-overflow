@@ -10,6 +10,7 @@ public class SnowStorm {
     public void tryStorm() {
         PositionLUT pL = PositionLUT.getInstance();
         System.out.println("Snowstorm.SnowStorm.tryStorm()");
+        System.out.println("What should the storm do?");
         System.out.println("(1) Destroy an Igloo");
         System.out.println("(2) Hurt a player");
         System.out.println("(3) Put snow on a tile");

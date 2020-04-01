@@ -12,20 +12,17 @@ public abstract class Player {
     protected int BodyHeat;
     protected int ID;
     protected int workPoints;
-    public boolean inWater; //public lett, kesobb lehet javitani
+    public boolean inWater; // public lett, kesobb ezt átgondolhatjuk még
     protected Item inHand;
-    protected Item wearing; //lehetne DivingSuit is vagy csak egy boolean, ugyse csinalunk mar vele semmit
+    protected Item wearing;
 
     public void startRound() {
         workPoints = 4;
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("startRound()");
         System.out.println("Waiting for player input...");
-        // TODO: lehetséges inputokat kérni a tesztelőtől (for step press (1) ...)
-        // Válasz: inkabb a RoundControllerben kene
 
-       // Tile position= PositionLUT.getInstance().getPosition(this);
-        Tile position = PositionLUT.getInstance().getPosition(this);
+        Tile position;
         while(workPoints>0 && !inWater) {
             System.out.println("Enter the activity:");
             Scanner scanner = new Scanner(System.in);
@@ -61,7 +58,7 @@ public abstract class Player {
                     break;
             }
         }
-        passRound(); // ha elfogy a workPoint, akkor automatikus pass
+        passRound(); // ha elfogy a workPoint/vízbe esik, akkor automatikus pass
     }
     public void fallInWater() {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
@@ -69,11 +66,14 @@ public abstract class Player {
 
         inWater = true;
     }
+    /**
+     * Called by Food, if its picked up. Food is automatically eaten if its picked up
+     * */
     public void ateFood() {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("ateFood()");
-
-        inHand.used(this, Activity.eatingFood);
+        inHand = null;
+        changeBodyHeat(1);
     }
     public void changeBodyHeat(int thisMuch) {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
@@ -81,18 +81,20 @@ public abstract class Player {
 
         BodyHeat += thisMuch;
     }
+    /**
+     * Called by DivingSuit, if its pickedUp (its automatically worn if its picked up)
+     * */
     public void wear(DivingSuit suit) {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("wear(ItemClasses.DivingSuit)");
-        suit.used(this,Activity.puttingOnSuit);
         wearing = suit;
+        inHand = null;
     }
 
     // IControllable implementations:
-    // TODO: none of these implementations are done
 
     // getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
-    public void step(Direction dir) { //public lett vizbeeses miatt, kesobb lehet javitani
+    public void step(Direction dir) {
         System.out.print("(IControllable) Player:");
         System.out.println("step("+dir+")");
         if(dir == Direction.here) {
@@ -105,9 +107,9 @@ public abstract class Player {
             Tile next_tile = position.getNeighbour(dir);
             position.steppedOff(dir);
             PositionLUT.getInstance().setPosition(this, next_tile);
-            Item player_item= this.inHand;
-            if(inHand!=null){ // ez nem biztos hogy jó, ha nincs a kezében semmi akkor InHand=null?
-               PositionLUT.getInstance().setPosition(player_item,next_tile); // megy a karakterrel az item is
+            Item player_item = this.inHand;
+            if(inHand!=null){
+               PositionLUT.getInstance().setPosition(player_item,next_tile);
             }
             next_tile.steppedOn(this);
         } catch (IndexOutOfBoundsException e) {
@@ -118,20 +120,20 @@ public abstract class Player {
     }
     public void pickUp(Item i) {
         System.out.print("(IControllable) Player:");
-        System.out.println("pickUp("+i+")"); // TODO: Item toString?
+        System.out.println("pickUp(Item)");
         Tile position = PositionLUT.getInstance().getPosition(i);
         int snow = position.getSnow();
         if(snow==0) {
             if (inHand != null) {
                 if (inHand.getState() == ItemState.thrownDown) {
                     inHand.diggedUp();
-
                 } else {
                     inHand.thrownDown();
+                    inHand = null;
                 }
             }
+            inHand = i;
             i.pickedUp(this);
-            inHand = i;//EZ JO ITT?
         }
         workPoints--;
     }

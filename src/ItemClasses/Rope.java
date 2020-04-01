@@ -14,22 +14,19 @@ public class Rope extends Item{
     public void used(Player p, Activity a){
         System.out.println("ItemClasses.Rope.used()");
 
-
         if(a == Activity.savingPeople) {
-
             Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
             Direction wateTile_dir = Direction.up;///getDir();//csak egy gyors pelda, megadja milyen irányban van a waterTile
             Tile waterTile = currentTile.getNeighbour(wateTile_dir);
             ArrayList<Player> inWaterPlayers = PositionLUT.getInstance().getPlayersOnTile(waterTile);
             for (int count=0 ;count<inWaterPlayers.size();count++) { // Player iwp : inWaterPlayers rossz volt
-                Direction step_dir=Direction.down;//getDir(); //melyik irányba szeretnénk menteni
-                    inWaterPlayers.get(count).step(step_dir);//mi van, ha nem lehet arra lepni? hibakezeles, ujra, esetleg mint masik oldat folytatja mint snake
-                    //stepen belul lehetne lekezeln
+                Direction step_dir = Direction.down;//getDir(); //melyik irányba szeretnénk menteni
+                    inWaterPlayers.get(count).step(step_dir);
             }
         }
     }
 
-    private Direction getDir(){ //csak most csinaltam, lehessen iranyitani
+    private Direction getDir(){
         System.out.println("for directions press button: a, w, s or d");
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();
