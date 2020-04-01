@@ -282,11 +282,7 @@ public class SkeletonMain {
         researcher2.step(Direction.right);
         researcher2.step(Direction.down); //researcher2 to Tile (2, 1)
         //one sgf is on Tile (2, 1) thwrownDown
-
-        ArrayList<Player> pls = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,1)); //all Players on Tile (2, 1)
-        researcher2.digItemUp(sgf1.get(0));
-        eskimo2.digItemUp(sgf2.get(0));
-        ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(PositionLUT.getInstance().getTile(2,1));
+        
         System.out.println();
         System.out.println("#   Put SignalFlare together");
         researcher1.putSignalTogether(RoundController.getInstance().sg);
