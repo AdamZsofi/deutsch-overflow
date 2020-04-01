@@ -84,7 +84,6 @@ public abstract class Player {
     public void wear(DivingSuit suit) {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("wear(ItemClasses.DivingSuit)");
-
         suit.used(this,Activity.puttingOnSuit);
         wearing = suit;
     }
@@ -137,20 +136,19 @@ public abstract class Player {
         System.out.print("(IControllable) Player:");
         System.out.println("clearSnow()");
 
-        int thismuch=-1;
+
         if (inHand != null) {
             if(inHand.getState()==ItemState.inHand){
                 inHand.used(this,Activity.clearingSnow);
-                thismuch=-2;
             }
         }
 
         Tile position= PositionLUT.getInstance().getPosition(this);
-        position.changeSnow(thismuch);
+        position.changeSnow(-1);
         workPoints--;
     }
     //atirni protectedre
-    void digItemUp(Item i) {
+    public void digItemUp(Item i) {
         System.out.print("(IControllable) Player:");
         System.out.println("digItemUp()");
 
