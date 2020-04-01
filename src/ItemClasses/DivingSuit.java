@@ -9,7 +9,7 @@ public class DivingSuit extends Item{
         System.out.println("ItemClasses.DivingSuit.used");
 
 
-        if(a == Activity.puttingOnSuit)
-            p.wear(this);
+        //if(a == Activity.puttingOnSuit)
+            //p.wear(this);
     }
 }
