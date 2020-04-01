@@ -121,6 +121,7 @@ public abstract class Player {
             if (inHand != null) {
                 if (inHand.getState() == ItemState.thrownDown) {
                     inHand.diggedUp();
+
                 } else {
                     inHand.thrownDown();
                 }

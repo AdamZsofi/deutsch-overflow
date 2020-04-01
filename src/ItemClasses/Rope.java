@@ -18,11 +18,11 @@ public class Rope extends Item{
         if(a == Activity.savingPeople) {
 
             Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
-            Direction wateTile_dir = getDir();//csak egy gyors pelda, megadja milyen irányban van a waterTile
+            Direction wateTile_dir = Direction.up;///getDir();//csak egy gyors pelda, megadja milyen irányban van a waterTile
             Tile waterTile = currentTile.getNeighbour(wateTile_dir);
             ArrayList<Player> inWaterPlayers = PositionLUT.getInstance().getPlayersOnTile(waterTile);
             for (int count=0 ;count<inWaterPlayers.size();count++) { // Player iwp : inWaterPlayers rossz volt
-                Direction step_dir=getDir(); //melyik irányba szeretnénk menteni
+                Direction step_dir=Direction.down;//getDir(); //melyik irányba szeretnénk menteni
                     inWaterPlayers.get(count).step(step_dir);//mi van, ha nem lehet arra lepni? hibakezeles, ujra, esetleg mint masik oldat folytatja mint snake
                     //stepen belul lehetne lekezeln
             }
