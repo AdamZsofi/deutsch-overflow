@@ -1,10 +1,7 @@
 package GlobalControllers;
 
 import ItemClasses.*;
-import PlayerClasses.Eskimo;
-import PlayerClasses.Player;
-import PlayerClasses.PlayerContainer;
-import PlayerClasses.Researcher;
+import PlayerClasses.*;
 import TileClasses.*;
 
 import javax.print.attribute.standard.PDLOverrideSupported;
@@ -30,6 +27,8 @@ public class PositionLUT {
     private HashMap<Item, Tile> itemTileMap;
     private HashMap<Tile, ArrayList<Item>> tileItemMap; //kövezzetek meg, jo lesz karbantartani 🙂👍 init után put nem lesz ajanlott
     private HashMap<Player, Tile> playerTileMap;
+    private HashMap<PolarBear,Tile> polarbearTileMap; // polarbear position
+    private HashMap<Tile,ArrayList<PolarBear>> tilePolarBearMap;
     private HashMap<Tile, ArrayList<Player>> tilePlayerMap;//🙂👍
     private ArrayList<ArrayList<Tile>> tileList;//y: array index, x: Tile index
 
@@ -111,6 +110,9 @@ public class PositionLUT {
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(2),  getTile(0,0));//researcher1
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(3),  getTile(0,2));//researcher2
 
+        polarbearTileMap = new HashMap<>();
+        polarbearTileMap.put(RoundController.getInstance().polarbear,getTile(1,1)); //polarbear
+
 
         ArrayList player1 = new ArrayList();
         player1.add(PlayerContainer.getInstance().getPlayer(0));
@@ -167,5 +169,13 @@ public class PositionLUT {
         tileItemMap.get(itemTileMap.get(i)).remove(i);//átlátható. regi hely remove
         tileItemMap.get(t).add(i);//uj hely add
         itemTileMap.put(i, t);//put folulirja az elozot
+    }
+    public Tile getPosition(PolarBear pb){
+        return polarbearTileMap.get(pb);
+    }
+    public void setPosition(PolarBear pb, Tile t){
+        tilePolarBearMap.get(polarbearTileMap.get(pb)).remove(pb);
+        tilePolarBearMap.get(t).add(pb);//uj hely add
+        polarbearTileMap.put(pb, t);//put folulirja az elozot
     }
 }

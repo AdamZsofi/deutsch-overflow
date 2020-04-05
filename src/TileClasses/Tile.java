@@ -14,6 +14,7 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
     protected final int x,y;
     protected int snow;
     protected boolean igluOn;
+    public boolean tentOn;
 
     public Tile(int x, int y) {
         this.x = x;
@@ -83,4 +84,26 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
         System.out.println("TileClasses.Tile.buildIglu()");
         igluOn = true;
     }
+    public boolean getIgluOn(){ return igluOn;}
+
+    /**
+     * @author adam
+     * Tent set up. The parameters of the tent is set. (position and counter for count the live of tent.)
+     */
+    public void putOnTent(){
+        System.out.println("TileClasses.Tile.putOnTent()");
+        tentOn=true;
+        RoundController.getInstance().tent.counter =PlayerContainer.getInstance().getPlayerNum();
+        RoundController.getInstance().tent.x=x;
+        RoundController.getInstance().tent.y=y;
+    }
+
+    /**
+     * for polarbear moving
+     */
+    public boolean equals(Tile tile){
+        if(x==tile.x && y==tile.y) return true;
+        return false;
+    }
+
 }

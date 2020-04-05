@@ -8,12 +8,12 @@ import TileClasses.Direction;
 import java.io.IOException;
 import java.util.Scanner;
 
-public abstract class Player {
+public abstract class Player extends Character{
     protected int BodyHeat;
     protected int ID;
     protected int workPoints;
     public boolean inWater; // public lett, kesobb ezt átgondolhatjuk még
-    protected Item inHand;
+    public Item inHand; // public lett, hogy más is eltudja dobni a kezéből a törékeny ásót, más megoldás esetleg?
     protected Item wearing;
 
     public void startRound() {
@@ -94,7 +94,7 @@ public abstract class Player {
     // IControllable implementations:
 
     // getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
-    public void step(Direction dir) {
+    /*public void step(Direction dir) {
         System.out.print("(IControllable) Player:");
         System.out.println("step("+dir+")");
         if(dir == Direction.here) {
@@ -117,7 +117,7 @@ public abstract class Player {
             return;
         }
         workPoints--;
-    }
+    }*/
     public void pickUp(Item i) {
         System.out.print("(IControllable) Player:");
         System.out.println("pickUp(Item)");
@@ -151,6 +151,7 @@ public abstract class Player {
 
         Tile position= PositionLUT.getInstance().getPosition(this);
         position.changeSnow(-1);
+
         workPoints--;
     }
     //atirni protectedre
