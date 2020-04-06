@@ -30,7 +30,7 @@ public abstract class Player extends Character{
             scanner.close();
             switch (activity) {
                 case 0:
-                    step(Direction.left);
+                    step(Direction.valueOf(2));//left
                     break;
                 case 1:
                     position = PositionLUT.getInstance().getPosition(this);
@@ -46,7 +46,7 @@ public abstract class Player extends Character{
                     digItemUp(item);
                     break;
                 case 4:
-                    savePlayers(Direction.up);
+                    savePlayers(Direction.valueOf(0));//up
                     break;
                 case 5:
                     putSignalTogether(RoundController.getInstance().sg);
@@ -166,7 +166,7 @@ public abstract class Player extends Character{
     public void savePlayers(Direction dir) {
         System.out.print("(IControllable) Player:");
         System.out.println("savePlayers("+dir+")");
-        if(dir==Direction.here) {
+        if(dir==Direction.valueOf(4)) {
             System.out.println("You can't save yourself");
             return;
         }

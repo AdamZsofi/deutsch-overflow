@@ -3,6 +3,10 @@ package TileClasses;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author adam
+ * Directions. We can choose the Direction by value.
+ */
 public enum Direction {
     UP(0),
     DOWN(1),
@@ -25,8 +29,5 @@ public enum Direction {
     public static Direction valueOf(int direction){
         return (Direction)map.get(direction);
     }
-
-    public int  getValue() {
-        return value;
-    }
+    public int getValue(){ return value; }
 }

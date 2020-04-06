@@ -16,11 +16,11 @@ public class Rope extends Item{
 
         if(a == Activity.savingPeople) {
             Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
-            Direction wateTile_dir = Direction.up;///getDir();//csak egy gyors pelda, megadja milyen irányban van a waterTile
+            Direction wateTile_dir = Direction.valueOf(0);///getDir();//csak egy gyors pelda, megadja milyen irányban van a waterTile up:0
             Tile waterTile = currentTile.getNeighbour(wateTile_dir);
             ArrayList<Player> inWaterPlayers = PositionLUT.getInstance().getPlayersOnTile(waterTile);
             for (int count=0 ;count<inWaterPlayers.size();count++) { // Player iwp : inWaterPlayers rossz volt
-                Direction step_dir = Direction.down;//getDir(); //melyik irányba szeretnénk menteni
+                Direction step_dir = Direction.valueOf(1);//getDir(); //melyik irányba szeretnénk menteni down: 1
                     inWaterPlayers.get(count).step(step_dir);
             }
         }
@@ -33,18 +33,18 @@ public class Rope extends Item{
         switch (s){
             case "a":
                 System.out.println("left");
-                return Direction.left;
+                return Direction.valueOf(2);
             case "w":
                 System.out.println("up");
-                return Direction.up;
+                return Direction.valueOf(0);
             case "s":
                 System.out.println("down");
-                return Direction.down;
+                return Direction.valueOf(1);
             case "d":
                 System.out.println("right");
-                return Direction.right;
+                return Direction.valueOf(3);
             default:
-                return Direction.left;
+                return Direction.valueOf(2);
         }
     }
 

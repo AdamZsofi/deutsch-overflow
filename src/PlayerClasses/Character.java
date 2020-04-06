@@ -12,7 +12,7 @@ public abstract class Character {
     public void step(Direction dir) {
         System.out.print("(IControllable) Player:");
         System.out.println("step("+dir+")");
-        if(dir == Direction.here) {
+        if(dir.getValue() == 4) {
             System.out.println("You stay where you were");
             return;
         }

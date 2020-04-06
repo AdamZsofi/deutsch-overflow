@@ -101,14 +101,14 @@ public class SkeletonMain {
                 Player p1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
                 System.out.println();
                 System.out.println("#   (1)     Player steps inBound");
-                p1.step(Direction.right); //researcher1 steps right
+                p1.step(Direction.valueOf(3)); //researcher1 steps right 3: right
                 break;
             case 2:
                 System.out.println("#Init(2)");
                 Player p2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,0)).get(0);
                 System.out.println();
                 System.out.println("#   (2)     Player steps outBound");
-                p2.step(Direction.down); //eskimo1 steps up
+                p2.step(Direction.valueOf(1)); //eskimo1 steps up 1: down
                 break;
         }
     }
@@ -119,7 +119,7 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(2,0);
         System.out.println();
         System.out.println("#      TileSteppedOff");
-        t.steppedOff(Direction.up);
+        t.steppedOff(Direction.valueOf(0)); //up:0
     }
 
     static void snowyHoleSteppedOnSEQ() {
@@ -138,8 +138,8 @@ public class SkeletonMain {
         Player p = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
         Player p2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,2)).get(0);
         Tile t = PositionLUT.getInstance().getTile(0,1);
-        p.step(Direction.up);
-        p2.step(Direction.down);
+        p.step(Direction.valueOf(0));
+        p2.step(Direction.valueOf(1));
         System.out.println("^^Here 2 players fall in water, but vv for SteppedOn scenario(again)");
         System.out.println();
         System.out.println("#   Unstable Tile SteppedOn");
@@ -189,8 +189,8 @@ public class SkeletonMain {
                 Player p3 = PositionLUT.getInstance().getPlayersOnTile(t3).get(0);
                 t3.changeSnow(-t3.getSnow());
                 p3.pickUp(its3.get(0)); //researcher1 gets shovel
-                p3.step(Direction.up);
-                p3.step(Direction.up);
+                p3.step(Direction.valueOf(0));
+                p3.step(Direction.valueOf(0));
                 Tile t3_2 = PositionLUT.getInstance().getTile(0,2);  //Tile (0, 2)
                 ArrayList<Item> its3_2 = PositionLUT.getInstance().getItemOnTile(t3_2); //Items on Tile(0, 2)
                 t3_2.changeSnow(-t3_2.getSnow());
@@ -224,7 +224,7 @@ public class SkeletonMain {
                 t2.changeSnow(-t2.getSnow()); //Tile (0,0) snow = 0 to pickUp Shovel
                 PositionLUT.getInstance().getPlayersOnTile(t2).get(0).pickUp(its.get(0)); //researcher1 gets showel
                 System.out.println();
-                p2.step(Direction.right);
+                p2.step(Direction.valueOf(3)); // 3: right
                 System.out.println("#     (2)    Player clears snow with shovel");
                 p2.clearSnow();
                 System.out.println("^^thisMuch total -2");
@@ -236,46 +236,46 @@ public class SkeletonMain {
         System.out.println("@Player saves players");
         System.out.println("#Init");
         Player eskimo1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,0)).get(0);
-        eskimo1.step(Direction.right);
+        eskimo1.step(Direction.valueOf(3));
         Tile t = PositionLUT.getInstance().getTile(3,0);
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t);
         t.changeSnow(-t.getSnow());
         eskimo1.pickUp(its.get(0)); //eskimo1 picks up Rope
 
         Player eskimo2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(3,2)).get(0);
-        eskimo2.step(Direction.down); //eskimo2 steps in snowyhole
+        eskimo2.step(Direction.valueOf(1)); //eskimo2 steps in snowyhole
         System.out.println();
         System.out.println("#       Player saves players");
-        eskimo1.savePlayers(Direction.up);
+        eskimo1.savePlayers(Direction.valueOf(0));
     }
 
     static void putSignalFlareTogetherSEQ() {
         System.out.println("@Put SignalFlare together");
         System.out.println("#Init");
         Player eskimo1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,0)).get(0);
-        eskimo1.step(Direction.up);    //eskimo1 to Tile (2,1)
+        eskimo1.step(Direction.valueOf(0));    //eskimo1 to Tile (2,1)
 
         Player researcher1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
-        researcher1.step(Direction.right);
-        researcher1.step(Direction.right);
-        researcher1.step(Direction.up);  //researcher1 to Tile (2, 1)
+        researcher1.step(Direction.valueOf(3));
+        researcher1.step(Direction.valueOf(3));
+        researcher1.step(Direction.valueOf(0));  //researcher1 to Tile (2, 1)
 
         Player eskimo2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(3,2)).get(0);
-        eskimo2.step(Direction.left);
+        eskimo2.step(Direction.valueOf(1));
         Tile t2 = PositionLUT.getInstance().getTile(2,2);
         ArrayList<Item> sgf2 = PositionLUT.getInstance().getItemOnTile(t2);
         t2.changeSnow(-t2.getSnow());
         eskimo2.pickUp(sgf2.get(0)); // one sgf collected
-        eskimo2.step(Direction.down); //eskimo2 to Tile (2, 1)
+        eskimo2.step(Direction.valueOf(1)); //eskimo2 to Tile (2, 1)
 
         Player researcher2 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,2)).get(0);
-        researcher2.step(Direction.right);
+        researcher2.step(Direction.valueOf(3));
         Tile t1 = PositionLUT.getInstance().getTile(1,2);
         ArrayList<Item> sgf1 = PositionLUT.getInstance().getItemOnTile(t1);
         t1.changeSnow(-t1.getSnow());
         researcher2.pickUp(sgf1.get(0)); // one sgf collected
-        researcher2.step(Direction.right);
-        researcher2.step(Direction.down); //researcher2 to Tile (2, 1)
+        researcher2.step(Direction.valueOf(3));
+        researcher2.step(Direction.valueOf(1)); //researcher2 to Tile (2, 1)
         //one sgf is on Tile (2, 1) thwrownDown
 
         System.out.println();
@@ -301,7 +301,7 @@ public class SkeletonMain {
         Tile t = PositionLUT.getInstance().getTile(1,0);
         ArrayList<Item> its = PositionLUT.getInstance().getItemOnTile(t); // divingsuit
         Player p = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
-        p.step(Direction.right);
+        p.step(Direction.valueOf(3));
         t.changeSnow(-t.getSnow());
         p.pickUp(its.get(0));
         System.out.println();
@@ -346,9 +346,9 @@ public class SkeletonMain {
             case 2:
                 System.out.println("#Init(2)");
                 Eskimo es2 = (Eskimo) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,0)).get(0);
-                es2.step(Direction.left);
-                es2.step(Direction.left);
-                es2.step(Direction.up);
+                es2.step(Direction.valueOf(2));
+                es2.step(Direction.valueOf(2));
+                es2.step(Direction.valueOf(0));
                 System.out.println();
                 System.out.println("#   (2)     Eskimo builds Iglu on unstable Tile");
                 es2.buildIgloo(); //eskimo1 builds Igloo
@@ -356,8 +356,8 @@ public class SkeletonMain {
             case 3:
                 System.out.println("#Init(3)");
                 Eskimo es3 = (Eskimo) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,0)).get(0);
-                es3.step(Direction.left);
-                es3.step(Direction.up);
+                es3.step(Direction.valueOf(2));
+                es3.step(Direction.valueOf(0));
                 System.out.println();
                 System.out.println("#   (3)     Eskimo builds Iglu on SnowyHole");
                 es3.buildIgloo(); //eskimo1 builds Igloo
@@ -377,22 +377,22 @@ public class SkeletonMain {
                 Researcher researcher1 = (Researcher) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
                 System.out.println();
                 System.out.println("#   (1)     Researcher mesaures stable Tile");
-                researcher1.detectCapacity(Direction.right);//researcher1 mesaures stable Tile
+                researcher1.detectCapacity(Direction.valueOf(3));//researcher1 mesaures stable Tile
                 break;
             case 2:
                 System.out.println("#Init(2)");
                 Researcher researcher2 = (Researcher) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
                 System.out.println();
                 System.out.println("#   (2)     Researcher mesaures unstable Tile");
-                researcher2.detectCapacity(Direction.up); //researcher1 mesaures unstable Tile
+                researcher2.detectCapacity(Direction.valueOf(0)); //researcher1 mesaures unstable Tile
                 break;
             case 3:
                 System.out.println("#Init(3)");
                 Researcher researcher3 = (Researcher) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
-                researcher3.step(Direction.right);
+                researcher3.step(Direction.valueOf(3));
                 System.out.println();
                 System.out.println("#   (3)     Researcher mesaures SnowyHole");
-                researcher3.detectCapacity(Direction.up); // researcher1 measures SnowyHole
+                researcher3.detectCapacity(Direction.valueOf(0)); // researcher1 measures SnowyHole
                 break;
         }
     }
