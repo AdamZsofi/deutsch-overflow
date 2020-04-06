@@ -29,5 +29,6 @@ public enum Direction {
     public static Direction valueOf(int direction){
         return (Direction)map.get(direction);
     }
+    public static int valueOf(Direction dir){ return (int)map.get(dir.value);}
     public int getValue(){ return value; }
 }

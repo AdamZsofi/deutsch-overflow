@@ -53,20 +53,20 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
     public Tile getNeighbour(Direction dir) throws IndexOutOfBoundsException {
         System.out.println("TileClasses.Tile.getNeighbour(): " + dir);
         int nx = this.x, ny = this.y;
-        switch (dir.getValue()) {
-            case 1:
+        switch (dir.valueOf(dir.getValue())) {
+            case DOWN:
                 nx = x; ny = y - 1;
                 break;
-            case 2:
+            case LEFT:
                 nx = x-1; ny = y;
                 break;
-            case 0:
+            case UP:
                 nx = x; ny = y + 1;
                 break;
-            case 3:
+            case RIGHT:
                 nx = x + 1; ny = y;
                 break;
-            case 4:
+            case HERE:
                 return this;
         }
         // Trükk: nem itt kéne lekezelni, ha nincs dir irányba tile, hanem ott, ahol a player input jön (IControllable)
