@@ -20,6 +20,11 @@ public abstract class Character {
         Tile position= PositionLUT.getInstance().getPosition(current_player);
         try {
             Tile next_tile = position.getNeighbour(dir);
+            Tile bear_position= PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
+            if(next_tile.equals(bear_position)){
+                System.out.println("Dangerous Direction");
+                return;
+            }
             position.steppedOff(dir);
             PositionLUT.getInstance().setPosition(current_player, next_tile);
             Item player_item = current_player.inHand;

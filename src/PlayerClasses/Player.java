@@ -13,7 +13,7 @@ public abstract class Player extends Character{
     protected int ID;
     protected int workPoints;
     public boolean inWater; // public lett, kesobb ezt átgondolhatjuk még
-    public Item inHand; // public lett, hogy más is eltudja dobni a kezéből a törékeny ásót, más megoldás esetleg?
+    protected Item inHand;
     protected Item wearing;
 
     public void startRound() {
@@ -188,4 +188,7 @@ public abstract class Player extends Character{
         RoundController.getInstance().endLastRound();
     }
     // Done with IControllable Implementations
+    public void dropFragileShovel(){
+        inHand = null;
+    }
 }

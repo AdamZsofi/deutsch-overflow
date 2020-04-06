@@ -30,7 +30,7 @@ public class FragileShovel extends Rope{
         counter--;
         if(counter==0){
             PositionLUT.getInstance().setPosition(this, PositionLUT.getInstance().getTile(0,2)); //másik tile-ra esik
-            p.inHand=null;
+            p.dropFragileShovel();
         }
     }
 }
