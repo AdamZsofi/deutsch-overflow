@@ -9,7 +9,7 @@ import TileClasses.Tile;
  *
  */
 
-public class FragileShovel extends Rope{
+public class FragileShovel extends Shovel{
     private int counter;
 
     public FragileShovel(){
