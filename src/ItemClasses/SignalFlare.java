@@ -7,6 +7,11 @@ import PlayerClasses.PlayerContainer;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * DEGIN PERSPECTIVE: It makes no sense to differentiate the SignalParts (no different behaviour)
+ * -> each part has just an (unique)id
+ */
 public class SignalFlare {
 
     public ArrayList<SignalFlarePart> signalFlareParts;
@@ -19,6 +24,10 @@ public class SignalFlare {
         signalFlareParts.add(new SignalFlarePart(2));
     }
 
+    /**
+     * Checks all player  && all item on a Tile -> WIN
+     * @param rc RoundController
+     */
     public void putTogether(RoundController rc){
         System.out.println("ItemClasses.SignalFlare.putTogether()");
 

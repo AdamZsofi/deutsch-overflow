@@ -6,7 +6,13 @@ import TileClasses.Direction;
 import TileClasses.Tile;
 
 public class Researcher extends Player {
-
+    /**
+     * Special function of the player
+     * Researcher is able to detect the capacity of a Tile in a given direction
+     * It prints out the capacity of the neighbour Tile
+     * Error handling: dir should be checked before the call of this method (if tile is OutOfBound)
+     * @param dir direction
+     */
     public void detectCapacity(Direction dir) {
         System.out.print("ResearcherID "+ID+":");
         System.out.println("detectCapacity("+dir+")");

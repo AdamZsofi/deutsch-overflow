@@ -4,6 +4,9 @@ import TileClasses.Direction;
 import ItemClasses.Item;
 import ItemClasses.SignalFlare;
 
+/**
+ * Collection of functions
+ */
 public interface IControllable {
 
     void step(Direction dir);

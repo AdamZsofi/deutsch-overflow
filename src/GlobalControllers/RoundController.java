@@ -22,6 +22,10 @@ public class RoundController {
     public Tent tent;
     //public Item it; //ez itt ami a játékos kezében van?
 
+    /**
+     * Gives back a reference to the RoundController
+     * @return RoundController
+     */
     public static RoundController getInstance() {
         // TODO review
         // paraméterek - mi az, amit kap, mi az, amit magának hoz létre? (Kb mi az, amit posLUT és mi az, amit ő hoz létre)
@@ -48,6 +52,11 @@ public class RoundController {
         // TODO review
     }
 
+    /**
+     * Initialises the game
+     * Initialises the PlayContainer and curID
+     * @param playerNum NumOfPlayer
+     */
     public void init(int playerNum) { //a játékot inicializálja
         System.out.println("GlobalControllers.RoundController.init(" + playerNum + ")");
 
@@ -56,6 +65,9 @@ public class RoundController {
         curID = 0;
     }
 
+    /**
+     * To initialise the ACTUAL Player to start Round
+     */
     public void startNextRound() {
         System.out.println("GlobalControllers.RoundController.startNextRound()");
 
@@ -63,6 +75,9 @@ public class RoundController {
         PlayerContainer.getInstance().getPlayer(curID).startRound();
     }
 
+    /**
+     *
+     */
     public void endLastRound() {
         System.out.println("GlobalControllers.RoundController.endLastRound()");
         boolean can_move=true;
@@ -87,18 +102,29 @@ public class RoundController {
         }
     }
 
+    /**
+     * Lose of game -> System exit
+     * @param cause String of reason
+     */
     public void lose(String cause) {
         System.out.println("GlobalControllers.RoundController.lose(" + cause + ")");
 
         System.exit(0);
     }
 
+    /**
+     * Win of game -> System exit
+     */
     public void win() {
         System.out.println("GlobalControllers.RoundController.win()");
 
         System.exit(0);
     }
 
+    /**
+     * Gives back the unique identifier ID of ACTUAL Player (use to indexing etc.)
+     * @return playerID
+     */
     public int getcurID() {
         return curID;
     }

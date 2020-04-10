@@ -15,6 +15,12 @@ public class Tent extends Item{
      */
     public int x,y;
 
+    /**
+     * Places a Tent to the caller (Player) position
+     * Tent cannot be placed to the Tile if an Iglu is on TIle
+     * @param p Player
+     * @param a Activity
+     */
     @Override
     public void used(Player p, Activity a){
         System.out.println("ItemClasses.Tent.used()");

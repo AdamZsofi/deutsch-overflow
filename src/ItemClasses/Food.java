@@ -7,9 +7,10 @@ public class Food extends Item{
 
     /**
      * If picked up, gets automatically eaten and respawns on a randomly selected tile,
-     * in a frozen state.
+     * in frozen state.
      * In skeleton random values are omitted, so it respawns on it's initial tile again.
-     * */
+     * @param p Player
+     */
     @Override
     public void pickedUp(Player p){
         System.out.println("ItemClasses.Food.pickedUp");

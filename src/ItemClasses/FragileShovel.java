@@ -10,14 +10,16 @@ import TileClasses.Tile;
  */
 
 public class FragileShovel extends Rope{
-    private int counter;
+    private int counter; // to count numOfUse (after 3times of usage it will thrown down)
 
     public FragileShovel(){
         counter=3;
     }
 
     /**
-     * After step, increments the counter of FragileShovel. If the player can't clear more tile with this fragile shovel: throws down.
+     * After step, increments the counter of FragileShovel. If the player can't clear more tile with this fragile shovel: throws down
+     * @param p Player
+     * @param a Activity
      */
     @Override
     public void used(Player p, Activity a){

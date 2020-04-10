@@ -8,6 +8,11 @@ import TileClasses.Direction;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class of Player
+ * Functinalities:
+ * -
+ */
 public abstract class Player extends Character{
     protected int BodyHeat;
     protected int ID;
@@ -16,6 +21,10 @@ public abstract class Player extends Character{
     protected Item inHand;
     protected Item wearing;
 
+    /**
+     * Initialisation for starting a round for Player
+     * Sets workingPoint to 4
+     */
     public void startRound() {
         workPoints = 4;
         System.out.print("PlayerClasses.Player, ID"+ID+":");
@@ -60,6 +69,11 @@ public abstract class Player extends Character{
         }
         passRound(); // ha elfogy a workPoint/vízbe esik, akkor automatikus pass
     }
+
+    /**
+     * Called by the
+     * Sets inWater parameter of Player to TRUE
+     */
     public void fallInWater() {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("fallInWater()");
@@ -68,13 +82,21 @@ public abstract class Player extends Character{
     }
     /**
      * Called by Food, if its picked up. Food is automatically eaten if its picked up
-     * */
+     * Removes the Food from Player's hand and increments the bodyHeat of Player
+     */
     public void ateFood() {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("ateFood()");
         inHand = null;
         changeBodyHeat(1);
     }
+
+    /**
+     * Changes the Player bodyHeat with thisMuch
+     * -ateFood(1)
+     * -snowStorm(-1)
+     * @param thisMuch thisMUCH (+/-)
+     */
     public void changeBodyHeat(int thisMuch) {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("changeBodyHeat("+thisMuch+")");
@@ -83,7 +105,8 @@ public abstract class Player extends Character{
     }
     /**
      * Called by DivingSuit, if its pickedUp (its automatically worn if its picked up)
-     * */
+     * Sets the diving suit to a specific variable, and takes out from the Player's hand
+     */
     public void wear(DivingSuit suit) {
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("wear(ItemClasses.DivingSuit)");
@@ -118,6 +141,13 @@ public abstract class Player extends Character{
         }
         workPoints--;
     }*/
+
+    /**
+     * Player picks up an item
+     * It Player's hand already has an item it takes back to actual Tile
+     * It also decrements of working points of the player
+     * @param i item
+     */
     public void pickUp(Item i) {
         System.out.print("(IControllable) Player:");
         System.out.println("pickUp(Item)");
@@ -137,6 +167,13 @@ public abstract class Player extends Character{
         }
         workPoints--;
     }
+
+    /**
+     * Player clears snow
+     * 1) Checks of the Player's hand has an item -> YES: it tries to clear snow with Shovel (1 unit of snow)
+     * 2) (Another) unit of snow will be cleared from the Tile
+     * It also decrements of working points of the player
+     */
     //atirni protectedre
     public void clearSnow() {
         System.out.print("(IControllable) Player:");
@@ -154,6 +191,12 @@ public abstract class Player extends Character{
 
         workPoints--;
     }
+
+    /**
+     * Player digs to Item from Tile (calls the Tile to change the state of the item)
+     * It also decrements of working points of the player
+     * @param i item
+     */
     //atirni protectedre
     public void digItemUp(Item i) {
         System.out.print("(IControllable) Player:");
@@ -162,6 +205,13 @@ public abstract class Player extends Character{
         i.diggedUp();
         workPoints--;
     }
+
+    /**
+     * Player saves another Players on neighbour Tile (defined by the direction)
+     * It also decrements of working points of the player, if action is successful
+     * Error handling: if direction is HERE, it makes no sense -> Reply message: "You can't save yourself"
+     * @param dir direction
+     */
     //atirni protectedre
     public void savePlayers(Direction dir) {
         System.out.print("(IControllable) Player:");
@@ -173,6 +223,13 @@ public abstract class Player extends Character{
         inHand.used(this,Activity.savingPeople);
         workPoints--;
     }
+
+    /**
+     * Player puts the signal flare together
+     * Calls the putTogether() function of the SignalFlare-> calls the win() function of RoundController
+     * if all Player and SignalFlarePart are on the same tile
+     * @param sg signal flare
+     */
     //atirni protectedre
     public void putSignalTogether(SignalFlare sg) {
         System.out.print("(IControllable) Player:");
@@ -180,6 +237,11 @@ public abstract class Player extends Character{
 
         sg.putTogether(RoundController.getInstance());
     }
+
+    /**
+     * Player passes the round
+     * Calls the endLastRound() function of RoundController
+     */
     //atirni protectedre
     public void passRound() {
         System.out.print("(IControllable) Player:");
@@ -187,6 +249,11 @@ public abstract class Player extends Character{
 
         RoundController.getInstance().endLastRound();
     }
+
+    /**
+     * Function to set the Player's hand to null (FragileShovel can be used just 3 times,
+     * after it disappears from Player's hand)
+     */
     // Done with IControllable Implementations
     public void dropFragileShovel(){
         inHand = null;

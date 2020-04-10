@@ -6,7 +6,17 @@ import ItemClasses.Item;
 import TileClasses.Direction;
 import TileClasses.Tile;
 
+/**
+ * Auto special Player
+ * Functionalities:
+ * - auto-step
+ * - ))))))))))))))))))
+ */
 public class PolarBear extends Character{
+    /**
+     *
+     * @param dir Direction
+     */
     public void step(Direction dir) {
         System.out.println("step("+dir+")");
         Tile position= PositionLUT.getInstance().getPosition(this);

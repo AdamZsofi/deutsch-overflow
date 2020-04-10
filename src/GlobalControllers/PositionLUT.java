@@ -16,7 +16,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * */
 public class PositionLUT {
     protected static PositionLUT pLUT;
-
+    /**
+     * Gives back the reference of PositionLUT
+     */
     public static PositionLUT getInstance() {
         if(pLUT == null) {
             pLUT = new PositionLUT();
@@ -127,34 +129,69 @@ public class PositionLUT {
         player4.add(PlayerContainer.getInstance().getPlayer(3));
         tilePlayerMap.put(getTile(0,2), player4);
 
-
     }
 
+    /**
+     * Gives back position (Tile) of a Player (p)
+     * @param p Player
+     * @return position(Tile)
+     */
     public Tile getPosition(Player p){
         System.out.println("GlobalControllers.PositionLUT.getPosition(Player p)");
 
         return playerTileMap.get(p);
     }
+
+    /**
+     * Gives back position (Tile) of an Item (i)
+     * @param i Item
+     * @return position(Tile)
+     */
     public Tile getPosition(Item i){
         System.out.println("GlobalControllers.PositionLUT.getPosition(Item i)");
 
         return itemTileMap.get(i);
     }
+
+    /**
+     * Gives back all player on a specific Tile
+     * @param t position (Tile)
+     * @return ArrayList<Item> players of the Tile
+     */
     public ArrayList<Player> getPlayersOnTile(Tile t){
         System.out.println("GlobalControllers.PositionLUT.getPlayersOnTile(Tile t)");
 
         return tilePlayerMap.get(t);
     }
+
+    /**
+     * Gives back all item on a specific Tile
+     * @param t position (Tile)
+     * @return ArrayList<Item> items of the Tile
+     */
     public ArrayList<Item> getItemOnTile(Tile t){
         System.out.println("GlobalControllers.PositionLUT.getItemOnTile(Tile t)");
 
         return tileItemMap.get(t);
     }
+
+    /**
+     * Gets two integers
+     * @param x Descartes coord. x (Row)
+     * @param y Descartes coord. y (Column)
+     * @return position (Tile)
+     */
     public Tile getTile(int x, int y){
         System.out.println("GlobalControllers.PositionLUT.getTile(int x, int y)");
 
         return tileList.get(y).get(x); //indexing convension
     }
+
+    /**
+     * Sets position (Tile - t) of the Player (p)
+     * @param p Player
+     * @param t Tile
+     */
     public void setPosition(Player p, Tile t){
         System.out.println("GlobalControllers.PositionLUT.setPosition(Player p, Tile t)");
 
@@ -163,6 +200,12 @@ public class PositionLUT {
         playerTileMap.put(p, t);//put folulirja az elozot
         //todo megnezni jo e?
     }//kell frissiteni: tilePlayerMap, playerTileMap más osztalyokban kell? remelem nem
+
+    /**
+     * Sets the position (Tile - t) of an Item (i)
+     * @param i Item
+     * @param t position (Tile)
+     */
     public void setPosition(Item i, Tile t){
         System.out.println("GlobalControllers.PositionLUT.setPosition(Item i, Tile t)");
 
@@ -170,9 +213,21 @@ public class PositionLUT {
         tileItemMap.get(t).add(i);//uj hely add
         itemTileMap.put(i, t);//put folulirja az elozot
     }
+
+    /**
+     * Gives back the position (Tile) of PolarBear
+     * @param pb PolarBear
+     * @return position(Tile)
+     */
     public Tile getPosition(PolarBear pb){
         return polarbearTileMap.get(pb);
     }
+
+    /**
+     * Sets the position (Tile - t) of the PolarBear(pb)
+     * @param pb PolarBear
+     * @param t position(Tile)
+     */
     public void setPosition(PolarBear pb, Tile t){
         tilePolarBearMap.get(polarbearTileMap.get(pb)).remove(pb);
         tilePolarBearMap.get(t).add(pb);//uj hely add

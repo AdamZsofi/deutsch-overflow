@@ -5,8 +5,9 @@ import PlayerClasses.Player;
 public class DivingSuit extends Item{
 
     /**
-     * automatically worn, if picked up
-     * */
+     * Player picks up the DivingSuit
+     * Automatically worn, if picked up
+     */
     @Override
     public void pickedUp(Player p){
         System.out.println("ItemClasses.DivingSuit.used");
