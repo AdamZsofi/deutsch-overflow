@@ -9,8 +9,8 @@ import TileClasses.Tile;
  *
  */
 
-public class FragileShovel extends Rope{
-    private int counter; // to count numOfUse (after 3times of usage it will thrown down)
+public class FragileShovel extends Shovel{
+    private int counter;
 
     public FragileShovel(){
         counter=3;
