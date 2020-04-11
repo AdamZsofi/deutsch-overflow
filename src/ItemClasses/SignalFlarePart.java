@@ -4,11 +4,12 @@ import PlayerClasses.Player;
 
 /**
  * Parts of SinalFlare
- * It has an unique identifier partID
  */
 public class SignalFlarePart extends Item {
-
-    private int partID; //should be unique
+    /**
+     * @param partID unique identifier
+     */
+    private int partID;
 
     public SignalFlarePart(int id){
         partID = id;

@@ -41,7 +41,7 @@ public abstract class Item {
     }
 
     /**
-     * Gives back the sate of the item
+     * Gives back the state of the item
      * @return state of the item
      */
     public ItemState getState(){
@@ -49,6 +49,7 @@ public abstract class Item {
     }
 
     /**
+     * Called by RoundController
      * This method is an abstract method, which is specifically implemented in the subclasses
      * @param p Player
      * @param a Activity

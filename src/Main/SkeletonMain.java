@@ -10,6 +10,9 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Test class for sequences
+ */
 public class SkeletonMain {
 
     public static void main(String[] args) {

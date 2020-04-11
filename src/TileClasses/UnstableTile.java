@@ -14,12 +14,23 @@ public class UnstableTile extends Tile {
         capacity = 1 ; // ez majd random lesz élesben
     }
 
+    /**
+     * Called by Character
+     * It increases the capacity of Tile => standinghere-- (somebody has left the Tile)
+     * @param dir direction
+     */
     @Override
     public void steppedOff(Direction dir) {
         System.out.println("TileClasses.UnstableTile.steppedOff()");
         standingHere--;
     }
 
+    /**
+     * Called by the Character
+     * It decreases the capacity of Tile => standinghere++ (somebody entered on Tile)
+     * It also check if the OVERWEIGHT OF TILE, in case: all Player fall in water
+     * @param p player
+     */
     @Override
     public void steppedOn(Player p) {
         System.out.println("TileClasses.UnstableTile.steppedOn()");

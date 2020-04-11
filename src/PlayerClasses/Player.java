@@ -71,7 +71,7 @@ public abstract class Player extends Character{
     }
 
     /**
-     * Called by the
+     * Called by the SnowyHole or UnstableTile
      * Sets inWater parameter of Player to TRUE
      */
     public void fallInWater() {

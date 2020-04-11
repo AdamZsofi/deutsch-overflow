@@ -9,11 +9,13 @@ import java.util.ArrayList;
 
 /**
  *
- * DEGIN PERSPECTIVE: It makes no sense to differentiate the SignalParts (no different behaviour)
+ * DESIGN PERSPECTIVE: It makes no sense to differentiate the SignalParts (no different behaviour, no more classes)
  * -> each part has just an (unique)id
  */
 public class SignalFlare {
-
+    /**
+     * @param singalFlareParts parts of SignalFlare
+     */
     public ArrayList<SignalFlarePart> signalFlareParts;
     //3 db alkatrész
 
@@ -25,7 +27,7 @@ public class SignalFlare {
     }
 
     /**
-     * Checks all player  && all item on a Tile -> WIN
+     * Checks all player && all item on a Tile -> calls RoundController win() method
      * @param rc RoundController
      */
     public void putTogether(RoundController rc){

@@ -16,8 +16,10 @@ public class Tent extends Item{
     public int x,y;
 
     /**
+     * Called by RoundController
+     * Player(p) puts Tent on Tile
+     * If Activity (a) is 'putUpTent' and Tile hasn't Iglu
      * Places a Tent to the caller (Player) position
-     * Tent cannot be placed to the Tile if an Iglu is on TIle
      * @param p Player
      * @param a Activity
      */

@@ -13,7 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A singleton Look-Up-Table
- * */
+ * It includes HashMaps between Item - Tiles , Tiles - PLayers ..
+ */
 public class PositionLUT {
     protected static PositionLUT pLUT;
     /**

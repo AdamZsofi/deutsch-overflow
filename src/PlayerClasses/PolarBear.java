@@ -14,7 +14,8 @@ import TileClasses.Tile;
  */
 public class PolarBear extends Character{
     /**
-     *
+     * PolarBear steps, PositionLUT will be refreshed
+     * ERROR HANDLING: Tile hasn't neighbour on dir direction, then prints out "You can't go that way" message
      * @param dir Direction
      */
     public void step(Direction dir) {

@@ -57,6 +57,7 @@ public class PlayerContainer {
 
     /**
      * Gives back a Player based on PlayerId (pid)
+     * ERROR HANDLING: throws NullPointerException by outindexing => SHOULD BE CHECKED BY CALLER
      * @param pid id of a Player
      * @return player of pid
      */

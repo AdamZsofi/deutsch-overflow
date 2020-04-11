@@ -6,8 +6,15 @@ import PlayerClasses.Player;
 import java.util.Scanner;
 
 public class SnowStorm {
-
-    public void tryStorm() {
+    /**
+     * Called by the RoundController after a player round
+     * Based randomly => befall:
+     * On some Tile selected randomly
+     * 1) destroys Iglu on them
+     * 2) hurts player on them (BodyHeat of players will decreased)
+     * 3) puts snow on them
+     */
+    public void tryStorm() { //TODO rendes mukodes
         PositionLUT pL = PositionLUT.getInstance();
         System.out.println("Snowstorm.SnowStorm.tryStorm()");
         System.out.println("What should the storm do?");

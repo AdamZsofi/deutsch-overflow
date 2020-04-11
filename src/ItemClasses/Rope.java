@@ -13,8 +13,10 @@ public class Rope extends Item{
 
     /**
      * Called from RoundController
+     * Player (p) uses Rope
+     * If Activity (a) is 'savingPeople'
      * Prompts the user to get a neighbour Tile
-     * Places all player to the callers Tile
+     * Places all player (on neighbour Tile) to the callers Tile
      * @param p Player
      * @param a Activity
      */

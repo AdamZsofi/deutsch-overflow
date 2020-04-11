@@ -26,9 +26,25 @@ public enum Direction {
         }
     }
 
+    /**
+     * Converts int to Direction
+     * @param direction(int)
+     * @return Direction(enum)
+     */
     public static Direction valueOf(int direction){
         return (Direction)map.get(direction);
     }
+
+    /**
+     * Converts Direction to int
+     * @param dir direction (enum)
+     * @return int
+     */
     public static int valueOf(Direction dir){ return (int)map.get(dir.value);}
+
+    /**
+     * Returns the value of Direction enum
+     * @return value (int)
+     */
     public int getValue(){ return value; }
 }
