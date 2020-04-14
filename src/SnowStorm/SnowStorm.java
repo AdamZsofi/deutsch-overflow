@@ -10,7 +10,7 @@ public class SnowStorm {
      * Called by the RoundController after a player round
      * Based randomly => befall:
      * On some Tile selected randomly
-     * 1) destroys Iglu on them
+     * 1) destroys Igloo on them
      * 2) hurts player on them (BodyHeat of players will decreased)
      * 3) puts snow on them
      */
@@ -28,7 +28,7 @@ public class SnowStorm {
         switch (choice) {
             case 1:
                 System.out.println("Destroying an Igloo...");
-                pL.getTile(2,1).destroyIglu();
+                pL.getTile(2,1).destroyIgloo();
                 break;
             case 2:
                 System.out.println("Hurting a player...");

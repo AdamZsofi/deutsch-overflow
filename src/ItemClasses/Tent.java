@@ -27,7 +27,7 @@ public class Tent extends Item{
     public void used(Player p, Activity a){
         System.out.println("ItemClasses.Tent.used()");
         Tile t = PositionLUT.getInstance().getPosition(p);
-        if(a == Activity.putUpTent && !t.getIgluOn()){
+        if(a == Activity.putUpTent && !t.getIglooOn()){
             t.tentOn=true;
         }
     }

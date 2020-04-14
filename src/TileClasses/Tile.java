@@ -17,7 +17,7 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
      *  @param capacity : max achievable capacity
      *  @param standingHere : the 'actual capacity' (determined by the numOfPlayers on the Tile)
      *  @param snow : amount of snow currently on Tile
-     *  @param igluOn manages Iglu on Tile
+     *  @param iglooOn manages Igloo on Tile
      *  @param tenOn manages Tent on Tile
      */
     protected int capacity;
@@ -25,13 +25,13 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
 
     protected final int x,y;
     protected int snow;
-    protected boolean igluOn;
+    protected boolean iglooOn;
     public boolean tentOn;
 
     public Tile(int x, int y) {
         this.x = x;
         this.y = y;
-        igluOn = false;
+        iglooOn = false;
         Random r = new Random();
         snow = r.nextInt(4) + 1 ;// snow lehet: 1, 2, 3, 4
         capacity = PlayerContainer.getInstance().getPlayerNum(); // ennél nagyobb capacity-nek nincs értelme
@@ -122,22 +122,22 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
 
     /**
      * Called by SnowStorm: tryStorm()
-     * Destroys Iglu on Tile (igluOn = false)
+     * Destroys Igloo on Tile (iglooOn = false)
      */
-    public void destroyIglu(){
-        System.out.println("TileClasses.Tile.destroyIglu()");
-        igluOn = false;
+    public void destroyIgloo(){
+        System.out.println("TileClasses.Tile.destroyIgloo()");
+        iglooOn = false;
     }
 
     /**
      * Called by Eskimo
-     * Sets Iglu on Tile (igluOn = true)
+     * Sets Igloo on Tile (iglooOn = true)
      */
-    public void buildIglu(){
-        System.out.println("TileClasses.Tile.buildIglu()");
-        igluOn = true;
+    public void buildIgloo(){
+        System.out.println("TileClasses.Tile.buildIgloo()");
+        iglooOn = true;
     }
-    public boolean getIgluOn(){ return igluOn;}
+    public boolean getIglooOn(){ return iglooOn;}
 
     /**
      * @author adam

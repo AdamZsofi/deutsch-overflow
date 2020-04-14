@@ -10,21 +10,21 @@ public class SnowyHole extends Tile {
     }
 
     /**
-     * Sets Iglu parameter of Tile to FALSE (igluOn = FALSE)
+     * Sets Igloo parameter of Tile to FALSE (iglooOn = FALSE)
      */
     @Override
-    public void destroyIglu(){
-        System.out.println("TileClasses.SnowyHole.destroyIglu(), you shouldn't be able to call this inGame!");
-        igluOn = false;
+    public void destroyIgloo(){
+        System.out.println("TileClasses.SnowyHole.destroyIgloo(), you shouldn't be able to call this inGame!");
+        iglooOn = false;
     }
 
     /**
-     * Sets Iglu parameter of Tile to TRUE (igluOn = TRUE)
+     * Sets Igloo parameter of Tile to TRUE (iglooOn = TRUE)
      */
     @Override
-    public void buildIglu(){
-        System.out.println("TileClasses.SnowyHole.buildIglu(), you shouldn't be able to call this inGame!");
-        igluOn = false;
+    public void buildIgloo(){
+        System.out.println("TileClasses.SnowyHole.buildIgloo(), you shouldn't be able to call this inGame!");
+        iglooOn = false;
     }
 
     /**

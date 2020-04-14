@@ -34,7 +34,7 @@ public class SkeletonMain {
         System.out.println("(11) PlayerWearsDivingSuit");
         System.out.println("(12) RoundPassing");
         System.out.println("(13) SnowStorming");
-        System.out.println("(14) EskimoBuildsIglu");
+        System.out.println("(14) EskimoBuildsIgloo");
         System.out.println("(15) ResearcherDetectsCapacity");
 
         Scanner scan = new Scanner(System.in);
@@ -83,7 +83,7 @@ public class SkeletonMain {
                 snowStormingSEQ();
                 break;
             case 14:
-                eskimoBuildsIgluSEQ();
+                eskimoBuildsIglooSEQ();
                 break;
             case 15:
                 researcherDetectsCapacitySEQ();
@@ -326,24 +326,24 @@ public class SkeletonMain {
         SnowStorm ss = new SnowStorm();
         // In case of an igloo destroying storm, we need an igloo first, we initialize that here
         // This is a "syntetic use" of our classes, normally you don't build an igloo outside of the round of an eskimo
-        PositionLUT.getInstance().getTile(2,1).buildIglu();
+        PositionLUT.getInstance().getTile(2,1).buildIgloo();
         System.out.println();
         System.out.println("#     Snowstorming");
         ss.tryStorm();
     }
 
-    static void eskimoBuildsIgluSEQ() {
-        System.out.println("@Eskimo builds Iglu (3 cases)");
-        System.out.println("(1) Eskimo builds Iglu on stable Tile");
-        System.out.println("(2) Eskimo builds Iglu on unstable Tile");
-        System.out.println("(3) Eskimo builds Iglu on SnowyHole");
+    static void eskimoBuildsIglooSEQ() {
+        System.out.println("@Eskimo builds Igloo (3 cases)");
+        System.out.println("(1) Eskimo builds Igloo on stable Tile");
+        System.out.println("(2) Eskimo builds Igloo on unstable Tile");
+        System.out.println("(3) Eskimo builds Igloo on SnowyHole");
         Scanner scn = new Scanner(System.in);
         switch (scn.nextInt()) {
             case 1:
                 System.out.println("#Init(1)");
                 Eskimo es1 = (Eskimo) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(2,0)).get(0);
                 System.out.println();
-                System.out.println("#   (1)     Eskimo builds Iglu on stable Tile");
+                System.out.println("#   (1)     Eskimo builds Igloo on stable Tile");
                 es1.buildIgloo(); //eskimo1 builds Igloo
                 break;
             case 2:
@@ -353,7 +353,7 @@ public class SkeletonMain {
                 es2.step(Direction.valueOf(2));
                 es2.step(Direction.valueOf(0));
                 System.out.println();
-                System.out.println("#   (2)     Eskimo builds Iglu on unstable Tile");
+                System.out.println("#   (2)     Eskimo builds Igloo on unstable Tile");
                 es2.buildIgloo(); //eskimo1 builds Igloo
                 break;
             case 3:
@@ -362,7 +362,7 @@ public class SkeletonMain {
                 es3.step(Direction.valueOf(2));
                 es3.step(Direction.valueOf(0));
                 System.out.println();
-                System.out.println("#   (3)     Eskimo builds Iglu on SnowyHole");
+                System.out.println("#   (3)     Eskimo builds Igloo on SnowyHole");
                 es3.buildIgloo(); //eskimo1 builds Igloo
                 break;
         }
@@ -379,22 +379,22 @@ public class SkeletonMain {
                 System.out.println("#Init(1)");
                 Researcher researcher1 = (Researcher) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
                 System.out.println();
-                System.out.println("#   (1)     Researcher mesaures stable Tile");
-                researcher1.detectCapacity(Direction.valueOf(3));//researcher1 mesaures stable Tile
+                System.out.println("#   (1)     Researcher measures stable Tile");
+                researcher1.detectCapacity(Direction.valueOf(3));//researcher1 measures stable Tile
                 break;
             case 2:
                 System.out.println("#Init(2)");
                 Researcher researcher2 = (Researcher) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
                 System.out.println();
-                System.out.println("#   (2)     Researcher mesaures unstable Tile");
-                researcher2.detectCapacity(Direction.valueOf(0)); //researcher1 mesaures unstable Tile
+                System.out.println("#   (2)     Researcher measures unstable Tile");
+                researcher2.detectCapacity(Direction.valueOf(0)); //researcher1 measures unstable Tile
                 break;
             case 3:
                 System.out.println("#Init(3)");
                 Researcher researcher3 = (Researcher) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
                 researcher3.step(Direction.valueOf(3));
                 System.out.println();
-                System.out.println("#   (3)     Researcher mesaures SnowyHole");
+                System.out.println("#   (3)     Researcher measures SnowyHole");
                 researcher3.detectCapacity(Direction.valueOf(0)); // researcher1 measures SnowyHole
                 break;
         }
