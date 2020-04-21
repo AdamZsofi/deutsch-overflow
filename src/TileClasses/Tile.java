@@ -10,12 +10,11 @@ import java.util.Random;
 /**
  * Class of Tile, the "small portions" of the game board
  * A Tile is indexed by x and y
- * It includes:
  */
 public abstract class Tile {
     /**
      *  @param capacity : max achievable capacity
-     *  @param standingHere : the 'actual capacity' (determined by the numOfPlayers on the Tile)
+     *  @param standingHere : the number of players currently standing on the tile (determined by the numOfPlayers on the Tile)
      *  @param snow : amount of snow currently on Tile
      *  @param iglooOn manages Igloo on Tile
      *  @param tenOn manages Tent on Tile

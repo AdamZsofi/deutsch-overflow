@@ -1,5 +1,6 @@
 package Main;
 
+import CLI.CommandInterpreter;
 import GlobalControllers.*;
 import PlayerClasses.*;
 import SnowStorm.*;
@@ -13,13 +14,24 @@ import java.util.Scanner;
 /**
  * Test class for sequences
  */
-public class SkeletonMain {
+public class ProtoMain {
 
+    /**
+     * Creates a command interpreter and starts it
+     * The Command interpreter will wait for commands and forward them to the game instance
+     * The loop, which enables the continous sampling of commands, is implemented in Command
+     * Interpeter, not in main.
+     */
     public static void main(String[] args) {
+        CommandInterpreter commandInterpreter = new CommandInterpreter(System.in, System.out);
+        commandInterpreter.waitingCommands();
+         // Note: if you want to run more than one test, you can just copy and paste these 2 lines and modify them to your case (other in/out)
+
+        // Ez a skeleton main volt, majd ki kell szedni egyszercsak
+        /*
         PlayerContainer.Initialize(4);
         RoundController.getInstance(); //letrehoz
         PositionLUT.getInstance();
-
         System.out.println("Choose a scene you want to test:");
         System.out.println("(1) PlayerSteps");
         System.out.println("(2) TileSteppedOff");
@@ -92,7 +104,10 @@ public class SkeletonMain {
                 System.out.println("That is not a valid test number");
                 break;
         }
+
+         */
     }
+    /*
     static void playerStepsSEQ() {
         System.out.println("@Player steps (4 cases)");
         System.out.println("(1) Player steps inBound");
@@ -399,5 +414,6 @@ public class SkeletonMain {
                 break;
         }
     }
+    */
 }
 
