@@ -6,6 +6,11 @@ import TileClasses.Direction;
 import TileClasses.Tile;
 
 public class Researcher extends Player {
+
+    public Researcher(){
+        super();
+        BodyHeat=4;
+    }
     /**
      * Special function of the player
      * Researcher is able to detect the capacity of a Tile in a given direction

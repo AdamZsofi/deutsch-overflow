@@ -12,7 +12,7 @@ import java.util.Random;
  * A Tile is indexed by x and y
  * It includes:
  */
-public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (stableTile helyett lehetne, az üres)
+public abstract class Tile {
     /**
      *  @param capacity : max achievable capacity
      *  @param standingHere : the 'actual capacity' (determined by the numOfPlayers on the Tile)
@@ -21,7 +21,7 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
      *  @param tenOn manages Tent on Tile
      */
     protected int capacity;
-    public int standingHere; // TODO kell, h public legyen? check later
+    protected int standingHere;
 
     protected final int x,y;
     protected int snow;
@@ -64,8 +64,9 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
      */
     public void changeSnow(int thisMuch) {
         System.out.println("TileClasses.Tile.changeSnow(): " + thisMuch);
-        //TODO itt visszairni 0-tol csak negativ ertekeket fogadjon el
-        if(snow+thisMuch>-4 && snow+thisMuch<=4)
+        if(thisMuch<0 && snow>0)
+            snow += thisMuch;
+        else if(snow==0 && thisMuch>0)
             snow += thisMuch;
     }
 
@@ -117,6 +118,7 @@ public abstract class Tile { // TODO végiggondolni, hogy abstract maradjon-e (s
         // Indok: Itt ha újrahívnám ezt a fgv-t, az könnyen végtelen rekurzióba hajszolhatná
         // viszont ha csak pl this-t visszaadok és nem kezelünk semmit feljebb, akkor olyan hibák jöhetnek ki, mint
         // levonódik egy workPoint, de egy helyben marad a player, stb.
+        // vagy egyszerűen nincs lehetősége arra lépni a játékosnak?
         return PositionLUT.getInstance().getTile(nx, ny); // throws IndexOutOfBoundsException if, and only if there's no neighbour
     }
 

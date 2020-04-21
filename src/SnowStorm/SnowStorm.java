@@ -3,6 +3,8 @@ package SnowStorm;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SnowStorm {
@@ -14,35 +16,42 @@ public class SnowStorm {
      * 2) hurts player on them (BodyHeat of players will decreased)
      * 3) puts snow on them
      */
-    public void tryStorm() { //TODO rendes mukodes
+    public void tryStorm() {
         PositionLUT pL = PositionLUT.getInstance();
         System.out.println("Snowstorm.SnowStorm.tryStorm()");
-        System.out.println("What should the storm do?");
-        System.out.println("(1) Destroy an Igloo");
-        System.out.println("(2) Hurt a player");
-        System.out.println("(3) Put snow on a tile");
-        Scanner scan = new Scanner(System.in);
-        int choice = scan.nextInt();
-        scan.close();
 
-        switch (choice) {
-            case 1:
-                System.out.println("Destroying an Igloo...");
-                pL.getTile(2,1).destroyIgloo();
-                break;
-            case 2:
-                System.out.println("Hurting a player...");
-                for (Player p : pL.getPlayersOnTile(pL.getTile(2,0))) {
-                    p.changeBodyHeat(-1);
-                }
-                break;
-            case 3:
-                System.out.println("Putting snow on a tile...");
-                pL.getTile(2,1).changeSnow(1);
-                break;
-            default:
-                System.out.println("That is not a valid test number");
-                break;
+        Random rand = new Random();
+        int number= rand.nextInt(100);
+
+        if(number>30) {// ~70%
+            System.out.println(number);
+            return;
+        }
+
+        ArrayList<Integer[]> values = new ArrayList<>(); // coordinates of tiles
+        int x,y;
+        boolean flag=true;
+        do{
+            x= rand.nextInt(4);
+            y=rand.nextInt(3);
+            for(int i=0;i<values.size();i++){
+                if(values.get(i)[0] ==x && values.get(i)[1]==y)
+                    flag=false;
+            }
+            if(flag)
+                values.add(new Integer[] { x,y});
+            flag=true;
+        } while(values.size()<4);
+
+        for(int i=0;i<4;i++){
+            int x_coord=values.get(i)[0];
+            int y_coord= values.get(i)[1];
+
+            pL.getTile(x_coord,y).destroyIgloo(); //destroy igloo
+            for (Player p : pL.getPlayersOnTile(pL.getTile(x_coord,y_coord))) {
+                p.changeBodyHeat(-1); //change bodyheat of players, who stand on this tile
+            }
+            pL.getTile(x_coord,y_coord).changeSnow(1);
         }
     }
 }

@@ -27,7 +27,6 @@ public class RoundController {
      * @return RoundController
      */
     public static RoundController getInstance() {
-        // TODO review
         // paraméterek - mi az, amit kap, mi az, amit magának hoz létre? (Kb mi az, amit posLUT és mi az, amit ő hoz létre)
         // Megj.: Ha bármit kap paraméterben, akkor kell egy init fgv és egy getInstance külön, ahol getInstance nem kap paramétert
         // hogy pl. Player működését itt a paraméterek ne nyírják ki
@@ -48,8 +47,9 @@ public class RoundController {
 
     private RoundController() {
         ss = new SnowStorm();
-        sg = new SignalFlare();//feltölti itemekkel a sajat ArrrayList-ét, posLUT initnél mapon is ott lesz.
-        // TODO review
+        sg = new SignalFlare(); //feltölti itemekkel a sajat ArrrayList-ét, posLUT initnél mapon is ott lesz.
+        polarbear= new PolarBear();
+        tent= new Tent();
     }
 
     /**
@@ -65,41 +65,36 @@ public class RoundController {
         curID = 0;
     }
 
-    /**
-     * To initialise the ACTUAL Player to start Round
-     */
-    public void startNextRound() {
-        System.out.println("GlobalControllers.RoundController.startNextRound()");
-
-
-        PlayerContainer.getInstance().getPlayer(curID).startRound();
-    }
 
     /**
      *
      */
     public void endLastRound() {
         System.out.println("GlobalControllers.RoundController.endLastRound()");
-        boolean can_move=true;
+        //boolean can_move=true;
         curID = (curID + 1) % PlayerContainer.getInstance().getPlayerNum();
         ss.tryStorm();
         checkTent();
 
-        Random r = new Random();
-        int direction = r.nextInt(4);
-        boolean success=true;
-        Tile current_tile= PositionLUT.getInstance().getPosition(polarbear);
-        Tile next_tile=null;
-        int players_num;
-        do{
-            polarbear.step(Direction.valueOf(direction));
-            next_tile = current_tile.getNeighbour(Direction.valueOf(direction));
-            if(current_tile.equals(next_tile)) success=false;
-        } while(!success);
-        players_num= PositionLUT.pLUT.getPlayersOnTile(next_tile).size();
-        if(players_num>0){
-            lose("Bear kills player");
+        if(curID == 0) { // end of whole round
+            Random r = new Random();
+            int direction = r.nextInt(4);
+            boolean success = true;
+            Tile current_tile = PositionLUT.getInstance().getPosition(polarbear);
+            Tile next_tile = null;
+            int players_num;
+            do {
+                direction=r.nextInt(4);
+                polarbear.step(Direction.valueOf(direction));
+                next_tile = current_tile.getNeighbour(Direction.valueOf(direction));
+                if (current_tile.equals(next_tile)) success = false;
+            } while (!success);
+            players_num = PositionLUT.pLUT.getPlayersOnTile(next_tile).size();
+            if (players_num > 0) {
+                lose("Bear kills player");
+            }
         }
+        PlayerContainer.getInstance().getPlayer(curID).startRound();
     }
 
     /**

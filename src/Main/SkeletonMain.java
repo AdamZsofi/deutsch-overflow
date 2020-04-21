@@ -104,6 +104,7 @@ public class SkeletonMain {
                 Player p1 = PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
                 System.out.println();
                 System.out.println("#   (1)     Player steps inBound");
+
                 p1.step(Direction.valueOf(3)); //researcher1 steps right 3: right
                 break;
             case 2:
@@ -392,7 +393,6 @@ public class SkeletonMain {
             case 3:
                 System.out.println("#Init(3)");
                 Researcher researcher3 = (Researcher) PositionLUT.getInstance().getPlayersOnTile(PositionLUT.getInstance().getTile(0,0)).get(0);
-                researcher3.step(Direction.valueOf(3));
                 System.out.println();
                 System.out.println("#   (3)     Researcher measures SnowyHole");
                 researcher3.detectCapacity(Direction.valueOf(0)); // researcher1 measures SnowyHole

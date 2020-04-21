@@ -11,6 +11,10 @@ public class Eskimo extends Player {
     /**
      * Sets Igloo on Tile, where the Eskimo is actually standing
      */
+    public Eskimo(){
+        super();
+        BodyHeat=5;
+    }
     public void buildIgloo() {
         System.out.print("PlayerClasses.Eskimo, ID"+ID+":");
         System.out.println("buildIgloo()");

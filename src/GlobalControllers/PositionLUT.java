@@ -42,6 +42,7 @@ public class PositionLUT {
     private PositionLUT(){
         tileList = new ArrayList<>();
         ArrayList<Tile> row1= new ArrayList<>();
+
         row1.add(new StableTile(0,0));
         row1.add(new StableTile(1,0));
         row1.add(new StableTile(2,0));
@@ -65,10 +66,12 @@ public class PositionLUT {
 
         tileItemMap = new HashMap<>();
         tilePlayerMap = new HashMap<>();
+        tilePolarBearMap=new HashMap<>();
         for(int y = 0; y<3; y++){//init, h mindenhol legyen
             for(int x = 0; x< 4; x++){
                 tilePlayerMap.put(getTile(x,y),new ArrayList<>() );
                 tileItemMap.put(getTile(x,y),new ArrayList<>() );
+                tilePolarBearMap.put(getTile(x,y),new ArrayList<>());
             }
         }
 
@@ -115,6 +118,10 @@ public class PositionLUT {
 
         polarbearTileMap = new HashMap<>();
         polarbearTileMap.put(RoundController.getInstance().polarbear,getTile(1,1)); //polarbear
+
+        ArrayList polarbear= new ArrayList();
+        polarbear.add(RoundController.getInstance().polarbear);
+        tilePolarBearMap.put(getTile(1,1),polarbear);
 
 
         ArrayList player1 = new ArrayList();
@@ -230,7 +237,7 @@ public class PositionLUT {
      * @param t position(Tile)
      */
     public void setPosition(PolarBear pb, Tile t){
-        tilePolarBearMap.get(polarbearTileMap.get(pb)).remove(pb);
+        tilePolarBearMap.get(polarbearTileMap.get(pb)).remove(pb); //.
         tilePolarBearMap.get(t).add(pb);//uj hely add
         polarbearTileMap.put(pb, t);//put folulirja az elozot
     }

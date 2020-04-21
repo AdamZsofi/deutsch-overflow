@@ -16,7 +16,7 @@ import java.util.Scanner;
 public abstract class Player extends Character{
     protected int BodyHeat;
     protected int ID;
-    protected int workPoints;
+    public int workPoints;
     public boolean inWater; // public lett, kesobb ezt átgondolhatjuk még
     protected Item inHand;
     protected Item wearing;
@@ -25,6 +25,13 @@ public abstract class Player extends Character{
      * Initialisation for starting a round for Player
      * Sets workingPoint to 4
      */
+    public Player(){
+        inHand=null;
+        inWater=false;
+        wearing=null;
+        workPoints=4;
+    }
+
     public void startRound() {
         workPoints = 4;
         System.out.print("PlayerClasses.Player, ID"+ID+":");
@@ -36,7 +43,7 @@ public abstract class Player extends Character{
             System.out.println("Enter the activity:");
             Scanner scanner = new Scanner(System.in);
             int activity = scanner.nextInt();
-            scanner.close();
+           // scanner.close();
             switch (activity) {
                 case 0:
                     step(Direction.valueOf(2));//left
@@ -257,5 +264,37 @@ public abstract class Player extends Character{
     // Done with IControllable Implementations
     public void dropFragileShovel(){
         inHand = null;
+    }
+
+    @Override
+    public void step(Direction dir) {
+            System.out.print("(IControllable) Player:");
+            System.out.println("step("+dir+")");
+            if(dir.getValue() == 4) {
+                System.out.println("You stay where you were");
+                return;
+            }
+            // Player current_player= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
+
+            Tile position= PositionLUT.getInstance().getPosition(this);
+            try {
+                Tile next_tile = position.getNeighbour(dir);
+                Tile bear_position= PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
+                if(next_tile.equals(bear_position)){
+                    System.out.println("Dangerous Direction");
+                    return;
+                }
+                position.steppedOff(dir);
+                PositionLUT.getInstance().setPosition(this, next_tile);
+                Item player_item = this.inHand;
+                if(this.inHand!=null){
+                    PositionLUT.getInstance().setPosition(player_item,next_tile);
+                }
+                next_tile.steppedOn(this);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("You can't go that way");
+                return;
+            }
+            this.workPoints--;
     }
 }

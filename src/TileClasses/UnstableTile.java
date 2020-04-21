@@ -11,7 +11,9 @@ public class UnstableTile extends Tile {
 
     public UnstableTile(int x, int y) {
         super(x, y);
-        capacity = 1 ; // ez majd random lesz élesben
+
+        Random rand= new Random();
+        capacity= rand.nextInt(3) + 1;
     }
 
     /**
