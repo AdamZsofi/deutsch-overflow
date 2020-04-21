@@ -28,4 +28,8 @@ public class Researcher extends Player {
         int capacity = checkedTile.getCapacity();
         System.out.println("Tile capacity: "+capacity);
     }
+
+    public String getShortName() {
+        return "R"+ID;
+    }
 }

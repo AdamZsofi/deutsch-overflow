@@ -21,4 +21,8 @@ public class Eskimo extends Player {
         Tile tile = PositionLUT.getInstance().getPosition(this);
         tile.buildIgloo();
     }
+
+    public String getShortName() {
+        return "E"+ID;
+    }
 }

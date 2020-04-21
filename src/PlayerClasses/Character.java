@@ -17,4 +17,5 @@ public abstract class Character {
      * @param dir Direction where to step
      */
     public abstract  void step(Direction dir);
+    public abstract String getShortName();
 }

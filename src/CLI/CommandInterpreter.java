@@ -1,5 +1,7 @@
 package CLI;
 
+import TileClasses.Direction;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -8,6 +10,7 @@ import java.util.Scanner;
  * Interprets the input commands and if the game is started then initializes a game instance
  * THE GAME SHOULD NEVER USE OTHER INPUT OR OUTPUT AS THE STORED ONES
  * (see its members: log, input)
+ * @author Zsófi
  */
 public class CommandInterpreter {
     /**
@@ -49,6 +52,7 @@ public class CommandInterpreter {
      * Processing is done in the corresponding method of the command in the gameInstance
      * The loop ends, when the game ends or when EndGame command is given.
      * The commands and arguments should be separated with new lines
+     * @author Zsófi
      */
     public void waitingCommands() {
         while(!endGame) {
@@ -68,11 +72,16 @@ public class CommandInterpreter {
             }
 
             // és itt jön a szép nagy switch case :D
-            // TODO corresponding methods (like startGame) should be implemented
+            // TODO corresponding methods for every command (like startGame) should be implemented
             // TODO Note: A Game osztály lényege, hogy amikor a command interpreter helyett a CLI küldözget hasonló parancsokat, akkor azok szét legyenek választva a CLI-től
-            // Tehát: a corresponding methodok a Game methodjai kell legyenek (startGame static, mert még nincs példány, a többi nem static)
+            // TODO Note2: a corresponding methodok a Game methodjai kell legyenek (startGame static, mert még nincs példány, a többi nem static)
+            // TODO Note3: Fontos, hogy az argumentumokat (irány, stb.) már itt bekérje a CommandInterpreter és csak utána hívja meg a gameInstanceon amit kell, az arg-t paraméterként átadva
+            // TODO Note4: a printCharacterMap-t és a step-t megírtam, mint példa, az lehet, hogy segít
+            // TODO Note5: illetve a 7-s doksiban van a ki és bemeneti nyelv kiírása az argumentumokkal, azt légyszi kövessétek
+            // TODO Note6: néhány helyen lekezeltem, ha hülyeséget kapunk bemenetként, de alapvetően sztem NEM kell kezelni - ez egy teszt nyelv, nem hülye user van, hanem mi használjuk tesztelésre, tőlünk elvárható az értelmes input
             switch (commandScanner.nextLine()) {
                 case "PrintCharacterMap":
+                    gameInstance.printCharacterMap();
                     break;
                 case "PrintItemMap":
                     break;
@@ -87,6 +96,21 @@ public class CommandInterpreter {
                 case "PrintPlayer":
                     break;
                 case "Step":
+                    log.println("Which direction? (w,a,s,d)"); // Note: ahol van értelme egy helyben csinálni vmit, ott kell 5.-ik irány arg
+                    switch (commandScanner.nextLine()) {
+                        case "w":
+                            gameInstance.step(Direction.UP);
+                            break;
+                        case "a":
+                            gameInstance.step(Direction.LEFT);
+                            break;
+                        case "s":
+                            gameInstance.step(Direction.DOWN);
+                            break;
+                        case "d":
+                            gameInstance.step(Direction.RIGHT);
+                            break;
+                    }
                     break;
                 case "PickUp":
                     break;

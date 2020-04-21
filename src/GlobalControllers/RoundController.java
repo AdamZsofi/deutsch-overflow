@@ -117,7 +117,7 @@ public class RoundController {
     }
 
     /**
-     * Gives back the unique identifier ID of ACTUAL Player (use to indexing etc.)
+     * Gives back the unique identifier ID of CURRENT Player (use to indexing etc.)
      * @return playerID
      */
     public int getcurID() {

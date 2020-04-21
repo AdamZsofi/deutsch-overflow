@@ -29,4 +29,8 @@ public class PolarBear extends Character{
             return;
         }
     }
+
+    public String getShortName() {
+        return "B";
+    }
 }

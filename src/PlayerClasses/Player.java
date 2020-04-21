@@ -38,6 +38,8 @@ public abstract class Player extends Character{
         System.out.println("startRound()");
         System.out.println("Waiting for player input...");
 
+        // TODO Ez a rész kb átkerült a Game és CommandInterpreterbe, Game methodjainak implementálásánál még jól jöhet, ezért majd akkor töröljük, ha azok készen vannak
+        /*
         Tile position;
         while(workPoints>0 && !inWater) {
             System.out.println("Enter the activity:");
@@ -75,6 +77,7 @@ public abstract class Player extends Character{
             }
         }
         passRound(); // ha elfogy a workPoint/vízbe esik, akkor automatikus pass
+        */
     }
 
     /**
@@ -173,6 +176,7 @@ public abstract class Player extends Character{
             i.pickedUp(this);
         }
         workPoints--;
+        if(workPoints==0) passRound();
     }
 
     /**
@@ -197,6 +201,7 @@ public abstract class Player extends Character{
         position.changeSnow(-1);
 
         workPoints--;
+        if(workPoints==0) passRound();
     }
 
     /**
@@ -211,6 +216,7 @@ public abstract class Player extends Character{
 
         i.diggedUp();
         workPoints--;
+        if(workPoints==0) passRound();
     }
 
     /**
@@ -229,6 +235,7 @@ public abstract class Player extends Character{
         }
         inHand.used(this,Activity.savingPeople);
         workPoints--;
+        if(workPoints==0) passRound();
     }
 
     /**
@@ -296,5 +303,6 @@ public abstract class Player extends Character{
                 return;
             }
             this.workPoints--;
+            if(workPoints==0) passRound();
     }
 }
