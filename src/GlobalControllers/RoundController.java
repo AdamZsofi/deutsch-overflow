@@ -1,5 +1,6 @@
 package GlobalControllers;
 
+import CLI.Game;
 import ItemClasses.SignalFlare;
 import ItemClasses.Tent;
 import PlayerClasses.PolarBear;
@@ -7,7 +8,6 @@ import PlayerClasses.PlayerContainer;
 import SnowStorm.SnowStorm;
 import TileClasses.Direction;
 import TileClasses.Tile;
-import javafx.geometry.Pos;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -49,7 +49,7 @@ public class RoundController {
         ss = new SnowStorm();
         sg = new SignalFlare(); //feltölti itemekkel a sajat ArrrayList-ét, posLUT initnél mapon is ott lesz.
         polarbear= new PolarBear();
-        tent= new Tent();
+        tent = new Tent();
     }
 
     /**
@@ -58,10 +58,9 @@ public class RoundController {
      * @param playerNum NumOfPlayer
      */
     public void init(int playerNum) { //a játékot inicializálja
-        System.out.println("GlobalControllers.RoundController.init(" + playerNum + ")");
-
         //playercontainer itt init (skeletonban a playerNum nem játszik szerepet, minig 4 lesz)
         PlayerContainer.Initialize(playerNum);
+        Game.log.format("# RoundController>init : RoundController initialised by %d players\n", playerNum);
         curID = 0;
     }
 
@@ -70,7 +69,7 @@ public class RoundController {
      *
      */
     public void endLastRound() {
-        System.out.println("GlobalControllers.RoundController.endLastRound()");
+        Game.log.println("# RoundController>endLastRound : Round end started");
         //boolean can_move=true;
         curID = (curID + 1) % PlayerContainer.getInstance().getPlayerNum();
         ss.tryStorm();
@@ -78,8 +77,8 @@ public class RoundController {
 
         if(curID == 0) { // end of whole round
             Random r = new Random();
-            int direction = r.nextInt(4);
             boolean success = true;
+            int direction;
             Tile current_tile = PositionLUT.getInstance().getPosition(polarbear);
             Tile next_tile = null;
             int players_num;
@@ -91,9 +90,11 @@ public class RoundController {
             } while (!success);
             players_num = PositionLUT.pLUT.getPlayersOnTile(next_tile).size();
             if (players_num > 0) {
+                Game.log.println("! RoundController>endLastRound : Bear killed the players on Tile");
                 lose("Bear kills player");
             }
         }
+        Game.log.println("# RoundController>endLastRound : Round end ended");
         PlayerContainer.getInstance().getPlayer(curID).startRound();
     }
 
@@ -102,8 +103,8 @@ public class RoundController {
      * @param cause String of reason
      */
     public void lose(String cause) {
-        System.out.println("GlobalControllers.RoundController.lose(" + cause + ")");
-
+        System.out.format("You loose the game, %s\n", cause);
+        Game.log.println("$ RoundController>lose : Game lose, ended");
         System.exit(0);
     }
 
@@ -111,8 +112,8 @@ public class RoundController {
      * Win of game -> System exit
      */
     public void win() {
-        System.out.println("GlobalControllers.RoundController.win()");
-
+        System.out.println("You win the game, congratulation");
+        Game.log.println("$ RoundController>win : Game won, ended");
         System.exit(0);
     }
 

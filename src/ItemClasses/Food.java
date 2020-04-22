@@ -1,5 +1,6 @@
 package ItemClasses;
 
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 
@@ -13,9 +14,9 @@ public class Food extends Item{
      */
     @Override
     public void pickedUp(Player p){
-        System.out.println("ItemClasses.Food.pickedUp");
         PositionLUT.getInstance().setPosition(this, PositionLUT.getInstance().getTile(0,2));
         state = ItemState.frozen;
         p.ateFood();
+        Game.log.println("$ Food>pickedUp : Transaction 'pickUp' and 'ateFood' was successful");
     }
 }

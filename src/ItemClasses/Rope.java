@@ -1,5 +1,6 @@
 package ItemClasses;
 
+import CLI.Game;
 import PlayerClasses.Player;
 import GlobalControllers.PositionLUT;
 import TileClasses.*;
@@ -22,8 +23,6 @@ public class Rope extends Item{
      */
     @Override
     public void used(Player p, Activity a){
-        System.out.println("ItemClasses.Rope.used()");
-
         if(a == Activity.savingPeople) {
             Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
             Direction wateTile_dir = Direction.valueOf(0);///getDir();//csak egy gyors pelda, megadja milyen irányban van a waterTile up:0
@@ -35,6 +34,9 @@ public class Rope extends Item{
                         //TODO mento player iranyaba, nem kell bekerni
                     inWaterPlayers.get(count).step(step_dir);
             }
+            Game.log.println("$ Rope>used : Transaction 'savingPeople' was successful");
+        } else {
+            Game.log.println("! Rope>used : Activity is not 'savingPeople'");
         }
     }
 

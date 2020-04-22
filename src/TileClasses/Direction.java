@@ -47,4 +47,22 @@ public enum Direction {
      * @return value (int)
      */
     public int getValue(){ return value; }
+
+    public String toString() {
+        switch (value)
+        {
+            case 0:
+                return "UP";
+            case 1:
+                return "DOWN";
+            case 2:
+                return "LEFT";
+            case 3:
+                return "RIGHT";
+            case 4:
+                return "HERE";
+            default:
+                return null;
+        }
+    }
 }

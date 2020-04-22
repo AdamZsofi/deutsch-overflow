@@ -1,5 +1,6 @@
 package TileClasses;
 
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import PlayerClasses.Player;
@@ -43,7 +44,7 @@ public abstract class Tile {
      * @param p player
      */
     public void steppedOn(Player p) { // void, cause this method's only job is to set it's object's attributes
-        System.out.println("TileClasses.Tile.steppedOn()");
+        Game.log.format("# Tile>steppedOn : Player stepped on Tile (%d, %d)\n", x, y);
     }
 
     /**
@@ -52,7 +53,7 @@ public abstract class Tile {
      * @param dir direction
      */
     public void steppedOff(Direction dir) {
-        System.out.println("TileClasses.Tile.steppedOff()");
+        Game.log.format("# Tile>steppedOff : Player left the Tile (%d, %d)\n", x, y);
     }
 
     /**
@@ -62,11 +63,11 @@ public abstract class Tile {
      * @param thisMuch DIFFERENCE
      */
     public void changeSnow(int thisMuch) {
-        System.out.println("TileClasses.Tile.changeSnow(): " + thisMuch);
         if(thisMuch<0 && snow>0)
             snow += thisMuch;
         else if(snow==0 && thisMuch>0)
             snow += thisMuch;
+        Game.log.format("# Tile>ChangeSnow : snow level is: %d (it has been changed by %d much)\n", snow, thisMuch);
     }
 
     /**
@@ -74,7 +75,6 @@ public abstract class Tile {
      * @return amount of snow (unit)
      */
     public int getSnow(){
-        System.out.println("TileClasses.Tile.getSnow()");
         return snow;
     }
 
@@ -84,7 +84,6 @@ public abstract class Tile {
      * @return capacity
      */
     public int getCapacity() {
-        System.out.println("TileClasses.Tile.getCapacity()");
         return capacity;
     }
 
@@ -95,7 +94,7 @@ public abstract class Tile {
      * @throws IndexOutOfBoundsException, when no neighbour in that direction => SHOULD CHECKED BY THE CALLER
      */
     public Tile getNeighbour(Direction dir) throws IndexOutOfBoundsException {
-        System.out.println("TileClasses.Tile.getNeighbour(): " + dir);
+        Game.log.format("# Tile>getNeighbour : Neighbour check for Tile (%d, %d) in Direction: %s \n", dir.toString());
         int nx = this.x, ny = this.y;
         switch (dir.valueOf(dir.getValue())) {
             case DOWN:
@@ -111,6 +110,7 @@ public abstract class Tile {
                 nx = x + 1; ny = y;
                 break;
             case HERE:
+                Game.log.println("! Tile>getNeighbour: returned HERE");
                 return this;
         }
         // Trükk: nem itt kéne lekezelni, ha nincs dir irányba tile, hanem ott, ahol a player input jön (IControllable)
@@ -118,6 +118,7 @@ public abstract class Tile {
         // viszont ha csak pl this-t visszaadok és nem kezelünk semmit feljebb, akkor olyan hibák jöhetnek ki, mint
         // levonódik egy workPoint, de egy helyben marad a player, stb.
         // vagy egyszerűen nincs lehetősége arra lépni a játékosnak?
+        Game.log.format("# Tile>getNeighbour : NeighbourTile (%d, %d)\n", nx, ny);
         return PositionLUT.getInstance().getTile(nx, ny); // throws IndexOutOfBoundsException if, and only if there's no neighbour
     }
 
@@ -126,8 +127,8 @@ public abstract class Tile {
      * Destroys Igloo on Tile (iglooOn = false)
      */
     public void destroyIgloo(){
-        System.out.println("TileClasses.Tile.destroyIgloo()");
         iglooOn = false;
+        Game.log.format("# Tile>destroyIgloo : Igloo destroyed from Tile (%d, %d)'iglooOn=false'\n", x, y);
     }
 
     /**
@@ -135,8 +136,8 @@ public abstract class Tile {
      * Sets Igloo on Tile (iglooOn = true)
      */
     public void buildIgloo(){
-        System.out.println("TileClasses.Tile.buildIgloo()");
         iglooOn = true;
+        Game.log.format("$ Tile>buildIgloo : Transaction 'buildIgloo' is completed. Igloo built on Tile (%d, %d) 'iglooOn=true'\n", x, y);
     }
     public boolean getIglooOn(){ return iglooOn;}
 
@@ -145,11 +146,11 @@ public abstract class Tile {
      * Tent set up (tenOn = true). The parameters of the tent is set. (position and counter for count the live of tent.)
      */
     public void putOnTent(){
-        System.out.println("TileClasses.Tile.putOnTent()");
         tentOn=true;
         RoundController.getInstance().tent.counter =PlayerContainer.getInstance().getPlayerNum();
         RoundController.getInstance().tent.x=x;
         RoundController.getInstance().tent.y=y;
+        Game.log.format("Tile>putOnTent : Tent built on Tile (%d, %d) 'iglooOn=true'\n", x, y);
     }
 
     /**

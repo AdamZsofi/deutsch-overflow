@@ -1,5 +1,6 @@
 package TileClasses;
 
+import CLI.Game;
 import PlayerClasses.Player;
 
 public class SnowyHole extends Tile {
@@ -14,8 +15,8 @@ public class SnowyHole extends Tile {
      */
     @Override
     public void destroyIgloo(){
-        System.out.println("TileClasses.SnowyHole.destroyIgloo(), you shouldn't be able to call this inGame!");
         iglooOn = false;
+        Game.log.format("! SnowyHole>destroyIgloo : SnowyHole (%d, %d) cannot have Igloo! Cannot destroy 'iglooOn=false'\n", x, y);
     }
 
     /**
@@ -23,8 +24,8 @@ public class SnowyHole extends Tile {
      */
     @Override
     public void buildIgloo(){
-        System.out.println("TileClasses.SnowyHole.buildIgloo(), you shouldn't be able to call this inGame!");
         iglooOn = false;
+        Game.log.format("! SnowyHole>buildIgloo : SnowyHole (%d, %d) cannot have Igloo! Cannot built 'iglooOn=false'\n", x, y);
     }
 
     /**
@@ -33,7 +34,7 @@ public class SnowyHole extends Tile {
      */
     @Override
     public void steppedOn(Player p) {
-        System.out.println("TileClasses.SnowyHole.steppedOn()");
         p.fallInWater();
+        Game.log.format("# SnowyHole>steppedOn : Player fallInWater (on SnowyHole(%d, %d))\n", x, y);
     }
 }

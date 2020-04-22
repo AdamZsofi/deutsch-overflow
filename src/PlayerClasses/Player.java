@@ -1,4 +1,5 @@
 package PlayerClasses;
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import ItemClasses.*;
@@ -85,20 +86,17 @@ public abstract class Player extends Character{
      * Sets inWater parameter of Player to TRUE
      */
     public void fallInWater() {
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("fallInWater()");
-
         inWater = true;
+        Game.log.format("# Player>fallInWater : Player (PlayerId:%d) fall in Water \n", ID);
     }
     /**
      * Called by Food, if its picked up. Food is automatically eaten if its picked up
      * Removes the Food from Player's hand and increments the bodyHeat of Player
      */
     public void ateFood() {
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("ateFood()");
         inHand = null;
         changeBodyHeat(1);
+        Game.log.format("$ Player>ateFood : Player (PlayerId:%d) ate the Food \n", ID);
     }
 
     /**
@@ -108,20 +106,17 @@ public abstract class Player extends Character{
      * @param thisMuch thisMUCH (+/-)
      */
     public void changeBodyHeat(int thisMuch) {
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("changeBodyHeat("+thisMuch+")");
-
         BodyHeat += thisMuch;
+        Game.log.format("# Player>changeBodyHeat : Player (PlayerId:%d) bodyHeat is changed to %d (by %d much)\n", ID, BodyHeat, thisMuch);
     }
     /**
      * Called by DivingSuit, if its pickedUp (its automatically worn if its picked up)
      * Sets the diving suit to a specific variable, and takes out from the Player's hand
      */
     public void wear(DivingSuit suit) {
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("wear(ItemClasses.DivingSuit)");
         wearing = suit;
         inHand = null;
+        Game.log.format("$ Player>wear : Player (PlayerId:%d) now wears DivingSuit\n", ID);
     }
 
     // IControllable implementations:
@@ -159,8 +154,7 @@ public abstract class Player extends Character{
      * @param i item
      */
     public void pickUp(Item i) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("pickUp(Item)");
+
         Tile position = PositionLUT.getInstance().getPosition(i);
         int snow = position.getSnow();
         if(snow==0) {
@@ -171,12 +165,21 @@ public abstract class Player extends Character{
                     inHand.thrownDown();
                     inHand = null;
                 }
+                Game.log.format("# Player>pickUp : Player (PlayerId:%d) old item from players hand has been removed and thrown down\n", ID);
             }
             inHand = i;
             i.pickedUp(this);
+            Game.log.format("$ Player>pickUp : Player (PlayerId:%d) picked up item\n", ID);
+        } else {
+            Game.log.format("! Player>pickUp : Player (PlayerId:%d) item cannot picked up, Tile has snow\n", ID);
         }
+
+        //TODO ha van snow a tileon akkor nem tudta felvenni, igy nem kell munkaponot levonni
         workPoints--;
-        if(workPoints==0) passRound();
+        if(workPoints==0) {
+            Game.log.format("# Player>pickUp : Player (PlayerId:%d) has no more workingPoints\n", ID);
+            passRound();
+        }
     }
 
     /**
@@ -187,8 +190,6 @@ public abstract class Player extends Character{
      */
     //atirni protectedre
     public void clearSnow() {
-        System.out.print("(IControllable) Player:");
-        System.out.println("clearSnow()");
 
 
         if (inHand != null) {
@@ -199,9 +200,14 @@ public abstract class Player extends Character{
 
         Tile position= PositionLUT.getInstance().getPosition(this);
         position.changeSnow(-1);
-
+        Game.log.format("$ Player>clearSnow : Player (PlayerId:%d) cleared snow\n", ID);
         workPoints--;
-        if(workPoints==0) passRound();
+
+        if(workPoints==0) {
+            Game.log.format("# Player>clearSnow : Player (PlayerId:%d) has no more workingPoints\n", ID);
+            passRound();
+        }
+
     }
 
     /**
@@ -211,12 +217,13 @@ public abstract class Player extends Character{
      */
     //atirni protectedre
     public void digItemUp(Item i) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("digItemUp()");
-
         i.diggedUp();
+        Game.log.format("$ Player>digItemUp : Player (PlayerId:%d) 'digItemUp' is completed\n", ID);
         workPoints--;
-        if(workPoints==0) passRound();
+        if(workPoints==0) {
+            Game.log.format("# Player>digItemUp : Player (PlayerId:%d) has no more workingPoints\n", ID);
+            passRound();
+        }
     }
 
     /**
@@ -227,15 +234,18 @@ public abstract class Player extends Character{
      */
     //atirni protectedre
     public void savePlayers(Direction dir) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("savePlayers("+dir+")");
+        Game.log.format("# Player>savePlayers : Player (PlayerId:%d) save started in direction:%s\n", ID, dir.toString());
         if(dir==Direction.valueOf(4)) {
-            System.out.println("You can't save yourself");
+            System.out.println("You cannot rescue yourself");
+            Game.log.format("! Player>savePlayers : Player (PlayerId:%d) cannot rescue herself\n", ID);
             return;
         }
         inHand.used(this,Activity.savingPeople);
         workPoints--;
-        if(workPoints==0) passRound();
+        if(workPoints==0) {
+            Game.log.format("# Player>savePlayers : Player (PlayerId:%d) has no more workingPoints\n", ID);
+            passRound();
+        }
     }
 
     /**
@@ -246,9 +256,7 @@ public abstract class Player extends Character{
      */
     //atirni protectedre
     public void putSignalTogether(SignalFlare sg) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("putSignalTogether("+sg+")");
-
+        Game.log.format("# Player>putSignalTogether : Player (PlayerId:%d) started putting together\n", ID);
         sg.putTogether(RoundController.getInstance());
     }
 
@@ -258,9 +266,7 @@ public abstract class Player extends Character{
      */
     //atirni protectedre
     public void passRound() {
-        System.out.print("(IControllable) Player:");
-        System.out.println("passRound()");
-
+        Game.log.format("# Player>passRound : Player (PlayerId:%d) passed round\n", ID);
         RoundController.getInstance().endLastRound();
     }
 
@@ -275,10 +281,9 @@ public abstract class Player extends Character{
 
     @Override
     public void step(Direction dir) {
-            System.out.print("(IControllable) Player:");
-            System.out.println("step("+dir+")");
             if(dir.getValue() == 4) {
                 System.out.println("You stay where you were");
+                Game.log.format("! Player>step : Player (PlayerId:%d) player has chosen HERE for step\n", ID);
                 return;
             }
             // Player current_player= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
@@ -288,7 +293,8 @@ public abstract class Player extends Character{
                 Tile next_tile = position.getNeighbour(dir);
                 Tile bear_position= PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
                 if(next_tile.equals(bear_position)){
-                    System.out.println("Dangerous Direction");
+                    System.out.println("Dangerous Direction, there is a PolarBear");
+                    Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(PolarBear)\n", ID);
                     return;
                 }
                 position.steppedOff(dir);
@@ -298,11 +304,16 @@ public abstract class Player extends Character{
                     PositionLUT.getInstance().setPosition(player_item,next_tile);
                 }
                 next_tile.steppedOn(this);
+                Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' is completed\n", ID);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("You can't go that way");
+                Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(OutBound)\n", ID);
                 return;
             }
-            this.workPoints--;
-            if(workPoints==0) passRound();
+            workPoints--;
+            if(workPoints==0) {
+                Game.log.format("# Player>step : Player (PlayerId:%d) has no more workingPoints\n", ID);
+                passRound();
+            }
     }
 }

@@ -1,5 +1,6 @@
 package PlayerClasses;
 
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 import TileClasses.Direction;
@@ -19,13 +20,13 @@ public class Researcher extends Player {
      * @param dir direction
      */
     public void detectCapacity(Direction dir) {
-        System.out.print("ResearcherID "+ID+":");
-        System.out.println("detectCapacity("+dir+")");
+        Game.log.format("# Researcher>detectCapacity started by Player %d\n", ID);
 
-        // getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
+        //TODO getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
         Tile thisTile = PositionLUT.getInstance().getPosition(this);
         Tile checkedTile = thisTile.getNeighbour(dir);
         int capacity = checkedTile.getCapacity();
+        Game.log.println("$ Researcher>detectCapacity : Transaction 'detectCapacity' is completed");
         System.out.println("Tile capacity: "+capacity);
     }
 

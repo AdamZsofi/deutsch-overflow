@@ -1,5 +1,6 @@
 package ItemClasses;
 
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 import TileClasses.Tile;
@@ -23,16 +24,19 @@ public class FragileShovel extends Shovel{
      */
     @Override
     public void used(Player p, Activity a){
-        System.out.println("ItemClasses.FragileShovel.used()");
-
+        //TODO Itt nem fordulhat elo az hogy rossz aktivitynel is csokkenti a countot ??
         if(a == Activity.clearingSnow && counter>0){
             Tile t = PositionLUT.getInstance().getPosition(p);
             t.changeSnow(-1);//csak egy, mert a Player.clearSnowbol jön, ott már egyet alapbol ás az áson kivul.
+            Game.log.println("$ FragileShovel>used : Transaction 'clearingSnow' was successful");
+        } else {
+            Game.log.format("! FragileShovel>used : Activity is not 'clearingSnow' or counter is not: %d>0\n", counter);
         }
         counter--;
         if(counter==0){
             PositionLUT.getInstance().setPosition(this, PositionLUT.getInstance().getTile(0,2)); //másik tile-ra esik
             p.dropFragileShovel();
+            Game.log.println("$ FragileShovel>used : Transaction 'dropFragileShovel' was successful");
         }
     }
 }

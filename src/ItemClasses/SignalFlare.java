@@ -1,5 +1,6 @@
 package ItemClasses;
 
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import PlayerClasses.Player;
@@ -31,18 +32,24 @@ public class SignalFlare {
      * @param rc RoundController
      */
     public void putTogether(RoundController rc){
-        System.out.println("ItemClasses.SignalFlare.putTogether()");
-
         TileClasses.Tile t1 = PositionLUT.getInstance().getPosition(signalFlareParts.get(0));
         int playerNum = PlayerContainer.getInstance().getPlayerNum();
 
         ArrayList<Player> players = PositionLUT.getInstance().getPlayersOnTile(t1);
 
-        if(players.size()<playerNum)return;
+        if(players.size()<playerNum) {
+            Game.log.println("! SignalFlare>putTogether : Not all players are on Tile");
+            return;
+        }
         for (int i=0;i<3;i++) {
             if(!(PositionLUT.getInstance().getPosition(signalFlareParts.get(i)).equals(t1)))
+            {
+                Game.log.println("! SignalFlare>putTogether : Not all signalFlareParts are on Tile");
                 return;
+            }
         }
+        Game.log.println("# SignalFlare>putTogether : Ready to win");
         rc.win();
+        Game.log.println("$ SignalFlare>putTogether : Transaction 'putTogether' was successful");
     }
 }

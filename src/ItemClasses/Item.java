@@ -1,5 +1,6 @@
 package ItemClasses;
 
+import CLI.Game;
 import PlayerClasses.Player;
 
 /**
@@ -19,8 +20,8 @@ public abstract class Item {
      * Sets the state of the item to 'thrownDown'
      */
     public void thrownDown(){
-        System.out.println("ItemClasses.Item.thrownDown");
         state =  ItemState.thrownDown;
+        Game.log.println("# Item>thrownDown : Item state has changed to 'thrownDown'");
     }
 
     /**
@@ -28,16 +29,16 @@ public abstract class Item {
      * @param Picker player, who calls the function
      */
     public void pickedUp(Player Picker){
-        System.out.println("ItemClasses.Item.pickedUp");
         state = ItemState.inHand;
+        Game.log.println("# Item>pickedUp : Item state has changed to 'inHand'");
     }
 
     /**
      * Sets the state of the item to 'thrownDown'
      */
     public void diggedUp(){
-        System.out.println("ItemClasses.Item.diggedUp");
         state = ItemState.thrownDown;
+        Game.log.println("# Item>diggedUp : Item state has changed to 'thrownDown'");
     }
 
     /**

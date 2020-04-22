@@ -1,5 +1,6 @@
 package ItemClasses;
 
+import CLI.Game;
 import PlayerClasses.Player;
 
 public class DivingSuit extends Item{
@@ -10,7 +11,7 @@ public class DivingSuit extends Item{
      */
     @Override
     public void pickedUp(Player p){
-        System.out.println("ItemClasses.DivingSuit.used");
         p.wear(this);
+        Game.log.println("$ DivingSuit>pickedUp : Transaction 'pickingUpDivingSuit' was successful");
     }
 }

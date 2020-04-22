@@ -1,5 +1,6 @@
 package PlayerClasses;
 
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import TileClasses.Tile;
 
@@ -16,10 +17,10 @@ public class Eskimo extends Player {
         BodyHeat=5;
     }
     public void buildIgloo() {
-        System.out.print("PlayerClasses.Eskimo, ID"+ID+":");
-        System.out.println("buildIgloo()");
+        Game.log.format("# Eskimo>buildIgloo : started by PlayerID: %d\n", ID);
         Tile tile = PositionLUT.getInstance().getPosition(this);
         tile.buildIgloo();
+        Game.log.println("# Eskimo>buildIgloo : ended");
     }
 
     public String getShortName() {

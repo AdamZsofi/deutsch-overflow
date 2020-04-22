@@ -167,8 +167,6 @@ public class PositionLUT {
      * @return ArrayList<Item> players of the Tile
      */
     public ArrayList<Player> getPlayersOnTile(Tile t){
-        System.out.println("GlobalControllers.PositionLUT.getPlayersOnTile(Tile t)");
-
         return tilePlayerMap.get(t);
     }
 

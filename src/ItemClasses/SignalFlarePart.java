@@ -1,5 +1,6 @@
 package ItemClasses;
 
+import CLI.Game;
 import PlayerClasses.Player;
 
 /**
@@ -17,6 +18,6 @@ public class SignalFlarePart extends Item {
 
     @Override
     public void used(Player p, Activity a){
-        System.out.println("ItemClasses.SignalFlarePart.used()");
+        Game.log.println("# SignalFlarePart>used");
     }
 }

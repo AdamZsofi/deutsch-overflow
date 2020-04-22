@@ -1,5 +1,6 @@
 package PlayerClasses;
 
+import CLI.Game;
 import GlobalControllers.RoundController;
 
 import java.util.ArrayList;
@@ -15,7 +16,10 @@ public class PlayerContainer {
      * @return
      */
     public static PlayerContainer getInstance() {
-        if(pc == null) throw new NullPointerException("PlayerContainer should be initialized");
+        if(pc == null) {
+            Game.log.format("! PlayerContainer>getInstance : Sorry, instance does not exist THROWN NULLPOINTER EXCEPTION");
+            throw new NullPointerException("PlayerContainer should be initialized");
+        }
         return pc;
     }
 
@@ -62,10 +66,10 @@ public class PlayerContainer {
      * @return player of pid
      */
     public Player getPlayer(int pid) { // pid = players-ben az adott player indexe
-        System.out.print("PlayerContainer:");
-        System.out.println("getPlayer("+pid+")");
-
-        if(pid>playerNum) throw new NullPointerException("Player with that pid does not exist");
+        if(pid>playerNum) {
+            Game.log.format("! PlayerContainer>getPlayer : Sorry, that playerID does not exist THROWN NULLPOINTER EXCEPTION", pid);
+            throw new NullPointerException("Player with that pid does not exist");
+        }
         else return players.get(pid);
     }
 }

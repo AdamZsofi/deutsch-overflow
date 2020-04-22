@@ -1,5 +1,6 @@
 package SnowStorm;
 
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 
@@ -18,16 +19,16 @@ public class SnowStorm {
      */
     public void tryStorm() {
         PositionLUT pL = PositionLUT.getInstance();
-        System.out.println("Snowstorm.SnowStorm.tryStorm()");
 
         Random rand = new Random();
         int number= rand.nextInt(100);
 
         if(number>30) {// ~70%
             System.out.println(number);
+            Game.log.println("# SnowStorm>tryStorm : SnowStorm is NOT coming");
             return;
         }
-
+        Game.log.println("# SnowStorm>tryStorm : SnowStorm is coming");
         ArrayList<Integer[]> values = new ArrayList<>(); // coordinates of tiles
         int x,y;
         boolean flag=true;
@@ -50,6 +51,7 @@ public class SnowStorm {
             pL.getTile(x_coord,y).destroyIgloo(); //destroy igloo
             for (Player p : pL.getPlayersOnTile(pL.getTile(x_coord,y_coord))) {
                 p.changeBodyHeat(-1); //change bodyheat of players, who stand on this tile
+                Game.log.format("# SnowStorm>tryStorm : player");
             }
             pL.getTile(x_coord,y_coord).changeSnow(1);
         }
