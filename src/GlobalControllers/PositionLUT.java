@@ -1,5 +1,6 @@
 package GlobalControllers;
 
+import CLI.Game;
 import ItemClasses.*;
 import PlayerClasses.*;
 import TileClasses.*;
@@ -145,8 +146,7 @@ public class PositionLUT {
      * @return position(Tile)
      */
     public Tile getPosition(Player p){
-        System.out.println("GlobalControllers.PositionLUT.getPosition(Player p)");
-
+        //Game.log.println("# PositionLUT>getPosition(Player) returns Tile");
         return playerTileMap.get(p);
     }
 
@@ -156,8 +156,7 @@ public class PositionLUT {
      * @return position(Tile)
      */
     public Tile getPosition(Item i){
-        System.out.println("GlobalControllers.PositionLUT.getPosition(Item i)");
-
+        //Game.log.println("# PositionLUT>getPosition(Item) returns Tile");
         return itemTileMap.get(i);
     }
 
@@ -167,6 +166,7 @@ public class PositionLUT {
      * @return ArrayList<Item> players of the Tile
      */
     public ArrayList<Player> getPlayersOnTile(Tile t){
+        //Game.log.println("# PositionLUT>getPlayersOnTile(Tile) returns ArrayList<Player>");
         return tilePlayerMap.get(t);
     }
 
@@ -176,8 +176,7 @@ public class PositionLUT {
      * @return ArrayList<Item> items of the Tile
      */
     public ArrayList<Item> getItemOnTile(Tile t){
-        System.out.println("GlobalControllers.PositionLUT.getItemOnTile(Tile t)");
-
+        //Game.log.println("# PositionLUT>getItemOnTile(Tile) returns ArrayList<Item>");
         return tileItemMap.get(t);
     }
 
@@ -188,8 +187,7 @@ public class PositionLUT {
      * @return position (Tile)
      */
     public Tile getTile(int x, int y){
-        System.out.println("GlobalControllers.PositionLUT.getTile(int x, int y)");
-
+        //Game.log.format("# PositionLUT>getTile(%d, %d) returns Tile\n", x, y);
         return tileList.get(y).get(x); //indexing convension
     }
 
@@ -199,8 +197,7 @@ public class PositionLUT {
      * @param t Tile
      */
     public void setPosition(Player p, Tile t){
-        System.out.println("GlobalControllers.PositionLUT.setPosition(Player p, Tile t)");
-
+        //Game.log.println("# PositionLUT>setPosition(Player, Tile)");
         tilePlayerMap.get(playerTileMap.get(p)).remove(p);
         tilePlayerMap.get(t).add(p);//uj hely add
         playerTileMap.put(p, t);//put folulirja az elozot
@@ -213,8 +210,7 @@ public class PositionLUT {
      * @param t position (Tile)
      */
     public void setPosition(Item i, Tile t){
-        System.out.println("GlobalControllers.PositionLUT.setPosition(Item i, Tile t)");
-
+        //Game.log.println("# PositionLUT>setPosition(Item, Tile)");
         tileItemMap.get(itemTileMap.get(i)).remove(i);//átlátható. regi hely remove
         tileItemMap.get(t).add(i);//uj hely add
         itemTileMap.put(i, t);//put folulirja az elozot
@@ -226,6 +222,7 @@ public class PositionLUT {
      * @return position(Tile)
      */
     public Tile getPosition(PolarBear pb){
+        //Game.log.println("# PositionLUT>getPosition(PolarBear)");
         return polarbearTileMap.get(pb);
     }
 
@@ -235,6 +232,7 @@ public class PositionLUT {
      * @param t position(Tile)
      */
     public void setPosition(PolarBear pb, Tile t){
+        //Game.log.println("# PositionLUT>setPosition(PolarBear, Tile)");
         tilePolarBearMap.get(polarbearTileMap.get(pb)).remove(pb); //.
         tilePolarBearMap.get(t).add(pb);//uj hely add
         polarbearTileMap.put(pb, t);//put folulirja az elozot
