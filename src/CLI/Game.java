@@ -14,12 +14,13 @@ import static GlobalControllers.RoundController.getInstance;
 /**
  * An instance of the game, starts the game when created
  * @author Zsófi
+ * @noinspection ALL
  */
 public class Game {
     /**
      * Stores, if this game is deterministic or random.
      */
-    public boolean isDeterministic;
+    static public boolean isDeterministic;
     /**
      * Stores the number of players.
      * The number of players is asked as input and
@@ -42,7 +43,7 @@ public class Game {
         isDeterministic = _isDeterministic;
         playerNum = _playerNum;
         PlayerContainer.Initialize(playerNum);
-        getInstance(); //letrehoz
+        RoundController.getInstance(); //letrehoz
         PositionLUT.getInstance();
     }
 

@@ -30,7 +30,7 @@ public class CommandInterpreter {
     /**
      * The inputs will be scanned through this scanner
      */
-    private Scanner commandScanner = new Scanner(input);
+    private Scanner commandScanner;
     /**
      * Ends the game at the beginning of the next iteration
      */
@@ -43,6 +43,7 @@ public class CommandInterpreter {
     public CommandInterpreter(InputStream in, PrintStream out) {
         input = in;
         log = out;
+        commandScanner = new Scanner(input);
     }
 
     /**
@@ -57,7 +58,7 @@ public class CommandInterpreter {
     public void waitingCommands() {
         while(!endGame) {
             // amíg nincs
-            while(commandScanner.nextLine()!="StartGame") {
+            while(!commandScanner.nextLine().equals("StartGame")) {
                 log.println("You can't do anything until you start the game (StartGame)");
             }
             log.println("Deterministic or Random?");
