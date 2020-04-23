@@ -1,9 +1,17 @@
 package CLI;
 
+import GlobalControllers.PositionLUT;
+import GlobalControllers.RoundController;
+import ItemClasses.Item;
+import PlayerClasses.Eskimo;
+import PlayerClasses.Player;
+import PlayerClasses.PlayerContainer;
 import TileClasses.Direction;
+import TileClasses.Tile;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -85,16 +93,22 @@ public class CommandInterpreter {
                     gameInstance.printCharacterMap();
                     break;
                 case "PrintItemMap":
+                    gameInstance.printItemMap();
                     break;
-                case "PrintHeimMap": // TODO lehet azt a Heim-t angolul kéne, bocsi, most vettem csak észre :D
+                case "PrintHeimMap":
+                    gameInstance.printShelterMap();
                     break;
                 case "PrintSnowTileMap":
+                    gameInstance.printSnowTileMap();
                     break;
                 case "PrintTile":
+                    gameInstance.printTile();
                     break;
                 case "PrintItem":
+                    gameInstance.printItem();
                     break;
                 case "PrintPlayer":
+                    gameInstance.printPlayer();
                     break;
                 case "Step":
                     log.println("Which direction? (w,a,s,d)"); // Note: ahol van értelme egy helyben csinálni vmit, ott kell 5.-ik irány arg
@@ -114,20 +128,68 @@ public class CommandInterpreter {
                     }
                     break;
                 case "PickUp":
+                    Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
+                    Tile currentTile= PositionLUT.getInstance().getPosition(p);
+                    ArrayList<Item> items = PositionLUT.getInstance().getItemOnTile(currentTile);
+                    gameInstance.pickUp(items.get(0));
                     break;
                 case "DigItemUp":
+                    Player p1= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
+                    Tile currentTile1= PositionLUT.getInstance().getPosition(p1);
+                    ArrayList<Item> items1 = PositionLUT.getInstance().getItemOnTile(currentTile1);
+                    gameInstance.digItemUp(items1.get(0));
                     break;
                 case "UseSkill":
+                    Player p2= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
+                    if(p2 instanceof Eskimo){ // :(
+                        gameInstance.buildIgloo();
+                    }
+                    else{
+                        log.println("Which direction? (w,a,s,d)");
+                        switch (commandScanner.nextLine()) {
+                            case "w":
+                                gameInstance.detectCapacity(Direction.UP);
+                                break;
+                            case "a":
+                                gameInstance.detectCapacity(Direction.LEFT);
+                                break;
+                            case "s":
+                                gameInstance.detectCapacity(Direction.DOWN);
+                                break;
+                            case "d":
+                                gameInstance.detectCapacity(Direction.RIGHT);
+                                break;
+                        }
+                    }
                     break;
                 case "ClearSnow":
+                    gameInstance.clearSnow();
                     break;
                 case "SavePlayers":
+                    log.println("Which direction? (w,a,s,d)");
+                    switch (commandScanner.nextLine()) {
+                        case "w":
+                            gameInstance.savePlayers(Direction.UP);
+                            break;
+                        case "a":
+                            gameInstance.savePlayers(Direction.LEFT);
+                            break;
+                        case "s":
+                            gameInstance.savePlayers(Direction.DOWN);
+                            break;
+                        case "d":
+                            gameInstance.savePlayers(Direction.RIGHT);
+                            break;
+                    }
                     break;
                 case "BuildTent":
+                    gameInstance.buildTent();
                     break;
                 case "PutSignalTogether":
+                    gameInstance.putSignalTogether();
                     break;
                 case "PassRound":
+                    gameInstance.passRound();
                     break;
                 case "EndGame": // NOTE: this one is new, but its useful for automated CLI tests
                     endGame = true;
@@ -138,6 +200,4 @@ public class CommandInterpreter {
             }
         }
     }
-
-
 }

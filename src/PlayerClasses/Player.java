@@ -316,4 +316,5 @@ public abstract class Player extends Character{
                 passRound();
             }
     }
+    public abstract String getInformation();
 }

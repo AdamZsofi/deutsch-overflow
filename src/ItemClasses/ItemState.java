@@ -8,4 +8,11 @@ package ItemClasses;
  */
 public enum ItemState {
     frozen,inHand,thrownDown;
+
+    public String getShortName(ItemState is){
+        if(is.equals(frozen))
+            return "F";
+        else
+            return "T";
+    }
 }

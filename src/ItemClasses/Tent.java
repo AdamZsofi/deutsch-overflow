@@ -35,4 +35,5 @@ public class Tent extends Item{
             Game.log.format("! Tent>used : Activity is not 'putUpTent' or Tile has Igloo : hasIgloo=%s\n", t.getIglooOn() );
         }
     }
+    public String getShortName(){ return "T("+state.getShortName(getState())+")";}
 }

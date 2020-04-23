@@ -52,4 +52,5 @@ public class SignalFlare {
         rc.win();
         Game.log.println("$ SignalFlare>putTogether : Transaction 'putTogether' was successful");
     }
+    public String getShortName(){ return "SF";}
 }

@@ -67,5 +67,5 @@ public class Rope extends Item{
                 return Direction.valueOf(2);
         }
     }
-
+    public String getShortName(){ return "R("+state.getShortName(getState())+")";}
 }

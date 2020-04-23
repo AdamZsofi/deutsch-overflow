@@ -56,4 +56,5 @@ public abstract class Item {
      * @param a Activity
      */
     public void used(Player p, Activity a){ }
+    public abstract String getShortName();
 }

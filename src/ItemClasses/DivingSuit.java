@@ -14,4 +14,5 @@ public class DivingSuit extends Item{
         p.wear(this);
         Game.log.println("$ DivingSuit>pickedUp : Transaction 'pickingUpDivingSuit' was successful");
     }
+    public String getShortName(){ return "D("+this.getState()+")";}
 }

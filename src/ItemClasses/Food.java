@@ -19,4 +19,5 @@ public class Food extends Item{
         p.ateFood();
         Game.log.println("$ Food>pickedUp : Transaction 'pickUp' and 'ateFood' was successful");
     }
+    public String getShortName(){ return "F("+state.getShortName(getState())+")";}
 }

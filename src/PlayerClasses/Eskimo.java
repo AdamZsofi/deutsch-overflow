@@ -26,4 +26,22 @@ public class Eskimo extends Player {
     public String getShortName() {
         return "E"+ID;
     }
+    public String getInformation(){
+        String ih;
+        String wear;
+        String inwater;
+        if(inHand!=null)
+            ih=inHand.getShortName();
+        else
+            ih="-";
+        if(wearing!=null)
+            wear="+";
+        else
+            wear="-";
+        if(inWater)
+            inwater="+";
+        else
+            inwater="-";
+        return "( "+getShortName()+ ":   InHand "+ih+", Wear: "+wear+", "+"Temp: "+BodyHeat+", inWater: "+inwater+" )";
+    }
 }
