@@ -3,6 +3,7 @@ package CLI;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import ItemClasses.Item;
+import ItemClasses.ItemState;
 import PlayerClasses.Eskimo;
 import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
@@ -131,13 +132,33 @@ public class CommandInterpreter {
                     Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                     Tile currentTile= PositionLUT.getInstance().getPosition(p);
                     ArrayList<Item> items = PositionLUT.getInstance().getItemOnTile(currentTile);
-                    gameInstance.pickUp(items.get(0));
+                    for(Item i : items) {
+                        if(i.getState().equals(ItemState.frozen))
+                            items.remove(i);
+                    }
+                    int maxPick=items.size();
+                    log.println("Which item? 0-"+(maxPick-1));
+                    int inputPick=0;
+                    do {
+                        inputPick = Integer.parseInt(commandScanner.nextLine());
+                    }while(inputPick<0 || inputPick>maxPick-1);
+                    gameInstance.pickUp(items.get(inputPick));
                     break;
                 case "DigItemUp":
                     Player p1= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                     Tile currentTile1= PositionLUT.getInstance().getPosition(p1);
                     ArrayList<Item> items1 = PositionLUT.getInstance().getItemOnTile(currentTile1);
-                    gameInstance.digItemUp(items1.get(0));
+                    for(Item ii : items1) {
+                        if(!ii.getState().equals(ItemState.frozen))
+                            items1.remove(ii);
+                    }
+                    int maxDig=items1.size();
+                    log.println("Which item? 0-"+(maxDig-1));
+                    int inputDig=0;
+                    do {
+                        inputDig = Integer.parseInt(commandScanner.nextLine());
+                    }while(inputDig<0 || inputDig>maxDig-1);
+                    gameInstance.digItemUp(items1.get(inputDig));
                     break;
                 case "UseSkill":
                     Player p2= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());

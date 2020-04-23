@@ -3,6 +3,7 @@ package CLI;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import ItemClasses.Item;
+import ItemClasses.ItemState;
 import PlayerClasses.Eskimo;
 import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
@@ -12,8 +13,10 @@ import TileClasses.Tile;
 import javafx.geometry.Pos;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static GlobalControllers.RoundController.getInstance;
+import static ItemClasses.ItemState.frozen;
 
 /**
  * An instance of the game, starts the game when created
