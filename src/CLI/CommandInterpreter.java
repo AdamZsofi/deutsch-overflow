@@ -137,6 +137,11 @@ public class CommandInterpreter {
                             items.remove(i);
                     }
                     int maxPick=items.size();
+                    int posPick=0;
+                    for(Item i: items){
+                        log.println(posPick+": "+i.getShortName());
+                        posPick++;
+                    }
                     log.println("Which item? 0-"+(maxPick-1));
                     int inputPick=0;
                     do {
@@ -153,6 +158,11 @@ public class CommandInterpreter {
                             items1.remove(ii);
                     }
                     int maxDig=items1.size();
+                    int posDig=0;
+                    for(Item i: items1){
+                        log.println(posDig+": "+i.getShortName());
+                        posDig++;
+                    }
                     log.println("Which item? 0-"+(maxDig-1));
                     int inputDig=0;
                     do {
