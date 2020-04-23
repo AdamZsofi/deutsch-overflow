@@ -2,6 +2,7 @@ package PlayerClasses;
 
 import CLI.Game;
 import GlobalControllers.RoundController;
+import ItemClasses.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -50,13 +51,32 @@ public class PlayerContainer {
      * @param num quantity (count) of all player
      */
     private PlayerContainer(int num){
+        detInit();
+    }
+
+    private void detInit(){
+        playerNum = 6;
         players = new ArrayList<Player>();
         players.add(new Eskimo());
         players.add(new Eskimo());
         players.add(new Researcher());
         players.add(new Researcher());
-        playerNum = num;
+        players.add(new Researcher());
+        players.add(new Researcher());
 
+        players.get(1).inHand = new Rope();
+        players.get(3).inHand = new Tent();
+        players.get(5).inHand = new Shovel();
+    }
+
+    private void putTogetherInit(){
+        players = new ArrayList<Player>();
+        players.add(new Eskimo());
+        players.add(new Eskimo());
+        players.add(new Researcher());
+        players.get(0).inHand = RoundController.getInstance().sg.signalFlareParts.get(0);
+        players.get(1).inHand = RoundController.getInstance().sg.signalFlareParts.get(1);
+        players.get(2).inHand = RoundController.getInstance().sg.signalFlareParts.get(2);
     }
 
     /**
