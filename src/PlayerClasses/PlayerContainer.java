@@ -30,21 +30,25 @@ public class PlayerContainer {
      */
     public static void Initialize(int num, int mapNum) {
         if(pc == null) {
-            playerNum = num;
             pc = new PlayerContainer(num);
 
             if(Game.isDeterministic){
-                if(mapNum == 0)
+                if(mapNum == 0){
                     detInit();
-                else putTogetherInit();
+                    playerNum = 6;
+                }
+                else {
+                    putTogetherInit();
+                    playerNum = 3;
+                }
             }
-            else randInit();
+            else{
+                randInit();
+                playerNum = num;
+            }
 
         }
     }
-
-
-
 
     /**
      * Gives back the numOfPlayer, quantity (count) of all player in game
@@ -83,8 +87,14 @@ public class PlayerContainer {
         players.add(new Eskimo());
         players.add(new Researcher());
         players.get(0).inHand = RoundController.getInstance().sg.signalFlareParts.get(0);
+        players.get(0).inHand.diggedUp();
+        players.get(0).inHand.pickedUp(players.get(0));
         players.get(1).inHand = RoundController.getInstance().sg.signalFlareParts.get(1);
+        players.get(1).inHand.diggedUp();
+        players.get(1).inHand.pickedUp(players.get(1));
         players.get(2).inHand = RoundController.getInstance().sg.signalFlareParts.get(2);
+        players.get(2).inHand.diggedUp();
+        players.get(2).inHand.pickedUp(players.get(2));
     }
 
     private static void randInit(){

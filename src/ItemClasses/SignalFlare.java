@@ -32,7 +32,7 @@ public class SignalFlare {
      * @param rc RoundController
      */
     public void putTogether(RoundController rc){
-        TileClasses.Tile t1 = PositionLUT.getInstance().getPosition(signalFlareParts.get(0));
+        TileClasses.Tile t1 = PositionLUT.getInstance().getPosition(PlayerContainer.getInstance().getPlayer(0));
         int playerNum = PlayerContainer.getInstance().getPlayerNum();
 
         ArrayList<Player> players = PositionLUT.getInstance().getPlayersOnTile(t1);
@@ -42,9 +42,9 @@ public class SignalFlare {
             return;
         }
         for (int i=0;i<3;i++) {
-            if(!(PositionLUT.getInstance().getPosition(signalFlareParts.get(i)).equals(t1)))
+            if(signalFlareParts.get(i).state != ItemState.inHand)
             {
-                Game.log.println("! SignalFlare>putTogether : Not all signalFlareParts are on Tile");
+                Game.log.println("! SignalFlare>putTogether : Not all signalFlareParts in Hand");
                 return;
             }
         }

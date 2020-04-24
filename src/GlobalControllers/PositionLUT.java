@@ -73,6 +73,9 @@ public class PositionLUT {
         }
 
         tileList.get(4).set(2, new SnowyHole(2,4));
+        //hó nullázás a könnyebb ásás érdekében
+        tileList.get(5).get(0).changeSnow(-tileList.get(5).get(0).getSnow());
+        tileList.get(4).get(3).changeSnow(-tileList.get(5).get(0).getSnow());
 
         tileItemMap = new HashMap<>();
         tilePlayerMap = new HashMap<>();
@@ -154,10 +157,27 @@ public class PositionLUT {
      */
     private static void putTogetherInit() {
         tileList = new ArrayList<>();
-        ArrayList<Tile> row= new ArrayList<>();//csak két tile
-        row.add(new StableTile(0,0));
-        row.add(new StableTile(1,0));
-        tileList.add(row);
+        tilePlayerMap = new HashMap<>();
+        polarbearTileMap = new HashMap<>();
+        tilePolarBearMap = new HashMap<>();
+        tileItemMap = new HashMap<>();
+        playerTileMap = new HashMap<>();
+
+        for(int y = 0; y <6; y++){
+            ArrayList<Tile> row= new ArrayList<>();
+            for(int x = 0; x < 6; x++){
+                row.add(new StableTile(x,y));
+            }
+            tileList.add(row);
+        }
+
+        for(int y = 0; y<6; y++){//init, h mindenhol legyen
+            for(int x = 0; x< 6; x++){
+                tilePlayerMap.put(getTile(x,y),new ArrayList<>() );
+                tileItemMap.put(getTile(x,y),new ArrayList<>() );
+                tilePolarBearMap.put(getTile(x,y),new ArrayList<>());
+            }
+        }
 
 
         ArrayList player1 = new ArrayList();
@@ -167,6 +187,16 @@ public class PositionLUT {
         players23.add(PlayerContainer.getInstance().getPlayer(1));
         players23.add(PlayerContainer.getInstance().getPlayer(2));
         tilePlayerMap.put(getTile(1,0), players23);
+
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(0), getTile(0,0));
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(1), getTile(1,0));
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(2), getTile(1,0));
+
+        polarbearTileMap = new HashMap<>();
+        polarbearTileMap.put(RoundController.getInstance().polarbear,getTile(0,4)); //polarbear
+        ArrayList polarbear= new ArrayList();
+        polarbear.add(RoundController.getInstance().polarbear);
+        tilePolarBearMap.put(getTile(0,4),polarbear);
     }
 
     /**

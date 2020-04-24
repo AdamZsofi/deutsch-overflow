@@ -101,6 +101,14 @@ public abstract class Player extends Character{
     }
 
     /**
+     * tent building
+     */
+    public void buildTent(){
+        if(inHand != null)
+            inHand.used(this, Activity.putUpTent);
+    }
+
+    /**
      * Changes the Player bodyHeat with thisMuch
      * -ateFood(1)
      * -snowStorm(-1)

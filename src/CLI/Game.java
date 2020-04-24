@@ -260,8 +260,8 @@ public class Game {
      */
     public void buildTent(){
         Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
-        Tile t= PositionLUT.getInstance().getPosition(p);
-        t.putOnTent();
+        p.buildTent();
+        //tile.putontent volt, igy talan jobb, vizre ugyem tud rakni, ha benne van
     }
     /**
      * Player put signalflare together
