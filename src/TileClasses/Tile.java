@@ -94,8 +94,8 @@ public abstract class Tile {
      * @throws IndexOutOfBoundsException, when no neighbour in that direction => SHOULD CHECKED BY THE CALLER
      */
     public Tile getNeighbour(Direction dir) throws IndexOutOfBoundsException {
-        Game.log.format("# Tile>getNeighbour : Neighbour check for Tile (%d, %d) in Direction: %s \n", dir.toString());
         int nx = this.x, ny = this.y;
+        Game.log.format("# Tile>getNeighbour : Neighbour check for Tile (%d, %d) in Direction: %s \n",nx, ny, dir.toString());
         switch (dir.valueOf(dir.getValue())) {
             case DOWN:
                 nx = x; ny = y - 1;

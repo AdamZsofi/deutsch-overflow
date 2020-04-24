@@ -133,9 +133,11 @@ public class CommandInterpreter {
                     Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                     Tile currentTile= PositionLUT.getInstance().getPosition(p);
                     ArrayList<Item> items = PositionLUT.getInstance().getItemOnTile(currentTile);
-                    for(Item i : items) {
+                    for(Item i : items) {//ha elfogy minden hibás
                         if(i.getState().equals(ItemState.frozen))
                             items.remove(i);
+                        if(items.size() == 0)
+                            break;
                     }
                     int maxPick=items.size();
                     int posPick=0;
@@ -157,6 +159,8 @@ public class CommandInterpreter {
                     for(Item ii : items1) {
                         if(!ii.getState().equals(ItemState.frozen))
                             items1.remove(ii);
+                        if(items1.size()== 0)
+                            break;
                     }
                     int maxDig=items1.size();
                     int posDig=0;

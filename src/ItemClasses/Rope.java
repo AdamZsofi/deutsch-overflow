@@ -25,14 +25,14 @@ public class Rope extends Item{
     public void used(Player p, Activity a){
         if(a == Activity.savingPeople) {
             Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
-            Direction wateTile_dir = Direction.valueOf(0);///getDir();//csak egy gyors pelda, megadja milyen irányban van a waterTile up:0
-            //TODO
+            Direction wateTile_dir = p.saveDirection;//nem a legszebb, át lehet később gondolni
             Tile waterTile = currentTile.getNeighbour(wateTile_dir);
             ArrayList<Player> inWaterPlayers = PositionLUT.getInstance().getPlayersOnTile(waterTile);
             for (int count=0 ;count<inWaterPlayers.size();count++) { // Player iwp : inWaterPlayers rossz volt
-                Direction step_dir = Direction.valueOf(1);//getDir(); //melyik irányba szeretnénk menteni down: 1
-                        //TODO mento player iranyaba, nem kell bekerni
-                    inWaterPlayers.get(count).step(step_dir);
+                int step_dir_value = wateTile_dir.getValue();
+                step_dir_value += (wateTile_dir.getValue()%2==0 )? 1:-1;
+                Direction step_dir = Direction.valueOf(step_dir_value);//oda lép, ahonnan a segítség jött
+                inWaterPlayers.get(count).step(step_dir);
             }
             Game.log.println("$ Rope>used : Transaction 'savingPeople' was successful");
         } else {

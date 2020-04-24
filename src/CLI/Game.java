@@ -84,8 +84,8 @@ public class Game {
     public void printCharacterMap() {
         // TODO hardcodeolt 6x6-os pálya, ha ez változik, akkor itt is ki kell szedni a hardcodeot
         Tile bearTile = PositionLUT.getInstance().getPosition(getInstance().polarbear);
-        for(int x = 0; x < 6; x++) {
-            for (int y = 0; y < 6; y++) {
+        for (int y = 5; y >= 0; y--) {
+            for(int x = 0; x < 6; x++) {
                 Tile currentTile = PositionLUT.getInstance().getTile(x, y);
                 log.print("[ ");
                 for(Player p : PositionLUT.getInstance().getPlayersOnTile(currentTile)) {
@@ -105,8 +105,8 @@ public class Game {
      * @author Ádám
      */
     public void printItemMap() {
-        for(int x = 0; x < 6; x++){
-            for(int y = 0; y < 6; y++){
+        for (int y = 5; y >= 0; y--) {
+            for(int x = 0; x < 6; x++){
                 Tile currentTile = PositionLUT.getInstance().getTile(x,y);
                 log.print("[ ");
                 for(Item item : PositionLUT.getInstance().getItemOnTile(currentTile)){
@@ -123,8 +123,8 @@ public class Game {
      * @author Ádám
      */
     public void printShelterMap() {
-        for(int x = 0; x < 6; x++){
-            for(int y = 0; y < 6; y++){
+        for (int y = 5; y >= 0; y--) {
+            for(int x = 0; x < 6; x++){
                 Tile currentTile = PositionLUT.getInstance().getTile(x,y);
                 log.print("[ ");
                 if(currentTile.getIglooOn()){
@@ -144,8 +144,8 @@ public class Game {
      * @author Ádám
      */
     public void printSnowTileMap() {
-        for(int x = 0; x < 6; x++){
-            for(int y = 0; y < 6; y++){
+        for (int y = 5; y >= 0; y--) {
+            for(int x = 0; x < 6; x++){
                 Tile currentTile = PositionLUT.getInstance().getTile(x,y);
                 log.print("[ ");
                 log.print(currentTile.getSnow());
@@ -161,8 +161,8 @@ public class Game {
      */
     public void printTile() {
         Tile bearTile = PositionLUT.getInstance().getPosition(getInstance().polarbear);
-        for(int x = 0; x < 6; x++){
-            for(int y = 0; y < 6; y++){
+        for (int y = 5; y >= 0; y--) {
+            for(int x = 0; x < 6; x++){
                 Tile currentTile = PositionLUT.getInstance().getTile(x,y);
                 log.print("[ C:");
                 log.print(currentTile.getCapacity());
@@ -185,8 +185,8 @@ public class Game {
      * @author Ádám
      */
     public void printItem() {
-        for(int x = 0; x < 6; x++) {
-            for (int y = 0; y < 6; y++) {
+        for (int y = 5; y >= 0; y--) {
+            for(int x = 0; x < 6; x++) {
                 Tile currentTile = PositionLUT.getInstance().getTile(x,y);
                 for(Item item : PositionLUT.getInstance().getItemOnTile(currentTile)){
                     log.print("[ ");

@@ -21,6 +21,7 @@ public abstract class Player extends Character{
     public boolean inWater; // public lett, kesobb ezt átgondolhatjuk még
     protected Item inHand;
     protected Item wearing;
+    public Direction saveDirection;
 
     /**
      * Initialisation for starting a round for Player
@@ -240,6 +241,7 @@ public abstract class Player extends Character{
             Game.log.format("! Player>savePlayers : Player (PlayerId:%d) cannot rescue herself\n", ID);
             return;
         }
+        saveDirection = dir;
         inHand.used(this,Activity.savingPeople);
         workPoints--;
         if(workPoints==0) {
@@ -299,10 +301,11 @@ public abstract class Player extends Character{
                 }
                 position.steppedOff(dir);
                 PositionLUT.getInstance().setPosition(this, next_tile);
-                Item player_item = this.inHand;
-                if(this.inHand!=null){
-                    PositionLUT.getInstance().setPosition(player_item,next_tile);
-                }
+                //a kézben tárolt item nincs a PosLUT ban!!!
+                //Item player_item = this.inHand;
+                //if(this.inHand!=null){
+                //    PositionLUT.getInstance().setPosition(player_item,next_tile);
+                //}
                 next_tile.steppedOn(this);
                 Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' is completed\n", ID);
             } catch (IndexOutOfBoundsException e) {
