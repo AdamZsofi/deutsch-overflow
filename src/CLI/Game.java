@@ -10,7 +10,7 @@ import PlayerClasses.PlayerContainer;
 import PlayerClasses.Researcher;
 import TileClasses.Direction;
 import TileClasses.Tile;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -43,15 +43,16 @@ public class Game {
     /**
      * @param _isDeterministic
      * @param _playerNum
+     * @param mapNum
      * Initializes the game instance and starts the game
      * @author Zsófi
      */
-    private Game(boolean _isDeterministic, int _playerNum) {
+    private Game(boolean _isDeterministic, int _playerNum, int mapNum) {
         isDeterministic = _isDeterministic;
         playerNum = _playerNum;
         PlayerContainer.Initialize(playerNum);
         RoundController.getInstance(); //letrehoz
-        PositionLUT.getInstance();
+        PositionLUT.Initialize(isDeterministic, mapNum);
     }
 
     /**
@@ -59,9 +60,9 @@ public class Game {
      * Then initializes the game instance and sets the output log to the given stream
      * @author Zsófi
      */
-    public static Game startGame(PrintStream out, boolean isDeterministic, int playerNum) {
+    public static Game startGame(PrintStream out, boolean isDeterministic, int playerNum, int mapNum) {
         log = out;
-        return new Game(isDeterministic, playerNum);
+        return new Game(isDeterministic, playerNum, mapNum);
     }
 
     /**

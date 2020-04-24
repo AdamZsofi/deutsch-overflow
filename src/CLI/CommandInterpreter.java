@@ -65,21 +65,22 @@ public class CommandInterpreter {
      * @author Zsófi
      */
     public void waitingCommands() {
-        while(!endGame) {
-            // amíg nincs
-            while(!commandScanner.nextLine().equals("StartGame")) {
-                log.println("You can't do anything until you start the game (StartGame)");
-            }
-            log.println("Deterministic or Random?");
-            switch (commandScanner.nextLine()) {
-                case "Deterministic":
-                    gameInstance = Game.startGame(log, true, 6);
+        // amíg nincs
+        while(!commandScanner.nextLine().toLowerCase().equals("startgame")) {
+            log.println("You can't do anything until you start the game (StartGame)");
+        }
+        log.println("Deterministic or Random?");
+        switch (commandScanner.nextLine().toLowerCase()) {
+            case "deterministic":
+                log.println("Choose map (0 or 1)");
+                gameInstance = Game.startGame(log, true, 6, Integer.valueOf(commandScanner.nextLine()));
                 break;
-                case "Random":
-                    log.println("How many players?");
-                    gameInstance = Game.startGame(log, false, commandScanner.nextInt());
-                    break;
-            }
+            case "random":
+                log.println("How many players?");
+                gameInstance = Game.startGame(log, false, commandScanner.nextInt(), 0);
+                break;
+        }
+        while(!endGame) {
 
             // és itt jön a szép nagy switch case :D
             // TODO corresponding methods for every command (like startGame) should be implemented
@@ -89,29 +90,29 @@ public class CommandInterpreter {
             // TODO Note4: a printCharacterMap-t és a step-t megírtam, mint példa, az lehet, hogy segít
             // TODO Note5: illetve a 7-s doksiban van a ki és bemeneti nyelv kiírása az argumentumokkal, azt légyszi kövessétek
             // TODO Note6: néhány helyen lekezeltem, ha hülyeséget kapunk bemenetként, de alapvetően sztem NEM kell kezelni - ez egy teszt nyelv, nem hülye user van, hanem mi használjuk tesztelésre, tőlünk elvárható az értelmes input
-            switch (commandScanner.nextLine()) {
-                case "PrintCharacterMap":
+            switch (commandScanner.nextLine().toLowerCase()) {
+                case "printcharactermap":
                     gameInstance.printCharacterMap();
                     break;
-                case "PrintItemMap":
+                case "printitemmap":
                     gameInstance.printItemMap();
                     break;
-                case "PrintHeimMap":
+                case "printheimmap":
                     gameInstance.printShelterMap();
                     break;
-                case "PrintSnowTileMap":
+                case "printsnowtilemap":
                     gameInstance.printSnowTileMap();
                     break;
-                case "PrintTile":
+                case "printtile":
                     gameInstance.printTile();
                     break;
-                case "PrintItem":
+                case "printitem":
                     gameInstance.printItem();
                     break;
-                case "PrintPlayer":
+                case "printplayer":
                     gameInstance.printPlayer();
                     break;
-                case "Step":
+                case "step":
                     log.println("Which direction? (w,a,s,d)"); // Note: ahol van értelme egy helyben csinálni vmit, ott kell 5.-ik irány arg
                     switch (commandScanner.nextLine()) {
                         case "w":
@@ -128,7 +129,7 @@ public class CommandInterpreter {
                             break;
                     }
                     break;
-                case "PickUp":
+                case "pickup":
                     Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                     Tile currentTile= PositionLUT.getInstance().getPosition(p);
                     ArrayList<Item> items = PositionLUT.getInstance().getItemOnTile(currentTile);
@@ -149,7 +150,7 @@ public class CommandInterpreter {
                     }while(inputPick<0 || inputPick>maxPick-1);
                     gameInstance.pickUp(items.get(inputPick));
                     break;
-                case "DigItemUp":
+                case "digitemup":
                     Player p1= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                     Tile currentTile1= PositionLUT.getInstance().getPosition(p1);
                     ArrayList<Item> items1 = PositionLUT.getInstance().getItemOnTile(currentTile1);
@@ -170,7 +171,7 @@ public class CommandInterpreter {
                     }while(inputDig<0 || inputDig>maxDig-1);
                     gameInstance.digItemUp(items1.get(inputDig));
                     break;
-                case "UseSkill":
+                case "useskill":
                     Player p2= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                     if(p2 instanceof Eskimo){ // :(
                         gameInstance.buildIgloo();
@@ -193,10 +194,10 @@ public class CommandInterpreter {
                         }
                     }
                     break;
-                case "ClearSnow":
+                case "clearsnow":
                     gameInstance.clearSnow();
                     break;
-                case "SavePlayers":
+                case "saveplayers":
                     log.println("Which direction? (w,a,s,d)");
                     switch (commandScanner.nextLine()) {
                         case "w":
@@ -213,16 +214,16 @@ public class CommandInterpreter {
                             break;
                     }
                     break;
-                case "BuildTent":
+                case "buildtent":
                     gameInstance.buildTent();
                     break;
-                case "PutSignalTogether":
+                case "putsignaltogether":
                     gameInstance.putSignalTogether();
                     break;
-                case "PassRound":
+                case "passround":
                     gameInstance.passRound();
                     break;
-                case "EndGame": // NOTE: this one is new, but its useful for automated CLI tests
+                case "endgame": // NOTE: this one is new, but its useful for automated CLI tests
                     endGame = true;
                     break;
                 default:

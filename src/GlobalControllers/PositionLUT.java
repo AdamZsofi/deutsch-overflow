@@ -28,23 +28,40 @@ public class PositionLUT {
         return pLUT;
     }
 
-    private HashMap<Item, Tile> itemTileMap;
-    private HashMap<Tile, ArrayList<Item>> tileItemMap;
-    private HashMap<Player, Tile> playerTileMap;
-    private HashMap<PolarBear,Tile> polarbearTileMap;
-    private HashMap<Tile,ArrayList<PolarBear>> tilePolarBearMap;
-    private HashMap<Tile, ArrayList<Player>> tilePlayerMap;
-    private ArrayList<ArrayList<Tile>> tileList;//y: array index, x: Tile index
+    private static HashMap<Item, Tile> itemTileMap;
+    private static HashMap<Tile, ArrayList<Item>> tileItemMap;
+    private static HashMap<Player, Tile> playerTileMap;
+    private static HashMap<PolarBear,Tile> polarbearTileMap;
+    private static HashMap<Tile,ArrayList<PolarBear>> tilePolarBearMap;
+    private static HashMap<Tile, ArrayList<Player>> tilePlayerMap;
+    private static ArrayList<ArrayList<Tile>> tileList;//y: array index, x: Tile index
 
     /**
      * Randomly generated fields are omitted in skeleton, we have a hardcoded map
      * at this phase of testing for the scenarios
      * */
-    private PositionLUT(){
-        initDet1();
+    private PositionLUT(){}
+
+    /**
+     * @param isDeterministic
+     * @param mapNum
+     */
+    public static void Initialize(boolean isDeterministic, int mapNum){
+        if(isDeterministic && mapNum ==0){
+            initDet1();
+        }
+        else if(isDeterministic && mapNum ==1){
+            putTogetherInit();
+        }
+        else{
+            randInit();
+        }
     }
 
-    public void initDet1(){
+    /**
+     * deterministic map initialisation for test cases
+     */
+    private static void initDet1(){
         tileList = new ArrayList<>();
 
         for(int y = 0; y <6; y++){
@@ -115,12 +132,12 @@ public class PositionLUT {
         tilePlayerMap.put(getTile(2,4), player3);
         ArrayList player4 = new ArrayList();
         player4.add(PlayerContainer.getInstance().getPlayer(3));
-        tilePlayerMap.put(getTile(2,4), player4);
+        tilePlayerMap.put(getTile(2,3), player4);
         ArrayList player5 = new ArrayList();
-        player4.add(PlayerContainer.getInstance().getPlayer(3));
+        player5.add(PlayerContainer.getInstance().getPlayer(3));
         tilePlayerMap.put(getTile(3,4), player5);
         ArrayList player6 = new ArrayList();
-        player4.add(PlayerContainer.getInstance().getPlayer(3));
+        player6.add(PlayerContainer.getInstance().getPlayer(3));
         tilePlayerMap.put(getTile(4,3), player6);
 
 
@@ -132,7 +149,10 @@ public class PositionLUT {
         tilePolarBearMap.put(getTile(0,4),polarbear);
     }
 
-    public void putTogetherInit() {
+    /**
+     * deterministic map for putTogether test
+     */
+    private static void putTogetherInit() {
         tileList = new ArrayList<>();
         ArrayList<Tile> row= new ArrayList<>();//csak két tile
         row.add(new StableTile(0,0));
@@ -149,7 +169,14 @@ public class PositionLUT {
         tilePlayerMap.put(getTile(1,0), players23);
     }
 
-    public void randInit(){
+    /**
+     * random initialisation, based on probability.
+     * players and items spawn on different Tiles
+     * Snowyhole is not allowed as spawnplace for players and items
+     * Polarbear can spawn anywhere
+     * at the beginning polarbear and player can't be on the same tile
+     */
+    private static void randInit(){
         tileList = new ArrayList<>();
         itemTileMap = new HashMap<>();
         tileItemMap = new HashMap<>();
@@ -160,7 +187,7 @@ public class PositionLUT {
         int [][] spawnMatrix = new int[6][6]; //segedmatrix, h ne rakjunk lyukra embert meg itemet
 
         Random random = new Random();
-        for(int y = 0; y<6; y++){               //filling up tileList based on probablity
+        for(int y = 0; y<6; y++){   //filling up tileList based on probablity
             tileList.add(new ArrayList<>());
             for(int x = 0; x<6; x++ ){
                 int randNum = random.nextInt(100) + 1;//randNum :1-100
@@ -237,7 +264,7 @@ public class PositionLUT {
          * @param p Player
          * @return position(Tile)
          */
-    public Tile getPosition(Player p){
+    public static Tile getPosition(Player p){
         //Game.log.println("# PositionLUT>getPosition(Player) returns Tile");
         return playerTileMap.get(p);
     }
@@ -247,7 +274,7 @@ public class PositionLUT {
      * @param i Item
      * @return position(Tile)
      */
-    public Tile getPosition(Item i){
+    public static Tile getPosition(Item i){
         //Game.log.println("# PositionLUT>getPosition(Item) returns Tile");
         return itemTileMap.get(i);
     }
@@ -257,7 +284,7 @@ public class PositionLUT {
      * @param t position (Tile)
      * @return ArrayList<Item> players of the Tile
      */
-    public ArrayList<Player> getPlayersOnTile(Tile t){
+    public static ArrayList<Player> getPlayersOnTile(Tile t){
         //Game.log.println("# PositionLUT>getPlayersOnTile(Tile) returns ArrayList<Player>");
         return tilePlayerMap.get(t);
     }
@@ -267,7 +294,7 @@ public class PositionLUT {
      * @param t position (Tile)
      * @return ArrayList<Item> items of the Tile
      */
-    public ArrayList<Item> getItemOnTile(Tile t){
+    public static ArrayList<Item> getItemOnTile(Tile t){
         //Game.log.println("# PositionLUT>getItemOnTile(Tile) returns ArrayList<Item>");
         return tileItemMap.get(t);
     }
@@ -278,7 +305,7 @@ public class PositionLUT {
      * @param y Descartes coord. y (Column)
      * @return position (Tile)
      */
-    public Tile getTile(int x, int y){
+    public static Tile getTile(int x, int y){
         //Game.log.format("# PositionLUT>getTile(%d, %d) returns Tile\n", x, y);
         return tileList.get(y).get(x); //indexing convension
     }
@@ -288,12 +315,11 @@ public class PositionLUT {
      * @param p Player
      * @param t Tile
      */
-    public void setPosition(Player p, Tile t){
+    public static void setPosition(Player p, Tile t){
         //Game.log.println("# PositionLUT>setPosition(Player, Tile)");
         tilePlayerMap.get(playerTileMap.get(p)).remove(p);
         tilePlayerMap.get(t).add(p);//uj hely add
         playerTileMap.put(p, t);//put folulirja az elozot
-        //todo megnezni jo e?
     }//kell frissiteni: tilePlayerMap, playerTileMap más osztalyokban kell? remelem nem
 
     /**
