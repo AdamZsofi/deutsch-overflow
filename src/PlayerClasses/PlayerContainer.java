@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayerContainer {
-    private int playerNum;
+    private static int playerNum;
 
     private static PlayerContainer pc;
-
+    private static ArrayList<Player> players;
     /**
      * Gives back a reference to the PlayerContainer
      * @return
@@ -28,15 +28,23 @@ public class PlayerContainer {
      * Initialisation of PlayerContainer, creates a new PlayerContainer (if it's not created)
      * @param num
      */
-    public static void Initialize(int num) {
+    public static void Initialize(int num, int mapNum) {
         if(pc == null) {
+            playerNum = num;
             pc = new PlayerContainer(num);
+
+            if(Game.isDeterministic){
+                if(mapNum == 0)
+                    detInit();
+                else putTogetherInit();
+            }
+            else randInit();
+
         }
     }
 
 
 
-    private ArrayList<Player> players;
 
     /**
      * Gives back the numOfPlayer, quantity (count) of all player in game
@@ -51,10 +59,10 @@ public class PlayerContainer {
      * @param num quantity (count) of all player
      */
     private PlayerContainer(int num){
-        detInit();
+
     }
 
-    private void detInit(){
+    private static void detInit(){
         playerNum = 6;
         players = new ArrayList<Player>();
         players.add(new Eskimo());
@@ -69,7 +77,7 @@ public class PlayerContainer {
         players.get(5).inHand = new Shovel();
     }
 
-    private void putTogetherInit(){
+    private static void putTogetherInit(){
         players = new ArrayList<Player>();
         players.add(new Eskimo());
         players.add(new Eskimo());
@@ -79,6 +87,19 @@ public class PlayerContainer {
         players.get(2).inHand = RoundController.getInstance().sg.signalFlareParts.get(2);
     }
 
+    private static void randInit(){
+        players = new ArrayList<>();
+        Random random = new Random();
+
+        for(int i = 0; i < playerNum; i++){
+            int randNum = random.nextInt(100) + 1;
+            if(randNum < 50)
+                players.add(new Researcher());
+            else
+                players.add(new Eskimo());
+        }
+
+    }
     /**
      * Gives back a Player based on PlayerId (pid)
      * ERROR HANDLING: throws NullPointerException by outindexing => SHOULD BE CHECKED BY CALLER

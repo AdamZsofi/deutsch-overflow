@@ -58,8 +58,6 @@ public class RoundController {
      * @param playerNum NumOfPlayer
      */
     public void init(int playerNum) { //a játékot inicializálja
-        //playercontainer itt init (skeletonban a playerNum nem játszik szerepet, minig 4 lesz)
-        PlayerContainer.Initialize(playerNum);
         Game.log.format("# RoundController>init : RoundController initialised by %d players\n", playerNum);
         curID = 0;
     }

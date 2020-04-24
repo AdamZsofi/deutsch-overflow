@@ -77,7 +77,7 @@ public class CommandInterpreter {
                 break;
             case "random":
                 log.println("How many players?");
-                gameInstance = Game.startGame(log, false, commandScanner.nextInt(), 0);
+                gameInstance = Game.startGame(log, false, Integer.valueOf(commandScanner.nextLine()), 0);
                 break;
         }
         while(!endGame) {

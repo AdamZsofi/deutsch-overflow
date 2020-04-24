@@ -186,16 +186,17 @@ public class PositionLUT {
         tilePolarBearMap = new HashMap<>();
         int [][] spawnMatrix = new int[6][6]; //segedmatrix, h ne rakjunk lyukra embert meg itemet
 
+
         Random random = new Random();
         for(int y = 0; y<6; y++){   //filling up tileList based on probablity
             tileList.add(new ArrayList<>());
             for(int x = 0; x<6; x++ ){
                 int randNum = random.nextInt(100) + 1;//randNum :1-100
-                if( randNum <= 50 ) {
-                    tileList.get(y).add(new StableTile(x, y));//50%
+                if( randNum <= 60 ) {
+                    tileList.get(y).add(new StableTile(x, y));//60%
                     spawnMatrix[y][x] = 1;
                 }else if(randNum<=80) {
-                    tileList.get(y).add(new UnstableTile(x, y));//30%
+                    tileList.get(y).add(new UnstableTile(x, y));//20%
                     spawnMatrix[y][x] = 1;
                 }else {
                     tileList.get(y).add(new SnowyHole(x, y));//20%
@@ -214,14 +215,23 @@ public class PositionLUT {
         items.add(RoundController.getInstance().sg.signalFlareParts.get(1));
         items.add(RoundController.getInstance().sg.signalFlareParts.get(2));
 
+
         int [][] itemSpawnMatrix = spawnMatrix;
         for(int i = 0 ;i < items.size(); i++) {
             int x = random.nextInt(6);
             int y = random.nextInt(6);
             do {
+                x = random.nextInt(6);
+                y = random.nextInt(6);
                 itemTileMap.put(items.get(i), getTile(x, y)); //random hely, ami nem luk és csak 1 Item spawnolhat 1 helyre
             } while (itemSpawnMatrix[y][x] == 0);
             itemSpawnMatrix[y][x] = 0;
+        }
+
+
+        for(int i = 0; i < 36; i++){
+            ArrayList<Item> item = new ArrayList<>();
+            tileItemMap.put(tileList.get(i/6).get(i%6), item);//filling up with empty lists
         }
 
         //filling up tileItemMap
@@ -231,14 +241,14 @@ public class PositionLUT {
             tileItemMap.put(itemTileMap.get(items.get(i)), item);
         }
 
+
         //polarBear position init, most csak 1 db van
         int x = random.nextInt(6);
         int y = random.nextInt(6);
-        PolarBear bear = new PolarBear();
-        polarbearTileMap.put(bear, getTile(x, y));//akarhol lehet, vízben is
+        polarbearTileMap.put(RoundController.getInstance().polarbear, getTile(x, y));//akarhol lehet, vízben is
         spawnMatrix[y][x] = 0;
         ArrayList<PolarBear> bearList = new ArrayList<>();
-        bearList.add(bear);
+        bearList.add(RoundController.getInstance().polarbear);
         tilePolarBearMap.put(getTile(x, y),bearList);
 
 
@@ -246,16 +256,24 @@ public class PositionLUT {
             x = random.nextInt(6);
             y = random.nextInt(6);
             do {
+                x = random.nextInt(6);
+                y = random.nextInt(6);
                 playerTileMap.put(PlayerContainer.getInstance().getPlayer(i),getTile(x, y));
             } while (spawnMatrix[y][x] == 0);
             spawnMatrix[y][x] = 0;
         }
 
-        for(int i = 0 ; i < items.size(); i++) {
+        for(int i = 0; i < 36; i++){
+            ArrayList<Player> player = new ArrayList<>();
+            tilePlayerMap.put(tileList.get(i/6).get(i%6), player);//filling up with empty lists
+        }
+
+        for(int i = 0 ; i <  PlayerContainer.getInstance().getPlayerNum(); i++) {
             ArrayList<Player> player = new ArrayList<>();
             player.add(PlayerContainer.getInstance().getPlayer(i));
-            tilePlayerMap.put(playerTileMap.get(items.get(i)), player);
+            tilePlayerMap.put(playerTileMap.get(player.get(0)), player);
         }
+
 
     }
 

@@ -50,9 +50,10 @@ public class Game {
     private Game(boolean _isDeterministic, int _playerNum, int mapNum) {
         isDeterministic = _isDeterministic;
         playerNum = _playerNum;
-        PlayerContainer.Initialize(playerNum);
+        PlayerContainer.Initialize(playerNum, mapNum);
         RoundController.getInstance(); //letrehoz
         PositionLUT.Initialize(isDeterministic, mapNum);
+        log.println("init ready");
     }
 
     /**
