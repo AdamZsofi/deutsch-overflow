@@ -27,11 +27,12 @@ public abstract class Player extends Character{
      * Initialisation for starting a round for Player
      * Sets workingPoint to 4
      */
-    public Player(){
+    public Player(int id){
         inHand=null;
         inWater=false;
         wearing=null;
         workPoints=4;
+        ID=id;
     }
 
     public void startRound() {
