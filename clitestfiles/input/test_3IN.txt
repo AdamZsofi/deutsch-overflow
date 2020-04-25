@@ -10,3 +10,4 @@ PrintPlayer
 SavePlayers
 s
 PrintCharacterMap
+EndGame

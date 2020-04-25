@@ -10,3 +10,4 @@ Step
 s
 PrintPlayer
 PassRound
+EndGame

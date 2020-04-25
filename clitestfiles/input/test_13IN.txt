@@ -14,5 +14,4 @@ PassRound
 PassRound
 PassRound
 PassRound
-//macit be kell allitani ehhez jelotem a detreminiticmap.docxben
-//itt is kaptam exception PolarbearIndexOutOfBounds
+EndGame

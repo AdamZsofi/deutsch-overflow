@@ -115,7 +115,7 @@ public class RoundController {
      * @param cause String of reason
      */
     public void lose(String cause) {
-        System.out.format("You loose the game, %s\n", cause);
+        Game.log.format("You lose the game, %s\n", cause);
         Game.log.println("$ RoundController>lose : Game lose, ended");
         System.exit(0);
     }
@@ -124,7 +124,7 @@ public class RoundController {
      * Win of game -> System exit
      */
     public void win() {
-        System.out.println("You win the game, congratulation");
+        Game.log.println("You win the game, congratulation");
         Game.log.println("$ RoundController>win : Game won, ended");
         System.exit(0);
     }

@@ -13,7 +13,5 @@ PassRound
 PassRound
 PassRound
 PassRound
-
-
-//viz lose sem mukodik
+EndGame
 
