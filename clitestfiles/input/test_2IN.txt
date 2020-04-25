@@ -1,6 +1,10 @@
 StartGame
 deterministic
 0
+PassRound
+PassRound
+PassRound
+PassRound
 PrintCharacterMap
 PrintPlayer
 PrintItemMap

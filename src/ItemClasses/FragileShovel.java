@@ -40,4 +40,5 @@ public class FragileShovel extends Shovel{
         }
     }
     public String getShortName(){ return "FS("+state.getShortName(getState())+")";}
+    public String toString() {return "FragileShovel";}
 }

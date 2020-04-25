@@ -68,4 +68,5 @@ public class Rope extends Item{
         }
     }
     public String getShortName(){ return "R("+state.getShortName(getState())+")";}
+    public String toString() {return "Rope";}
 }

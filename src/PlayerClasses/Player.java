@@ -36,8 +36,7 @@ public abstract class Player extends Character{
 
     public void startRound() {
         workPoints = 4;
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("startRound()");
+        Game.log.format("# Player>startRound : next Player is %d\n", ID);
         System.out.println("Waiting for player input...");
 
         // TODO Ez a rész kb átkerült a Game és CommandInterpreterbe, Game methodjainak implementálásánál még jól jöhet, ezért majd akkor töröljük, ha azok készen vannak

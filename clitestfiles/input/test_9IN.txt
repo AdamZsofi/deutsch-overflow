@@ -1,0 +1,6 @@
+StartGame
+deterministic
+0
+PrintHeimMap
+UseSkill
+PrintHeimMap

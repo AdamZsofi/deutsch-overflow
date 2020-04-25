@@ -24,7 +24,6 @@ public class SnowStorm {
         int number= rand.nextInt(100);
 
         if(number>30) {// ~70%
-            System.out.println(number);
             Game.log.println("# SnowStorm>tryStorm : SnowStorm is NOT coming");
             return;
         }

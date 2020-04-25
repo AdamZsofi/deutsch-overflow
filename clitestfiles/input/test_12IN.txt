@@ -1,0 +1,16 @@
+StartGame
+deterministic
+0
+PrintCharacterMap
+UseSkill
+PrintHeimMap
+PassRound
+PassRound
+PassRound
+BuildTent
+PrintHeimMap
+PassRound
+PrintHeimMap
+//varunk a snowstormra
+//a snowstormot be kell allitani detreminitisztikusra
+//utana johet egy olyan tilera is amin nincs menedek es akkor a loset is meg lehet nezni

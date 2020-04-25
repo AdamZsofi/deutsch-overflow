@@ -1,0 +1,3 @@
+StartGame
+deterministic
+0
