@@ -11,3 +11,4 @@ PrintPlayer
 PrintSnowTileMap
 ClearSnow
 PrintSnowTileMap
+EndGame

@@ -4,3 +4,4 @@ deterministic
 PrintHeimMap
 UseSkill
 PrintHeimMap
+EndGame

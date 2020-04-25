@@ -6,3 +6,4 @@ PassRound
 UseSkill
 d
 PrintTile
+EndGame

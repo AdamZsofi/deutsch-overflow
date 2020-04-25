@@ -37,8 +37,7 @@ public abstract class Player extends Character{
     public void startRound() {
         workPoints = 4;
         Game.log.format("# Player>startRound : next Player is %d\n", ID);
-        System.out.println("Waiting for player input...");
-
+        // System.out.println("Waiting for player input...");
         // TODO Ez a rész kb átkerült a Game és CommandInterpreterbe, Game methodjainak implementálásánál még jól jöhet, ezért majd akkor töröljük, ha azok készen vannak
         /*
         Tile position;
@@ -244,8 +243,8 @@ public abstract class Player extends Character{
     public void savePlayers(Direction dir) {
         Game.log.format("# Player>savePlayers : Player (PlayerId:%d) save started in direction:%s\n", ID, dir.toString());
         if(dir==Direction.valueOf(4)) {
-            System.out.println("You cannot rescue yourself");
             Game.log.format("! Player>savePlayers : Player (PlayerId:%d) cannot rescue herself\n", ID);
+            // System.out.println("You cannot rescue yourself");
             return;
         }
         saveDirection = dir;
@@ -291,7 +290,7 @@ public abstract class Player extends Character{
     @Override
     public void step(Direction dir) {
             if(dir.getValue() == 4) {
-                System.out.println("You stay where you were");
+                // System.out.println("You stay where you were");
                 Game.log.format("! Player>step : Player (PlayerId:%d) player has chosen HERE for step\n", ID);
                 return;
             }
@@ -302,7 +301,6 @@ public abstract class Player extends Character{
                 Tile next_tile = position.getNeighbour(dir);
                 Tile bear_position= PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
                 if(next_tile.equals(bear_position)){
-                    System.out.println("Dangerous Direction, there is a PolarBear");
                     Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(PolarBear)\n", ID);
                     return;
                 }
@@ -316,7 +314,7 @@ public abstract class Player extends Character{
                 next_tile.steppedOn(this);
                 Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' is completed\n", ID);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("You can't go that way");
+                // System.out.println("You can't go that way");
                 Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(OutBound)\n", ID);
                 return;
             }

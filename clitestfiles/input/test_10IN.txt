@@ -36,9 +36,4 @@ Step
 a
 Step
 a
-
-//tulindexeles
-//tobbmber kimentese
-//vizbol kilepes divingsuit nelkul nem hagy
-//vizbol kilepes divinsuittal
-
+EndGame

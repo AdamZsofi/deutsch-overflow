@@ -7,3 +7,4 @@ PassRound
 PrintHeimMap
 BuildTent
 PrintHeimMap
+EndGame

@@ -7,3 +7,4 @@ PrintCharacterMap
 PrintPlayer
 PrintItemMap
 PutSignalTogether
+EndGame
