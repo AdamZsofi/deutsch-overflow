@@ -1,0 +1,9 @@
+StartGame
+deterministic
+0
+PassRound
+PassRound
+PassRound
+PrintHeimMap
+BuildTent
+PrintHeimMap

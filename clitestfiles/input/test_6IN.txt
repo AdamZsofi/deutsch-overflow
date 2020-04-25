@@ -1,12 +1,9 @@
 StartGame
 deterministic
-0
+1
+step
+d
 PrintCharacterMap
 PrintPlayer
 PrintItemMap
-DigItemUp
-0
-PickUp
-0
-PrintPlayer
-PrintItemMap
+PutSignalTogether

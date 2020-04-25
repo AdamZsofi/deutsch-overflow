@@ -15,4 +15,5 @@ public class DivingSuit extends Item{
         Game.log.println("$ DivingSuit>pickedUp : Transaction 'pickingUpDivingSuit' was successful");
     }
     public String getShortName(){ return "D("+this.getState()+")";}
+    public String toString() {return "DivingSuit";}
 }

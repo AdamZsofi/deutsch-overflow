@@ -1,0 +1,44 @@
+StartGame
+deterministic
+0
+PrintCharacterMap
+Step
+a
+PrintCharacterMap
+Step
+s
+PrintCharacterMap
+Step
+d
+Step
+s
+Step
+d
+PassRound
+Step
+d
+PrintCharacterMap
+Step
+d
+PrintCharacterMap
+PassRound
+SavePlayers
+s
+PrintCharacterMap
+PassRound
+PassRound
+PrintItemMap
+DigItemUp
+0
+PickUp
+0
+Step
+a
+Step
+a
+
+//tulindexeles
+//tobbmber kimentese
+//vizbol kilepes divingsuit nelkul nem hagy
+//vizbol kilepes divinsuittal
+

@@ -67,7 +67,7 @@ public abstract class Tile {
             snow += thisMuch;
         else if(snow==0 && thisMuch>0)
             snow += thisMuch;
-        Game.log.format("# Tile>ChangeSnow : snow level is: %d (it has been changed by %d much)\n", snow, thisMuch);
+        Game.log.format("# Tile>ChangeSnow : Tile(%d, %d) snow level is: %d (it has been changed by %d much)\n", x, y, snow, thisMuch);
     }
 
     /**

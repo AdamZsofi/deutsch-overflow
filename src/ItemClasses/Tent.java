@@ -36,4 +36,5 @@ public class Tent extends Item{
         }
     }
     public String getShortName(){ return "T("+state.getShortName(getState())+")";}
+    public String toString() {return "Tent";}
 }

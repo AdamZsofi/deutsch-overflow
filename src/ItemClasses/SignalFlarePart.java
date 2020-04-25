@@ -21,4 +21,5 @@ public class SignalFlarePart extends Item {
         Game.log.println("# SignalFlarePart>used");
     }
     public String getShortName(){ return "SFP("+state.getShortName(getState())+")";}
+    public String toString() {return "SignalFlarePart";}
 }

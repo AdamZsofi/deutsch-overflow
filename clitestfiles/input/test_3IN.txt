@@ -1,0 +1,12 @@
+StartGame
+deterministic
+0
+PassRound
+Step
+d
+PassRound
+PrintCharacterMap
+PrintPlayer
+SavePlayers
+s
+PrintCharacterMap

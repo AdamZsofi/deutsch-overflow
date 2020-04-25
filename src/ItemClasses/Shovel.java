@@ -24,4 +24,5 @@ public class Shovel extends Item{
         }
     }
     public String getShortName(){ return "S("+state.getShortName(getState())+")";}
+    public String toString() {return "Shovel";}
 }

@@ -21,7 +21,7 @@ public abstract class Item {
      */
     public void thrownDown(){
         state =  ItemState.thrownDown;
-        Game.log.println("# Item>thrownDown : Item state has changed to 'thrownDown'");
+        Game.log.format("# Item>thrownDown : Item (%s) state has changed to 'thrownDown'\n", this.toString());
     }
 
     /**
@@ -30,7 +30,7 @@ public abstract class Item {
      */
     public void pickedUp(Player Picker){
         state = ItemState.inHand;
-        Game.log.println("# Item>pickedUp : Item state has changed to 'inHand'");
+        Game.log.format("# Item>pickedUp : Item (%s) state has changed to 'inHand'\n", this.toString());
     }
 
     /**
@@ -38,7 +38,7 @@ public abstract class Item {
      */
     public void diggedUp(){
         state = ItemState.thrownDown;
-        Game.log.println("# Item>diggedUp : Item state has changed to 'thrownDown'");
+        Game.log.format("# Item>diggedUp : Item (%s) state has changed to 'thrownDown'\n", this.toString());
     }
 
     /**
@@ -57,4 +57,5 @@ public abstract class Item {
      */
     public void used(Player p, Activity a){ }
     public abstract String getShortName();
+    public abstract String toString();
 }

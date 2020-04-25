@@ -1,0 +1,18 @@
+StartGame
+deterministic
+0
+Step
+d
+Step
+s
+Step
+s
+Step
+a
+PassRound
+PassRound
+PassRound
+PassRound
+PassRound
+//macit be kell allitani ehhez jelotem a detreminiticmap.docxben
+//itt is kaptam exception PolarbearIndexOutOfBounds
