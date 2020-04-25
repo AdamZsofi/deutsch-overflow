@@ -4,5 +4,5 @@ deterministic
 PassRound
 PassRound
 UseSkill
-a
+d
 PrintTile

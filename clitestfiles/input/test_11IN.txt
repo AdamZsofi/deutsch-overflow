@@ -3,7 +3,7 @@ deterministic
 0
 PassRound
 Step
-s
+d
 PrintPlayer
 PassRound
 PassRound
