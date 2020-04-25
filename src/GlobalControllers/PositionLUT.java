@@ -118,8 +118,8 @@ public class PositionLUT {
 
         playerTileMap = new HashMap<>();
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(0),  getTile(0,5));//eskimo1
-        playerTileMap.put(PlayerContainer.getInstance().getPlayer(1),  getTile(2,5));//eskimo2
-        playerTileMap.put(PlayerContainer.getInstance().getPlayer(2),  getTile(2,4));//researcher1
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(1),  getTile(1,4));//eskimo2
+        playerTileMap.put(PlayerContainer.getInstance().getPlayer(2),  getTile(2,5));//researcher1
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(3),  getTile(2,3));//researcher2
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(4),  getTile(3,4));//researcher3
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(5),  getTile(4,3));//researcher4
@@ -129,18 +129,18 @@ public class PositionLUT {
         tilePlayerMap.put(getTile(0,5), player1);
         ArrayList player2 = new ArrayList();
         player2.add(PlayerContainer.getInstance().getPlayer(1));
-        tilePlayerMap.put(getTile(2,5), player2);
+        tilePlayerMap.put(getTile(1,4), player2);
         ArrayList player3 = new ArrayList();
         player3.add(PlayerContainer.getInstance().getPlayer(2));
-        tilePlayerMap.put(getTile(2,4), player3);
+        tilePlayerMap.put(getTile(2,5), player3);
         ArrayList player4 = new ArrayList();
         player4.add(PlayerContainer.getInstance().getPlayer(3));
         tilePlayerMap.put(getTile(2,3), player4);
         ArrayList player5 = new ArrayList();
-        player5.add(PlayerContainer.getInstance().getPlayer(3));
+        player5.add(PlayerContainer.getInstance().getPlayer(4));
         tilePlayerMap.put(getTile(3,4), player5);
         ArrayList player6 = new ArrayList();
-        player6.add(PlayerContainer.getInstance().getPlayer(3));
+        player6.add(PlayerContainer.getInstance().getPlayer(5));
         tilePlayerMap.put(getTile(4,3), player6);
 
 
@@ -353,7 +353,7 @@ public class PositionLUT {
      * @param y Descartes coord. y (Column)
      * @return position (Tile)
      */
-    public static Tile getTile(int x, int y){
+    public static Tile getTile(int x, int y) {
         //Game.log.format("# PositionLUT>getTile(%d, %d) returns Tile\n", x, y);
         return tileList.get(y).get(x); //indexing convension
     }

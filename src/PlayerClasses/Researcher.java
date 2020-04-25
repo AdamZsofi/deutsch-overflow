@@ -8,8 +8,8 @@ import TileClasses.Tile;
 
 public class Researcher extends Player {
 
-    public Researcher(){
-        super();
+    public Researcher(int id){
+        super(id);
         BodyHeat=4;
     }
     /**

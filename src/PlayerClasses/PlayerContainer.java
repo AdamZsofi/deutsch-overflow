@@ -69,12 +69,12 @@ public class PlayerContainer {
     private static void detInit(){
         playerNum = 6;
         players = new ArrayList<Player>();
-        players.add(new Eskimo());
-        players.add(new Eskimo());
-        players.add(new Researcher());
-        players.add(new Researcher());
-        players.add(new Researcher());
-        players.add(new Researcher());
+        players.add(new Eskimo(0));
+        players.add(new Eskimo(1));
+        players.add(new Researcher(2));
+        players.add(new Researcher(3));
+        players.add(new Researcher(4));
+        players.add(new Researcher(5));
 
         players.get(1).inHand = new Rope();
         players.get(1).inHand.diggedUp();
@@ -82,16 +82,16 @@ public class PlayerContainer {
         players.get(3).inHand = new Tent();
         players.get(3).inHand.diggedUp();
         players.get(3).inHand.pickedUp(players.get(3));
-        players.get(5).inHand = new Shovel();
-        players.get(5).inHand.diggedUp();
-        players.get(5).inHand.pickedUp(players.get(5));
+        players.get(4).inHand = new Shovel();
+        players.get(4).inHand.diggedUp();
+        players.get(4).inHand.pickedUp(players.get(4));
     }
 
     private static void putTogetherInit(){
         players = new ArrayList<Player>();
-        players.add(new Eskimo());
-        players.add(new Eskimo());
-        players.add(new Researcher());
+        players.add(new Eskimo(0));
+        players.add(new Eskimo(1));
+        players.add(new Researcher(2));
         players.get(0).inHand = RoundController.getInstance().sg.signalFlareParts.get(0);
         players.get(0).inHand.diggedUp();
         players.get(0).inHand.pickedUp(players.get(0));
@@ -107,12 +107,14 @@ public class PlayerContainer {
         players = new ArrayList<>();
         Random random = new Random();
 
+        int count=0;
         for(int i = 0; i < playerNum; i++){
             int randNum = random.nextInt(100) + 1;
             if(randNum < 50)
-                players.add(new Researcher());
+                players.add(new Researcher(count));
             else
-                players.add(new Eskimo());
+                players.add(new Eskimo(count));
+            count++;
         }
 
     }

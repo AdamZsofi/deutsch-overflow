@@ -26,7 +26,13 @@ public class Rope extends Item{
         if(a == Activity.savingPeople) {
             Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
             Direction wateTile_dir = p.saveDirection;//nem a legszebb, át lehet később gondolni
-            Tile waterTile = currentTile.getNeighbour(wateTile_dir);
+            Tile waterTile;
+            try {
+                waterTile = currentTile.getNeighbour(wateTile_dir);
+            }catch(IndexOutOfBoundsException e){
+                p.workPoints++;
+                return;
+            }
             ArrayList<Player> inWaterPlayers = PositionLUT.getInstance().getPlayersOnTile(waterTile);
             for (int count=0 ;count<inWaterPlayers.size();count++) { // Player iwp : inWaterPlayers rossz volt
                 int step_dir_value = wateTile_dir.getValue();

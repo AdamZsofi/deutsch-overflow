@@ -73,7 +73,7 @@ public class CommandInterpreter {
         switch (commandScanner.nextLine().toLowerCase()) {
             case "deterministic":
                 log.println("Choose map (0 or 1)");
-                gameInstance = Game.startGame(log, true, 6, Integer.valueOf(commandScanner.nextLine()));
+                gameInstance = Game.startGame(log, true, 5, Integer.valueOf(commandScanner.nextLine()));
                 break;
             case "random":
                 log.println("How many players?");
@@ -203,20 +203,27 @@ public class CommandInterpreter {
                     break;
                 case "saveplayers":
                     log.println("Which direction? (w,a,s,d)");
-                    switch (commandScanner.nextLine()) {
-                        case "w":
-                            gameInstance.savePlayers(Direction.UP);
-                            break;
-                        case "a":
-                            gameInstance.savePlayers(Direction.LEFT);
-                            break;
-                        case "s":
-                            gameInstance.savePlayers(Direction.DOWN);
-                            break;
-                        case "d":
-                            gameInstance.savePlayers(Direction.RIGHT);
-                            break;
-                    }
+                    Player player= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
+                    //Tile ct= PositionLUT.getInstance().getPosition(p1);
+                    /*do {
+                        String dir = commandScanner.nextLine();
+                        Tile nextTile=
+
+                    }while()*/
+                        switch (commandScanner.nextLine()) {
+                            case "w":
+                                gameInstance.savePlayers(Direction.UP);
+                                break;
+                            case "a":
+                                gameInstance.savePlayers(Direction.LEFT);
+                                break;
+                            case "s":
+                                gameInstance.savePlayers(Direction.DOWN);
+                                break;
+                            case "d":
+                                gameInstance.savePlayers(Direction.RIGHT);
+                                break;
+                        }
                     break;
                 case "buildtent":
                     gameInstance.buildTent();

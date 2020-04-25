@@ -28,6 +28,7 @@ public class UnstableTile extends Tile {
         Game.log.format("# Tile>steppedOff : Player left the Tile (%d, %d) and standingHere changed to %d\n", x, y, standingHere);
     }
 
+
     /**
      * Called by the Character
      * It decreases the capacity of Tile => standinghere++ (somebody entered on Tile)

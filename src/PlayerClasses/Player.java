@@ -27,7 +27,8 @@ public abstract class Player extends Character{
      * Initialisation for starting a round for Player
      * Sets workingPoint to 4
      */
-    public Player(){
+    public Player(int id){
+        ID=id;
         inHand=null;
         inWater=false;
         wearing=null;
@@ -36,6 +37,9 @@ public abstract class Player extends Character{
 
     public void startRound() {
         workPoints = 4;
+        if(inWater){
+            RoundController.getInstance().lose("Drowning");
+        }
         System.out.print("PlayerClasses.Player, ID"+ID+":");
         System.out.println("startRound()");
         System.out.println("Waiting for player input...");
@@ -88,6 +92,7 @@ public abstract class Player extends Character{
      */
     public void fallInWater() {
         inWater = true;
+        this.passRound();
         Game.log.format("# Player>fallInWater : Player (PlayerId:%d) fall in Water \n", ID);
     }
     /**
@@ -208,10 +213,13 @@ public abstract class Player extends Character{
         }
 
         Tile position= PositionLUT.getInstance().getPosition(this);
-        position.changeSnow(-1);
-        Game.log.format("$ Player>clearSnow : Player (PlayerId:%d) cleared snow\n", ID);
-        workPoints--;
-
+        if(position.getSnow()>0) {
+            position.changeSnow(-1);
+            Game.log.format("$ Player>clearSnow : Player (PlayerId:%d) cleared snow\n", ID);
+            workPoints--;
+        }
+        else
+            Game.log.format("# The Tile is already clean!\n");
         if(workPoints==0) {
             Game.log.format("# Player>clearSnow : Player (PlayerId:%d) has no more workingPoints\n", ID);
             passRound();

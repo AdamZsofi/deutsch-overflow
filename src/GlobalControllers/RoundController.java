@@ -64,7 +64,8 @@ public class RoundController {
 
 
     /**
-     *
+     * if end of whole round: polarbear steps
+     * storm comes with 30% odds
      */
     public void endLastRound() {
         Game.log.println("# RoundController>endLastRound : Round end started");
@@ -74,19 +75,13 @@ public class RoundController {
         checkTent();
 
         if(curID == 0) { // end of whole round
-            Random r = new Random();
-            boolean success = true;
-            int direction;
-            Tile current_tile = PositionLUT.getInstance().getPosition(polarbear);
-            Tile next_tile = null;
+            boolean step=false;
+            do{
+                step=stepPolarbear();
+            }while(!step);
             int players_num;
-            do {
-                direction=r.nextInt(4);
-                polarbear.step(Direction.valueOf(direction));
-                next_tile = current_tile.getNeighbour(Direction.valueOf(direction));
-                if (current_tile.equals(next_tile)) success = false;
-            } while (!success);
-            players_num = PositionLUT.pLUT.getPlayersOnTile(next_tile).size();
+            Tile bearTile= PositionLUT.getInstance().getPosition(polarbear);
+            players_num = PositionLUT.pLUT.getPlayersOnTile(bearTile).size();
             if (players_num > 0) {
                 Game.log.println("! RoundController>endLastRound : Bear killed the players on Tile");
                 lose("Bear kills player");
@@ -94,6 +89,25 @@ public class RoundController {
         }
         Game.log.println("# RoundController>endLastRound : Round end ended");
         PlayerContainer.getInstance().getPlayer(curID).startRound();
+    }
+
+    /**
+     * Polarbear steps
+     * @author Ádám
+     */
+    public boolean stepPolarbear(){
+        Random r = new Random();
+        int direction;
+        Tile current_tile = PositionLUT.getInstance().getPosition(polarbear);
+        Tile next_tile;
+        direction=r.nextInt(4);
+        polarbear.step(Direction.valueOf(direction));
+        try {
+            next_tile = current_tile.getNeighbour(Direction.valueOf(direction));
+        }catch (IndexOutOfBoundsException e){
+            return false;
+        }
+        return true;
     }
 
     /**

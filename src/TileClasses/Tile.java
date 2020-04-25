@@ -83,7 +83,7 @@ public abstract class Tile {
      * Returns the capacity of Tile
      * @return capacity
      */
-    public int getCapacity() {
+    public int getCapacity(){
         return capacity;
     }
 
