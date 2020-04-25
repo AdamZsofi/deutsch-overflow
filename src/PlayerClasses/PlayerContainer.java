@@ -43,8 +43,8 @@ public class PlayerContainer {
                 }
             }
             else{
-                randInit();
                 playerNum = num;
+                randInit();
             }
 
         }
