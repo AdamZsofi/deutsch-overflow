@@ -77,8 +77,14 @@ public class PlayerContainer {
         players.add(new Researcher());
 
         players.get(1).inHand = new Rope();
+        players.get(1).inHand.diggedUp();
+        players.get(1).inHand.pickedUp(players.get(1));
         players.get(3).inHand = new Tent();
+        players.get(3).inHand.diggedUp();
+        players.get(3).inHand.pickedUp(players.get(3));
         players.get(5).inHand = new Shovel();
+        players.get(5).inHand.diggedUp();
+        players.get(5).inHand.pickedUp(players.get(5));
     }
 
     private static void putTogetherInit(){
