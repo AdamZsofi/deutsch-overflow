@@ -74,8 +74,8 @@ public class PositionLUT {
 
         tileList.get(4).set(2, new SnowyHole(2,4));
         //hó nullázás a könnyebb ásás érdekében
-        tileList.get(5).get(0).changeSnow(-tileList.get(5).get(0).getSnow());
-        tileList.get(4).get(3).changeSnow(-tileList.get(4).get(3).getSnow());
+        tileList.get(5).get(0).nullSnow();
+        tileList.get(4).get(3).nullSnow();
 
         tileItemMap = new HashMap<>();
         tilePlayerMap = new HashMap<>();

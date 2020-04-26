@@ -70,6 +70,10 @@ public abstract class Tile {
         Game.log.format("# Tile>ChangeSnow : Tile(%d, %d) snow level is: %d (it has been changed by %d much)\n", x, y, snow, thisMuch);
     }
 
+    public void nullSnow(){
+        snow = 0;
+    }
+
     /**
      * Returns the amount of snow
      * @return amount of snow (unit)
