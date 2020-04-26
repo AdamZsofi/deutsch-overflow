@@ -27,7 +27,7 @@ public class Tent extends Item{
     @Override
     public void used(Player p, Activity a){
         Tile t = PositionLUT.getInstance().getPosition(p);
-        if(a == Activity.putUpTent && !t.getIglooOn()){
+        if(a == Activity.putUpTent && !t.getIglooOn()&& t.getCapacity()>0){
             //TODO CHECK ITT NEM INKABB A TILE PUTONTNET FUGGVENYET KENE HIVI (pl snowyHolera ez igy nem jo
             t.putOnTent();
             p.workPoints--;
