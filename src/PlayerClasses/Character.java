@@ -1,12 +1,6 @@
 package PlayerClasses;
 
-import GlobalControllers.PositionLUT;
-import GlobalControllers.RoundController;
-import ItemClasses.Item;
 import TileClasses.Direction;
-import TileClasses.Tile;
-
-import static ItemClasses.ItemState.inHand;
 
 public abstract class Character {
     /**

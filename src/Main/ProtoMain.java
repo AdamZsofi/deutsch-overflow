@@ -37,10 +37,9 @@ public class ProtoMain {
      */
     public static void main(String[] args) {
         System.out.println("What mode do you want the prototype to run in?");
-        System.out.println("(1) Run all testfiles from the testfile directory and generate outputs");
-        System.out.println("(2) Start the game with the system input and output");
-        System.out.println("(3) Run a chosen testfile and generate output to system output");
-        System.out.println("(4) Run a chosen testfile and generate output to its corresponding output file");
+        System.out.println("(1) Start the game with the system input and output");
+        System.out.println("(2) Run a chosen testfile and generate output to system output");
+        System.out.println("(3) Run a chosen testfile and generate output to its corresponding output file");
 
         Scanner mainScanner = new Scanner(System.in); // scanning the mode and inputfile choices of the user
 
@@ -48,19 +47,10 @@ public class ProtoMain {
         // based on the choice of the user, fills the interpreter list
         switch(mainScanner.nextInt()) {
             case 1:
-                System.out.println("This will override the output files generated earlier, do you want to continue (y/N)?");
-                String dummy = mainScanner.nextLine();
-                if(mainScanner.nextLine().toLowerCase().equals("y")) {
-                    addAllTests();
-                }
-                else return;
-                // ha nem igent választ, befejezzük a futást
-                break;
-            case 2:
                 // Adds a system in/out interpreter
                 interpreters.add(new CommandInterpreter(System.in, System.out));
                 break;
-            case 3:
+            case 2:
                 // Adds a chosen test with the system output as the output
                 try {
                     ArrayList<File> testfiles = parseTestInputDirectory();
@@ -71,7 +61,7 @@ public class ProtoMain {
                     return;
                 }
                 break;
-            case 4:
+            case 3:
                 System.out.println("This will override the output files generated earlier, do you want to continue? (y/N)");
                 String dummy2 = mainScanner.nextLine();
                 if(mainScanner.nextLine().toLowerCase().equals("y")) {

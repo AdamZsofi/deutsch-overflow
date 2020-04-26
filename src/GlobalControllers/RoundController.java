@@ -10,7 +10,6 @@ import TileClasses.Direction;
 import TileClasses.Tile;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class RoundController {
 
@@ -143,7 +142,7 @@ public class RoundController {
     public void lose(String cause) {
         Game.log.format("You lose the game, %s\n", cause);
         Game.log.println("$ RoundController>lose : Game lose, ended");
-        System.exit(0);
+        System.exit(1);
     }
 
     /**
@@ -152,7 +151,7 @@ public class RoundController {
     public void win() {
         Game.log.println("You win the game, congratulation");
         Game.log.println("$ RoundController>win : Game won, ended");
-        System.exit(0);
+        System.exit(1);
     }
 
     /**

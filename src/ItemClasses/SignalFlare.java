@@ -31,7 +31,7 @@ public class SignalFlare {
      * Checks all player && all item on a Tile -> calls RoundController win() method
      * @param rc RoundController
      */
-    public void putTogether(RoundController rc){
+    public void putTogether(RoundController rc) {
         TileClasses.Tile t1 = PositionLUT.getInstance().getPosition(PlayerContainer.getInstance().getPlayer(0));
         int playerNum = PlayerContainer.getInstance().getPlayerNum();
 

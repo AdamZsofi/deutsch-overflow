@@ -13,7 +13,7 @@ public class Food extends Item{
      * @param p Player
      */
     @Override
-    public void pickedUp(Player p){
+    public void pickedUp(Player p) {
         PositionLUT.getInstance().setPosition(this, PositionLUT.getInstance().getTile(0,2));
         state = ItemState.frozen;
         p.ateFood();

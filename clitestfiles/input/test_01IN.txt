@@ -1,6 +1,7 @@
 StartGame
 deterministic
 0
+n
 PrintCharacterMap
 PrintPlayer
 PrintItemMap

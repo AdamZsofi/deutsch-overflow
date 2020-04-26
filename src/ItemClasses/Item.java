@@ -28,7 +28,7 @@ public abstract class Item {
      * Sets the state of the item to 'inHand'
      * @param Picker player, who calls the function
      */
-    public void pickedUp(Player Picker){
+    public void pickedUp(Player Picker) {
         state = ItemState.inHand;
         Game.log.format("# Item>pickedUp : Item (%s) state has changed to 'inHand'\n", this.toString());
     }

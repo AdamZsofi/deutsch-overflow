@@ -84,7 +84,8 @@ public class CommandInterpreter {
                 gameInstance = Game.startRandomGame(log, commandScanner.nextInt());
                 break;
         }
-        while(!endGame) {
+        boolean ended = false;
+        while(!ended) {
 
             // és itt jön a szép nagy switch case :D
             // TODO corresponding methods for every command (like startGame) should be implemented
@@ -239,7 +240,7 @@ public class CommandInterpreter {
                     gameInstance.passRound();
                     break;
                 case "endgame": // NOTE: this one is new, but its useful for automated CLI tests
-                    endGame = true;
+                    ended = true;
                     break;
                 default:
                     log.println("There is no such command");

@@ -6,9 +6,6 @@ import ItemClasses.*;
 import TileClasses.*;
 import TileClasses.Direction;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 /**
  * Class of Player
  * Functinalities:
@@ -93,7 +90,7 @@ public abstract class Player extends Character{
      * Called by Food, if its picked up. Food is automatically eaten if its picked up
      * Removes the Food from Player's hand and increments the bodyHeat of Player
      */
-    public void ateFood() {
+    public void ateFood() { // TODO ez igazából nem dob, mert thisMuch pozitív, kicsit hamis, de csak szépséghiba, ezért hagytam
         inHand = null;
         changeBodyHeat(1);
         Game.log.format("$ Player>ateFood : Player (PlayerId:%d) ate the Food \n", ID);
@@ -115,11 +112,12 @@ public abstract class Player extends Character{
      */
     public void changeBodyHeat(int thisMuch) {
         BodyHeat += thisMuch;
-        if(BodyHeat<=0){
+        if(thisMuch<0 && BodyHeat<=0){
             RoundController.getInstance().lose("Death");
         }
         Game.log.format("# Player>changeBodyHeat : Player (PlayerId:%d) bodyHeat is changed to %d (by %d much)\n", ID, BodyHeat, thisMuch);
     }
+
     /**
      * Called by DivingSuit, if its pickedUp (its automatically worn if its picked up)
      * Sets the diving suit to a specific variable, and takes out from the Player's hand
