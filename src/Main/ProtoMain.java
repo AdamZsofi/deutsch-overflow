@@ -22,7 +22,7 @@ public class ProtoMain {
     /**
      * Will be filled with interpreters - each of them corresponds to a test, running a distinct game instance
      */
-    static List<CommandInterpreter> interpreters = new ArrayList<CommandInterpreter>();
+    static CommandInterpreter interpreter;
     static final String inputFileDir = "./clitestfiles/input/";
     static final String outputFileDir = "./clitestfiles/output/";
 
@@ -48,7 +48,7 @@ public class ProtoMain {
         switch(mainScanner.nextInt()) {
             case 1:
                 // Adds a system in/out interpreter
-                interpreters.add(new CommandInterpreter(System.in, System.out));
+                interpreter = new CommandInterpreter(System.in, System.out);
                 break;
             case 2:
                 // Adds a chosen test with the system output as the output
@@ -83,7 +83,7 @@ public class ProtoMain {
                 return;
         }
 
-        for(CommandInterpreter interpreter : interpreters) { interpreter.waitingCommands(); }
+        interpreter.waitingCommands();
     }
 
     /**
@@ -102,7 +102,7 @@ public class ProtoMain {
         for(File testfile : testfiles) {
             try(InputStream inputStream = new FileInputStream(testfile);
                 PrintStream outputStream = new PrintStream(new FileOutputStream(createOutputFile(testfile)))) {
-                interpreters.add(new CommandInterpreter(inputStream, outputStream));
+                interpreter = new CommandInterpreter(inputStream, outputStream);
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -122,7 +122,7 @@ public class ProtoMain {
     static void addTest(File testfile, File outputfile) throws IOException {
         InputStream inputStream = new FileInputStream(testfile);
         PrintStream outputStream = new PrintStream(new FileOutputStream(outputfile));
-        interpreters.add(new CommandInterpreter(inputStream, outputStream));
+        interpreter = new CommandInterpreter(inputStream, outputStream);
     }
 
     /**
@@ -133,7 +133,7 @@ public class ProtoMain {
      */
     static void addTest(File testfile) throws IOException {
         InputStream inputStream = new FileInputStream(testfile);
-        interpreters.add(new CommandInterpreter(inputStream, System.out));
+        interpreter = new CommandInterpreter(inputStream, System.out);
     }
 
 
