@@ -127,8 +127,10 @@ public abstract class Tile {
      * Destroys Igloo on Tile (iglooOn = false)
      */
     public void destroyIgloo(){
-        iglooOn = false;
-        Game.log.format("# Tile>destroyIgloo : Igloo destroyed from Tile (%d, %d)'iglooOn=false'\n", x, y);
+        if(iglooOn){
+            iglooOn = false;
+            Game.log.format("# Tile>destroyIgloo : Igloo destroyed from Tile (%d, %d)'iglooOn=false'\n", x, y);
+        }
     }
 
     /**
