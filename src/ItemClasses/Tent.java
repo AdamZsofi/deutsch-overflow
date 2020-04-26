@@ -29,7 +29,8 @@ public class Tent extends Item{
         Tile t = PositionLUT.getInstance().getPosition(p);
         if(a == Activity.putUpTent && !t.getIglooOn()){
             //TODO CHECK ITT NEM INKABB A TILE PUTONTNET FUGGVENYET KENE HIVI (pl snowyHolera ez igy nem jo
-            t.tentOn=true;
+            t.putOnTent();
+            // t.tentOn=true;
             Game.log.println("$ Tent>used : Transaction 'puttingTent' was successful");
         } else {
             Game.log.format("! Tent>used : Activity is not 'putUpTent' or Tile has Igloo : hasIgloo=%s\n", t.getIglooOn() );

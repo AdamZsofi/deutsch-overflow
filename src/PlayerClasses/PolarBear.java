@@ -26,7 +26,7 @@ public class PolarBear extends Character{
             PositionLUT.getInstance().setPosition(this, next_tile);
             Game.log.println("$ PolarBear>step : Transaction 'PolarBearSteps' is completed");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("PolarBear can't go that way");
+            // System.out.println("PolarBear can't go that way");
             Game.log.format("! PolarBear>step : Sorry, PolarBear cannot go that way CAUGHT INDEX OUTOFBOUNDS EXCEPTION\n");
             return;
         }

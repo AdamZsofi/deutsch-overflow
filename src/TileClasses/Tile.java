@@ -18,7 +18,7 @@ public abstract class Tile {
      *  @param standingHere : the number of players currently standing on the tile (determined by the numOfPlayers on the Tile)
      *  @param snow : amount of snow currently on Tile
      *  @param iglooOn manages Igloo on Tile
-     *  @param tenOn manages Tent on Tile
+     *  @param tentOn manages Tent on Tile
      */
     protected int capacity;
     protected int standingHere;
@@ -130,11 +130,13 @@ public abstract class Tile {
      * Called by SnowStorm: tryStorm()
      * Destroys Igloo on Tile (iglooOn = false)
      */
-    public void destroyIgloo(){
+    public boolean destroyIgloo(){
         if(iglooOn){
             iglooOn = false;
             Game.log.format("# Tile>destroyIgloo : Igloo destroyed from Tile (%d, %d)'iglooOn=false'\n", x, y);
+            return true; // volt egy iglu, "sikeres destroy"
         }
+        else return false; // nem volt iglu rajta
     }
 
     /**
@@ -153,7 +155,7 @@ public abstract class Tile {
      */
     public void putOnTent(){
         tentOn=true;
-        RoundController.getInstance().tent.counter =PlayerContainer.getInstance().getPlayerNum();
+        RoundController.getInstance().tent.counter = PlayerContainer.getInstance().getPlayerNum();
         RoundController.getInstance().tent.x=x;
         RoundController.getInstance().tent.y=y;
         Game.log.format("Tile>putOnTent : Tent built on Tile (%d, %d) 'iglooOn=true'\n", x, y);
