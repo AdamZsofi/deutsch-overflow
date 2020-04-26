@@ -115,6 +115,9 @@ public abstract class Player extends Character{
      */
     public void changeBodyHeat(int thisMuch) {
         BodyHeat += thisMuch;
+        if(BodyHeat<=0){
+            RoundController.getInstance().lose("Death");
+        }
         Game.log.format("# Player>changeBodyHeat : Player (PlayerId:%d) bodyHeat is changed to %d (by %d much)\n", ID, BodyHeat, thisMuch);
     }
     /**
