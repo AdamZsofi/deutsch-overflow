@@ -205,9 +205,11 @@ public abstract class Player extends Character{
         }
 
         Tile position= PositionLUT.getInstance().getPosition(this);
-        position.changeSnow(-1);
-        Game.log.format("$ Player>clearSnow : Player (PlayerId:%d) cleared snow\n", ID);
-        workPoints--;
+        if(position.getSnow()>0) {
+            position.changeSnow(-1);
+            Game.log.format("$ Player>clearSnow : Player (PlayerId:%d) cleared snow\n", ID);
+            workPoints--;
+        }
 
         if(workPoints==0) {
             Game.log.format("# Player>clearSnow : Player (PlayerId:%d) has no more workingPoints\n", ID);
