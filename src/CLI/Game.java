@@ -28,6 +28,12 @@ public class Game {
      * Stores, if this game is deterministic or random.
      */
     static public boolean isDeterministic;
+
+    /**
+     * If this switch is on, then the storm can come
+     */
+    static public boolean stormy;
+
     /**
      * Stores the number of players.
      * The number of players is asked as input and
@@ -47,8 +53,7 @@ public class Game {
      * Initializes the game instance and starts the game
      * @author Zsófi
      */
-    private Game(boolean _isDeterministic, int _playerNum, int mapNum) {
-        isDeterministic = _isDeterministic;
+    private Game(int _playerNum, int mapNum) {
         playerNum = _playerNum;
         PlayerContainer.Initialize(playerNum, mapNum);
         RoundController.getInstance(); //letrehoz
@@ -57,13 +62,36 @@ public class Game {
     }
 
     /**
-     * Starts game, asks for a maximum of 2 arguments: is the game deterministic and if it is, how many players
+     * Sets the current (but static) states: isDeterministic=true and stormy
      * Then initializes the game instance and sets the output log to the given stream
+     * @param out              the log Stream of the Game
+     * @param playerNum        number of players in the game
+     * @param mapNum           there are two deterministic maps; this is used in a deterministic game
+     * @param _stormy          switch: deterministic games can have storms or no storms at all
+     * @return                 returns the new game instance
      * @author Zsófi
      */
-    public static Game startGame(PrintStream out, boolean isDeterministic, int playerNum, int mapNum) {
+    public static Game startDeterministicGame(PrintStream out, int playerNum, int mapNum, boolean _stormy) {
         log = out;
-        return new Game(isDeterministic, playerNum, mapNum);
+        isDeterministic = true;
+        stormy = _stormy;
+        return new Game(playerNum, mapNum);
+    }
+
+    /**
+     * Sets the current (but static) states: isDeterministic is false and stormy is true
+     * Then initializes the game instance and sets the output log to the given stream
+     * @param out              the log Stream of the Game
+     * @param playerNum        number of players in the game
+     * @return                 returns the new game instance
+     * @author Zsófi
+     */
+    public static Game startRandomGame(PrintStream out, int playerNum) {
+        log = out;
+        isDeterministic = false;
+        stormy = true;
+        // 0 is a dummy, initialization is based on isDeterministic and won't use this dummy in the random case
+        return new Game(playerNum, 0);
     }
 
     /**

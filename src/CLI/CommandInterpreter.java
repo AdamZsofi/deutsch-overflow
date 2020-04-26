@@ -73,11 +73,15 @@ public class CommandInterpreter {
         switch (commandScanner.nextLine().toLowerCase()) {
             case "deterministic":
                 log.println("Choose map (0 or 1)");
-                gameInstance = Game.startGame(log, true, 5, Integer.valueOf(commandScanner.nextLine()));
+                int map = commandScanner.nextInt();
+                log.println("Should the game have a storm after the last player's round? (y/n)");
+                commandScanner.nextLine(); // dummy
+                boolean stormy = commandScanner.nextLine().equals("y");
+                gameInstance = Game.startDeterministicGame(log, 5, map, stormy);
                 break;
             case "random":
                 log.println("How many players?");
-                gameInstance = Game.startGame(log, false, Integer.valueOf(commandScanner.nextLine()), 0);
+                gameInstance = Game.startRandomGame(log, commandScanner.nextInt());
                 break;
         }
         while(!endGame) {

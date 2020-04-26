@@ -403,4 +403,18 @@ public class PositionLUT {
         tilePolarBearMap.get(t).add(pb);//uj hely add
         polarbearTileMap.put(pb, t);//put folulirja az elozot
     }
+
+    /**
+     * @return the number of tiles in one row (max of x Coord + 1)
+     */
+    public int getTileRowSize() {
+        return tileList.size();
+    }
+
+    /**
+     * @return the number of tiles in one column (max of y Coord + 1)
+     */
+    public int getTileColumnSize() {
+        return tileList.get(0).size();
+    }
 }

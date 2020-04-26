@@ -14,9 +14,9 @@ public class SnowyHole extends Tile {
      * Sets Igloo parameter of Tile to FALSE (iglooOn = FALSE)
      */
     @Override
-    public void destroyIgloo(){
-        iglooOn = false;
+    public boolean destroyIgloo(){
         Game.log.format("! SnowyHole>destroyIgloo : SnowyHole (%d, %d) cannot have Igloo! Cannot destroy 'iglooOn=false'\n", x, y);
+        return false;
     }
 
     /**

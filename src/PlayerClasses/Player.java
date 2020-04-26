@@ -197,12 +197,10 @@ public abstract class Player extends Character{
      * Player clears snow
      * 1) Checks of the Player's hand has an item -> YES: it tries to clear snow with Shovel (1 unit of snow)
      * 2) (Another) unit of snow will be cleared from the Tile
-     * It also decrements of working points of the player
+     * It also decrements one working points from the player
      */
     //atirni protectedre
     public void clearSnow() {
-
-
         if (inHand != null) {
             if(inHand.getState()==ItemState.inHand){
                 inHand.used(this,Activity.clearingSnow);
@@ -254,7 +252,9 @@ public abstract class Player extends Character{
             return;
         }
         saveDirection = dir;
-        inHand.used(this,Activity.savingPeople);
+        if(inHand != null) {
+            inHand.used(this, Activity.savingPeople);
+        }
         workPoints--;
         if(workPoints==0) {
             Game.log.format("# Player>savePlayers : Player (PlayerId:%d) has no more workingPoints\n", ID);

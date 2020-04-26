@@ -72,21 +72,28 @@ public class RoundController {
         //boolean can_move=true;
         curID = (curID + 1) % PlayerContainer.getInstance().getPlayerNum();
         ss.tryStorm();
-        checkTent();
 
         if(curID == 0) { // end of whole round
             boolean step=false;
+            Direction dir = Direction.DOWN;
+            Game.log.println("# RoundController>endLastRound : PolarBear steps");
             do{
-                step=stepPolarbear();
-            }while(!step);
+                // det. játékban down-ból indulva óra iránnyal ellentétesen próbálkozunk
+                if(Game.isDeterministic) { step=stepPolarbear(dir); dir=Direction.valueOf((dir.getValue()+1)%4); }
+                else step=stepPolarbear();
+            } while(!step);
             int players_num;
-            Tile bearTile= PositionLUT.getInstance().getPosition(polarbear);
+            Tile bearTile = PositionLUT.getInstance().getPosition(polarbear);
             players_num = PositionLUT.pLUT.getPlayersOnTile(bearTile).size();
             if (players_num > 0) {
                 Game.log.println("! RoundController>endLastRound : Bear killed the players on Tile");
                 lose("Bear kills player");
             }
+            else {
+                Game.log.println("! RoundController>endLastRound : Bear has found no prey on his new Tile");
+            }
         }
+        checkTent(); // vihar után, hogy védjen a viharban
         Game.log.println("# RoundController>endLastRound : Round end ended");
         PlayerContainer.getInstance().getPlayer(curID).startRound();
     }
@@ -95,16 +102,35 @@ public class RoundController {
      * Polarbear steps
      * @author Ádám
      */
-    public boolean stepPolarbear(){
+    public boolean stepPolarbear() {
         Random r = new Random();
-        int direction;
+        Direction direction;
         Tile current_tile = PositionLUT.getInstance().getPosition(polarbear);
         Tile next_tile;
-        direction=r.nextInt(4);
-        polarbear.step(Direction.valueOf(direction));
+        direction = Direction.valueOf(r.nextInt(4));
+        polarbear.step(direction);
         try {
-            next_tile = current_tile.getNeighbour(Direction.valueOf(direction));
-        }catch (IndexOutOfBoundsException e){
+            next_tile = current_tile.getNeighbour(direction);
+        } catch (IndexOutOfBoundsException e){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Polarbear steps in the deterministic game
+     * @author Zsófi
+     */
+    public boolean stepPolarbear(Direction dir) {
+        Random r = new Random();
+        Direction direction;
+        Tile current_tile = PositionLUT.getInstance().getPosition(polarbear);
+        Tile next_tile;
+        direction=dir;
+        polarbear.step(direction);
+        try {
+            next_tile = current_tile.getNeighbour(direction);
+        } catch (IndexOutOfBoundsException e){
             return false;
         }
         return true;
@@ -142,10 +168,21 @@ public class RoundController {
      * Check the live of Tent. If the counter is 0, then tentOn parameter of Tile will change to false.
      */
     public void checkTent() {
+        if(tent==null) return; // a storm elpusztítja rögtön, de utána rc ezt még meghívja -> kell a check
         tent.counter--;
         if (tent.counter == 0) {
             Tile tile = PositionLUT.getInstance().getTile(tent.x, tent.y);
             tile.tentOn = false;
+            tent = null;
+            Game.log.println("RoundController>checkTent : Tent is destroyed (reason: was too old)");
         }
+    }
+
+    public void destroyTent() {
+        if(tent==null) return; // a storm elpusztítja rögtön, de utána rc ezt még meghívja -> kell a check
+        Tile tile = PositionLUT.getInstance().getTile(tent.x, tent.y);
+        tile.tentOn = false;
+        tent = null;
+        Game.log.println("RoundController>checkTent : Tent is destroyed (reason: storm)");
     }
 }

@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 /**
  * Test class for sequences
+ * @author Zsófi
  */
 public class ProtoMain {
     /**
@@ -32,6 +33,7 @@ public class ProtoMain {
      * The Command interpreter will wait for commands and forward them to the game instance
      * The loop, which enables the continous sampling of commands, is implemented in Command
      * Interpeter, not in main.
+     * @author Zsófi
      */
     public static void main(String[] args) {
         System.out.println("What mode do you want the prototype to run in?");
@@ -97,6 +99,7 @@ public class ProtoMain {
     /**
      * Parses the testfile's directory and adds an interpreter for every testfile and
      * sets the output to the corresponding test output files
+     * @author Zsófi
      */
     static void addAllTests() {
         ArrayList<File> testfiles;
@@ -124,6 +127,7 @@ public class ProtoMain {
      * @param testfile Input file of the to be started test
      * @param outputfile Output file of the to be started test
      * @throws IOException If there's a problem with creating the input/output streams
+     * @author Zsófi
      */
     static void addTest(File testfile, File outputfile) throws IOException {
         InputStream inputStream = new FileInputStream(testfile);
@@ -135,6 +139,7 @@ public class ProtoMain {
      * Creates an interpreter based on the given input with System.out as the output
      * @param testfile Input file of the to be started test
      * @throws IOException If there is a problem with creating the input stream
+     * @author Zsófi
      */
     static void addTest(File testfile) throws IOException {
         InputStream inputStream = new FileInputStream(testfile);
@@ -146,6 +151,7 @@ public class ProtoMain {
      * Parses the file input directory and creates a list of the test input files
      * (the input files are in the form: test_<TESTID>IN.txt)
      * @return list of files in the test input file directory
+     * @author Zsófi
      */
     private static ArrayList<File> parseTestInputDirectory() throws IOException {
         Stream<Path> walk = Files.walk(Paths.get(inputFileDir));
