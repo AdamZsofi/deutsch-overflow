@@ -5,10 +5,10 @@ n
 PassRound
 Step
 d
-PassRound
 PrintCharacterMap
 PrintPlayer
 SavePlayers
 s
 PrintCharacterMap
+PrintPlayer
 EndGame

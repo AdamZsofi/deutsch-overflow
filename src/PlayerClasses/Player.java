@@ -35,47 +35,9 @@ public abstract class Player extends Character{
     public void startRound() {
         workPoints = 4;
         Game.log.format("# Player>startRound : next Player is %d\n", ID);
-        // System.out.println("Waiting for player input...");
-        // TODO Ez a rész kb átkerült a Game és CommandInterpreterbe, Game methodjainak implementálásánál még jól jöhet, ezért majd akkor töröljük, ha azok készen vannak
-        /*
-        Tile position;
-        while(workPoints>0 && !inWater) {
-            System.out.println("Enter the activity:");
-            Scanner scanner = new Scanner(System.in);
-            int activity = scanner.nextInt();
-           // scanner.close();
-            switch (activity) {
-                case 0:
-                    step(Direction.valueOf(2));//left
-                    break;
-                case 1:
-                    position = PositionLUT.getInstance().getPosition(this);
-                    Item item = PositionLUT.getInstance().getItemOnTile(position).get(0);
-                    pickUp(item);
-                    break;
-                case 2:
-                    clearSnow();
-                    break;
-                case 3:
-                    position = PositionLUT.getInstance().getPosition(this);
-                    item = PositionLUT.getInstance().getItemOnTile(position).get(0);
-                    digItemUp(item);
-                    break;
-                case 4:
-                    savePlayers(Direction.valueOf(0));//up
-                    break;
-                case 5:
-                    putSignalTogether(RoundController.getInstance().sg);
-                case 6:
-                    passRound();
-                    break;
-                default:
-                    System.out.println("Invalid Activity number!");
-                    break;
-            }
-        }
-        passRound(); // ha elfogy a workPoint/vízbe esik, akkor automatikus pass
-        */
+
+        // check, if the player is freezing to death
+        if(inWater && wearing == null) { RoundController.getInstance().lose("A player froze in the water"); }
     }
 
     /**
@@ -84,7 +46,8 @@ public abstract class Player extends Character{
      */
     public void fallInWater() {
         inWater = true;
-        Game.log.format("# Player>fallInWater : Player (PlayerId:%d) fall in Water \n", ID);
+        Game.log.format("# Player>fallInWater : Player (PlayerId:%d) falls in Water \n", ID);
+        if(wearing==null) passRound();
     }
     /**
      * Called by Food, if its picked up. Food is automatically eaten if its picked up
@@ -113,7 +76,7 @@ public abstract class Player extends Character{
     public void changeBodyHeat(int thisMuch) {
         BodyHeat += thisMuch;
         if(thisMuch<0 && BodyHeat<=0){
-            RoundController.getInstance().lose("Death");
+            RoundController.getInstance().lose("Hypothermia");
         }
         Game.log.format("# Player>changeBodyHeat : Player (PlayerId:%d) bodyHeat is changed to %d (by %d much)\n", ID, BodyHeat, thisMuch);
     }
@@ -243,7 +206,7 @@ public abstract class Player extends Character{
      */
     //atirni protectedre
     public void savePlayers(Direction dir) {
-        Game.log.format("# Player>savePlayers : Player (PlayerId:%d) save started in direction:%s\n", ID, dir.toString());
+        Game.log.format("$ Player>savePlayers : Player (PlayerId:%d) save started in direction:%s\n", ID, dir.toString());
         if(dir==Direction.valueOf(4)) {
             Game.log.format("! Player>savePlayers : Player (PlayerId:%d) cannot rescue herself\n", ID);
             // System.out.println("You cannot rescue yourself");
@@ -251,13 +214,15 @@ public abstract class Player extends Character{
         }
         saveDirection = dir;
         if(inHand != null) {
+            Game.log.format("! Player>savePlayers : Player (PlayerId:%d) has no rope\n", ID);
             inHand.used(this, Activity.savingPeople);
         }
         workPoints--;
         if(workPoints==0) {
-            Game.log.format("# Player>savePlayers : Player (PlayerId:%d) has no more workingPoints\n", ID);
+            Game.log.format("! Player>savePlayers : Player (PlayerId:%d) has no more working points\n", ID);
             passRound();
         }
+        Game.log.format("$ Player>savePlayers : Player (PlayerId:%d)'s save ended\n", ID);
     }
 
     /**
@@ -268,7 +233,7 @@ public abstract class Player extends Character{
      */
     //atirni protectedre
     public void putSignalTogether(SignalFlare sg) {
-        Game.log.format("# Player>putSignalTogether : Player (PlayerId:%d) started putting together\n", ID);
+        Game.log.format("$ Player>putSignalTogether : Player (PlayerId:%d) started putting together\n", ID);
         sg.putTogether(RoundController.getInstance());
     }
 
@@ -293,7 +258,8 @@ public abstract class Player extends Character{
 
     @Override
     public void step(Direction dir) {
-            if(dir.getValue() == 4) {
+        Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' began\n", ID);
+        if(dir.getValue() == 4) {
                 // System.out.println("You stay where you were");
                 Game.log.format("! Player>step : Player (PlayerId:%d) player has chosen HERE for step\n", ID);
                 return;
@@ -316,7 +282,6 @@ public abstract class Player extends Character{
                 //    PositionLUT.getInstance().setPosition(player_item,next_tile);
                 //}
                 next_tile.steppedOn(this);
-                Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' is completed\n", ID);
             } catch (IndexOutOfBoundsException e) {
                 // System.out.println("You can't go that way");
                 Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(OutBound)\n", ID);

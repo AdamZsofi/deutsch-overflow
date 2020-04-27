@@ -3,6 +3,7 @@ package GlobalControllers;
 import CLI.Game;
 import ItemClasses.SignalFlare;
 import ItemClasses.Tent;
+import PlayerClasses.Player;
 import PlayerClasses.PolarBear;
 import PlayerClasses.PlayerContainer;
 import SnowStorm.SnowStorm;
@@ -63,76 +64,24 @@ public class RoundController {
 
 
     /**
-     * if end of whole round: polarbear steps
-     * storm comes with 30% odds
+     * When a player passes, this method is called
+     * It administrates the changes inbetween players, lets storm try once and then calls the next players round
+     * If it is the end of a whole round (the last player had the highest ID):
+     * polarbear steps
      */
     public void endLastRound() {
         Game.log.println("# RoundController>endLastRound : Round end started");
-        //boolean can_move=true;
         curID = (curID + 1) % PlayerContainer.getInstance().getPlayerNum();
         ss.tryStorm();
 
         if(curID == 0) { // end of whole round
-            boolean step=false;
-            Direction dir = Direction.DOWN;
-            Game.log.println("# RoundController>endLastRound : PolarBear steps");
-            do{
-                // det. játékban down-ból indulva óra iránnyal ellentétesen próbálkozunk
-                if(Game.isDeterministic) { step=stepPolarbear(dir); dir=Direction.valueOf((dir.getValue()+1)%4); }
-                else step=stepPolarbear();
-            } while(!step);
-            int players_num;
-            Tile bearTile = PositionLUT.getInstance().getPosition(polarbear);
-            players_num = PositionLUT.pLUT.getPlayersOnTile(bearTile).size();
-            if (players_num > 0) {
-                Game.log.println("! RoundController>endLastRound : Bear killed the players on Tile");
-                lose("Bear kills player");
-            }
-            else {
-                Game.log.println("! RoundController>endLastRound : Bear has found no prey on his new Tile");
-            }
+            Game.log.println("# RoundController>endLastRound : PolarBear goes to a hunt");
+            polarbear.hunt();
         }
         checkTent(); // vihar után, hogy védjen a viharban
         Game.log.println("# RoundController>endLastRound : Round end ended");
+
         PlayerContainer.getInstance().getPlayer(curID).startRound();
-    }
-
-    /**
-     * Polarbear steps
-     * @author Ádám
-     */
-    public boolean stepPolarbear() {
-        Random r = new Random();
-        Direction direction;
-        Tile current_tile = PositionLUT.getInstance().getPosition(polarbear);
-        Tile next_tile;
-        direction = Direction.valueOf(r.nextInt(4));
-        polarbear.step(direction);
-        try {
-            next_tile = current_tile.getNeighbour(direction);
-        } catch (IndexOutOfBoundsException e){
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Polarbear steps in the deterministic game
-     * @author Zsófi
-     */
-    public boolean stepPolarbear(Direction dir) {
-        Random r = new Random();
-        Direction direction;
-        Tile current_tile = PositionLUT.getInstance().getPosition(polarbear);
-        Tile next_tile;
-        direction=dir;
-        polarbear.step(direction);
-        try {
-            next_tile = current_tile.getNeighbour(direction);
-        } catch (IndexOutOfBoundsException e){
-            return false;
-        }
-        return true;
     }
 
     /**

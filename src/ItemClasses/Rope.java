@@ -24,19 +24,19 @@ public class Rope extends Item{
     @Override
     public void used(Player p, Activity a){
         if(a == Activity.savingPeople) {
-            Tile currentTile = PositionLUT.getInstance().getPosition(p); //static, kellene ismerni a PositionLUT peldanyt, singleton lehetne varázsolni?
-            Direction wateTile_dir = p.saveDirection;//nem a legszebb, át lehet később gondolni
+            Tile currentTile = PositionLUT.getInstance().getPosition(p);
+            Direction waterTile_dir = p.saveDirection;//nem a legszebb, át lehet később gondolni
             Tile waterTile;
             try {
-                waterTile = currentTile.getNeighbour(wateTile_dir);
-            }catch(IndexOutOfBoundsException e){
+                waterTile = currentTile.getNeighbour(waterTile_dir);
+            } catch(IndexOutOfBoundsException e){
                 p.workPoints++;
                 return;
             }
             ArrayList<Player> inWaterPlayers = PositionLUT.getInstance().getPlayersOnTile(waterTile);
             for (int count=0 ;count<inWaterPlayers.size();count++) { // Player iwp : inWaterPlayers rossz volt
-                int step_dir_value = wateTile_dir.getValue();
-                step_dir_value += (wateTile_dir.getValue()%2==0 )? 1:-1;
+                int step_dir_value = waterTile_dir.getValue();
+                step_dir_value += (waterTile_dir.getValue()%2==0 )? 1:-1;
                 Direction step_dir = Direction.valueOf(step_dir_value);//oda lép, ahonnan a segítség jött
                 inWaterPlayers.get(count).step(step_dir);
             }
