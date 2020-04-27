@@ -76,15 +76,15 @@ public class PlayerContainer {
         players.add(new Researcher(4));
         players.add(new Researcher(5));
 
-        players.get(1).inHand = new Rope();
-        players.get(1).inHand.diggedUp();
-        players.get(1).inHand.pickedUp(players.get(1));
+        players.get(2).inHand = new Rope();
+        players.get(2).inHand.diggedUp();
+        players.get(2).inHand.pickedUp(players.get(1));
         players.get(3).inHand = new Tent();
         players.get(3).inHand.diggedUp();
         players.get(3).inHand.pickedUp(players.get(3));
-        players.get(4).inHand = new Shovel();
-        players.get(4).inHand.diggedUp();
-        players.get(4).inHand.pickedUp(players.get(4));
+        players.get(5).inHand = new Shovel();
+        players.get(5).inHand.diggedUp();
+        players.get(5).inHand.pickedUp(players.get(4));
     }
 
     private static void putTogetherInit(){
