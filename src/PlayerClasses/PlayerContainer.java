@@ -125,7 +125,7 @@ public class PlayerContainer {
      * @return player of pid
      */
     public Player getPlayer(int pid) { // pid = players-ben az adott player indexe
-        if(pid>playerNum) {
+        if(pid>=playerNum) {
             Game.log.format("! PlayerContainer>getPlayer : Sorry, that playerID does not exist THROWN NULLPOINTER EXCEPTION", pid);
             throw new NullPointerException("Player with that pid does not exist");
         }
