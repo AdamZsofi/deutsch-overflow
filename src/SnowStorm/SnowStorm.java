@@ -33,8 +33,6 @@ public class SnowStorm {
                 values.add(PositionLUT.getInstance().getTile(0, 5));
                 stormTiles(values);
                 Game.log.println("# SnowStorm>tryStorm : The storm is done");
-            } else {
-                Game.log.println("# SnowStorm>tryStorm : SnowStorm is NOT coming");
             }
         }
         else if(!Game.isDeterministic) {

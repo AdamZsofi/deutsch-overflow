@@ -10,6 +10,12 @@ PassRound
 PrintCharacterMap
 PrintPlayer
 PrintSnowTileMap
+PrintTile
+4
+3
 ClearSnow
 PrintSnowTileMap
+PrintTile
+4
+3
 EndGame

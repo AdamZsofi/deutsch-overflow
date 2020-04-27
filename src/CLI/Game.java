@@ -191,7 +191,7 @@ public class Game {
         log.format("Tile(%d, %d) > ", x, y);
         log.print("Capacity: ");
         log.print(currentTile.getCapacity());
-        log.printf(", Snow: %d", currentTile.getSnow());
+        log.format(", Snow: %d\n", currentTile.getSnow());
     }
 
     /**

@@ -1,4 +1,4 @@
-package test.GlobalControllers;
+package JUnitTest.GlobalControllers;
 
 import CLI.Game;
 import GlobalControllers.PositionLUT;

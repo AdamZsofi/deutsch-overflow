@@ -47,7 +47,13 @@ public abstract class Player {
     public void fallInWater() {
         inWater = true;
         Game.log.format("# Player>fallInWater : Player (PlayerId:%d) falls in Water \n", ID);
-        if(wearing==null) passRound();
+        if(wearing==null) {
+            Game.log.format("# Player>fallInWater : Player (PlayerId:%d) has to wait for rescue \n", ID);
+            passRound();
+        }
+        else {
+            Game.log.format("# Player>fallInWater : Player (PlayerId:%d) has a diving suit, no worries \n", ID);
+        }
     }
     /**
      * Called by Food, if its picked up. Food is automatically eaten if its picked up
@@ -74,11 +80,11 @@ public abstract class Player {
      * @param thisMuch thisMUCH (+/-)
      */
     public void changeBodyHeat(int thisMuch) {
+        Game.log.format("# Player>changeBodyHeat : Player (PlayerId:%d) bodyHeat is changed to %d (by %d much)\n", ID, BodyHeat+thisMuch, thisMuch);
         BodyHeat += thisMuch;
-        if(thisMuch<0 && BodyHeat<=0){
+        if(BodyHeat==0){
             RoundController.getInstance().lose("Hypothermia");
         }
-        Game.log.format("# Player>changeBodyHeat : Player (PlayerId:%d) bodyHeat is changed to %d (by %d much)\n", ID, BodyHeat, thisMuch);
     }
 
     /**

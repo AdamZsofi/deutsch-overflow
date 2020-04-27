@@ -15,14 +15,12 @@ Step
 s
 Step
 d
-PassRound
 Step
 d
 PrintCharacterMap
 Step
 d
 PrintCharacterMap
-PassRound
 SavePlayers
 s
 PrintCharacterMap
