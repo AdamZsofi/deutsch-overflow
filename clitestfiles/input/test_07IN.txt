@@ -8,7 +8,10 @@ DigItemUp
 PrintItemMap
 PassRound
 Step
-s
+d
 PrintPlayer
 PassRound
-EndGame
+PassRound
+PassRound
+PassRound
+PassRound

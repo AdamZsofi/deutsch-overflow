@@ -98,7 +98,7 @@ public class RoundController {
      * Win of game -> System exit
      */
     public void win() {
-        Game.log.println("You win the game, congratulation");
+        Game.log.println("You win the game, Congratulations!");
         Game.log.println("$ RoundController>win : Game won, ended");
         System.exit(1);
     }

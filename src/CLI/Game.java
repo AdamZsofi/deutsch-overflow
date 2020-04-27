@@ -185,25 +185,13 @@ public class Game {
      * Writes out the Information about tables
      * @author Ádám
      */
-    public void printTile() {
+    public void printTile(int x, int y) {
         Tile bearTile = PositionLUT.getInstance().getPosition(getInstance().polarbear);
-        for (int y = 5; y >= 0; y--) {
-            for(int x = 0; x < 6; x++){
-                Tile currentTile = PositionLUT.getInstance().getTile(x,y);
-                log.print("[ C:");
-                log.print(currentTile.getCapacity());
-                log.print(", S:"+currentTile.getSnow());
-                int count=0;
-                for(Player p : PositionLUT.getInstance().getPlayersOnTile(currentTile)) {
-                    count++;
-                }
-                log.print(", SumP:"+count);
-                if(currentTile.equals(bearTile))
-                    log.print(", "+getInstance().polarbear.getShortName());
-                log.print("]");
-            }
-            log.println();
-        }
+        Tile currentTile = PositionLUT.getInstance().getTile(x,y);
+        log.format("Tile(%d, %d) > ", x, y);
+        log.print("Capacity: ");
+        log.print(currentTile.getCapacity());
+        log.printf(", Snow: %d", currentTile.getSnow());
     }
 
     /**

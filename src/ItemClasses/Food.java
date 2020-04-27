@@ -4,6 +4,8 @@ import CLI.Game;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 
+import java.util.Random;
+
 public class Food extends Item{
 
     /**
@@ -14,7 +16,7 @@ public class Food extends Item{
      */
     @Override
     public void pickedUp(Player p) {
-        PositionLUT.getInstance().setPosition(this, PositionLUT.getInstance().getTile(0,2));
+        PositionLUT.getInstance().setPosition(this, PositionLUT.getInstance().getTile(0, 2));
         state = ItemState.frozen;
         p.ateFood();
         Game.log.println("$ Food>pickedUp : Transaction 'pickUp' and 'ateFood' was successful");

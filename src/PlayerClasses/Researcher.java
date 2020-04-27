@@ -27,7 +27,7 @@ public class Researcher extends Player {
         Tile checkedTile = thisTile.getNeighbour(dir);
         int capacity = checkedTile.getCapacity();
         Game.log.println("$ Researcher>detectCapacity : Transaction 'detectCapacity' is completed");
-        System.out.println("Tile capacity: "+capacity);
+        System.out.println("! Researcher>detectCapacity : Tile capacity: "+capacity);
     }
 
     public String getShortName() {
