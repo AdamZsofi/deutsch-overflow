@@ -50,7 +50,7 @@ public class SnowStorm {
                 x = rand.nextInt(PositionLUT.getInstance().getTileRowSize());
                 y = rand.nextInt(PositionLUT.getInstance().getTileColumnSize());
                 Tile t = PositionLUT.getInstance().getTile(x,y);
-                if(values.contains(t))
+                if(!values.contains(t))
                     values.add(t);
             } while(values.size()<4);
             stormTiles(values);
