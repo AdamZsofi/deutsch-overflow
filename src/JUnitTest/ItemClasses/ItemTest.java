@@ -1,4 +1,4 @@
-package test.ItemClasses;
+package JUnitTest.ItemClasses;
 
 import CLI.Game;
 import ItemClasses.Item;

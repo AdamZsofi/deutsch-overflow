@@ -33,8 +33,6 @@ public class SnowStorm {
                 values.add(PositionLUT.getInstance().getTile(0, 5));
                 stormTiles(values);
                 Game.log.println("# SnowStorm>tryStorm : The storm is done");
-            } else {
-                Game.log.println("# SnowStorm>tryStorm : SnowStorm is NOT coming");
             }
         }
         else if(!Game.isDeterministic) {
@@ -52,7 +50,7 @@ public class SnowStorm {
                 x = rand.nextInt(PositionLUT.getInstance().getTileRowSize());
                 y = rand.nextInt(PositionLUT.getInstance().getTileColumnSize());
                 Tile t = PositionLUT.getInstance().getTile(x,y);
-                if(values.contains(t))
+                if(!values.contains(t))
                     values.add(t);
             } while(values.size()<4);
             stormTiles(values);
