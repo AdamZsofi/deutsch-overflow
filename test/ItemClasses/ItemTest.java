@@ -6,9 +6,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Testclass for the methods of Item
+ */
 public class ItemTest {
 
     @Test
+    /**
+     * Tests the methods of Item which change the state of the item
+     */
     public void itemStateCheck() {
         Game.log=System.out;
         Item i=new Shovel();

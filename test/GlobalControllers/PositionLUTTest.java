@@ -10,9 +10,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Testclass for the methods of PositionLUT
+ */
 public class PositionLUTTest {
     static PositionLUT pl;
     @Before
+    /**
+     * Initialises PositionLUT, PlayerContainer and Game before the tests with deterministic init
+     */
     public static void init(){
         Game.log=System.out;
         Game.isDeterministic=true;
@@ -22,6 +28,9 @@ public class PositionLUTTest {
     }
 
     @Test
+    /**
+     * Tests the methods of pLUT that deal with items
+     */
     public void itemPositionTest(){
         Tile t1=pl.getTile(0, 5);
         Tile t2=pl.getTile(4, 4);
@@ -36,6 +45,9 @@ public class PositionLUTTest {
     }
 
     @Test
+    /**
+     * Tests the methods of pLUT that deal with players
+     */
     public void playerPositionTest(){
         Tile t1=pl.getTile(0, 5);
         Tile t2=pl.getTile(4, 4);

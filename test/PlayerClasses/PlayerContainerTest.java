@@ -7,10 +7,16 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Testclass for the methods of PlayerContainer
+ */
 public class PlayerContainerTest {
     static PlayerContainer pc;
 
     @BeforeClass
+    /**
+     * Initialises PlayerContainer and Game before the tests with deterministic init
+     */
     public static void init(){
         Game.log=System.out;
         Game.isDeterministic=true;
@@ -19,14 +25,19 @@ public class PlayerContainerTest {
     }
 
     @Test
+    /**
+     * Tests the getPlayer method of PlayerContainer
+     */
     public void getPlayerTest() {
-
         assertEquals(6, pc.getPlayerNum());
         for(int i=0;i<pc.getPlayerNum();i++){
-            pc.getPlayer(i);
+            assertNotNull(pc.getPlayer(i));
         }
     }
 
+    /**
+     *Tests, that the getPlayer method throws an exception for invalid pID
+     */
     @Test(expected=NullPointerException.class)
     public void getPlayerExceptionTest(){
         pc.getPlayer(pc.getPlayerNum());
