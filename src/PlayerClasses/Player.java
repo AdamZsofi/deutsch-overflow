@@ -301,6 +301,39 @@ public abstract class Player {
                 passRound();
             }
     }
+
+    public void pullOut(Direction dir) {
+        Game.log.format("$ Player>pullOut : Player (PlayerId:%d) Transaction 'pulling out' began\n", ID);
+        if(dir.getValue() == 4) {
+            // System.out.println("You stay where you were");
+            Game.log.format("! Player>pullOut : Player (PlayerId:%d) player has chosen HERE for pullOut\n", ID);
+            return;
+        }
+        // Player current_player= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
+
+        Tile position= PositionLUT.getInstance().getPosition(this);
+        try {
+            Tile next_tile = position.getNeighbour(dir);
+            Tile bear_position= PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
+            if(next_tile.equals(bear_position)){
+                Game.log.format("! Player>pullOut : Player (PlayerId:%d) cannot pullOut in that direction(PolarBear)\n", ID);
+                return;
+            }
+            position.steppedOff(dir);
+            PositionLUT.getInstance().setPosition(this, next_tile);
+            //a kézben tárolt item nincs a PosLUT ban!!!
+            //Item player_item = this.inHand;
+            //if(this.inHand!=null){
+            //    PositionLUT.getInstance().setPosition(player_item,next_tile);
+            //}
+            next_tile.steppedOn(this);
+        } catch (IndexOutOfBoundsException e) {
+            // System.out.println("You can't go that way");
+            Game.log.format("! Player>pullOut : Player (PlayerId:%d) cannot pullOut in that direction(OutBound)\n", ID);
+            return;
+        }
+    }
+
     public abstract String getInformation();
     public abstract String getShortName();
 }
