@@ -12,4 +12,4 @@ do
 	printf "3\ny\n%d" ${i} | java -classpath out/production/deutsch-overflow/ Main.ProtoMain
 done
 
-diff -s -r ./clitestfiles/output ./clitestfiles/required
+diff -s -r $PWD/clitestfiles/output $PWD/clitestfiles/required
