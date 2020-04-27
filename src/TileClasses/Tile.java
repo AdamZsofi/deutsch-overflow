@@ -32,8 +32,12 @@ public abstract class Tile {
         this.x = x;
         this.y = y;
         iglooOn = false;
-        Random r = new Random();
-        snow = r.nextInt(4) + 1 ;// snow lehet: 1, 2, 3, 4
+        if(Game.isDeterministic){
+            snow = (x+y)%4;
+        }else {
+            Random r = new Random();
+            snow = r.nextInt(4) + 1;// snow lehet: 1, 2, 3, 4
+        }
         capacity = PlayerContainer.getInstance().getPlayerNum(); // ennél nagyobb capacity-nek nincs értelme
         standingHere = 0;
     }
