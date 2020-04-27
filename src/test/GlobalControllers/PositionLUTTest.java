@@ -1,6 +1,7 @@
-package GlobalControllers;
+package test.GlobalControllers;
 
 import CLI.Game;
+import GlobalControllers.PositionLUT;
 import ItemClasses.*;
 import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
@@ -19,7 +20,7 @@ public class PositionLUTTest {
     /**
      * Initialises PositionLUT, PlayerContainer and Game before the tests with deterministic init
      */
-    public static void init(){
+    public void init(){
         Game.log=System.out;
         Game.isDeterministic=true;
         PlayerContainer.Initialize(6, 0);

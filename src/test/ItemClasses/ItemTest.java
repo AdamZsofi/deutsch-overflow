@@ -1,6 +1,9 @@
-package ItemClasses;
+package test.ItemClasses;
 
 import CLI.Game;
+import ItemClasses.Item;
+import ItemClasses.ItemState;
+import ItemClasses.Shovel;
 import PlayerClasses.Researcher;
 import org.junit.Test;
 
@@ -18,7 +21,7 @@ public class ItemTest {
     public void itemStateCheck() {
         Game.log=System.out;
         Item i=new Shovel();
-        assertTrue(i.getState()==ItemState.frozen);
+        assertTrue(i.getState()== ItemState.frozen);
         i.diggedUp();
         assertTrue(i.getState()==ItemState.thrownDown);
         i.pickedUp(new Researcher(0));
