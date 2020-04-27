@@ -15,8 +15,4 @@ PickUp
 0
 PrintPlayer
 PrintItemMap
-step
-a
-step
-a
 EndGame

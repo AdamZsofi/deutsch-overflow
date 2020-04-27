@@ -33,12 +33,15 @@ public class Rope extends Item{
                 p.workPoints++;
                 return;
             }
-            ArrayList<Player> inWaterPlayers = PositionLUT.getInstance().getPlayersOnTile(waterTile);
-            for (int count=0 ;count<inWaterPlayers.size();count++) { // Player iwp : inWaterPlayers rossz volt
-                int step_dir_value = waterTile_dir.getValue();
-                step_dir_value += (waterTile_dir.getValue()%2==0 )? 1:-1;
-                Direction step_dir = Direction.valueOf(step_dir_value);//oda lép, ahonnan a segítség jött
-                inWaterPlayers.get(count).pullOut(step_dir);
+
+            int step_dir_value = waterTile_dir.getValue();
+            step_dir_value += (waterTile_dir.getValue()%2==0 )? 1:-1;
+            Direction step_dir = Direction.valueOf(step_dir_value);//oda lép, ahonnan a segítség jött
+
+            Player toSave;
+            while(PositionLUT.getInstance().getPlayersOnTile(waterTile).size()!=0) {
+                toSave = PositionLUT.getInstance().getPlayersOnTile(waterTile).get(0);
+                toSave.pullOut(step_dir);
             }
             Game.log.println("$ Rope>used : Transaction 'savingPeople' was successful");
         } else {

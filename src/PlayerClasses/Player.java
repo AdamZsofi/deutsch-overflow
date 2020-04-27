@@ -52,6 +52,7 @@ public abstract class Player {
             passRound();
         }
         else {
+            inWater = false; // Technically még maradhat a vízben, de nincs veszélyben!
             Game.log.format("# Player>fallInWater : Player (PlayerId:%d) has a diving suit, no worries \n", ID);
         }
     }
@@ -220,10 +221,12 @@ public abstract class Player {
         }
         saveDirection = dir;
         if(inHand != null) {
-            Game.log.format("! Player>savePlayers : Player (PlayerId:%d) has no rope\n", ID);
             inHand.used(this, Activity.savingPeople);
+            workPoints--;
         }
-        workPoints--;
+        else {
+            Game.log.format("! Player>savePlayers : Player (PlayerId:%d) has no rope\n", ID);
+        }
         if(workPoints==0) {
             Game.log.format("! Player>savePlayers : Player (PlayerId:%d) has no more working points\n", ID);
             passRound();
@@ -312,30 +315,25 @@ public abstract class Player {
         Game.log.format("$ Player>pullOut : Player (PlayerId:%d) Transaction 'pulling out' began\n", ID);
         if(dir.getValue() == 4) {
             // System.out.println("You stay where you were");
-            Game.log.format("! Player>pullOut : Player (PlayerId:%d) player has chosen HERE for pullOut\n", ID);
+            Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) player has chosen HERE for pullOut\n", ID);
             return;
         }
-        // Player current_player= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
 
         Tile position= PositionLUT.getInstance().getPosition(this);
         try {
             Tile next_tile = position.getNeighbour(dir);
             Tile bear_position= PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
             if(next_tile.equals(bear_position)){
-                Game.log.format("! Player>pullOut : Player (PlayerId:%d) cannot pullOut in that direction(PolarBear)\n", ID);
+                Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) cannot pullOut in that direction(PolarBear)\n", ID);
                 return;
             }
             position.steppedOff(dir);
             PositionLUT.getInstance().setPosition(this, next_tile);
-            //a kézben tárolt item nincs a PosLUT ban!!!
-            //Item player_item = this.inHand;
-            //if(this.inHand!=null){
-            //    PositionLUT.getInstance().setPosition(player_item,next_tile);
-            //}
             next_tile.steppedOn(this);
+            inWater = false;
         } catch (IndexOutOfBoundsException e) {
             // System.out.println("You can't go that way");
-            Game.log.format("! Player>pullOut : Player (PlayerId:%d) cannot pullOut in that direction(OutBound)\n", ID);
+            Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) cannot pullOut in that direction(OutBound)\n", ID);
             return;
         }
     }

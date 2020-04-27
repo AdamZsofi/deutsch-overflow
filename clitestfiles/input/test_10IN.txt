@@ -18,9 +18,6 @@ d
 Step
 d
 PrintCharacterMap
-Step
-d
-PrintCharacterMap
 SavePlayers
 s
 PrintCharacterMap
