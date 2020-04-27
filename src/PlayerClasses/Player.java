@@ -11,7 +11,7 @@ import TileClasses.Direction;
  * Functinalities:
  * -
  */
-public abstract class Player extends Character{
+public abstract class Player {
     protected int BodyHeat;
     protected int ID;
     public int workPoints;
@@ -256,7 +256,15 @@ public abstract class Player extends Character{
         inHand = null;
     }
 
-    @Override
+
+    /**
+     * Realises stepping of a Player, changes the position of Player in PositionLUT
+     * Error handling: if caller(Player) would like to step to a Tile where is a PolarBear: "Dangerous Direction" error message
+     * Error handling: if direction given is HERE: "You stay where you were" error message
+     * Error handling: if there isn't Tile in given direction: "You can't go that way" error message
+     * Error message != Exception!
+     * @param dir Direction where to step
+     */
     public void step(Direction dir) {
         Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' began\n", ID);
         if(dir.getValue() == 4) {
@@ -294,4 +302,5 @@ public abstract class Player extends Character{
             }
     }
     public abstract String getInformation();
+    public abstract String getShortName();
 }
