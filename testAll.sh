@@ -11,3 +11,5 @@ for i in 1 2 3 4 5 6 7 8 9 10 11 12 13
 do
 	printf "3\ny\n%d" ${i} | java -classpath out/production/deutsch-overflow/ Main.ProtoMain
 done
+
+diff -s -r /clitestfiles/output /clitestfiles/required
