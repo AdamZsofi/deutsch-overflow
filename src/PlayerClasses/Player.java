@@ -49,7 +49,7 @@ public abstract class Player {
         Game.log.format("# Player>fallInWater : Player (PlayerId:%d) falls in Water \n", ID);
         if(wearing==null) {
             Game.log.format("# Player>fallInWater : Player (PlayerId:%d) has to wait for rescue \n", ID);
-            passRound();
+            passRound(); // ha beszakadnak, akkor is csak az passzol, aki éppen volt, többen nem
         }
         else {
             inWater = false; // Technically még maradhat a vízben, de nincs veszélyben!
@@ -217,8 +217,10 @@ public abstract class Player {
      * Calls the endLastRound() function of RoundController
      */
     public void passRound() {
-        Game.log.format("# Player>passRound : Player (PlayerId:%d) passed round\n", ID);
-        RoundController.getInstance().endLastRound();
+        if(ID==RoundController.getInstance().getcurID()) {
+            Game.log.format("# Player>passRound : Player (PlayerId:%d) passed round\n", ID);
+            RoundController.getInstance().endLastRound();
+        }
     }
 
     /**

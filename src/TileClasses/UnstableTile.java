@@ -42,9 +42,12 @@ public class UnstableTile extends Tile {
             Game.log.format("# Tile>steppedOn : Player stepped on Tile (%d, %d) capacity %d is not enough for %d players\n", x, y, capacity, standingHere);
             Tile t = PositionLUT.getInstance().getPosition(p);
             ArrayList<Player> players = PositionLUT.getInstance().getPlayersOnTile(t);
-            for (Player player: players) {
-                player.fallInWater();
+            for (Player player : players) {
+                // az utoljára rálépő a current player, aki passzolni is fog, ezért o esik bele utoljára, hogy kor vege elott lemenjen a beeses
+                if(player!=p)
+                    player.fallInWater();
             }
+            p.fallInWater();
         } else {
             Game.log.format("# Tile>steppedOn : Player stepped on Tile (%d, %d) and standingHere changed to %d\n", x, y, standingHere);
         }

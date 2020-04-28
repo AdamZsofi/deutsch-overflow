@@ -21,7 +21,6 @@ public class RoundController {
     public PolarBear polarbear;
     public Tent tent;
 
-
     /**
      * Gives back a reference to the RoundController
      * @return RoundController
@@ -32,8 +31,6 @@ public class RoundController {
         }
         return rc;
     }
-
-
 
     private RoundController() {
         ss = new SnowStorm();
@@ -51,7 +48,6 @@ public class RoundController {
         Game.log.format("# RoundController>init : RoundController initialised by %d players\n", playerNum);
         curID = 0;
     }
-
 
     /**
      * When a player passes, this method is called
