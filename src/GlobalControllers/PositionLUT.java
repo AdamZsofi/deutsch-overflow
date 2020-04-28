@@ -277,6 +277,12 @@ public class PositionLUT {
         int y = random.nextInt(6);
         polarbearTileMap.put(RoundController.getInstance().polarbear, getTile(x, y));//akarhol lehet, vízben is
         spawnMatrix[y][x] = 0;
+
+        for(int yy =0 ; yy < 6; yy++){
+            for(int xx = 0; xx <6; xx++){
+                tilePolarBearMap.put(getTile(xx, yy), new ArrayList<>());
+            }
+        }
         ArrayList<PolarBear> bearList = new ArrayList<>();
         bearList.add(RoundController.getInstance().polarbear);
         tilePolarBearMap.put(getTile(x, y),bearList);
