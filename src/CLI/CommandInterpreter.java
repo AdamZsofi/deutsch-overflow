@@ -80,8 +80,13 @@ public class CommandInterpreter {
                 gameInstance = Game.startDeterministicGame(log, 5, map, stormy);
                 break;
             case "random":
-                log.println("How many players?");
-                gameInstance = Game.startRandomGame(log, commandScanner.nextInt());
+                log.println("How many players? (min. 3)");
+                int numOfPlayers = commandScanner.nextInt();
+                if(numOfPlayers < 3) {
+                    numOfPlayers = 3;
+                    log.println("Number of players has a minimum of 3; number of players is set to 3");
+                }
+                gameInstance = Game.startRandomGame(log, numOfPlayers);
                 commandScanner.nextLine(); // dummy
                 break;
         }
