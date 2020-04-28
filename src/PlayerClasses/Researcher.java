@@ -22,12 +22,17 @@ public class Researcher extends Player {
     public void detectCapacity(Direction dir) {
         Game.log.format("# Researcher>detectCapacity started by Player %d\n", ID);
 
-        //TODO getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
-        Tile thisTile = PositionLUT.getInstance().getPosition(this);
-        Tile checkedTile = thisTile.getNeighbour(dir);
-        int capacity = checkedTile.getCapacity();
-        Game.log.println("$ Researcher>detectCapacity : Transaction 'detectCapacity' is completed");
-        System.out.println("! Researcher>detectCapacity : Tile capacity: "+capacity);
+        try {
+            Tile thisTile = PositionLUT.getInstance().getPosition(this);
+            Tile checkedTile = thisTile.getNeighbour(dir);
+            int capacity = checkedTile.getCapacity();
+            Game.log.println("$ Researcher>detectCapacity : Transaction 'detectCapacity' is completed");
+            System.out.println("! Researcher>detectCapacity : Tile capacity: " + capacity);
+        }
+        catch(IndexOutOfBoundsException e){
+            Game.log.format("! Researcher>detectCapacity : No tile in that direction(OutBound)\n");
+            return;
+        }
     }
 
     public String getShortName() {
