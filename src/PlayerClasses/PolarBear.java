@@ -28,7 +28,6 @@ public class PolarBear {
             PositionLUT.getInstance().setPosition(this, next_tile);
             Game.log.println("$ PolarBear>step : Transaction 'PolarBearSteps' is completed");
         } catch (IndexOutOfBoundsException e) {
-            // System.out.println("PolarBear can't go that way");
             Game.log.format("! PolarBear>step : PolarBear cannot go that way\n");
             throw e;
         }
@@ -66,7 +65,7 @@ public class PolarBear {
     public void hunt() {
         // bear steps
         // this part is almost the same, as randomStep, but without the random part;
-        // we won't need the deterministic parts in the game (only for testing) and this way it is easy to take out from code
+        // we won't need the deterministic parts in the game (only for testing)
         if(Game.isDeterministic) {
             Direction direction = Direction.DOWN;
             boolean stepped = false;

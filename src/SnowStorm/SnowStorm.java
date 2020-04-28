@@ -28,7 +28,7 @@ public class SnowStorm {
             if (RoundController.getInstance().getcurID() == 0) { // 0, mert storm előtt már változik a curID
                 Game.log.println("# SnowStorm>tryStorm : SnowStorm is coming");
                 // tent és igloo rombolás, tent(2,5), igloo(0,0)
-                // játékos sebzés -> ha már elfogyott a Heim a fejük felől (brute force a stormos teszt, sok storm jön
+                // játékos sebzés -> ha már elfogyott a Heim a fejük felől
                 values.add(PositionLUT.getInstance().getTile(2, 3));
                 values.add(PositionLUT.getInstance().getTile(0, 5));
                 stormTiles(values);

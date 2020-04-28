@@ -20,34 +20,24 @@ public class RoundController {
     public SnowStorm ss;
     public PolarBear polarbear;
     public Tent tent;
-    //public Item it; //ez itt ami a játékos kezében van?
+
 
     /**
      * Gives back a reference to the RoundController
      * @return RoundController
      */
     public static RoundController getInstance() {
-        // paraméterek - mi az, amit kap, mi az, amit magának hoz létre? (Kb mi az, amit posLUT és mi az, amit ő hoz létre)
-        // Megj.: Ha bármit kap paraméterben, akkor kell egy init fgv és egy getInstance külön, ahol getInstance nem kap paramétert
-        // hogy pl. Player működését itt a paraméterek ne nyírják ki
-        //egyenlore nem latom hogy lenne külon
         if (rc == null) {
             rc = new RoundController();
         }
         return rc;
     }
 
-    /*
-    public static RoundController initializeInstance() { //ilyen formában összevonható a getInstance-val, nem kap parametert
-        if(rc == null) {
-            rc = new RoundController();
-        }
-        return rc;
-    }*/
+
 
     private RoundController() {
         ss = new SnowStorm();
-        sg = new SignalFlare(); //feltölti itemekkel a sajat ArrrayList-ét, posLUT initnél mapon is ott lesz.
+        sg = new SignalFlare(); //feltölti itemekkel a sajat ArrayList-ét, posLUT initnél mapon is ott lesz.
         polarbear= new PolarBear();
         tent = new Tent();
     }

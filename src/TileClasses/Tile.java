@@ -121,11 +121,7 @@ public abstract class Tile {
                 Game.log.println("! Tile>getNeighbour: returned HERE");
                 return this;
         }
-        // Trükk: nem itt kéne lekezelni, ha nincs dir irányba tile, hanem ott, ahol a player input jön (IControllable)
-        // Indok: Itt ha újrahívnám ezt a fgv-t, az könnyen végtelen rekurzióba hajszolhatná
-        // viszont ha csak pl this-t visszaadok és nem kezelünk semmit feljebb, akkor olyan hibák jöhetnek ki, mint
-        // levonódik egy workPoint, de egy helyben marad a player, stb.
-        // vagy egyszerűen nincs lehetősége arra lépni a játékosnak?
+        // nem itt kell lekezelni, ha nincs dir irányba tile, hanem ott, ahol a player input jön (IControllable)
         Game.log.format("# Tile>getNeighbour : NeighbourTile (%d, %d)\n", nx, ny);
         return PositionLUT.getInstance().getTile(nx, ny); // throws IndexOutOfBoundsException if, and only if there's no neighbour
     }

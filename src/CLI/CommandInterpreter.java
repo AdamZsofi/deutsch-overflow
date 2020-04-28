@@ -65,7 +65,7 @@ public class CommandInterpreter {
      * @author Zsófi
      */
     public void waitingCommands() {
-        // amíg nincs
+
         while(!commandScanner.nextLine().toLowerCase().equals("startgame")) {
             log.println("You can't do anything until you start the game (StartGame)");
         }
@@ -87,15 +87,9 @@ public class CommandInterpreter {
         }
         boolean ended = false;
         while(!ended) {
-
-            // és itt jön a szép nagy switch case :D
-            // TODO corresponding methods for every command (like startGame) should be implemented
-            // TODO Note: A Game osztály lényege, hogy amikor a command interpreter helyett a CLI küldözget hasonló parancsokat, akkor azok szét legyenek választva a CLI-től
-            // TODO Note2: a corresponding methodok a Game methodjai kell legyenek (startGame static, mert még nincs példány, a többi nem static)
-            // TODO Note3: Fontos, hogy az argumentumokat (irány, stb.) már itt bekérje a CommandInterpreter és csak utána hívja meg a gameInstanceon amit kell, az arg-t paraméterként átadva
-            // TODO Note4: a printCharacterMap-t és a step-t megírtam, mint példa, az lehet, hogy segít
-            // TODO Note5: illetve a 7-s doksiban van a ki és bemeneti nyelv kiírása az argumentumokkal, azt légyszi kövessétek
-            // TODO Note6: néhány helyen lekezeltem, ha hülyeséget kapunk bemenetként, de alapvetően sztem NEM kell kezelni - ez egy teszt nyelv, nem hülye user van, hanem mi használjuk tesztelésre, tőlünk elvárható az értelmes input
+            // Note: A Game osztály lényege, hogy amikor a command interpreter helyett a CLI küldözget hasonló parancsokat, akkor azok szét legyenek választva a CLI-től
+            // Note2: a corresponding methodok a Game methodjai (startGame static, mert még nincs példány, a többi nem static)
+            // Note3: Fontos, hogy az argumentumokat (irány, stb.) már itt bekéri a CommandInterpreter és csak utána hívja meg a gameInstanceon amit kell, az arg-t paraméterként átadva
             switch (commandScanner.nextLine().toLowerCase()) {
                 case "printcharactermap":
                     gameInstance.printCharacterMap();
@@ -145,7 +139,7 @@ public class CommandInterpreter {
                     Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                     Tile currentTile= PositionLUT.getInstance().getPosition(p);
                     ArrayList<Item> items = PositionLUT.getInstance().getItemOnTile(currentTile);
-                    for(Item i : items) {//ha elfogy minden hibás
+                    for(Item i : items) {
                         if(i.getState().equals(ItemState.frozen))
                             items.remove(i);
                         if(items.size() == 0)
@@ -189,7 +183,7 @@ public class CommandInterpreter {
                     break;
                 case "useskill":
                     Player p2= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
-                    if(p2 instanceof Eskimo){ // :(
+                    if(p2 instanceof Eskimo){
                         gameInstance.buildIgloo();
                     }
                     else{
@@ -216,26 +210,20 @@ public class CommandInterpreter {
                 case "saveplayers":
                     log.println("Which direction? (w,a,s,d)");
                     Player player= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
-                    //Tile ct= PositionLUT.getInstance().getPosition(p1);
-                    /*do {
-                        String dir = commandScanner.nextLine();
-                        Tile nextTile=
-
-                    }while()*/
-                        switch (commandScanner.nextLine()) {
-                            case "w":
-                                gameInstance.savePlayers(Direction.UP);
-                                break;
-                            case "a":
-                                gameInstance.savePlayers(Direction.LEFT);
-                                break;
-                            case "s":
-                                gameInstance.savePlayers(Direction.DOWN);
-                                break;
-                            case "d":
-                                gameInstance.savePlayers(Direction.RIGHT);
-                                break;
-                        }
+                    switch (commandScanner.nextLine()) {
+                        case "w":
+                            gameInstance.savePlayers(Direction.UP);
+                            break;
+                        case "a":
+                            gameInstance.savePlayers(Direction.LEFT);
+                            break;
+                        case "s":
+                            gameInstance.savePlayers(Direction.DOWN);
+                            break;
+                        case "d":
+                            gameInstance.savePlayers(Direction.RIGHT);
+                            break;
+                    }
                     break;
                 case "buildtent":
                     gameInstance.buildTent();

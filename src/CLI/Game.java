@@ -108,7 +108,7 @@ public class Game {
      * @author Zsófi
      */
     public void printCharacterMap() {
-        // TODO hardcodeolt 6x6-os pálya, ha ez változik, akkor itt is ki kell szedni a hardcodeot
+        //hardcodeolt 6x6-os pálya, ha ez változik, akkor itt is ki kell szedni a hardcodeot
         Tile bearTile = PositionLUT.getInstance().getPosition(getInstance().polarbear);
         for (int y = 5; y >= 0; y--) {
             for(int x = 0; x < 6; x++) {
@@ -274,7 +274,6 @@ public class Game {
     public void buildTent(){
         Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         p.buildTent();
-        //tile.putontent volt, igy talan jobb, vizre ugyem tud rakni, ha benne van
     }
     /**
      * Player put signalflare together

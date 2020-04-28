@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class SignalFlare {
     /**
-     * @param singalFlareParts parts of SignalFlare
+     * @param signalFlareParts parts of SignalFlare
      */
     public ArrayList<SignalFlarePart> signalFlareParts;
     //3 db alkatrész

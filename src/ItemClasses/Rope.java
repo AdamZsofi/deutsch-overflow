@@ -25,7 +25,7 @@ public class Rope extends Item{
     public void used(Player p, Activity a){
         if(a == Activity.savingPeople) {
             Tile currentTile = PositionLUT.getInstance().getPosition(p);
-            Direction waterTile_dir = p.saveDirection;//nem a legszebb, át lehet később gondolni
+            Direction waterTile_dir = p.saveDirection;
             Tile waterTile;
             try {
                 waterTile = currentTile.getNeighbour(waterTile_dir);

@@ -28,7 +28,6 @@ public class Tent extends Item{
     public void used(Player p, Activity a){
         Tile t = PositionLUT.getInstance().getPosition(p);
         if(a == Activity.putUpTent && !t.getIglooOn()&& t.getCapacity()>0){
-            //TODO CHECK ITT NEM INKABB A TILE PUTONTNET FUGGVENYET KENE HIVI (pl snowyHolera ez igy nem jo
             t.putOnTent();
             p.workPoints--;
             Game.log.println("$ Tent>used : Transaction 'puttingTent' was successful");

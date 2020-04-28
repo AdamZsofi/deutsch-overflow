@@ -4,7 +4,7 @@ import CLI.Game;
 import PlayerClasses.Player;
 
 /**
- * Parts of SinalFlare
+ * Parts of SignalFlare
  */
 public class SignalFlarePart extends Item {
     /**

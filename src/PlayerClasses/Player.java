@@ -60,7 +60,7 @@ public abstract class Player {
      * Called by Food, if its picked up. Food is automatically eaten if its picked up
      * Removes the Food from Player's hand and increments the bodyHeat of Player
      */
-    public void ateFood() { // TODO ez igazából nem dob, mert thisMuch pozitív, kicsit hamis, de csak szépséghiba, ezért hagytam
+    public void ateFood() {
         inHand = null;
         changeBodyHeat(1);
         Game.log.format("$ Player>ateFood : Player (PlayerId:%d) ate the Food \n", ID);
@@ -98,34 +98,6 @@ public abstract class Player {
         Game.log.format("$ Player>wear : Player (PlayerId:%d) now wears DivingSuit\n", ID);
     }
 
-    // IControllable implementations:
-
-    // getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
-    /*public void step(Direction dir) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("step("+dir+")");
-        if(dir == Direction.here) {
-            System.out.println("You stay where you were");
-            return;
-        }
-
-        Tile position= PositionLUT.getInstance().getPosition(this);
-        try {
-            Tile next_tile = position.getNeighbour(dir);
-            position.steppedOff(dir);
-            PositionLUT.getInstance().setPosition(this, next_tile);
-            Item player_item = this.inHand;
-            if(inHand!=null){
-               PositionLUT.getInstance().setPosition(player_item,next_tile);
-            }
-            next_tile.steppedOn(this);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("You can't go that way");
-            return;
-        }
-        workPoints--;
-    }*/
-
     /**
      * Player picks up an item
      * It Player's hand already has an item it takes back to actual Tile
@@ -148,13 +120,12 @@ public abstract class Player {
             }
             inHand = i;
             i.pickedUp(this);
+            workPoints--;
             Game.log.format("$ Player>pickUp : Player (PlayerId:%d) picked up item\n", ID);
         } else {
             Game.log.format("! Player>pickUp : Player (PlayerId:%d) item cannot picked up, Tile has snow\n", ID);
         }
 
-        //TODO ha van snow a tileon akkor nem tudta felvenni, igy nem kell munkaponot levonni
-        workPoints--;
         if(workPoints==0) {
             Game.log.format("# Player>pickUp : Player (PlayerId:%d) has no more workingPoints\n", ID);
             passRound();
@@ -167,7 +138,6 @@ public abstract class Player {
      * 2) (Another) unit of snow will be cleared from the Tile
      * It also decrements one working points from the player
      */
-    //atirni protectedre
     public void clearSnow() {
         if (inHand != null) {
             if(inHand.getState()==ItemState.inHand){
@@ -194,7 +164,6 @@ public abstract class Player {
      * It also decrements of working points of the player
      * @param i item
      */
-    //atirni protectedre
     public void digItemUp(Item i) {
         i.diggedUp();
         Game.log.format("$ Player>digItemUp : Player (PlayerId:%d) 'digItemUp' is completed\n", ID);
@@ -211,12 +180,10 @@ public abstract class Player {
      * Error handling: if direction is HERE, it makes no sense -> Reply message: "You can't save yourself"
      * @param dir direction
      */
-    //atirni protectedre
     public void savePlayers(Direction dir) {
         Game.log.format("$ Player>savePlayers : Player (PlayerId:%d) save started in direction:%s\n", ID, dir.toString());
         if(dir==Direction.valueOf(4)) {
             Game.log.format("! Player>savePlayers : Player (PlayerId:%d) cannot rescue herself\n", ID);
-            // System.out.println("You cannot rescue yourself");
             return;
         }
         saveDirection = dir;
@@ -240,7 +207,6 @@ public abstract class Player {
      * if all Player and SignalFlarePart are on the same tile
      * @param sg signal flare
      */
-    //atirni protectedre
     public void putSignalTogether(SignalFlare sg) {
         Game.log.format("$ Player>putSignalTogether : Player (PlayerId:%d) started putting together\n", ID);
         sg.putTogether(RoundController.getInstance());
@@ -250,7 +216,6 @@ public abstract class Player {
      * Player passes the round
      * Calls the endLastRound() function of RoundController
      */
-    //atirni protectedre
     public void passRound() {
         Game.log.format("# Player>passRound : Player (PlayerId:%d) passed round\n", ID);
         RoundController.getInstance().endLastRound();
@@ -260,7 +225,6 @@ public abstract class Player {
      * Function to set the Player's hand to null (FragileShovel can be used just 3 times,
      * after it disappears from Player's hand)
      */
-    // Done with IControllable Implementations
     public void dropFragileShovel(){
         inHand = null;
     }
@@ -277,11 +241,9 @@ public abstract class Player {
     public void step(Direction dir) {
         Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' began\n", ID);
         if(dir.getValue() == 4) {
-                // System.out.println("You stay where you were");
                 Game.log.format("! Player>step : Player (PlayerId:%d) player has chosen HERE for step\n", ID);
                 return;
             }
-            // Player current_player= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
 
             Tile position= PositionLUT.getInstance().getPosition(this);
             try {
@@ -293,14 +255,9 @@ public abstract class Player {
                 }
                 position.steppedOff(dir);
                 PositionLUT.getInstance().setPosition(this, next_tile);
-                //a kézben tárolt item nincs a PosLUT ban!!!
-                //Item player_item = this.inHand;
-                //if(this.inHand!=null){
-                //    PositionLUT.getInstance().setPosition(player_item,next_tile);
-                //}
+
                 next_tile.steppedOn(this);
             } catch (IndexOutOfBoundsException e) {
-                // System.out.println("You can't go that way");
                 Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(OutBound)\n", ID);
                 return;
             }
@@ -314,7 +271,6 @@ public abstract class Player {
     public void pullOut(Direction dir) {
         Game.log.format("$ Player>pullOut : Player (PlayerId:%d) Transaction 'pulling out' began\n", ID);
         if(dir.getValue() == 4) {
-            // System.out.println("You stay where you were");
             Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) player has chosen HERE for pullOut\n", ID);
             return;
         }
@@ -332,7 +288,6 @@ public abstract class Player {
             next_tile.steppedOn(this);
             inWater = false;
         } catch (IndexOutOfBoundsException e) {
-            // System.out.println("You can't go that way");
             Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) cannot pullOut in that direction(OutBound)\n", ID);
             return;
         }
