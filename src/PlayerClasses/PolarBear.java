@@ -43,8 +43,8 @@ public class PolarBear {
         Direction direction = Direction.valueOf(r.nextInt(4));
         boolean stepped = false;
         while(!stepped) {
-            stepped = true;
             try {
+                stepped = true;
                 step(direction);
             } catch (IndexOutOfBoundsException e) {
                 Game.log.format("! PolarBear>randomStep : random step unsuccessful\n");

@@ -103,6 +103,9 @@ public class CommandInterpreter {
                 case "printsnowtilemap":
                     gameInstance.printSnowTileMap();
                     break;
+                case "printcapacitytilemap":
+                    gameInstance.printCapacityTileMap();
+                    break;
                 case "printtile":
                     int x,y;
                     log.println("x?");

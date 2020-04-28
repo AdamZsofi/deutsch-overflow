@@ -182,11 +182,26 @@ public class Game {
     }
 
     /**
+     * Prints out a map with the tile's capacities on it
+     * @author Zsófi
+     */
+    public void printCapacityTileMap() {
+        for (int y = 5; y >= 0; y--) {
+            for(int x = 0; x < 6; x++){
+                Tile currentTile = PositionLUT.getInstance().getTile(x,y);
+                log.print("[ ");
+                log.print(currentTile.getCapacity());
+                log.print("]");
+            }
+            log.println();
+        }
+    }
+
+    /**
      * Writes out the Information about tables
      * @author Ádám
      */
     public void printTile(int x, int y) {
-        Tile bearTile = PositionLUT.getInstance().getPosition(getInstance().polarbear);
         Tile currentTile = PositionLUT.getInstance().getTile(x,y);
         log.format("Tile(%d, %d) > ", x, y);
         log.print("Capacity: ");
