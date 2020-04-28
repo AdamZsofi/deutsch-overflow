@@ -1,126 +1,111 @@
 package PlayerClasses;
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import ItemClasses.*;
 import TileClasses.*;
 import TileClasses.Direction;
 
-import java.io.IOException;
-import java.util.Scanner;
-
+/**
+ * Class of Player
+ * Functinalities:
+ * -
+ */
 public abstract class Player {
     protected int BodyHeat;
     protected int ID;
-    protected int workPoints;
+    public int workPoints;
     public boolean inWater; // public lett, kesobb ezt átgondolhatjuk még
     protected Item inHand;
     protected Item wearing;
+    public Direction saveDirection;
+
+    /**
+     * Initialisation for starting a round for Player
+     * Sets workingPoint to 4
+     */
+    public Player(int id){
+        inHand=null;
+        inWater=false;
+        wearing=null;
+        workPoints=4;
+        ID=id;
+    }
 
     public void startRound() {
         workPoints = 4;
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("startRound()");
-        System.out.println("Waiting for player input...");
+        Game.log.format("# Player>startRound : next Player is %d\n", ID);
 
-        Tile position;
-        while(workPoints>0 && !inWater) {
-            System.out.println("Enter the activity:");
-            Scanner scanner = new Scanner(System.in);
-            int activity = scanner.nextInt();
-            scanner.close();
-            switch (activity) {
-                case 0:
-                    step(Direction.left);
-                    break;
-                case 1:
-                    position = PositionLUT.getInstance().getPosition(this);
-                    Item item = PositionLUT.getInstance().getItemOnTile(position).get(0);
-                    pickUp(item);
-                    break;
-                case 2:
-                    clearSnow();
-                    break;
-                case 3:
-                    position = PositionLUT.getInstance().getPosition(this);
-                    item = PositionLUT.getInstance().getItemOnTile(position).get(0);
-                    digItemUp(item);
-                    break;
-                case 4:
-                    savePlayers(Direction.up);
-                    break;
-                case 5:
-                    putSignalTogether(RoundController.getInstance().sg);
-                case 6:
-                    passRound();
-                    break;
-                default:
-                    System.out.println("Invalid Activity number!");
-                    break;
-            }
-        }
-        passRound(); // ha elfogy a workPoint/vízbe esik, akkor automatikus pass
+        // check, if the player is freezing to death
+        if(inWater && wearing == null) { RoundController.getInstance().lose("A player froze in the water"); }
     }
-    public void fallInWater() {
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("fallInWater()");
 
+    /**
+     * Called by the SnowyHole or UnstableTile
+     * Sets inWater parameter of Player to TRUE
+     */
+    public void fallInWater() {
         inWater = true;
+        Game.log.format("# Player>fallInWater : Player (PlayerId:%d) falls in Water \n", ID);
+        if(wearing==null) {
+            Game.log.format("# Player>fallInWater : Player (PlayerId:%d) has to wait for rescue \n", ID);
+            passRound(); // ha beszakadnak, akkor is csak az passzol, aki éppen volt, többen nem
+        }
+        else {
+            inWater = false; // Technically még maradhat a vízben, de nincs veszélyben!
+            Game.log.format("# Player>fallInWater : Player (PlayerId:%d) has a diving suit, no worries \n", ID);
+        }
     }
     /**
      * Called by Food, if its picked up. Food is automatically eaten if its picked up
-     * */
+     * Removes the Food from Player's hand and increments the bodyHeat of Player
+     */
     public void ateFood() {
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("ateFood()");
         inHand = null;
         changeBodyHeat(1);
+        Game.log.format("$ Player>ateFood : Player (PlayerId:%d) ate the Food \n", ID);
     }
-    public void changeBodyHeat(int thisMuch) {
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("changeBodyHeat("+thisMuch+")");
 
-        BodyHeat += thisMuch;
+    /**
+     * tent building
+     */
+    public void buildTent(){
+        if(inHand != null)
+            inHand.used(this, Activity.putUpTent);
     }
+
+    /**
+     * Changes the Player bodyHeat with thisMuch
+     * -ateFood(1)
+     * -snowStorm(-1)
+     * @param thisMuch thisMUCH (+/-)
+     */
+    public void changeBodyHeat(int thisMuch) {
+        Game.log.format("# Player>changeBodyHeat : Player (PlayerId:%d) bodyHeat is changed to %d (by %d much)\n", ID, BodyHeat+thisMuch, thisMuch);
+        BodyHeat += thisMuch;
+        if(BodyHeat==0){
+            RoundController.getInstance().lose("Hypothermia");
+        }
+    }
+
     /**
      * Called by DivingSuit, if its pickedUp (its automatically worn if its picked up)
-     * */
+     * Sets the diving suit to a specific variable, and takes out from the Player's hand
+     */
     public void wear(DivingSuit suit) {
-        System.out.print("PlayerClasses.Player, ID"+ID+":");
-        System.out.println("wear(ItemClasses.DivingSuit)");
         wearing = suit;
         inHand = null;
+        Game.log.format("$ Player>wear : Player (PlayerId:%d) now wears DivingSuit\n", ID);
     }
 
-    // IControllable implementations:
-
-    // getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
-    public void step(Direction dir) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("step("+dir+")");
-        if(dir == Direction.here) {
-            System.out.println("You stay where you were");
-            return;
-        }
-
-        Tile position= PositionLUT.getInstance().getPosition(this);
-        try {
-            Tile next_tile = position.getNeighbour(dir);
-            position.steppedOff(dir);
-            PositionLUT.getInstance().setPosition(this, next_tile);
-            Item player_item = this.inHand;
-            if(inHand!=null){
-               PositionLUT.getInstance().setPosition(player_item,next_tile);
-            }
-            next_tile.steppedOn(this);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("You can't go that way");
-            return;
-        }
-        workPoints--;
-    }
+    /**
+     * Player picks up an item
+     * It Player's hand already has an item it takes back to actual Tile
+     * It also decrements of working points of the player
+     * @param i item
+     */
     public void pickUp(Item i) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("pickUp(Item)");
+
         Tile position = PositionLUT.getInstance().getPosition(i);
         int snow = position.getSnow();
         if(snow==0) {
@@ -131,18 +116,29 @@ public abstract class Player {
                     inHand.thrownDown();
                     inHand = null;
                 }
+                Game.log.format("# Player>pickUp : Player (PlayerId:%d) old item from players hand has been removed and thrown down\n", ID);
             }
             inHand = i;
             i.pickedUp(this);
+            workPoints--;
+            Game.log.format("$ Player>pickUp : Player (PlayerId:%d) picked up item\n", ID);
+        } else {
+            Game.log.format("! Player>pickUp : Player (PlayerId:%d) item cannot picked up, Tile has snow\n", ID);
         }
-        workPoints--;
+
+        if(workPoints==0) {
+            Game.log.format("# Player>pickUp : Player (PlayerId:%d) has no more workingPoints\n", ID);
+            passRound();
+        }
     }
-    //atirni protectedre
+
+    /**
+     * Player clears snow
+     * 1) Checks of the Player's hand has an item -> YES: it tries to clear snow with Shovel (1 unit of snow)
+     * 2) (Another) unit of snow will be cleared from the Tile
+     * It also decrements one working points from the player
+     */
     public void clearSnow() {
-        System.out.print("(IControllable) Player:");
-        System.out.println("clearSnow()");
-
-
         if (inHand != null) {
             if(inHand.getState()==ItemState.inHand){
                 inHand.used(this,Activity.clearingSnow);
@@ -150,41 +146,155 @@ public abstract class Player {
         }
 
         Tile position= PositionLUT.getInstance().getPosition(this);
-        position.changeSnow(-1);
-        workPoints--;
-    }
-    //atirni protectedre
-    public void digItemUp(Item i) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("digItemUp()");
+        if(position.getSnow()>0) {
+            position.changeSnow(-1);
+            Game.log.format("$ Player>clearSnow : Player (PlayerId:%d) cleared snow\n", ID);
+            workPoints--;
+        }
 
-        i.diggedUp();
-        workPoints--;
+        if(workPoints==0) {
+            Game.log.format("# Player>clearSnow : Player (PlayerId:%d) has no more workingPoints\n", ID);
+            passRound();
+        }
+
     }
-    //atirni protectedre
+
+    /**
+     * Player digs to Item from Tile (calls the Tile to change the state of the item)
+     * It also decrements of working points of the player
+     * @param i item
+     */
+    public void digItemUp(Item i) {
+        i.diggedUp();
+        Game.log.format("$ Player>digItemUp : Player (PlayerId:%d) 'digItemUp' is completed\n", ID);
+        workPoints--;
+        if(workPoints==0) {
+            Game.log.format("# Player>digItemUp : Player (PlayerId:%d) has no more workingPoints\n", ID);
+            passRound();
+        }
+    }
+
+    /**
+     * Player saves another Players on neighbour Tile (defined by the direction)
+     * It also decrements of working points of the player, if action is successful
+     * Error handling: if direction is HERE, it makes no sense -> Reply message: "You can't save yourself"
+     * @param dir direction
+     */
     public void savePlayers(Direction dir) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("savePlayers("+dir+")");
-        if(dir==Direction.here) {
-            System.out.println("You can't save yourself");
+        Game.log.format("$ Player>savePlayers : Player (PlayerId:%d) save started in direction:%s\n", ID, dir.toString());
+        if(dir==Direction.valueOf(4)) {
+            Game.log.format("! Player>savePlayers : Player (PlayerId:%d) cannot rescue herself\n", ID);
             return;
         }
-        inHand.used(this,Activity.savingPeople);
-        workPoints--;
+        saveDirection = dir;
+        if(inHand != null) {
+            inHand.used(this, Activity.savingPeople);
+            workPoints--;
+        }
+        else {
+            Game.log.format("! Player>savePlayers : Player (PlayerId:%d) has no rope\n", ID);
+        }
+        if(workPoints==0) {
+            Game.log.format("! Player>savePlayers : Player (PlayerId:%d) has no more working points\n", ID);
+            passRound();
+        }
+        Game.log.format("$ Player>savePlayers : Player (PlayerId:%d)'s save ended\n", ID);
     }
-    //atirni protectedre
-    public void putSignalTogether(SignalFlare sg) {
-        System.out.print("(IControllable) Player:");
-        System.out.println("putSignalTogether("+sg+")");
 
+    /**
+     * Player puts the signal flare together
+     * Calls the putTogether() function of the SignalFlare-> calls the win() function of RoundController
+     * if all Player and SignalFlarePart are on the same tile
+     * @param sg signal flare
+     */
+    public void putSignalTogether(SignalFlare sg) {
+        Game.log.format("$ Player>putSignalTogether : Player (PlayerId:%d) started putting together\n", ID);
         sg.putTogether(RoundController.getInstance());
     }
-    //atirni protectedre
-    public void passRound() {
-        System.out.print("(IControllable) Player:");
-        System.out.println("passRound()");
 
-        RoundController.getInstance().endLastRound();
+    /**
+     * Player passes the round
+     * Calls the endLastRound() function of RoundController
+     */
+    public void passRound() {
+        if(ID==RoundController.getInstance().getcurID()) {
+            Game.log.format("# Player>passRound : Player (PlayerId:%d) passed round\n", ID);
+            RoundController.getInstance().endLastRound();
+        }
     }
-    // Done with IControllable Implementations
+
+    /**
+     * Function to set the Player's hand to null (FragileShovel can be used just 3 times,
+     * after it disappears from Player's hand)
+     */
+    public void dropFragileShovel(){
+        inHand = null;
+    }
+
+
+    /**
+     * Realises stepping of a Player, changes the position of Player in PositionLUT
+     * Error handling: if caller(Player) would like to step to a Tile where is a PolarBear: "Dangerous Direction" error message
+     * Error handling: if direction given is HERE: "You stay where you were" error message
+     * Error handling: if there isn't Tile in given direction: "You can't go that way" error message
+     * Error message != Exception!
+     * @param dir Direction where to step
+     */
+    public void step(Direction dir) {
+        Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' began\n", ID);
+        if(dir.getValue() == 4) {
+                Game.log.format("! Player>step : Player (PlayerId:%d) player has chosen HERE for step\n", ID);
+                return;
+            }
+
+            Tile position= PositionLUT.getInstance().getPosition(this);
+            try {
+                Tile next_tile = position.getNeighbour(dir);
+                Tile bear_position= PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
+                if(next_tile.equals(bear_position)){
+                    Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(PolarBear)\n", ID);
+                    return;
+                }
+                position.steppedOff(dir);
+                PositionLUT.getInstance().setPosition(this, next_tile);
+
+                next_tile.steppedOn(this);
+            } catch (IndexOutOfBoundsException e) {
+                Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(OutBound)\n", ID);
+                return;
+            }
+            workPoints--;
+            if(workPoints==0) {
+                Game.log.format("# Player>step : Player (PlayerId:%d) has no more workingPoints\n", ID);
+                passRound();
+            }
+    }
+
+    public void pullOut(Direction dir) {
+        Game.log.format("$ Player>pullOut : Player (PlayerId:%d) Transaction 'pulling out' began\n", ID);
+        if(dir.getValue() == 4) {
+            Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) player has chosen HERE for pullOut\n", ID);
+            return;
+        }
+
+        Tile position= PositionLUT.getInstance().getPosition(this);
+        try {
+            Tile next_tile = position.getNeighbour(dir);
+            Tile bear_position= PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
+            if(next_tile.equals(bear_position)){
+                Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) cannot pullOut in that direction(PolarBear)\n", ID);
+                return;
+            }
+            position.steppedOff(dir);
+            PositionLUT.getInstance().setPosition(this, next_tile);
+            next_tile.steppedOn(this);
+            inWater = false;
+        } catch (IndexOutOfBoundsException e) {
+            Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) cannot pullOut in that direction(OutBound)\n", ID);
+            return;
+        }
+    }
+
+    public abstract String getInformation();
+    public abstract String getShortName();
 }

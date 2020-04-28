@@ -1,10 +1,16 @@
 package ItemClasses;
 
+import CLI.Game;
 import PlayerClasses.Player;
 
+/**
+ * Parts of SignalFlare
+ */
 public class SignalFlarePart extends Item {
-
-    private int partID; //egyedinek kell lenni!
+    /**
+     * @param partID unique identifier
+     */
+    private int partID;
 
     public SignalFlarePart(int id){
         partID = id;
@@ -12,6 +18,8 @@ public class SignalFlarePart extends Item {
 
     @Override
     public void used(Player p, Activity a){
-        System.out.println("ItemClasses.SignalFlarePart.used()");
+        Game.log.println("# SignalFlarePart>used");
     }
+    public String getShortName(){ return "SFP("+state.getShortName(getState())+")";}
+    public String toString() {return "SignalFlarePart";}
 }

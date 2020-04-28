@@ -1,14 +1,47 @@
 package PlayerClasses;
 
+import CLI.Game;
 import GlobalControllers.PositionLUT;
 import TileClasses.Tile;
 
+/**
+ * Specification of Player
+ * Eskimo can build Igloo (special ability)
+ */
 public class Eskimo extends Player {
-
+    /**
+     * Sets Igloo on Tile, where the Eskimo is actually standing
+     */
+    public Eskimo(int id){
+        super(id);
+        BodyHeat=5;
+    }
     public void buildIgloo() {
-        System.out.print("PlayerClasses.Eskimo, ID"+ID+":");
-        System.out.println("buildIgloo()");
+        Game.log.format("# Eskimo>buildIgloo : started by PlayerID: %d\n", ID);
         Tile tile = PositionLUT.getInstance().getPosition(this);
-        tile.buildIglu();
+        tile.buildIgloo();
+        Game.log.println("# Eskimo>buildIgloo : ended");
+    }
+
+    public String getShortName() {
+        return "E"+ID;
+    }
+    public String getInformation(){
+        String ih;
+        String wear;
+        String inwater;
+        if(inHand!=null)
+            ih=inHand.getShortName();
+        else
+            ih="-";
+        if(wearing!=null)
+            wear="+";
+        else
+            wear="-";
+        if(inWater)
+            inwater="+";
+        else
+            inwater="-";
+        return "( "+getShortName()+ ":   InHand "+ih+", Wear: "+wear+", "+"Temp: "+BodyHeat+", inWater: "+inwater+" )";
     }
 }
