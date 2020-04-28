@@ -168,5 +168,8 @@ public abstract class Tile {
         if(x==tile.x && y==tile.y) return true;
         return false;
     }
+    public void setStandingHere(int sh){
+          standingHere = sh;
+    }
 
 }

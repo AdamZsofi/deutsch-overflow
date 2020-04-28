@@ -118,11 +118,17 @@ public class PositionLUT {
 
         playerTileMap = new HashMap<>();
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(0),  getTile(0,5));//eskimo1
+        getTile(0,5).setStandingHere(1);
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(1),  getTile(1,4));//eskimo2
+        getTile(1,4).setStandingHere(1);
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(2),  getTile(2,5));//researcher1
+        getTile(2,5).setStandingHere(1);
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(3),  getTile(2,3));//researcher2
+        getTile(2,3).setStandingHere(1);
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(4),  getTile(3,4));//researcher3
+        getTile(3,4).setStandingHere(1);
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(5),  getTile(4,3));//researcher4
+        getTile(4,3).setStandingHere(1);
 
         ArrayList player1 = new ArrayList();
         player1.add(PlayerContainer.getInstance().getPlayer(0));
@@ -183,10 +189,12 @@ public class PositionLUT {
         ArrayList player1 = new ArrayList();
         player1.add(PlayerContainer.getInstance().getPlayer(0));
         tilePlayerMap.put(getTile(0,0), player1);
+        getTile(0,0).setStandingHere(1);
         ArrayList players23 = new ArrayList();
         players23.add(PlayerContainer.getInstance().getPlayer(1));
         players23.add(PlayerContainer.getInstance().getPlayer(2));
         tilePlayerMap.put(getTile(1,0), players23);
+        getTile(1,0).setStandingHere(2);
 
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(0), getTile(0,0));
         playerTileMap.put(PlayerContainer.getInstance().getPlayer(1), getTile(1,0));
@@ -295,6 +303,7 @@ public class PositionLUT {
                 x = random.nextInt(6);
                 y = random.nextInt(6);
                 playerTileMap.put(PlayerContainer.getInstance().getPlayer(i),getTile(x, y));
+                getTile(x,y).setStandingHere(1);
             } while (spawnMatrix[y][x] == 0);
             spawnMatrix[y][x] = 0;
         }
