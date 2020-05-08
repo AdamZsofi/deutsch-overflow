@@ -171,5 +171,5 @@ public abstract class Tile {
     public void setStandingHere(int sh){
           standingHere = sh;
     }
-
+    public abstract String toString();
 }

@@ -2,7 +2,6 @@ package TileClasses;
 
 import CLI.Game;
 import GlobalControllers.PositionLUT;
-import GlobalControllers.RoundController;
 import PlayerClasses.Player;
 
 import java.util.ArrayList;
@@ -51,5 +50,13 @@ public class UnstableTile extends Tile {
         } else {
             Game.log.format("# Tile>steppedOn : Player stepped on Tile (%d, %d) and standingHere changed to %d\n", x, y, standingHere);
         }
+    }
+
+
+    @Override
+    public String toString() {
+        if (snow > 0) return "tileSnow";
+        if (capacity == 0) return "tileWater";
+        return "tileNoSnow";
     }
 }

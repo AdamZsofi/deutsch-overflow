@@ -22,10 +22,15 @@ public class Eskimo extends Player {
         tile.buildIgloo();
         Game.log.println("# Eskimo>buildIgloo : ended");
     }
-
+    @Override
     public String getShortName() {
         return "E"+ID;
     }
+
+    @Override
+    public String toString() {return "E-"+ ID;}
+
+    @Override
     public String getInformation(){
         String ih;
         String wear;

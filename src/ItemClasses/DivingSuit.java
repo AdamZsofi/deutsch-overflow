@@ -14,6 +14,10 @@ public class DivingSuit extends Item{
         p.wear(this);
         Game.log.println("$ DivingSuit>pickedUp : Transaction 'pickingUpDivingSuit' was successful");
     }
+
+    @Override
     public String getShortName(){ return "D("+state.getShortName(this.getState())+")";}
-    public String toString() {return "DivingSuit";}
+
+    @Override
+    public String toString() {return "divingSuit"+state.getShortName(getState());}
 }

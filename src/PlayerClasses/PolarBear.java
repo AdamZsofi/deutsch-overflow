@@ -3,7 +3,6 @@ package PlayerClasses;
 import CLI.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
-import ItemClasses.Item;
 import TileClasses.Direction;
 import TileClasses.Tile;
 
@@ -101,4 +100,5 @@ public class PolarBear {
     public String getShortName() {
         return "B";
     }
+    public String toString() {return "P";}
 }

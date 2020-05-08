@@ -40,6 +40,10 @@ public class FragileShovel extends Shovel{
             Game.log.println("$ FragileShovel>used : Transaction 'dropFragileShovel' was successful");
         }
     }
+
+    @Override
     public String getShortName(){ return "FS("+state.getShortName(getState())+")";}
-    public String toString() {return "FragileShovel";}
+
+    @Override
+    public String toString() {return "fragileShovel"+state.getShortName(getState());}
 }

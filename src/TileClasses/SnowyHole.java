@@ -37,4 +37,10 @@ public class SnowyHole extends Tile {
         Game.log.format("# SnowyHole>steppedOn : Stepped on SnowyHole(%d, %d)\n", x, y);
         p.fallInWater();
     }
+
+    @Override
+    public String toString() {
+        if (snow > 0) return "tileSnow";
+        return "tileWater";
+    }
 }

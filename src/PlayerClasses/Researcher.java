@@ -2,7 +2,6 @@ package PlayerClasses;
 
 import CLI.Game;
 import GlobalControllers.PositionLUT;
-import PlayerClasses.Player;
 import TileClasses.Direction;
 import TileClasses.Tile;
 
@@ -34,10 +33,15 @@ public class Researcher extends Player {
             return;
         }
     }
-
+    @Override
     public String getShortName() {
         return "R"+ID;
     }
+
+    @Override
+    public String toString() {return "R-"+ ID;}
+
+    @Override
     public String getInformation(){
         String ih;
         String wear;

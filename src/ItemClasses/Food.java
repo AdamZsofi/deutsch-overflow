@@ -4,8 +4,6 @@ import CLI.Game;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
 
-import java.util.Random;
-
 public class Food extends Item{
 
     /**
@@ -21,6 +19,10 @@ public class Food extends Item{
         p.ateFood();
         Game.log.println("$ Food>pickedUp : Transaction 'pickUp' and 'ateFood' was successful");
     }
+
+    @Override
     public String getShortName(){ return "F("+state.getShortName(getState())+")";}
-    public String toString() {return "Food";}
+
+    @Override
+    public String toString() {return "food"+state.getShortName(getState());}
 }

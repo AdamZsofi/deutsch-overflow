@@ -1,16 +1,17 @@
 package GlobalControllers;
 
-import CLI.Game;
 import ItemClasses.*;
-import PlayerClasses.*;
-import TileClasses.*;
+import PlayerClasses.Player;
+import PlayerClasses.PlayerContainer;
+import PlayerClasses.PolarBear;
+import TileClasses.SnowyHole;
+import TileClasses.StableTile;
+import TileClasses.Tile;
+import TileClasses.UnstableTile;
 
-import javax.print.attribute.standard.PDLOverrideSupported;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A singleton Look-Up-Table
@@ -398,6 +399,9 @@ public class PositionLUT {
     public Tile getPosition(PolarBear pb){
         return polarbearTileMap.get(pb);
     }
+
+
+
 
     /**
      * Sets the position (Tile - t) of the PolarBear(pb)

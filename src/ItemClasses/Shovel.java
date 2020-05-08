@@ -23,6 +23,10 @@ public class Shovel extends Item{
             Game.log.println("! Shovel>used : Activity is not 'clearingSnow'");
         }
     }
+
+    @Override
     public String getShortName(){ return "S("+state.getShortName(getState())+")";}
-    public String toString() {return "Shovel";}
+
+    @Override
+    public String toString() {return "shovel"+state.getShortName(getState());}
 }

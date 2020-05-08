@@ -6,6 +6,8 @@ import ItemClasses.*;
 import TileClasses.*;
 import TileClasses.Direction;
 
+import java.util.ArrayList;
+
 /**
  * Class of Player
  * Functinalities:
@@ -295,6 +297,15 @@ public abstract class Player {
         }
     }
 
+    public ArrayList<Item> getItemsOnHand() {
+        ArrayList<Item> items = new ArrayList<>();
+        if (inHand!= null) items.add(inHand);
+        if (wearing!= null) items.add(wearing);
+        return items;
+    }
+    public int getBodyHeat() {return BodyHeat;}
     public abstract String getInformation();
     public abstract String getShortName();
+    public abstract String toString();
+
 }

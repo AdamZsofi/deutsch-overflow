@@ -1,11 +1,11 @@
 package ItemClasses;
 
 import CLI.Game;
-import PlayerClasses.Player;
 import GlobalControllers.PositionLUT;
-import TileClasses.*;
+import PlayerClasses.Player;
+import TileClasses.Direction;
+import TileClasses.Tile;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Rope extends Item{
@@ -76,6 +76,10 @@ public class Rope extends Item{
                 return Direction.valueOf(2);
         }
     }
+
+    @Override
     public String getShortName(){ return "R("+state.getShortName(getState())+")";}
-    public String toString() {return "Rope";}
+
+    @Override
+    public String toString() {return "rope"+state.getShortName(getState());}
 }
