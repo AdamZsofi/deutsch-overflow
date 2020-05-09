@@ -5,24 +5,14 @@ import ItemClasses.Item;
 import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
 import TileClasses.Tile;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static javafx.application.Application.launch;
 
-//ha a JAVAFX PIROS LENNE File>ProjectStructure>GlobalLibaries>+ gomb
-//Path vmi hasonlo: C:\Program Files (x86)\Java\jre1.8.0_231\lib\ext
-//leokezod
-
-public class InGame {
+public class InGame extends JFrame {
     //internal variables
     private Map<String, DrawingGUI> icons = new HashMap<String, DrawingGUI>();
 
@@ -157,27 +147,20 @@ public class InGame {
     }
 
 
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+    JFrame frame;
+    InGame(int playersCount){
+        setTitle("Game");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1200, 850);
+        setLayout(null);
+        setVisible(true);
+        //TODO PLAYERCONTAINER INIT
+        PlayerContainer.Initialize(playersCount, 3);
 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        initComponents();
     }
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args){
+        new InGame(6);
     }
 }
