@@ -401,8 +401,6 @@ public class PositionLUT {
     }
 
 
-
-
     /**
      * Sets the position (Tile - t) of the PolarBear(pb)
      * @param pb PolarBear
@@ -427,4 +425,5 @@ public class PositionLUT {
     public int getTileColumnSize() {
         return tileList.get(0).size();
     }
+
 }

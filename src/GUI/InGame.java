@@ -2,12 +2,25 @@ package GUI;
 
 import GlobalControllers.PositionLUT;
 import ItemClasses.Item;
+import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
+import TileClasses.Tile;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static javafx.application.Application.launch;
+
+//ha a JAVAFX PIROS LENNE File>ProjectStructure>GlobalLibaries>+ gomb
+//Path vmi hasonlo: C:\Program Files (x86)\Java\jre1.8.0_231\lib\ext
+//leokezod
 
 public class InGame {
     //internal variables
@@ -15,12 +28,16 @@ public class InGame {
 
     private ArrayList<DrawingGUI> [][] elements = new ArrayList[6][6]; // on each Tile there's a ArrayList of Drawables
     private DrawingGUI [] [] tiles = new DrawingGUI[6][6];
+    private DrawingGUI [] players = new DrawingGUI[6];
+    private DrawingGUI [] activePlayers = new DrawingGUI[6];
     private ArrayList<DrawingGUI> [] hand  = new ArrayList[6];  //Collection of Drawables for each player hand
                                                                 // (Note: DivingSuit counts here=>ArrayList)
     private int [] bodyHeats = new int[6];
-
-
-    //amikor rajzolz hasznald relativan, ezekre a valtozokra hivatkozva a ikonok kirajzolasat
+    private boolean messageBoxIsEnabled = false;
+    private DrawingGUI messageBoxIcon;
+    private String messageBoxMessage;
+    //!!!!!!!!!!!!!!!!!!
+    //amikor rajzolz hasznaldd relativan, ezekre a valtozokra hivatkozva a ikonok kirajzolasat
     //for more information OneDrive/GUI/sizes.png
     private int margin;
     private int tilePadding;
@@ -42,20 +59,8 @@ public class InGame {
     //viszont InGame-n belul meghivathjuk enummal ->enum intte castolodik, es mindegyik enumnak van egy konkret erteke
     //enumot pl hasznalhatsz Tilon levo elemek, playerek draw(enum size==>>int) fgvnel
 
-
-    //sajnos nem latunk bele a positonLUTba, nem tudjuk indexelni a Tilokat x, y szerint
-    //TODO kitalani valami ugyeset, hogy fel legyen toltve a elements tomb,
-    //a setElemtsFugvt mondjuk hivhatod kivulrol, amikor beallitjuk es bepushuoljuk a dolgokat a postionLUTba
-    //elementName = item.toString() / player.ToString()
-    // x, y "Tileok indexei"
-    public void setElements(int x, int y, String elementName) {
-        elements[x][y].add(icons.get(elementName));
-    }
-
-
     private void initComponents() {
         initIcons();
-        //TODO sajnos a elements Array 2D tombot kivulrol lehet feltolteni Gegenstandokkal, Playererkkel hasznald kivulrol a setElements fugv-t
 
         //loading Tile Icons
         for (int i = 0 ; i < 6; i++) {
@@ -63,6 +68,27 @@ public class InGame {
                 tiles[i][j] = icons.get("tileSnow");
             }
         }
+
+        //loading Player and Active Players Icons
+        for (int i = 0; i < 6; i++) {
+            String p = PlayerContainer.getInstance().getPlayer(i).toString();
+            players[i] = icons.get(p);
+            activePlayers[i] = icons.get(p+ "-a");
+        }
+
+        //loading elements on Tile (Items+Player) Icons
+        for (int i = 0 ; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                Tile t =PositionLUT.getTile(i, j);
+                for (Item it : PositionLUT.getItemOnTile(t)) {
+                    elements[i][j].add(icons.get(it.toString()));
+                }
+                for (Player p : PositionLUT.getPlayersOnTile(t)) {
+                    elements[i][j].add(icons.get(p.toString()));
+                }
+            }
+        }
+
 
         //loading bodyHeats for all players => for PlayerBar (right-upper corner)
         for (int i = 0; i < 6; i++) {
@@ -75,7 +101,6 @@ public class InGame {
                 hand[i].add(icons.get(it.toString()));
             }
         }
-
 
     }
 
@@ -131,9 +156,8 @@ public class InGame {
         icons.put("workingPoints", new DrawingGUI("workingPoints.svg"));
     }
 
-    @Override
+
     public void start(Stage primaryStage) {
-        /* //ez valami basic demo
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -152,7 +176,6 @@ public class InGame {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
-        */
     }
     public static void main(String[] args) {
         launch(args);
