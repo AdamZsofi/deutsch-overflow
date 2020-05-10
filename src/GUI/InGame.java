@@ -148,17 +148,18 @@ public class InGame extends JFrame {
 
 
     JFrame frame;
+    Menu menu = new Menu();
     InGame(int playersCount){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 850);
-        setLayout(null);
-        setVisible(true);
         //TODO PLAYERCONTAINER INIT
-        PlayerContainer.Initialize(playersCount, 3);
+        add(menu.menuPanel);
+        //add(new JButton("voa"));
+        setVisible(true);
 
 
-        initComponents();
+        //initComponents();
     }
     public static void main(String[] args){
         new InGame(6);
