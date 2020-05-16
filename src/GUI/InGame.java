@@ -7,6 +7,7 @@ import PlayerClasses.PlayerContainer;
 import TileClasses.Tile;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -147,15 +148,16 @@ public class InGame extends JFrame {
     }
 
 
-    JFrame frame;
+    JPanel gamePanel = new JPanel();
     Menu menu = new Menu();
     InGame(int playersCount){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 850);
         //TODO PLAYERCONTAINER INIT
-        add(menu.menuPanel);
-        //add(new JButton("voa"));
+        add(menu);
+        //gamePanel.add(new Button("sdf"));
+        //add(gamePanel);
         setVisible(true);
 
 

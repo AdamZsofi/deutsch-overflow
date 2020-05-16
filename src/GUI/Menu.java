@@ -2,18 +2,23 @@ package GUI;
 
 import PlayerClasses.PlayerContainer;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class Menu  {
-    JPanel menuPanel = new JPanel(new GridBagLayout());
+public class Menu extends JPanel  {
+    //JPanel menuPanel = new JPanel(new GridBagLayout());
     JButton minus, plus, startGame;
     JLabel numLabel;
     Integer number;
 
     Menu(){
+        setLayout(new GridBagLayout());
         number = 4;
         numLabel = new JLabel(number.toString());
         minus = new JButton("-");
@@ -46,14 +51,26 @@ public class Menu  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PlayerContainer.Initialize(number, 3);
+                invalidate();
             }
         });
-        menuPanel.add(minus);
-        menuPanel.add(numLabel);
-        menuPanel.add(plus);
-        menuPanel.add(startGame);
-        menuPanel.setVisible(true);
+        add(minus);
+        add(numLabel);
+        add(plus);
+        add(startGame);
+        setVisible(true);
     }
 
+    public void paintComponent (Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        BufferedImage image = null;//new ImageIcon("GUI/Pack/start.jpg");
+        try {
+            image = ImageIO.read(new File("src\\GUI\\Pack\\start.jpg"));
+        } catch (IOException e) {
+        }
+        g2d.drawImage(image, 0, 0, null);
+    }
 
 }
