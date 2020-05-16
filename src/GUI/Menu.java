@@ -18,10 +18,11 @@ public class Menu extends JPanel  {
     Integer number;
 
     Menu(){
-        setLayout(new GridBagLayout());
+        setLayout(null);
         number = 4;
         numLabel = new JLabel(number.toString());
         minus = new JButton("-");
+
         minus.addActionListener(new ActionListener() {
 
             @Override
@@ -58,6 +59,24 @@ public class Menu extends JPanel  {
         add(numLabel);
         add(plus);
         add(startGame);
+        minus.setLocation(500,300);
+        minus.setSize(50,50);
+        Image img = null;
+        try {
+            img = ImageIO.read(new File("src\\GUI\\Pack\\start.jpg")); // átmenetileg, ha lesz hozzá kép annak a path-ja mehet helyette
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        minus.setIcon(new ImageIcon(img));
+        plus.setLocation(600,300);
+        plus.setSize(50,50);
+        startGame.setLocation(500,350);
+        startGame.setSize(150,80);
+        numLabel.setLocation(565,300);
+        numLabel.setSize(50,50);
+        numLabel.setFont(new Font("Serif", Font.PLAIN, 34));
+        startGame.setFont(new Font("Serif", Font.PLAIN, 24));
+        plus.setFont(new Font("Serif", Font.PLAIN, 27)); // majd kép lesz helyette csak még nincs kép (+,- ról)
         setVisible(true);
     }
 

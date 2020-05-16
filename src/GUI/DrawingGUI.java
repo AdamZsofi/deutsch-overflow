@@ -19,6 +19,7 @@ public class DrawingGUI {
         System.out.println(name);
     }
     public void draw(int x, int y, int size) {
+
     }
 
 }
