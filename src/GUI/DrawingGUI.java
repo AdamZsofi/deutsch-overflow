@@ -7,9 +7,11 @@ import java.io.*;
 import java.nio.Buffer;
 
 public class DrawingGUI {
-    private BufferedImage texture;
+    BufferedImage texture;
+    int x, y, width, height;
 
     DrawingGUI(String textureName) {
+
         String name = null;
         try {
             name = "./src/GUI/Pack/" + textureName;
@@ -18,8 +20,6 @@ public class DrawingGUI {
             System.out.println("File cannot opened");
         }
         System.out.println(name);
-    }
-    public void draw(int x, int y, int size) {
     }
 }
 
