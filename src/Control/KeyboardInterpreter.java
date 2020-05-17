@@ -147,6 +147,40 @@ public class KeyboardInterpreter implements KeyListener {
     }
 
     private void savingReady(KeyEvent e) {
+        state = InputAcceptingState.disabled;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                gameInstance.savePlayers(Direction.UP);
+                break;
+            case KeyEvent.VK_LEFT:
+                gameInstance.savePlayers(Direction.LEFT);
+                break;
+            case KeyEvent.VK_DOWN:
+                gameInstance.savePlayers(Direction.DOWN);
+                break;
+            case KeyEvent.VK_RIGHT:
+                gameInstance.savePlayers(Direction.RIGHT);
+                break;
+        }
+        state = InputAcceptingState.waiting_command;
+    }
 
+    private void researcherSkillReady(KeyEvent e) {
+        state = InputAcceptingState.disabled;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                gameInstance.detectCapacity(Direction.UP);
+                break;
+            case KeyEvent.VK_LEFT:
+                gameInstance.detectCapacity(Direction.LEFT);
+                break;
+            case KeyEvent.VK_DOWN:
+                gameInstance.detectCapacity(Direction.DOWN);
+                break;
+            case KeyEvent.VK_RIGHT:
+                gameInstance.detectCapacity(Direction.RIGHT);
+                break;
+        }
+        state = InputAcceptingState.waiting_command;
     }
 }

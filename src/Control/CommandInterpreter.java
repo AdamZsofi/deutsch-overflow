@@ -217,7 +217,6 @@ public class CommandInterpreter {
                     break;
                 case "saveplayers":
                     log.println("Which direction? (w,a,s,d)");
-                    Player player= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                     switch (commandScanner.nextLine()) {
                         case "w":
                             gameInstance.savePlayers(Direction.UP);
