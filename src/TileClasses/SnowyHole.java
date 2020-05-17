@@ -1,6 +1,6 @@
 package TileClasses;
 
-import CLI.Game;
+import Control.Game;
 import PlayerClasses.Player;
 
 public class SnowyHole extends Tile {

@@ -1,6 +1,6 @@
 package JUnitTest.GlobalControllers;
 
-import CLI.Game;
+import Control.Game;
 import GlobalControllers.PositionLUT;
 import ItemClasses.*;
 import PlayerClasses.Player;

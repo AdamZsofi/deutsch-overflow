@@ -1,6 +1,6 @@
 package JUnitTest.PlayerClasses;
 
-import CLI.Game;
+import Control.Game;
 import PlayerClasses.PlayerContainer;
 import org.junit.BeforeClass;
 import org.junit.Test;
