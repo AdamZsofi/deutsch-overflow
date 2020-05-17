@@ -1,6 +1,8 @@
 package GUI;
 
+import GlobalControllers.PositionLUT;
 import PlayerClasses.PlayerContainer;
+import javafx.geometry.Pos;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -52,7 +54,8 @@ public class Menu extends JPanel  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PlayerContainer.Initialize(number, 3);
-                invalidate();
+                PositionLUT.getInstance().randInit();
+                InGame.getInstance().initComponents(Integer.parseInt(numLabel.getText()));
             }
         });
         add(minus);

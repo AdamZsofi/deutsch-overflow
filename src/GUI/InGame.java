@@ -50,8 +50,16 @@ public class InGame extends JFrame {
     //viszont InGame-n belul meghivathjuk enummal ->enum intte castolodik, es mindegyik enumnak van egy konkret erteke
     //enumot pl hasznalhatsz Tilon levo elemek, playerek draw(enum size==>>int) fgvnel
 
-    private void initComponents() {
-        initIcons();
+    protected static InGame inGame;
+
+    public static InGame getInstance() {
+        if(inGame == null) {
+            inGame = new InGame(6);
+        }
+        return inGame;
+    }
+    public void initComponents(int playerNum) {
+        initIcons(playerNum);
 
         //loading Tile Icons
         for (int i = 0 ; i < 6; i++) {
@@ -61,7 +69,7 @@ public class InGame extends JFrame {
         }
 
         //loading Player and Active Players Icons
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < playerNum; i++) {
             String p = PlayerContainer.getInstance().getPlayer(i).toString();
             players[i] = icons.get(p);
             activePlayers[i] = icons.get(p+ "-a");
@@ -72,21 +80,23 @@ public class InGame extends JFrame {
             for (int j = 0; j < 6; j++) {
                 Tile t =PositionLUT.getTile(i, j);
                 for (Item it : PositionLUT.getItemOnTile(t)) {
-                    elements[i][j].add(icons.get(it.toString()));
+                    System.out.println(icons.get(it.toString()));
+                    elements[i][j].add(icons.get(it.toString())); // HIBÁS
                 }
                 for (Player p : PositionLUT.getPlayersOnTile(t)) {
-                    elements[i][j].add(icons.get(p.toString()));
+                    System.out.println(icons.get(p.toString()));
+                    elements[i][j].add(icons.get(p.toString())); // HIBÁS
                 }
             }
         }
 
 
         //loading bodyHeats for all players => for PlayerBar (right-upper corner)
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < playerNum; i++) {
             bodyHeats[i] = PlayerContainer.getInstance().getPlayer(i).getBodyHeat();
         }
         //loading the handItem Icons for all players => for PlayerBar (right-upper corner)
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < playerNum; i++) {
             ArrayList<Item> items = PlayerContainer.getInstance().getPlayer(i).getItemsOnHand();
             for(Item it : items) {
                 hand[i].add(icons.get(it.toString()));
@@ -95,10 +105,10 @@ public class InGame extends JFrame {
 
     }
 
-    private void initIcons() {
+    private void initIcons(int playerNum) {
         //loading players
         //in runtime revealed if a player is eskimo or researcher
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < playerNum; i++) {
             String p = PlayerContainer.getInstance().getPlayer(i).toString();
             icons.put(p, new DrawingGUI(p +".svg"));
             icons.put(p +"-a", new DrawingGUI(p + "-a.svg"));
@@ -148,20 +158,15 @@ public class InGame extends JFrame {
     }
 
 
-    JPanel gamePanel = new JPanel();
-    Menu menu = new Menu();
+    static JPanel gamePanel = new JPanel();
+    static Menu menu = new Menu();
     InGame(int playersCount){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 850);
-        //TODO PLAYERCONTAINER INIT
+        //TODO PLAYERCONTAINER INIT (MENÜ-be lett áttéve mert nullptr ex.)
         add(menu);
-        //gamePanel.add(new Button("sdf"));
-        //add(gamePanel);
         setVisible(true);
-
-
-        //initComponents();
     }
     public static void main(String[] args){
         new InGame(6);

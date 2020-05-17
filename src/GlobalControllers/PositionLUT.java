@@ -215,7 +215,7 @@ public class PositionLUT {
      * Polarbear can spawn anywhere
      * at the beginning polarbear and player can't be on the same tile
      */
-    private static void randInit(){
+    public static void randInit(){ //public lett sry, mostmár a menüből van hivva
         tileList = new ArrayList<>();
         itemTileMap = new HashMap<>();
         tileItemMap = new HashMap<>();
