@@ -55,7 +55,8 @@ public class InGame extends JFrame {
 
     public static InGame getInstance() {
         if(inGame == null) {
-            inGame = new InGame();
+            //playercount
+            inGame = new InGame(6);
         }
         return inGame;
     }
@@ -162,10 +163,8 @@ public class InGame extends JFrame {
 
     static GamePanel gamePanel = null;
     static Menu menu = new Menu();
-    InGame() {
 
-    }
-    /*
+
     InGame(int playersCount){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -174,7 +173,7 @@ public class InGame extends JFrame {
         this.getContentPane().add(menu);
         setVisible(true);
     }
-     */
+
 
     public void changeScreen(){
         this.getContentPane().removeAll();
@@ -184,13 +183,14 @@ public class InGame extends JFrame {
         revalidate();
     }
     public static void main(String[] args){
+        /*
         JFrame frame = new JFrame();
         frame.setTitle("Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 850);
         frame.add(menu);
-
         frame.setVisible(true);
-        //inGame= new InGame(6);
+         */
+        inGame= new InGame(6);
     }
 }
