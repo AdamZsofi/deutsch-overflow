@@ -1,6 +1,6 @@
 package SnowStorm;
 
-import CLI.Game;
+import Control.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import PlayerClasses.Player;

@@ -1,6 +1,6 @@
 package JUnitTest.ItemClasses;
 
-import CLI.Game;
+import Control.Game;
 import ItemClasses.Item;
 import ItemClasses.ItemState;
 import ItemClasses.Shovel;

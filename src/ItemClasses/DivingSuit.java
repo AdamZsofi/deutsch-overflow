@@ -1,6 +1,6 @@
 package ItemClasses;
 
-import CLI.Game;
+import Control.Game;
 import PlayerClasses.Player;
 
 public class DivingSuit extends Item{

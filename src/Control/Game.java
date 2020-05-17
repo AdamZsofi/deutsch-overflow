@@ -1,4 +1,4 @@
-package CLI;
+package Control;
 
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;

@@ -1,5 +1,5 @@
 package PlayerClasses;
-import CLI.Game;
+import Control.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import ItemClasses.*;

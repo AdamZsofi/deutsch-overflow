@@ -1,4 +1,4 @@
-package CLI;
+package Control;
 
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
@@ -241,9 +241,6 @@ public class CommandInterpreter {
                     break;
                 case "passround":
                     gameInstance.passRound();
-                    break;
-                case "endgame": // NOTE: this one is new, but its useful for automated CLI tests
-                    ended = true;
                     break;
                 default:
                     log.println("There is no such command");
