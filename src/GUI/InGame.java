@@ -177,9 +177,7 @@ public class InGame extends JFrame {
      */
 
     public void changeScreen(){
-        System.out.println("h3ge");
         this.getContentPane().removeAll();
-        //frame.getContentPane().add(new JPanel());
         gamePanel = new GamePanel();
         add(gamePanel);
         gamePanel.refreshComponents();
