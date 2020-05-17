@@ -55,6 +55,7 @@ public class Menu extends JPanel  {
                 PlayerContainer.Initialize(number, 3);
                 PositionLUT.getInstance().randInit();
                 InGame.getInstance().initComponents(Integer.parseInt(numLabel.getText()));
+                InGame.getInstance().changeScreen();
             }
         });
         add(minus);
@@ -65,7 +66,7 @@ public class Menu extends JPanel  {
         minus.setSize(50,50);
         Image img = null;
         try {
-            img = ImageIO.read(new File("src\\GUI\\Pack\\start.jpg")); // átmenetileg, ha lesz hozzá kép annak a path-ja mehet helyette
+            img = ImageIO.read(new File("src\\GUI\\Pack\\minus.png")); // átmenetileg, ha lesz hozzá kép annak a path-ja mehet helyette
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,7 +92,7 @@ public class Menu extends JPanel  {
             image = ImageIO.read(new File("src\\GUI\\Pack\\start.jpg"));
         } catch (IOException e) {
         }
-        g2d.drawImage(image, 0, 0, null);
+        g2d.drawImage(image, 0, 0,null);
     }
 
 }

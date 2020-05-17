@@ -170,6 +170,10 @@ public class InGame extends JFrame {
         add(menu);
         setVisible(true);
     }
+
+    public void changeScreen(){
+
+    }
     public static void main(String[] args){
         inGame= new InGame(6);
     }

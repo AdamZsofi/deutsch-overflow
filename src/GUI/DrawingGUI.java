@@ -21,6 +21,5 @@ public class DrawingGUI {
     }
     public void draw(int x, int y, int size) {
     }
-    public BufferedImage getTexture(){return texture;}
 }
 
