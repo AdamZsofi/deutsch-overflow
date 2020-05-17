@@ -1,8 +1,5 @@
 package GUI;
 
-import GlobalControllers.PositionLUT;
-import PlayerClasses.PlayerContainer;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -15,21 +12,21 @@ import java.io.IOException;
 public class Menu extends JPanel  {
     JButton minus, plus, startGame;
     JLabel numLabel;
-    Integer number;
+    Integer playerNum;
 
     Menu(){
         setLayout(null);
-        number = 4;
-        numLabel = new JLabel(number.toString());
+        playerNum = 4;
+        numLabel = new JLabel(playerNum.toString());
         minus = new JButton();
 
         minus.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(number > 3) {
-                    numLabel.setText((--number).toString());
-                    if(number == 5) plus.validate();
+                if(playerNum > 3) {
+                    numLabel.setText((--playerNum).toString());
+                    if(playerNum == 5) plus.validate();
                 }
                 else minus.invalidate();
             }
@@ -39,9 +36,9 @@ public class Menu extends JPanel  {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(number < 6) {
-                    numLabel.setText((++number).toString());
-                    if(number == 4) minus.validate();
+                if(playerNum < 6) {
+                    numLabel.setText((++playerNum).toString());
+                    if(playerNum == 4) minus.validate();
                 }
                 else plus.invalidate();
             }
@@ -51,10 +48,12 @@ public class Menu extends JPanel  {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlayerContainer.Initialize(number, 3);
-                PositionLUT.getInstance().randInit();
-                InGame.getInstance().initComponents(Integer.parseInt(numLabel.getText()));
-                InGame.getInstance().changeScreen();
+                // TODO ugye nincs máshol Game-n kívül ilyen belső hívás??
+                // PlayerContainer.Initialize(number, 3);
+                // PositionLUT.getInstance().randInit();
+                // InGame.getInstance().initComponents(Integer.parseInt(numLabel.getText()));
+                // InGame.getInstance().changeScreen();
+                InGame.getInstance().changeToGameScreen(playerNum);
             }
         });
         add(minus);

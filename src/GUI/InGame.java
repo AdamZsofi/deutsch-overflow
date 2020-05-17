@@ -1,7 +1,9 @@
 package GUI;
 
+import Control.KeyboardInterpreter;
 import GlobalControllers.PositionLUT;
 import ItemClasses.Item;
+import Main.Main;
 import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
 import TileClasses.Tile;
@@ -12,6 +14,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static Main.Main.interpreter;
 
 
 public class InGame extends JFrame {
@@ -169,30 +173,36 @@ public class InGame extends JFrame {
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 850);
-        //TODO PLAYERCONTAINER INIT (MENÜ-be lett áttéve mert nullptr ex.)
+        //TODO PLAYERCONTAINER INIT (Végül maradt GAME-ben, mert az erre van)
         this.getContentPane().add(menu);
         setVisible(true);
     }
 
 
-    public void changeScreen(){
-        System.out.println("h3ge");
+    public void changeToGameScreen(int playerNum){
         this.getContentPane().removeAll();
         //frame.getContentPane().add(new JPanel());
         gamePanel = new GamePanel();
+
+        gamePanel.addKeyListener(Main.interpreter);
+        gamePanel.setFocusable(true);
+        Main.interpreter.startGame(playerNum);
+
         add(gamePanel);
         gamePanel.refreshComponents();
         revalidate();
     }
-    public static void main(String[] args){
+
+    public static void createWelcomeScreen() {
         /*
         JFrame frame = new JFrame();
         frame.setTitle("Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 850);
         frame.add(menu);
+
         frame.setVisible(true);
          */
-        inGame= new InGame(6);
+        inGame = new InGame(4);
     }
 }
