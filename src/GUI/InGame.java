@@ -55,7 +55,7 @@ public class InGame extends JFrame {
 
     public static InGame getInstance() {
         if(inGame == null) {
-            inGame = new InGame(6);
+            inGame = new InGame();
         }
         return inGame;
     }
@@ -77,7 +77,7 @@ public class InGame extends JFrame {
         }
 
         //loading elements on Tile (Items+Player) Icons
-        /*for (int i = 0 ; i < 6; i++) { // TODO: null-t ad vissza az icons.get() valamiért, egyenlőre kikommenteltem, valaki pls nézzen rá hátha tudja miert
+        /*for (int i = 0 ; i < 6; i++) { // TODO posLutot elotte inicializalni!!
             for (int j = 0; j < 6; j++) {
                 Tile t =PositionLUT.getTile(i, j);
                 for (Item it : PositionLUT.getItemOnTile(t)) {
@@ -121,21 +121,21 @@ public class InGame extends JFrame {
         icons.put("P-a", new DrawingGUI("P-a"));
 
         //loading items
-        icons.put("divingSuitT", new DrawingGUI("divingSuitT"));
+        icons.put("divingSuit", new DrawingGUI("divingSuit"));
         icons.put("divingSuitF", new DrawingGUI("divingSuitF"));
-        icons.put("foodT", new DrawingGUI("foodT"));
+        icons.put("food", new DrawingGUI("food"));
         icons.put("foodF", new DrawingGUI("foodF"));
-        icons.put("fragileShovelT", new DrawingGUI("fragileShovelT"));
+        icons.put("fragileShovel", new DrawingGUI("fragileShovel"));
         icons.put("fragileShovelF", new DrawingGUI("fragileShovelF"));
-        icons.put("signalflarePart1T", new DrawingGUI("signalflarePart1T"));
+        icons.put("signalflarePart1", new DrawingGUI("signalflarePart1"));
         icons.put("signalflarePart1F", new DrawingGUI("signalflarePart1F"));
-        icons.put("signalflarePart2T", new DrawingGUI("signalflarePart2T"));
+        icons.put("signalflarePart2", new DrawingGUI("signalflarePart2"));
         icons.put("signalflarePart2F", new DrawingGUI("signalflarePart2F"));
-        icons.put("signalflarePart3T", new DrawingGUI("signalflarePart0T"));
+        icons.put("signalflarePart3", new DrawingGUI("signalflarePart0"));
         icons.put("signalflarePart3F", new DrawingGUI("signalflarePart0F"));
-        icons.put("ropeT", new DrawingGUI("ropeT"));
+        icons.put("rope", new DrawingGUI("rope"));
         icons.put("ropeF", new DrawingGUI("ropeF"));
-        icons.put("shovelT", new DrawingGUI("shovelT"));
+        icons.put("shovel", new DrawingGUI("shovel"));
         icons.put("shovelF", new DrawingGUI("shovelF"));
 
         //other actions
@@ -162,6 +162,10 @@ public class InGame extends JFrame {
 
     static GamePanel gamePanel = null;
     static Menu menu = new Menu();
+    InGame() {
+
+    }
+    /*
     InGame(int playersCount){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -170,6 +174,7 @@ public class InGame extends JFrame {
         this.getContentPane().add(menu);
         setVisible(true);
     }
+     */
 
     public void changeScreen(){
         System.out.println("h3ge");
@@ -181,6 +186,13 @@ public class InGame extends JFrame {
         revalidate();
     }
     public static void main(String[] args){
-        inGame= new InGame(6);
+        JFrame frame = new JFrame();
+        frame.setTitle("Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1200, 850);
+        frame.add(menu);
+
+        frame.setVisible(true);
+        //inGame= new InGame(6);
     }
 }
