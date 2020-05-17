@@ -112,51 +112,51 @@ public class InGame extends JFrame {
         //in runtime revealed if a player is eskimo or researcher
         for (int i = 0; i < playerNum; i++) {
             String p = PlayerContainer.getInstance().getPlayer(i).toString();
-            icons.put(p, new DrawingGUI(p +".png"));
-            icons.put(p +"-a", new DrawingGUI(p + "-a.png"));
+            icons.put(p, new DrawingGUI(p ));
+            icons.put(p +"-a", new DrawingGUI(p + "-a"));
         }
 
         //loading polarbear
-        icons.put("P", new DrawingGUI("P.png"));
-        icons.put("P-a", new DrawingGUI("P-a.png"));
+        icons.put("P", new DrawingGUI("P"));
+        icons.put("P-a", new DrawingGUI("P-a"));
 
         //loading items
-        icons.put("divingSuitT", new DrawingGUI("divingSuitT.png"));
-        icons.put("divingSuitF", new DrawingGUI("divingSuitF.png"));
-        icons.put("foodT", new DrawingGUI("foodT.png"));
-        icons.put("foodF", new DrawingGUI("foodF.png"));
-        icons.put("fragileShovelT", new DrawingGUI("fragileShovelT.png"));
-        icons.put("fragileShovelF", new DrawingGUI("fragileShovelF.png"));
-        icons.put("signalflarePart1T", new DrawingGUI("signalflarePart1T.png"));
-        icons.put("signalflarePart1F", new DrawingGUI("signalflarePart1F.png"));
-        icons.put("signalflarePart2T", new DrawingGUI("signalflarePart2T.png"));
-        icons.put("signalflarePart2F", new DrawingGUI("signalflarePart2F.png"));
-        icons.put("signalflarePart3T", new DrawingGUI("signalflarePart0T.png"));
-        icons.put("signalflarePart3F", new DrawingGUI("signalflarePart0F.png"));
-        icons.put("ropeT", new DrawingGUI("ropeT.png"));
-        icons.put("ropeF", new DrawingGUI("ropeF.png"));
-        icons.put("shovelT", new DrawingGUI("shovelT.png"));
-        icons.put("shovelF", new DrawingGUI("shovelF.png"));
+        icons.put("divingSuitT", new DrawingGUI("divingSuitT"));
+        icons.put("divingSuitF", new DrawingGUI("divingSuitF"));
+        icons.put("foodT", new DrawingGUI("foodT"));
+        icons.put("foodF", new DrawingGUI("foodF"));
+        icons.put("fragileShovelT", new DrawingGUI("fragileShovelT"));
+        icons.put("fragileShovelF", new DrawingGUI("fragileShovelF"));
+        icons.put("signalflarePart1T", new DrawingGUI("signalflarePart1T"));
+        icons.put("signalflarePart1F", new DrawingGUI("signalflarePart1F"));
+        icons.put("signalflarePart2T", new DrawingGUI("signalflarePart2T"));
+        icons.put("signalflarePart2F", new DrawingGUI("signalflarePart2F"));
+        icons.put("signalflarePart3T", new DrawingGUI("signalflarePart0T"));
+        icons.put("signalflarePart3F", new DrawingGUI("signalflarePart0F"));
+        icons.put("ropeT", new DrawingGUI("ropeT"));
+        icons.put("ropeF", new DrawingGUI("ropeF"));
+        icons.put("shovelT", new DrawingGUI("shovelT"));
+        icons.put("shovelF", new DrawingGUI("shovelF"));
 
         //other actions
-        icons.put("capacity", new DrawingGUI("capacity.png"));
-        icons.put("clearSnow", new DrawingGUI("clearSnow.png"));
-        icons.put("digUp", new DrawingGUI("digUp.png"));
-        icons.put("igloo", new DrawingGUI("igloo.png"));
-        icons.put("passRound", new DrawingGUI("passRound.png"));
-        icons.put("pickUp", new DrawingGUI("pickUp.png"));
-        icons.put("tent", new DrawingGUI("tent.png"));
+        icons.put("capacity", new DrawingGUI("capacity"));
+        icons.put("clearSnow", new DrawingGUI("clearSnow"));
+        icons.put("digUp", new DrawingGUI("digUp"));
+        icons.put("igloo", new DrawingGUI("igloo"));
+        icons.put("passRound", new DrawingGUI("passRound"));
+        icons.put("pickUp", new DrawingGUI("pickUp"));
+        icons.put("tent", new DrawingGUI("tent"));
 
         //loading tiles
-        icons.put("tileNoSnow", new DrawingGUI("tileNoSnow.png"));
-        icons.put("tileSnow", new DrawingGUI("tileSnow.png"));
-        icons.put("tileWater", new DrawingGUI("tileWater.png"));
+        icons.put("tileNoSnow", new DrawingGUI("tileNoSnow"));
+        icons.put("tileSnow", new DrawingGUI("tileSnow"));
+        icons.put("tileWater", new DrawingGUI("tileWater"));
         //other icons
-        icons.put("snow", new DrawingGUI("snow.png"));
-        icons.put("inWater", new DrawingGUI("inWater.png"));
-        icons.put("heart", new DrawingGUI("heart.png"));
-        icons.put("warning", new DrawingGUI("warning.png"));
-        icons.put("workingPoints", new DrawingGUI("workingPoints.png"));
+        icons.put("snow", new DrawingGUI("snow"));
+        icons.put("inWater", new DrawingGUI("inWater"));
+        icons.put("heart", new DrawingGUI("heart"));
+        icons.put("warning", new DrawingGUI("warning"));
+        icons.put("workingPoints", new DrawingGUI("workingPoints"));
     }
 
 

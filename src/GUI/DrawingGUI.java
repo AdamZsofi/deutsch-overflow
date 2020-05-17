@@ -14,7 +14,7 @@ public class DrawingGUI {
 
         String name = null;
         try {
-            name = "./src/GUI/Pack/" + textureName;
+            name = "./src/GUI/Pack/" + textureName + ".png" ;
             texture = ImageIO.read(new File(name));
         } catch (Exception e) {
             System.out.println("File cannot opened");
