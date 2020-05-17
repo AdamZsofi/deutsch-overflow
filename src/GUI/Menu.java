@@ -22,7 +22,7 @@ public class Menu extends JPanel  {
         setLayout(null);
         number = 4;
         numLabel = new JLabel(number.toString());
-        minus = new JButton("-");
+        minus = new JButton();
 
         minus.addActionListener(new ActionListener() {
 
@@ -35,7 +35,7 @@ public class Menu extends JPanel  {
                 else minus.invalidate();
             }
         });
-        plus = new JButton("+");
+        plus = new JButton();
         plus.addActionListener(new ActionListener() {
 
             @Override
@@ -64,13 +64,22 @@ public class Menu extends JPanel  {
         add(startGame);
         minus.setLocation(500,300);
         minus.setSize(50,50);
-        Image img = null;
+        Image imgMinus = null;
+        Image imgPlus= null;
         try {
-            img = ImageIO.read(new File("src\\GUI\\Pack\\minus.png")); // átmenetileg, ha lesz hozzá kép annak a path-ja mehet helyette
+            imgMinus = ImageIO.read(new File("src\\GUI\\Pack\\minus.png"));
+            imgPlus = ImageIO.read(new File("src\\GUI\\Pack\\plus.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        minus.setIcon(new ImageIcon(img));
+        Image newimgMinus = imgMinus.getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;
+        Image newimgPlus = imgPlus.getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;
+
+        minus.setIcon(new ImageIcon(newimgMinus));
+        plus.setIcon(new ImageIcon(newimgPlus));
+        startGame.setOpaque(false);
+        startGame.setContentAreaFilled(false);
+
         plus.setLocation(600,300);
         plus.setSize(50,50);
         startGame.setLocation(500,350);
@@ -79,7 +88,6 @@ public class Menu extends JPanel  {
         numLabel.setSize(50,50);
         numLabel.setFont(new Font("Serif", Font.PLAIN, 34));
         startGame.setFont(new Font("Serif", Font.PLAIN, 24));
-        plus.setFont(new Font("Serif", Font.PLAIN, 27)); // majd kép lesz helyette csak még nincs kép (+,- ról)
         setVisible(true);
     }
 
