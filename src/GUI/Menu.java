@@ -2,7 +2,6 @@ package GUI;
 
 import GlobalControllers.PositionLUT;
 import PlayerClasses.PlayerContainer;
-import javafx.geometry.Pos;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -68,8 +67,8 @@ public class Menu extends JPanel  {
         Image imgPlus= null;
 
         try {
-            imgMinus = ImageIO.read(new File("src\\GUI\\Pack\\minus.png"));
-            imgPlus = ImageIO.read(new File("src\\GUI\\Pack\\plus.png"));
+            imgMinus = ImageIO.read(new File("src/GUI/Pack/minus.png"));
+            imgPlus = ImageIO.read(new File("src/GUI/Pack/plus.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,7 +98,7 @@ public class Menu extends JPanel  {
         Graphics2D g2d = (Graphics2D) g;
         BufferedImage image = null;//new ImageIcon("GUI/Pack/start.jpg");
         try {
-            image = ImageIO.read(new File("src\\GUI\\Pack\\start.jpg"));
+            image = ImageIO.read(new File("src/GUI/Pack/start.jpg"));
         } catch (IOException e) {
         }
         g2d.drawImage(image, 0, 0,null);
