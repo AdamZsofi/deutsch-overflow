@@ -34,11 +34,18 @@ public class KeyboardInterpreter implements KeyListener {
 
     /**
      * @param out used as output of game
+     * @author Zsófi
+    */
+    public KeyboardInterpreter(PrintStream out) {
+        log = out;
+        state = InputAcceptingState.waiting_command;
+    }
+
+    /**
      * @param numOfPlayers Number of players in game
      * @author Zsófi
      */
-    public void startGame(PrintStream out, int numOfPlayers) {
-        log = out;
+    public void startGame(int numOfPlayers) {
         gameInstance = Game.startRandomGame(log, numOfPlayers);
     }
 
@@ -64,6 +71,8 @@ public class KeyboardInterpreter implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
+        // debug:
+        System.out.println("Key " + e.getKeyChar() + " released");
         switch (state) {
             case waiting_command:
                 commandArrived(e);
@@ -99,26 +108,23 @@ public class KeyboardInterpreter implements KeyListener {
                 Player p = PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                 Tile currentTile = PositionLUT.getInstance().getPosition(p);
                 ArrayList<Item> items = PositionLUT.getInstance().getItemOnTile(currentTile);
+                if(items.size() == 0)
+                    break;
                 for(Item i : items) {
                     if(i.getState().equals(ItemState.frozen))
-                        items.remove(i);
-                    if(items.size() == 0)
-                        break;
+                        gameInstance.pickUp(i); // elvileg már csak egy maradhatott a listában TODO ellenőrizni
                 }
-                // elvileg már csak egy maradhatott a listában TODO ellenőrizni
-                gameInstance.pickUp(items.get(0));
                 break;
             case KeyEvent.VK_D:
                 Player p1 = PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                 Tile currentTile1= PositionLUT.getInstance().getPosition(p1);
                 ArrayList<Item> items1 = PositionLUT.getInstance().getItemOnTile(currentTile1);
+                if(items1.size() == 0)
+                    break;
                 for(Item ii : items1) {
                     if(!ii.getState().equals(ItemState.frozen))
-                        items1.remove(ii);
-                    if(items1.size()== 0)
-                        break;
+                        gameInstance.digItemUp(ii); // elvileg csak egy lehet ott befagyva
                 }
-                gameInstance.digItemUp(items1.get(0)); // elvileg csak egy lehet ott befagyva
                 break;
             case KeyEvent.VK_U:
                 Player p2 = PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
