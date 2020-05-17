@@ -160,20 +160,25 @@ public class InGame extends JFrame {
     }
 
 
-    static GamePanel gamePanel = new GamePanel();
+    static GamePanel gamePanel = null;
     static Menu menu = new Menu();
     InGame(int playersCount){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 850);
         //TODO PLAYERCONTAINER INIT (MENÜ-be lett áttéve mert nullptr ex.)
-        //add(menu);
-        add(gamePanel);
+        this.getContentPane().add(menu);
         setVisible(true);
     }
 
     public void changeScreen(){
-
+        System.out.println("h3ge");
+        this.getContentPane().removeAll();
+        //frame.getContentPane().add(new JPanel());
+        gamePanel = new GamePanel();
+        add(gamePanel);
+        gamePanel.refreshComponents();
+        revalidate();
     }
     public static void main(String[] args){
         inGame= new InGame(6);

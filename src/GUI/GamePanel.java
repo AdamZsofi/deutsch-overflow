@@ -110,9 +110,6 @@ public class GamePanel extends JPanel {
 
     public void paintComponent (Graphics g)
     {
-        PlayerContainer.Initialize(4,0);
-        PositionLUT.getInstance().randInit();
-        initIcons(4);
         refreshComponents();
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
