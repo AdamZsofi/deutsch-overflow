@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageTranscoder;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.Buffer;
 
 public class DrawingGUI {
     private BufferedImage texture;
@@ -20,6 +21,6 @@ public class DrawingGUI {
     }
     public void draw(int x, int y, int size) {
     }
-
+    public BufferedImage getTexture(){return texture;}
 }
 

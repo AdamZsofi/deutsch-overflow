@@ -8,6 +8,7 @@ import TileClasses.Tile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,19 +77,20 @@ public class InGame extends JFrame {
         }
 
         //loading elements on Tile (Items+Player) Icons
-        for (int i = 0 ; i < 6; i++) {
+        /*for (int i = 0 ; i < 6; i++) { // TODO: null-t ad vissza az icons.get() valamiért, egyenlőre kikommenteltem, valaki pls nézzen rá hátha tudja miert
             for (int j = 0; j < 6; j++) {
                 Tile t =PositionLUT.getTile(i, j);
                 for (Item it : PositionLUT.getItemOnTile(t)) {
+                    System.out.println(it);
                     System.out.println(icons.get(it.toString()));
-                    elements[i][j].add(icons.get(it.toString())); // HIBÁS
+                    elements[i][j].add(icons.get(it.toString())); // HIBÁS TODO*
                 }
                 for (Player p : PositionLUT.getPlayersOnTile(t)) {
-                    System.out.println(icons.get(p.toString()));
-                    elements[i][j].add(icons.get(p.toString())); // HIBÁS
+                    System.out.println(icons.get(p));
+                    elements[i][j].add(icons.get(p.toString())); // HIBÁS //TODO*
                 }
             }
-        }
+        }*/
 
 
         //loading bodyHeats for all players => for PlayerBar (right-upper corner)
@@ -169,6 +171,6 @@ public class InGame extends JFrame {
         setVisible(true);
     }
     public static void main(String[] args){
-        new InGame(6);
+        inGame= new InGame(6);
     }
 }

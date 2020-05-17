@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Menu extends JPanel  {
-    //JPanel menuPanel = new JPanel(new GridBagLayout());
     JButton minus, plus, startGame;
     JLabel numLabel;
     Integer number;
