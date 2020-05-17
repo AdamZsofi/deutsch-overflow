@@ -174,5 +174,11 @@ public abstract class Tile {
     }
     public abstract String toString();
 
+    public int getX() {
+        return x;
+    }
 
+    public int getY() {
+        return y;
+    }
 }

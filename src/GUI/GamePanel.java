@@ -1,7 +1,12 @@
 package GUI;
 
 import GlobalControllers.PositionLUT;
+import GlobalControllers.RoundController;
+import ItemClasses.Item;
+import ItemClasses.ItemState;
+import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
+import PlayerClasses.PolarBear;
 import TileClasses.Tile;
 
 import javax.imageio.ImageIO;
@@ -87,24 +92,66 @@ public class GamePanel extends JPanel {
      * fills up components from positionLUT
      *
      */
-    void refreshComponents(){
+    void refreshComponents() {
         components.clear();
 
         //loading tiles from positionLUT
-        for(int x = 0; x < 6; x++){
-            for(int y = 0; y < 6; y++) {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
                 DrawingGUI dgui = new DrawingGUI((PositionLUT.getTile(x, y).toString()));
                 try {
                     dgui.texture = ImageIO.read(new File("src/GUI/Pack/ice"));
                 } catch (IOException e) {
                 }
-                dgui.x = tileCorner + x* (tileSize+1);
-                dgui.y = tileCorner + y* (tileSize+1);
+                dgui.x = tileCorner + x * (tileSize + 1);
+                dgui.y = tileCorner + y * (tileSize + 1);
                 dgui.width = tileSize;
                 dgui.height = tileSize;
                 components.add(dgui);
             }
         }
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
+                ArrayList<Player> players = PositionLUT.getPlayersOnTile(PositionLUT.getTile(x, y));
+                for (Player p : players) {
+                    DrawingGUI dgui = new DrawingGUI(p.toString());
+                    try {
+                        dgui.texture = ImageIO.read(new File("src/GUI/Pack/" + p.toString()));
+                    } catch (IOException e) {
+                    }
+                    dgui.x = tileCorner + x * (tileSize + 1)+5;
+                    dgui.y = tileCorner + y * (tileSize + 1)+70;
+                    dgui.width = 25;
+                    dgui.height = 25;
+                    components.add(dgui);
+                }
+            }
+        }
+        //loading items from positionLUT
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
+                ArrayList<Item> iList = PositionLUT.getItemOnTile(PositionLUT.getTile(x, y));
+                for (Item item : iList) {
+                    if (item.getState() == ItemState.thrownDown) {
+                        DrawingGUI dgui = new DrawingGUI(item.toString()); //lehet így, nem kell iconsokat hasznalni
+                        dgui.x = tileCorner + x * (tileSize + 1) + 65;
+                        dgui.y = tileCorner + y * (tileSize + 1) + 65;
+                        dgui.width = 30;
+                        dgui.height = 30;
+                        components.add(dgui);
+                    }
+                }
+            }
+        }
+        Tile tile = PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
+        int x= tile.getX();
+        int y = tile.getY();
+        DrawingGUI dgui = new DrawingGUI(RoundController.getInstance().polarbear.toString()); //lehet így, nem kell iconsokat hasznalni
+        dgui.x = tileCorner + x * (tileSize + 1) + 25;
+        dgui.y = tileCorner + y * (tileSize + 1) + 25;
+        dgui.width = 50;
+        dgui.height = 50;
+        components.add(dgui);
     }
 
 
