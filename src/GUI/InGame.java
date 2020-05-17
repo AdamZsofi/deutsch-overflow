@@ -160,14 +160,15 @@ public class InGame extends JFrame {
     }
 
 
-    static JPanel gamePanel = new JPanel();
+    static GamePanel gamePanel = new GamePanel();
     static Menu menu = new Menu();
     InGame(int playersCount){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 850);
         //TODO PLAYERCONTAINER INIT (MENÜ-be lett áttéve mert nullptr ex.)
-        add(menu);
+        //add(menu);
+        add(gamePanel);
         setVisible(true);
     }
 

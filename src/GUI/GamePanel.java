@@ -1,6 +1,8 @@
 package GUI;
 
+import GlobalControllers.PositionLUT;
 import PlayerClasses.PlayerContainer;
+import TileClasses.Tile;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,11 +16,18 @@ import java.util.Map;
 
 public class GamePanel extends JPanel {
 
+    int tileCorner = 50;
+    int tileSize = 100;
+
     private Map<String, DrawingGUI> icons = new HashMap<String, DrawingGUI>();
     /**
      * collection of components from positionLUT
      */
     ArrayList<DrawingGUI> components = new ArrayList<>();
+
+    GamePanel(){
+        setLayout(new GridBagLayout());
+    }
 
     private void initIcons(int playerNum) {
         //loading players
@@ -61,9 +70,9 @@ public class GamePanel extends JPanel {
         icons.put("tent", new DrawingGUI("tent.svg"));
 
         //loading tiles
-        icons.put("tileNoSnow", new DrawingGUI("tileNoSnow.svg"));
-        icons.put("tileSnow", new DrawingGUI("tileSnow.svg"));
-        icons.put("tileWater", new DrawingGUI("tileWater.svg"));
+        icons.put("tileNoSnow", new DrawingGUI("ice.png"));
+        icons.put("tileSnow", new DrawingGUI("ice.png"));
+        icons.put("tileWater", new DrawingGUI("ice.png"));
         //other icons
         icons.put("snow", new DrawingGUI("snow.svg"));
         icons.put("inWater", new DrawingGUI("inWater.svg"));
@@ -80,9 +89,20 @@ public class GamePanel extends JPanel {
      */
     void refreshComponents(){
         components.clear();
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 6; j++) {
-                components.add(DrawingGUI());
+
+        //loading tiles from positionLUT
+        for(int x = 0; x < 6; x++){
+            for(int y = 0; y < 6; y++) {
+                DrawingGUI dgui = new DrawingGUI((PositionLUT.getTile(x, y).toString()));
+                try {
+                    dgui.texture = ImageIO.read(new File("src\\GUI\\Pack\\ice.png"));
+                } catch (IOException e) {
+                }
+                dgui.x = tileCorner + x* (tileSize+1);
+                dgui.y = tileCorner + y* (tileSize+1);
+                dgui.width = tileSize;
+                dgui.height = tileSize;
+                components.add(dgui);
             }
         }
     }
@@ -90,6 +110,10 @@ public class GamePanel extends JPanel {
 
     public void paintComponent (Graphics g)
     {
+        PlayerContainer.Initialize(4,0);
+        PositionLUT.getInstance().randInit();
+        initIcons(4);
+        refreshComponents();
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         BufferedImage image = null;//new ImageIcon("GUI/Pack/start.jpg");
@@ -100,6 +124,8 @@ public class GamePanel extends JPanel {
         for (DrawingGUI dg:components) {
             g2d.drawImage(dg.texture, dg.x, dg.y, dg.width, dg.height, null);
         }
+        setVisible(true);
+
     }
 
 }
