@@ -19,7 +19,6 @@ public class DrawingGUI {
         } catch (Exception e) {
             System.out.println("File cannot opened");
         }
-        System.out.println(name);
     }
 }
 
