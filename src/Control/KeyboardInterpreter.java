@@ -76,6 +76,7 @@ public class KeyboardInterpreter implements KeyListener {
     }
 
     /**
+     * If a command arrives (when the game is accepting commands), it will be handled here
      * @param e KeyEvent of command
      * @author Zsófi
      */
@@ -146,6 +147,11 @@ public class KeyboardInterpreter implements KeyListener {
         if(state.equals(InputAcceptingState.disabled)) state = InputAcceptingState.waiting_command;
     }
 
+    /**
+     * If we were waiting for a secondary command (argument) for savePlayers, it will be handled here, when it arrives
+     * @param e KeyEvent of command
+     * @author Zsófi
+     */
     private void savingReady(KeyEvent e) {
         state = InputAcceptingState.disabled;
         switch (e.getKeyCode()) {
@@ -165,6 +171,11 @@ public class KeyboardInterpreter implements KeyListener {
         state = InputAcceptingState.waiting_command;
     }
 
+    /**
+     * If we were waiting for a secondary command (argument) for researcher's useSkill, it will be handled here, when it arrives
+     * @param e KeyEvent of command
+     * @author Zsófi
+     */
     private void researcherSkillReady(KeyEvent e) {
         state = InputAcceptingState.disabled;
         switch (e.getKeyCode()) {
@@ -179,6 +190,9 @@ public class KeyboardInterpreter implements KeyListener {
                 break;
             case KeyEvent.VK_RIGHT:
                 gameInstance.detectCapacity(Direction.RIGHT);
+                break;
+            case KeyEvent.VK_H:
+                gameInstance.detectCapacity(Direction.HERE);
                 break;
         }
         state = InputAcceptingState.waiting_command;
