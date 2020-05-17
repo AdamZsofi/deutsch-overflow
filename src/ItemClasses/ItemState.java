@@ -13,6 +13,6 @@ public enum ItemState {
         if(is.equals(frozen))
             return "F";
         else
-            return "T";
+            return "";
     }
 }

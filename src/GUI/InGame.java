@@ -121,21 +121,21 @@ public class InGame extends JFrame {
         icons.put("P-a", new DrawingGUI("P-a"));
 
         //loading items
-        icons.put("divingSuitT", new DrawingGUI("divingSuitT"));
+        icons.put("divingSuit", new DrawingGUI("divingSuit"));
         icons.put("divingSuitF", new DrawingGUI("divingSuitF"));
-        icons.put("foodT", new DrawingGUI("foodT"));
+        icons.put("food", new DrawingGUI("food"));
         icons.put("foodF", new DrawingGUI("foodF"));
-        icons.put("fragileShovelT", new DrawingGUI("fragileShovelT"));
+        icons.put("fragileShovel", new DrawingGUI("fragileShovel"));
         icons.put("fragileShovelF", new DrawingGUI("fragileShovelF"));
-        icons.put("signalflarePart1T", new DrawingGUI("signalflarePart1T"));
+        icons.put("signalflarePart1", new DrawingGUI("signalflarePart1"));
         icons.put("signalflarePart1F", new DrawingGUI("signalflarePart1F"));
-        icons.put("signalflarePart2T", new DrawingGUI("signalflarePart2T"));
+        icons.put("signalflarePart2", new DrawingGUI("signalflarePart2"));
         icons.put("signalflarePart2F", new DrawingGUI("signalflarePart2F"));
-        icons.put("signalflarePart3T", new DrawingGUI("signalflarePart0T"));
+        icons.put("signalflarePart3", new DrawingGUI("signalflarePart0"));
         icons.put("signalflarePart3F", new DrawingGUI("signalflarePart0F"));
-        icons.put("ropeT", new DrawingGUI("ropeT"));
+        icons.put("rope", new DrawingGUI("rope"));
         icons.put("ropeF", new DrawingGUI("ropeF"));
-        icons.put("shovelT", new DrawingGUI("shovelT"));
+        icons.put("shovel", new DrawingGUI("shovel"));
         icons.put("shovelF", new DrawingGUI("shovelF"));
 
         //other actions
