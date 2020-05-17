@@ -2,6 +2,7 @@ package GUI;
 
 import GlobalControllers.PositionLUT;
 import PlayerClasses.PlayerContainer;
+import javafx.geometry.Pos;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,10 +19,11 @@ public class Menu extends JPanel  {
     Integer number;
 
     Menu(){
-        setLayout(new GridBagLayout());
+        setLayout(null);
         number = 4;
         numLabel = new JLabel(number.toString());
         minus = new JButton("-");
+
         minus.addActionListener(new ActionListener() {
 
             @Override
@@ -64,7 +66,7 @@ public class Menu extends JPanel  {
         minus.setSize(50,50);
         Image img = null;
         try {
-            img = ImageIO.read(new File("src\\GUI\\Pack\\ice.png")); // átmenetileg, ha lesz hozzá kép annak a path-ja mehet helyette
+            img = ImageIO.read(new File("src\\GUI\\Pack\\minus.png")); // átmenetileg, ha lesz hozzá kép annak a path-ja mehet helyette
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,7 +81,6 @@ public class Menu extends JPanel  {
         startGame.setFont(new Font("Serif", Font.PLAIN, 24));
         plus.setFont(new Font("Serif", Font.PLAIN, 27)); // majd kép lesz helyette csak még nincs kép (+,- ról)
         setVisible(true);
-
     }
 
     public void paintComponent (Graphics g)
@@ -92,7 +93,6 @@ public class Menu extends JPanel  {
         } catch (IOException e) {
         }
         g2d.drawImage(image, 0, 0,null);
-        g2d.drawImage(image, 0, 0,500,600,null);
     }
 
 }
