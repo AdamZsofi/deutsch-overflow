@@ -1,5 +1,6 @@
 package PlayerClasses;
 import Control.Game;
+import GlobalControllers.GameEndCause;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import ItemClasses.*;
@@ -39,7 +40,7 @@ public abstract class Player {
         Game.log.format("# Player>startRound : next Player is %d\n", ID);
 
         // check, if the player is freezing to death
-        if(inWater && wearing == null) { RoundController.getInstance().lose("A player froze in the water"); }
+        if(inWater && wearing == null) { RoundController.getInstance().lose(GameEndCause.water); }
     }
 
     /**
@@ -86,7 +87,7 @@ public abstract class Player {
         Game.log.format("# Player>changeBodyHeat : Player (PlayerId:%d) bodyHeat is changed to %d (by %d much)\n", ID, BodyHeat+thisMuch, thisMuch);
         BodyHeat += thisMuch;
         if(BodyHeat==0){
-            RoundController.getInstance().lose("Hypothermia");
+            RoundController.getInstance().lose(GameEndCause.hypothermia);
         }
     }
 

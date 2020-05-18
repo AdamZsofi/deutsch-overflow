@@ -1,6 +1,7 @@
 package GlobalControllers;
 
 import Control.Game;
+import GUI.GameEndPopup;
 import ItemClasses.SignalFlare;
 import ItemClasses.Tent;
 import PlayerClasses.PolarBear;
@@ -73,9 +74,8 @@ public class RoundController {
      * Lose of game -> System exit
      * @param cause String of reason
      */
-    public void lose(String cause) {
-        JFrame frame = new JFrame("Game ended");
-        JOptionPane.showMessageDialog(frame, cause + "\nYou lost the game!");
+    public void lose(GameEndCause cause) {
+        GameEndPopup.showPopup(cause);
         Game.log.format("! RoundController>lose : You lose the game, cause: %s\n", cause);
         Game.log.println("$ RoundController>lose : Game lost, ended");
         System.exit(1);
@@ -85,8 +85,7 @@ public class RoundController {
      * Win of game -> System exit
      */
     public void win() {
-        JFrame frame = new JFrame("Game ended");
-        JOptionPane.showMessageDialog(frame, "You win the game!\nCongratulations!");
+        GameEndPopup.showPopup(GameEndCause.win);
         Game.log.println("$ RoundController>win : Game won, ended");
         System.exit(1);
     }
