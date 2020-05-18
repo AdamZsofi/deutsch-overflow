@@ -17,6 +17,10 @@ import java.util.Map;
 
 public class GamePanel extends JPanel {
 
+    public static boolean capacityEnabled = false;
+    public static int capacotyOnTile;
+    public static int capacotyX;
+    public static int capacotyY;
     int panelHeight = getHeight();
     int panelWidth = getWidth();
 
@@ -101,10 +105,11 @@ public class GamePanel extends JPanel {
      *
      */
     void refreshComponents() {
-        i++;
-        System.out.println(i.toString());
         components.clear();
         removeAll();
+        //revalidate();
+        i++;
+        System.out.println(i.toString());
 
         //loading tiles from positionLUT
         for (int x = 0; x < 6; x++) {
@@ -200,6 +205,9 @@ public class GamePanel extends JPanel {
         DrawingGUI dguiW = icons.get("workingPoints").getImage(8*tileSize+10, 6*tileSize+10, 40);
         components.add(dguiW);
 
+        DrawingGUI capacitygui = icons.get("capacity").getImage(8*tileSize+15, 5*tileSize, 30);
+        components.add(capacitygui);
+
         Label workingPointsLabel= new Label(Integer.toString(activePlayer.workPoints));
         this.add(workingPointsLabel);
         workingPointsLabel.setLocation(8*tileSize+60,6*tileSize+15);
@@ -207,11 +215,20 @@ public class GamePanel extends JPanel {
         workingPointsLabel.setFont(new Font("Serif", Font.PLAIN, 34));
 
 
-        Label snowLabel= new Label("-");
+        Label snowLabel= new Label(Integer.toString(PositionLUT.getPosition(activePlayer).standingHere));
         this.add(snowLabel);
         snowLabel.setLocation(8*tileSize+60,5*tileSize+70);
         snowLabel.setSize(30,30);
         snowLabel.setFont(new Font("Serif", Font.PLAIN, 34));
+
+        String capacity = "-";
+        if(capacityEnabled){
+            capacity = "Capacity on Tile (" +Integer.toString(capacotyX) + ";" +Integer.toString(capacotyX) + " ) is "+ Integer.toString(capacotyOnTile) + ".";
+        }
+        Label capacityLabel= new Label(capacity);
+        this.add(capacityLabel);
+        capacityLabel.setLocation(8*tileSize+60,5*tileSize);
+        capacityLabel.setSize(200,30);
 
 
     }
@@ -221,6 +238,7 @@ public class GamePanel extends JPanel {
     @Override
     public void paint(Graphics g)
     {
+
         if(Game.dirty){
         refreshComponents();
         }
@@ -229,6 +247,7 @@ public class GamePanel extends JPanel {
         for (DrawingGUI dg : components) {
             g2d.drawImage(dg.texture, dg.x, dg.y, dg.width, dg.height, null);
         }
+        System.out.println("Szia");
         setVisible(true);
 
     }

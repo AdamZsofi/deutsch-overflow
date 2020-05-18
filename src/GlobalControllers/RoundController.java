@@ -2,6 +2,7 @@ package GlobalControllers;
 
 import Control.Game;
 import GUI.GameEndPopup;
+import GUI.GamePanel;
 import ItemClasses.SignalFlare;
 import ItemClasses.Tent;
 import PlayerClasses.PolarBear;
@@ -66,7 +67,7 @@ public class RoundController {
         }
         checkTent(); // vihar után, hogy védjen a viharban
         Game.log.println("# RoundController>endLastRound : Round end ended");
-
+        GamePanel.capacityEnabled = false;
         PlayerContainer.getInstance().getPlayer(curID).startRound();
     }
 

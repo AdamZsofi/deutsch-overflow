@@ -1,6 +1,7 @@
 package PlayerClasses;
 
 import Control.Game;
+import GUI.GamePanel;
 import GlobalControllers.PositionLUT;
 import TileClasses.Direction;
 import TileClasses.Tile;
@@ -25,6 +26,10 @@ public class Researcher extends Player {
             Tile thisTile = PositionLUT.getInstance().getPosition(this);
             Tile checkedTile = thisTile.getNeighbour(dir);
             int capacity = checkedTile.getCapacity();
+            GamePanel.capacityEnabled = true;
+            GamePanel.capacotyOnTile = capacity;
+            GamePanel.capacotyX = checkedTile.getX();
+            GamePanel.capacotyY = checkedTile.getY();
             Game.log.println("$ Researcher>detectCapacity : Transaction 'detectCapacity' is completed");
             System.out.println("! Researcher>detectCapacity : Tile capacity: " + capacity);
         }
