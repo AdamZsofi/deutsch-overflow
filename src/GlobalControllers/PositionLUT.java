@@ -234,7 +234,7 @@ public class PositionLUT {
                 if( randNum <= 60 ) {
                     tileList.get(y).add(new StableTile(x, y));//60%
                     spawnMatrix[y][x] = 1;
-                }else if(randNum<=80) {
+                }else if(randNum<=100) {
                     tileList.get(y).add(new UnstableTile(x, y));//20%
                     spawnMatrix[y][x] = 1;
                 }else {
@@ -428,4 +428,21 @@ public class PositionLUT {
         return tileList.get(0).size();
     }
 
+    /**
+     * removes Item from tileItemMap & itemTileMap
+     * called from Player.pickUp
+     */
+    public static void pickItemUp(Item item, Tile t){
+        tileItemMap.get(t).remove(item);
+        itemTileMap.remove(item);
+    }
+
+    /**
+     * adds Item to tileItemMap & itemTileMap
+     * called from Player.pickUp
+     */
+    public static void throwItemDown(Item item, Tile t){
+        tileItemMap.get(t).add(item);
+        itemTileMap.put(item, t);
+    }
 }

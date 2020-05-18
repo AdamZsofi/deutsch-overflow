@@ -139,11 +139,11 @@ public class GamePanel extends JPanel {
             for (int y = 0; y < 6; y++) {
                 ArrayList<Item> iList = PositionLUT.getItemOnTile(PositionLUT.getTile(x, y));
                 for (Item item : iList) {
-                    if ((item.getState() == ItemState.thrownDown || item.getState() == ItemState.frozen) && PositionLUT.getTile(x, y).getSnow() == 0 ) {
+                    //if ((item.getState() == ItemState.thrownDown || item.getState() == ItemState.frozen) && PositionLUT.getTile(x, y).getSnow() == 0 ) {
                         DrawingGUI dgui = icons.get(item.toString())
                                         .getImage(tileCorner + x * (tileSize + 1) + 65, tileCorner + y * (tileSize + 1) + 65, 30);
                         components.add(dgui);
-                    }
+                    //}
                 }
             }
         }

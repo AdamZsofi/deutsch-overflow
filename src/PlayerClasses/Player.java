@@ -112,16 +112,18 @@ public abstract class Player {
         int snow = position.getSnow();
         if(snow==0) {
             if (inHand != null) {
-                if (inHand.getState() == ItemState.thrownDown) {
+                if (inHand.getState() == ItemState.thrownDown) {//wtf ilyen lehet?
                     inHand.diggedUp();
                 } else {
                     inHand.thrownDown();
+                    PositionLUT.throwItemDown(inHand, position);
                     inHand = null;
                 }
                 Game.log.format("# Player>pickUp : Player (PlayerId:%d) old item from players hand has been removed and thrown down\n", ID);
             }
             inHand = i;
             i.pickedUp(this);
+            PositionLUT.pickItemUp(i, position);
             workPoints--;
             Game.log.format("$ Player>pickUp : Player (PlayerId:%d) picked up item\n", ID);
         } else {
