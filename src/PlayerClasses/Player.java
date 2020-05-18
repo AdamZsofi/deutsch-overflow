@@ -167,9 +167,11 @@ public abstract class Player {
      * @param i item
      */
     public void digItemUp(Item i) {
-        i.diggedUp();
-        Game.log.format("$ Player>digItemUp : Player (PlayerId:%d) 'digItemUp' is completed\n", ID);
-        workPoints--;
+        if(i.getState()==ItemState.frozen) {
+            i.diggedUp();
+            Game.log.format("$ Player>digItemUp : Player (PlayerId:%d) 'digItemUp' is completed\n", ID);
+            workPoints--;
+        }
         if(workPoints==0) {
             Game.log.format("# Player>digItemUp : Player (PlayerId:%d) has no more workingPoints\n", ID);
             passRound();

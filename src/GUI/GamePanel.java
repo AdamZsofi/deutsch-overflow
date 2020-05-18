@@ -119,10 +119,19 @@ public class GamePanel extends JPanel {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
                 ArrayList<Player> players = PositionLUT.getPlayersOnTile(PositionLUT.getTile(x, y));
+                int count=0;
+                int count2=0;
                 for (Player p : players) {
                     DrawingGUI dgui = icons.get(p.toString())
-                            .getImage(tileCorner + x * (tileSize + 1)+5, tileCorner + y * (tileSize + 1)+70, 25);
+                            .getImage(tileCorner + x * (tileSize + 1)+5+count2*25, tileCorner + y * (tileSize + 1)+70-count*30, 25);
                     components.add(dgui);
+                    if(count2==0) {
+                        count++;
+                    }
+                    if(count%3==0){
+                        count2=1;
+                        count=0;
+                    }
                 }
             }
         }
