@@ -203,13 +203,13 @@ public class KeyboardInterpreter implements KeyListener {
         state = InputAcceptingState.disabled;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                gameInstance.detectCapacity(Direction.UP);
+                gameInstance.detectCapacity(Direction.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
                 gameInstance.detectCapacity(Direction.LEFT);
                 break;
             case KeyEvent.VK_DOWN:
-                gameInstance.detectCapacity(Direction.DOWN);
+                gameInstance.detectCapacity(Direction.UP);
                 break;
             case KeyEvent.VK_RIGHT:
                 gameInstance.detectCapacity(Direction.RIGHT);

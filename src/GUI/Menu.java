@@ -2,6 +2,7 @@ package GUI;
 
 import Control.Game;
 import GlobalControllers.PositionLUT;
+import GlobalControllers.RoundController;
 import PlayerClasses.PlayerContainer;
 
 import javax.imageio.ImageIO;
@@ -54,6 +55,7 @@ public class Menu extends JPanel  {
             public void actionPerformed(ActionEvent e) {
                 // TODO INIteket behuytam
                 PlayerContainer.Initialize(playerNum, 3);
+                RoundController.getInstance();
                 PositionLUT.getInstance().randInit();
                 // InGame.getInstance().initComponents(Integer.parseInt(numLabel.getText()));
                 // InGame.getInstance().changeScreen();
