@@ -7,20 +7,13 @@ import ItemClasses.Item;
 import ItemClasses.ItemState;
 import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
-import PlayerClasses.PolarBear;
 import TileClasses.Tile;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static GUI.Size.small;
 
 public class GamePanel extends JPanel {
 
