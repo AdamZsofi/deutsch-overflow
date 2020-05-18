@@ -167,8 +167,8 @@ public class GamePanel extends JPanel {
                     .getImage(firstPlayerX + (i%3)*playerBoxX + 70, margin + (i/3)*(playerBoxY + playerPadding), 30);
             components.add(heartgui);
 
-            JLabel label = new JLabel(Integer.toString(PlayerContainer.getInstance().getPlayer(i).getBodyHeat()));
-            add(label);
+            Label label = new Label(Integer.toString(PlayerContainer.getInstance().getPlayer(i).getBodyHeat()));
+            this.add(label);
             label.setSize(30,30);
             label.setLocation(heartgui.x+40,heartgui.y);
 
