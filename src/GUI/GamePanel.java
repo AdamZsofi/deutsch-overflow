@@ -131,10 +131,6 @@ public class GamePanel extends JPanel {
                         count=0;
                     }
                 }
-                Label label = new Label(Integer.toString(PositionLUT.getTile(x,y).getCapacity()));
-                this.add(label);
-                label.setSize(30,30);
-                label.setLocation(x*tileSize+50,y*tileSize+50);
             }
         }
 
