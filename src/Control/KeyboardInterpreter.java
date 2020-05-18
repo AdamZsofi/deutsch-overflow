@@ -20,7 +20,6 @@ import java.util.Scanner;
 public class KeyboardInterpreter implements KeyListener {
     /**
      * Currently active, started game
-     * @author Zsófi
      */
     private Game gameInstance;
 
@@ -28,7 +27,6 @@ public class KeyboardInterpreter implements KeyListener {
      * The output CLI language will be written to this stream
      * Watch out: it is static, but will be set in the c'tor
      * ( Because every other class should see the log and at any given moment there is only one actively running log )
-     * @author Zsófi
      */
     private PrintStream log;
 
@@ -87,7 +85,7 @@ public class KeyboardInterpreter implements KeyListener {
                 researcherSkillReady(e);
                 Game.dirty = true;
                 break;
-        } // default would be disabled -> return
+        }
     }
 
     /**
@@ -99,10 +97,10 @@ public class KeyboardInterpreter implements KeyListener {
         state = InputAcceptingState.disabled; // TODO ha a skill meg savePlayers másik key felfogása furán működne (lassan), akkor ezt kell átpakolni (Zsófi)
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                gameInstance.step(Direction.UP);
+                gameInstance.step(Direction.DOWN);
                 break;
             case KeyEvent.VK_DOWN:
-                gameInstance.step(Direction.DOWN);
+                gameInstance.step(Direction.UP);
                 break;
             case KeyEvent.VK_LEFT:
                 gameInstance.step(Direction.LEFT);
@@ -168,13 +166,13 @@ public class KeyboardInterpreter implements KeyListener {
         state = InputAcceptingState.disabled;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                gameInstance.savePlayers(Direction.UP);
+                gameInstance.savePlayers(Direction.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
                 gameInstance.savePlayers(Direction.LEFT);
                 break;
             case KeyEvent.VK_DOWN:
-                gameInstance.savePlayers(Direction.DOWN);
+                gameInstance.savePlayers(Direction.UP);
                 break;
             case KeyEvent.VK_RIGHT:
                 gameInstance.savePlayers(Direction.RIGHT);
