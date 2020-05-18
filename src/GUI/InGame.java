@@ -29,7 +29,7 @@ public class InGame extends JFrame {
         return inGame;
     }
 
-    static GamePanel gamePanel = null;
+    public static GamePanel gamePanel = null;
     static Menu menu = new Menu();
 
 

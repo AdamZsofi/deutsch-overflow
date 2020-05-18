@@ -1,5 +1,6 @@
 package Control;
 
+import GUI.InGame;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import ItemClasses.Item;
@@ -245,7 +246,7 @@ public class Game {
      */
     public void pickUp(Item i){
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).pickUp(i);
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
 
     /**
@@ -254,7 +255,7 @@ public class Game {
      */
     public void digItemUp(Item i) {
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).digItemUp(i);
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
 
     /**
@@ -264,7 +265,7 @@ public class Game {
     public void buildIgloo(){
         Eskimo e= (Eskimo) PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         e.buildIgloo();
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
     /**
      * Researcher detect the capacity of table
@@ -273,7 +274,7 @@ public class Game {
     public void detectCapacity(Direction dir){
         Researcher r = (Researcher) PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         r.detectCapacity(dir);
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
     /**
      * Player clear snow.
@@ -281,7 +282,7 @@ public class Game {
      */
     public void clearSnow(){
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).clearSnow();
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
     /**
      * Player saves her pal
@@ -289,7 +290,7 @@ public class Game {
      */
     public void savePlayers(Direction dir){
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).savePlayers(dir);
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
     /**
      * Player build tent
@@ -298,7 +299,7 @@ public class Game {
     public void buildTent(){
         Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         p.buildTent();
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
     /**
      * Player put signalflare together
@@ -307,7 +308,7 @@ public class Game {
     public void putSignalTogether(){
         Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         p.putSignalTogether(RoundController.getInstance().sg);
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
     /**
      * Player pass round
@@ -315,6 +316,6 @@ public class Game {
      */
     public void passRound(){
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).passRound();
-        dirty = true;
+        InGame.gamePanel.repaint();
     }
 }

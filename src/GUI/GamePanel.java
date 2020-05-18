@@ -218,19 +218,15 @@ public class GamePanel extends JPanel {
 
     Integer i = 0;
 
-    public void paintComponent (Graphics g)
+    @Override
+    public void paint(Graphics g)
     {
-        if(Game.dirty){
-        refreshComponents();
-        }
-        Game.dirty = false;
-        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
-        for (DrawingGUI dg:components) {
+        refreshComponents();
+        for (DrawingGUI dg : components) {
             g2d.drawImage(dg.texture, dg.x, dg.y, dg.width, dg.height, null);
         }
-
+        Game.dirty = false;
         setVisible(true);
 
     }
