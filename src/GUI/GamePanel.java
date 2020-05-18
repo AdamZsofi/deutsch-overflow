@@ -66,8 +66,8 @@ public class GamePanel extends JPanel {
         icons.put("signalflarePart1F", new DrawingGUI("signalflarePart1F"));
         icons.put("signalflarePart2", new DrawingGUI("signalflarePart2"));
         icons.put("signalflarePart2F", new DrawingGUI("signalflarePart2F"));
-        icons.put("signalflarePart3", new DrawingGUI("signalflarePart0"));
-        icons.put("signalflarePart3F", new DrawingGUI("signalflarePart0F"));
+        icons.put("signalflarePart0", new DrawingGUI("signalflarePart0"));
+        icons.put("signalflarePart0F", new DrawingGUI("signalflarePart0F"));
         icons.put("rope", new DrawingGUI("rope"));
         icons.put("ropeF", new DrawingGUI("ropeF"));
         icons.put("shovel", new DrawingGUI("shovel"));
@@ -132,11 +132,11 @@ public class GamePanel extends JPanel {
             for (int y = 0; y < 6; y++) {
                 ArrayList<Item> iList = PositionLUT.getItemOnTile(PositionLUT.getTile(x, y));
                 for (Item item : iList) {
-                    if (item.getState() == ItemState.thrownDown) {
+                   // if (item.getState() == ItemState.thrownDown) {
                         DrawingGUI dgui = icons.get(item.toString())
                                         .getImage(tileCorner + x * (tileSize + 1) + 65, tileCorner + y * (tileSize + 1) + 65, 30);
                         components.add(dgui);
-                    }
+                    //}
                 }
             }
         }
