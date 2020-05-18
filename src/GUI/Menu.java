@@ -1,5 +1,6 @@
 package GUI;
 
+import Control.Game;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.PlayerContainer;
 

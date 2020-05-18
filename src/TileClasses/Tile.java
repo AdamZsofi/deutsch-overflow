@@ -21,7 +21,7 @@ public abstract class Tile {
      *  @param tentOn manages Tent on Tile
      */
     protected int capacity;
-    protected int standingHere;
+    public int standingHere;
 
     protected final int x,y;
     protected int snow;

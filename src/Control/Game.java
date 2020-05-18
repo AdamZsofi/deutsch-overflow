@@ -104,6 +104,24 @@ public class Game {
     }
 
     /**
+     * Writes out a map of items on the table
+     * @author Ádám
+     */
+    public void printItemMap() {
+        for (int y = 5; y >= 0; y--) {
+            for(int x = 0; x < 6; x++){
+                Tile currentTile = PositionLUT.getInstance().getTile(x,y);
+                log.print("[ ");
+                for(Item item : PositionLUT.getInstance().getItemOnTile(currentTile)){
+                    log.print(item.getShortName()+" ");
+                }
+                log.print("]");
+            }
+            log.println();
+        }
+    }
+
+    /**
      * Writes out a map of players on the table
      * A 3x3 example of the representation of this map:
      * [E1, R2][][]
@@ -123,24 +141,6 @@ public class Game {
                 }
                 if(currentTile.equals(bearTile)) {
                     log.print(getInstance().polarbear.getShortName()+" ");
-                }
-                log.print("]");
-            }
-            log.println();
-        }
-    }
-
-    /**
-     * Writes out a map of items on the table
-     * @author Ádám
-     */
-    public void printItemMap() {
-        for (int y = 5; y >= 0; y--) {
-            for(int x = 0; x < 6; x++){
-                Tile currentTile = PositionLUT.getInstance().getTile(x,y);
-                log.print("[ ");
-                for(Item item : PositionLUT.getInstance().getItemOnTile(currentTile)){
-                    log.print(item.getShortName()+" ");
                 }
                 log.print("]");
             }
@@ -189,7 +189,7 @@ public class Game {
      * Prints out a map with the tile's capacities on it
      * @author Zsófi
      */
-    public void printCapacityTileMap() {
+    public static void printCapacityTileMap() {
         for (int y = 5; y >= 0; y--) {
             for(int x = 0; x < 6; x++){
                 Tile currentTile = PositionLUT.getInstance().getTile(x,y);

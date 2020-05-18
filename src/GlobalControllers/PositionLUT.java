@@ -304,8 +304,10 @@ public class PositionLUT {
                 x = random.nextInt(6);
                 y = random.nextInt(6);
                 playerTileMap.put(PlayerContainer.getInstance().getPlayer(i),getTile(x, y));
-                getTile(x,y).setStandingHere(1);
+
             } while (spawnMatrix[y][x] == 0);
+            getTile(x,y).setStandingHere(1);
+            System.out.println(Integer.toString(x) + Integer.toString(y) +  getTile(x,y).toString());
             spawnMatrix[y][x] = 0;
         }
 

@@ -1,5 +1,6 @@
 
 package GUI;
+import Control.Game;
 import Main.Main;
 import javax.swing.*;
 

@@ -40,8 +40,10 @@ public class SnowyHole extends Tile {
 
     @Override
     public String toString() {
-        if(standingHere >0 )  return "tileWater";
-        if (snow > 0) return "tileSnow";
+        if(standingHere > 0 )
+            return "tileWater";
+        if (snow > 0)
+            return "tileSnow";
         return "tileSnow";
     }
 }
