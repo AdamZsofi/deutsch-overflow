@@ -18,7 +18,6 @@ public class InGame extends JFrame {
     public static GamePanel gamePanel = null;
     static Menu menu = new Menu();
 
-
     InGame(){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,7 +25,6 @@ public class InGame extends JFrame {
         this.getContentPane().add(menu);
         setVisible(true);
     }
-
 
     public void changeToGameScreen(int playerNum){
         this.getContentPane().removeAll();
@@ -39,6 +37,7 @@ public class InGame extends JFrame {
 
         add(gamePanel);
         gamePanel.refreshComponents();
+        gamePanel.requestFocus();
         revalidate();
     }
 
