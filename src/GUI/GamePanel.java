@@ -36,6 +36,7 @@ public class GamePanel extends JPanel {
     private int posStatusBoxUpSideY;
     private int statusBoxIconSize;
     private int itemSize;
+    private int posMessageBoxUpSideY;
 
 
     private Map<String, DrawingGUI> icons = new HashMap<String, DrawingGUI>();
@@ -63,7 +64,7 @@ public class GamePanel extends JPanel {
         statusBoxIconSize = (int) (1.8*playerBoxY);
         posRightSideX = panelHeight + margin;
         posStatusBoxUpSideY = panelHeight- statusBoxIconSize - margin;
-
+        posMessageBoxUpSideY = posStatusBoxUpSideY-2*messageBoxY;
     }
 
     private void initIcons() {
@@ -225,7 +226,7 @@ public class GamePanel extends JPanel {
         DrawingGUI dguiW = icons.get("workingPoints").getImage(posRightSideX + statusBoxIconSize + 10, posStatusBoxUpSideY+10, 40);
         components.add(dguiW);
 
-        DrawingGUI capacitygui = icons.get("capacity").getImage(8*tileSize+15, 5*tileSize, 30);
+        DrawingGUI capacitygui = icons.get("capacity").getImage(posRightSideX+100, posMessageBoxUpSideY, 30);
         components.add(capacitygui);
 
 
@@ -248,7 +249,7 @@ public class GamePanel extends JPanel {
         }
         Label capacityLabel= new Label(capacity);
         this.add(capacityLabel);
-        capacityLabel.setLocation(8*tileSize+60,5*tileSize);
+        capacityLabel.setLocation(posRightSideX+150,posMessageBoxUpSideY);
         capacityLabel.setSize(200,30);
 
 
