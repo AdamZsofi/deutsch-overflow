@@ -1,22 +1,7 @@
 
 package GUI;
-
-import Control.KeyboardInterpreter;
-import GlobalControllers.PositionLUT;
-import ItemClasses.Item;
 import Main.Main;
-import PlayerClasses.Player;
-import PlayerClasses.PlayerContainer;
-import TileClasses.Tile;
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import static Main.Main.interpreter;
 
 
 public class InGame extends JFrame {
