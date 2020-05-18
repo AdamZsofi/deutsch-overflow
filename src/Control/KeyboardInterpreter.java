@@ -73,6 +73,7 @@ public class KeyboardInterpreter implements KeyListener {
     public void keyReleased(KeyEvent e) {
         // debug:
         System.out.println("Key " + e.getKeyChar() + " released");
+        if(state.equals(InputAcceptingState.disabled)) return;
         switch (state) {
             case waiting_command:
                 commandArrived(e);
