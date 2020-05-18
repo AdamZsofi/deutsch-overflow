@@ -10,6 +10,7 @@ import PlayerClasses.PlayerContainer;
 import TileClasses.Direction;
 import TileClasses.Tile;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.InputStream;
@@ -153,6 +154,17 @@ public class KeyboardInterpreter implements KeyListener {
             case KeyEvent.VK_ENTER:
                 gameInstance.passRound();
                 break;
+            case KeyEvent.VK_S:
+                String string = "Steps: w(up), a(left), s(down), d(right)\n" +
+                                "Pick item up: i\n" +
+                                "Dig item up: d\n" +
+                                "Build igloo or get capacity: u or u + Direction\n" +
+                                "Clear snow: c\n" +
+                                "Saving player: h + Direction \n" +
+                                "Build tent: t\n" +
+                                "Put singal together: w\n" +
+                                "Pass round: Enter\n";
+                JOptionPane.showMessageDialog(null,string);
         }
         // ha nem másik billentyűre várunk (-> lásd useSkill, savePlayers), akkor kell blokkolóról waitingre állítani
         if(state.equals(InputAcceptingState.disabled)) state = InputAcceptingState.waiting_command;
