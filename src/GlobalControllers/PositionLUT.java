@@ -234,7 +234,7 @@ public class PositionLUT {
                 if( randNum <= 60 ) {
                     tileList.get(y).add(new StableTile(x, y));//60%
                     spawnMatrix[y][x] = 1;
-                }else if(randNum<=100) {
+                }else if(randNum<=80) {
                     tileList.get(y).add(new UnstableTile(x, y));//20%
                     spawnMatrix[y][x] = 1;
                 }else {

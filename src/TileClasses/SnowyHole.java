@@ -34,6 +34,7 @@ public class SnowyHole extends Tile {
      */
     @Override
     public void steppedOn(Player p) {
+        standingHere++;
         Game.log.format("# SnowyHole>steppedOn : Stepped on SnowyHole(%d, %d)\n", x, y);
         p.fallInWater();
     }
