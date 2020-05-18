@@ -21,7 +21,7 @@ public class InGame extends JFrame {
     InGame(){
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 850);
+        setSize(1400, 750);
         this.getContentPane().add(menu);
         setVisible(true);
     }
