@@ -20,5 +20,18 @@ public class DrawingGUI {
             System.out.println("File cannot opened");
         }
     }
+    private DrawingGUI(DrawingGUI other) {
+        this.texture = other.texture;
+    }
+
+    public DrawingGUI getImage(int posX, int posY, int size) {
+        DrawingGUI g = new DrawingGUI(this);
+        g.x = posX;
+        g.y = posY;
+        g.width = size;
+        g.height = size;
+        return  g;
+    }
 }
+
 

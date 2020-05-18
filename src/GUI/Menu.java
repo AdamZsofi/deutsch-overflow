@@ -1,5 +1,8 @@
 package GUI;
 
+import GlobalControllers.PositionLUT;
+import PlayerClasses.PlayerContainer;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -48,9 +51,9 @@ public class Menu extends JPanel  {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO ugye nincs máshol Game-n kívül ilyen belső hívás??
-                // PlayerContainer.Initialize(number, 3);
-                // PositionLUT.getInstance().randInit();
+                // TODO INIteket behuytam
+                PlayerContainer.Initialize(playerNum, 3);
+                PositionLUT.getInstance().randInit();
                 // InGame.getInstance().initComponents(Integer.parseInt(numLabel.getText()));
                 // InGame.getInstance().changeScreen();
                 InGame.getInstance().changeToGameScreen(playerNum);

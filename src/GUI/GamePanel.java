@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static GUI.Size.small;
+
 public class GamePanel extends JPanel {
 
     int panelHeight = getHeight();
@@ -43,12 +45,13 @@ public class GamePanel extends JPanel {
 
     GamePanel(){
         setLayout(new GridBagLayout());
+        initIcons();
     }
 
-    private void initIcons(int playerNum) {
+    private void initIcons() {
         //loading players
         //in runtime revealed if a player is eskimo or researcher
-        for (int i = 0; i < playerNum; i++) {
+        for (int i = 0; i < PlayerContainer.getInstance().getPlayerNum(); i++) {
             String p = PlayerContainer.getInstance().getPlayer(i).toString();
             icons.put(p, new DrawingGUI(p));
             icons.put(p +"-a", new DrawingGUI(p + "-a"));
@@ -86,9 +89,9 @@ public class GamePanel extends JPanel {
         icons.put("tent", new DrawingGUI("tent"));
 
         //loading tiles
-        icons.put("tileNoSnow", new DrawingGUI("ice"));
-        icons.put("tileSnow", new DrawingGUI("ice"));
-        icons.put("tileWater", new DrawingGUI("ice"));
+        icons.put("tileNoSnow", new DrawingGUI("tileNoSnow"));
+        icons.put("tileSnow", new DrawingGUI("tileSnow"));
+        icons.put("tileWater", new DrawingGUI("tileWater"));
         //other icons
         icons.put("snow", new DrawingGUI("snow"));
         icons.put("inWater", new DrawingGUI("inWater"));
@@ -110,15 +113,9 @@ public class GamePanel extends JPanel {
         //loading tiles from positionLUT
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
-                DrawingGUI dgui = new DrawingGUI((PositionLUT.getTile(x, y).toString()));
-                try {
-                    dgui.texture = ImageIO.read(new File("src/GUI/Pack/ice"));
-                } catch (IOException e) {
-                }
-                dgui.x = tileCorner + x * (tileSize + 1);
-                dgui.y = tileCorner + y * (tileSize + 1);
-                dgui.width = tileSize;
-                dgui.height = tileSize;
+                DrawingGUI dgui = icons.get(PositionLUT.getTile(x, y).toString())
+                        .getImage(tileCorner + x * (tileSize + 1), tileCorner + y * (tileSize + 1), tileSize);
+
                 components.add(dgui);
             }
         }
@@ -127,15 +124,8 @@ public class GamePanel extends JPanel {
             for (int y = 0; y < 6; y++) {
                 ArrayList<Player> players = PositionLUT.getPlayersOnTile(PositionLUT.getTile(x, y));
                 for (Player p : players) {
-                    DrawingGUI dgui = new DrawingGUI(p.toString());
-                    try {
-                        dgui.texture = ImageIO.read(new File("src/GUI/Pack/" + p.toString()));
-                    } catch (IOException e) {
-                    }
-                    dgui.x = tileCorner + x * (tileSize + 1)+5;
-                    dgui.y = tileCorner + y * (tileSize + 1)+70;
-                    dgui.width = 25;
-                    dgui.height = 25;
+                    DrawingGUI dgui = icons.get(p.toString())
+                            .getImage(tileCorner + x * (tileSize + 1)+5, tileCorner + y * (tileSize + 1)+70, 25);
                     components.add(dgui);
                 }
             }
@@ -147,11 +137,8 @@ public class GamePanel extends JPanel {
                 ArrayList<Item> iList = PositionLUT.getItemOnTile(PositionLUT.getTile(x, y));
                 for (Item item : iList) {
                     if (item.getState() == ItemState.thrownDown) {
-                        DrawingGUI dgui = new DrawingGUI(item.toString()); //lehet így, nem kell iconsokat hasznalni
-                        dgui.x = tileCorner + x * (tileSize + 1) + 65;
-                        dgui.y = tileCorner + y * (tileSize + 1) + 65;
-                        dgui.width = 30;
-                        dgui.height = 30;
+                        DrawingGUI dgui = icons.get(item.toString())
+                                        .getImage(tileCorner + x * (tileSize + 1) + 65, tileCorner + y * (tileSize + 1) + 65, 30);
                         components.add(dgui);
                     }
                 }
@@ -161,29 +148,20 @@ public class GamePanel extends JPanel {
         Tile tile = PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
         int x= tile.getX();
         int y = tile.getY();
-        DrawingGUI polargui = new DrawingGUI(RoundController.getInstance().polarbear.toString()); //lehet így, nem kell iconsokat hasznalni
-        polargui.x = tileCorner + x * (tileSize + 1) + 25;
-        polargui.y = tileCorner + y * (tileSize + 1) + 25;
-        polargui.width = 50;
-        polargui.height = 50;
+        DrawingGUI polargui = icons.get(RoundController.getInstance().polarbear.toString())
+                .getImage(tileCorner + x * (tileSize + 1) + 25, tileCorner + y * (tileSize + 1) + 25, 50);
         components.add(polargui);
 
 
         //loop initializes player details
         int firstPlayerX = 2*margin + 5*tilePadding +6*tileSize;
         for(int i = 0; i <PlayerContainer.getInstance().getPlayerNum(); i++ ){
-            DrawingGUI dgui = new DrawingGUI(PlayerContainer.getInstance().getPlayer(i).toString());
-            dgui.x = firstPlayerX + (i%3)*playerBoxX;
-            dgui.y = margin + (i/3)*(playerBoxY + playerPadding);
-            dgui.width = 50;
-            dgui.height = 50;
+            DrawingGUI dgui = icons.get(PlayerContainer.getInstance().getPlayer(i).toString())
+                    .getImage(firstPlayerX + (i%3)*playerBoxX, margin + (i/3)*(playerBoxY + playerPadding), 50);
             components.add(dgui);
 
-            DrawingGUI heartgui = new DrawingGUI("heart");
-            heartgui.x = firstPlayerX + (i%3)*playerBoxX + 70;
-            heartgui.y = margin + (i/3)*(playerBoxY + playerPadding);
-            heartgui.width = 30;
-            heartgui.height = 30;
+            DrawingGUI heartgui = icons.get("heart")
+                    .getImage(firstPlayerX + (i%3)*playerBoxX + 70, margin + (i/3)*(playerBoxY + playerPadding), 30);
             components.add(heartgui);
 
             JLabel label = new JLabel(Integer.toString(PlayerContainer.getInstance().getPlayer(i).getBodyHeat()));
@@ -194,50 +172,29 @@ public class GamePanel extends JPanel {
 
 
             if(PlayerContainer.getInstance().getPlayer(i).getItemsOnHand().size() == 1){
-                DrawingGUI itemgui = new DrawingGUI(PlayerContainer.getInstance().getPlayer(i).getItemsOnHand().get(0).toString());
-                itemgui.x = firstPlayerX + (i%3)*playerBoxX + 70;
-                itemgui.y = margin + (i/3)*(playerBoxY + playerPadding) + 35;
-                itemgui.width = 30;
-                itemgui.height = 30;
+                DrawingGUI itemgui = icons.get(PlayerContainer.getInstance().getPlayer(i).getItemsOnHand().get(0).toString())
+                        .getImage(firstPlayerX + (i%3)*playerBoxX + 70, margin + (i/3)*(playerBoxY + playerPadding) + 35, 30);
                 components.add(itemgui);
             }else if(PlayerContainer.getInstance().getPlayer(i).getItemsOnHand().size() == 2){
-                DrawingGUI itemgui = new DrawingGUI(PlayerContainer.getInstance().getPlayer(i).getItemsOnHand().get(0).toString());
-                itemgui.x = firstPlayerX + (i%3)*playerBoxX + 70;
-                itemgui.y = margin + (i/3)*(playerBoxY + playerPadding) + 35;
-                itemgui.width = 30;
-                itemgui.height = 30;
+                DrawingGUI itemgui = icons.get(PlayerContainer.getInstance().getPlayer(i).getItemsOnHand().get(0).toString())
+                        .getImage(firstPlayerX + (i%3)*playerBoxX + 70, margin + (i/3)*(playerBoxY + playerPadding) + 35, 30);
                 components.add(itemgui);
 
-                DrawingGUI divingsuitgui = new DrawingGUI(PlayerContainer.getInstance().getPlayer(i).getItemsOnHand().get(1).toString());
-                divingsuitgui.x = firstPlayerX + (i%3)*playerBoxX + 105;
-                divingsuitgui.y = margin + (i/3)*(playerBoxY + playerPadding) + 35;
-                divingsuitgui.width = 30;
-                divingsuitgui.height = 30;
+                DrawingGUI divingsuitgui = icons.get(PlayerContainer.getInstance().getPlayer(i).getItemsOnHand().get(1).toString())
+                        .getImage(firstPlayerX + (i%3)*playerBoxX + 105, margin + (i/3)*(playerBoxY + playerPadding) + 35, 30);
                 components.add(divingsuitgui);
             }
 
         }
 
         Player activePlayer = PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
-        DrawingGUI dguiP = new DrawingGUI(activePlayer.toString()+"-a");
-        dguiP.x = 7*tileSize;
-        dguiP.y = 5*tileSize+50;
-        dguiP.width = 100;
-        dguiP.height = 100;
+        DrawingGUI dguiP = icons.get(activePlayer.toString()+"-a").getImage(7*tileSize, 5*tileSize+50, 100);
         components.add(dguiP);
 
-        DrawingGUI dguiS = new DrawingGUI("snow");
-        dguiS.x = 8*tileSize+15;
-        dguiS.y = 5*tileSize+70;
-        dguiS.width = 30;
-        dguiS.height = 30;
+        DrawingGUI dguiS = icons.get("snow").getImage(8*tileSize+15, 5*tileSize+70, 30);
         components.add(dguiS);
 
-        DrawingGUI dguiW = new DrawingGUI("workingPoints");
-        dguiW.x = 8*tileSize+10;
-        dguiW.y = 6*tileSize+10;
-        dguiW.width = 40;
-        dguiW.height = 40;
+        DrawingGUI dguiW = icons.get("workingPoints").getImage(8*tileSize+10, 6*tileSize+10, 40);
         components.add(dguiW);
 
         Label workingPointsLabel= new Label(Integer.toString(activePlayer.workPoints));

@@ -1,3 +1,4 @@
+
 package GUI;
 
 import Control.KeyboardInterpreter;
@@ -27,7 +28,7 @@ public class InGame extends JFrame {
     private DrawingGUI [] players = new DrawingGUI[6];
     private DrawingGUI [] activePlayers = new DrawingGUI[6];
     private ArrayList<DrawingGUI> [] hand  = new ArrayList[6];  //Collection of Drawables for each player hand
-                                                                // (Note: DivingSuit counts here=>ArrayList)
+    // (Note: DivingSuit counts here=>ArrayList)
     private int [] bodyHeats = new int[6];
     private boolean messageBoxIsEnabled = false;
     private DrawingGUI messageBoxIcon;
@@ -64,107 +65,7 @@ public class InGame extends JFrame {
         }
         return inGame;
     }
-    public void initComponents(int playerNum) {
-        initIcons(playerNum);
-
-        //loading Tile Icons
-        for (int i = 0 ; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
-                tiles[i][j] = icons.get("tileSnow");
-            }
-        }
-
-        //loading Player and Active Players Icons
-        for (int i = 0; i < playerNum; i++) {
-            String p = PlayerContainer.getInstance().getPlayer(i).toString();
-            players[i] = icons.get(p);
-            activePlayers[i] = icons.get(p+ "-a");
-        }
-
-        //loading elements on Tile (Items+Player) Icons
-        /*for (int i = 0 ; i < 6; i++) { // TODO posLutot elotte inicializalni!!
-            for (int j = 0; j < 6; j++) {
-                Tile t =PositionLUT.getTile(i, j);
-                for (Item it : PositionLUT.getItemOnTile(t)) {
-                    System.out.println(it);
-                    System.out.println(icons.get(it.toString()));
-                    elements[i][j].add(icons.get(it.toString())); // HIBÁS TODO*
-                }
-                for (Player p : PositionLUT.getPlayersOnTile(t)) {
-                    System.out.println(icons.get(p));
-                    elements[i][j].add(icons.get(p.toString())); // HIBÁS //TODO*
-                }
-            }
-        }*/
-
-
-        //loading bodyHeats for all players => for PlayerBar (right-upper corner)
-        for (int i = 0; i < playerNum; i++) {
-            bodyHeats[i] = PlayerContainer.getInstance().getPlayer(i).getBodyHeat();
-        }
-        //loading the handItem Icons for all players => for PlayerBar (right-upper corner)
-        for (int i = 0; i < playerNum; i++) {
-            ArrayList<Item> items = PlayerContainer.getInstance().getPlayer(i).getItemsOnHand();
-            for(Item it : items) {
-                hand[i].add(icons.get(it.toString()));
-            }
-        }
-
-    }
-
-    private void initIcons(int playerNum) {
-        //loading players
-        //in runtime revealed if a player is eskimo or researcher
-        for (int i = 0; i < playerNum; i++) {
-            String p = PlayerContainer.getInstance().getPlayer(i).toString();
-            icons.put(p, new DrawingGUI(p ));
-            icons.put(p +"-a", new DrawingGUI(p + "-a"));
-        }
-
-        //loading polarbear
-        icons.put("P", new DrawingGUI("P"));
-        icons.put("P-a", new DrawingGUI("P-a"));
-
-        //loading items
-        icons.put("divingSuit", new DrawingGUI("divingSuit"));
-        icons.put("divingSuitF", new DrawingGUI("divingSuitF"));
-        icons.put("food", new DrawingGUI("food"));
-        icons.put("foodF", new DrawingGUI("foodF"));
-        icons.put("fragileShovel", new DrawingGUI("fragileShovel"));
-        icons.put("fragileShovelF", new DrawingGUI("fragileShovelF"));
-        icons.put("signalflarePart1", new DrawingGUI("signalflarePart1"));
-        icons.put("signalflarePart1F", new DrawingGUI("signalflarePart1F"));
-        icons.put("signalflarePart2", new DrawingGUI("signalflarePart2"));
-        icons.put("signalflarePart2F", new DrawingGUI("signalflarePart2F"));
-        icons.put("signalflarePart3", new DrawingGUI("signalflarePart0"));
-        icons.put("signalflarePart3F", new DrawingGUI("signalflarePart0F"));
-        icons.put("rope", new DrawingGUI("rope"));
-        icons.put("ropeF", new DrawingGUI("ropeF"));
-        icons.put("shovel", new DrawingGUI("shovel"));
-        icons.put("shovelF", new DrawingGUI("shovelF"));
-
-        //other actions
-        icons.put("capacity", new DrawingGUI("capacity"));
-        icons.put("clearSnow", new DrawingGUI("clearSnow"));
-        icons.put("digUp", new DrawingGUI("digUp"));
-        icons.put("igloo", new DrawingGUI("igloo"));
-        icons.put("passRound", new DrawingGUI("passRound"));
-        icons.put("pickUp", new DrawingGUI("pickUp"));
-        icons.put("tent", new DrawingGUI("tent"));
-
-        //loading tiles
-        icons.put("tileNoSnow", new DrawingGUI("tileNoSnow"));
-        icons.put("tileSnow", new DrawingGUI("tileSnow"));
-        icons.put("tileWater", new DrawingGUI("tileWater"));
-        //other icons
-        icons.put("snow", new DrawingGUI("snow"));
-        icons.put("inWater", new DrawingGUI("inWater"));
-        icons.put("heart", new DrawingGUI("heart"));
-        icons.put("warning", new DrawingGUI("warning"));
-        icons.put("workingPoints", new DrawingGUI("workingPoints"));
-    }
-
-
+    
     static GamePanel gamePanel = null;
     static Menu menu = new Menu();
 
@@ -200,7 +101,6 @@ public class InGame extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 850);
         frame.add(menu);
-
         frame.setVisible(true);
          */
         inGame = new InGame(4);
