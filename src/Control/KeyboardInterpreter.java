@@ -76,10 +76,15 @@ public class KeyboardInterpreter implements KeyListener {
         switch (state) {
             case waiting_command:
                 commandArrived(e);
+                Game.dirty = true;
                 break;
             case waiting_saving_argument:
+                savingReady(e);
+                Game.dirty = true;
                 break;
             case waiting_skill_argument:
+                researcherSkillReady(e);
+                Game.dirty = true;
                 break;
         } // default would be disabled -> return
     }

@@ -131,4 +131,8 @@ public class PlayerContainer {
         }
         else return players.get(pid);
     }
+
+    public int playerNum(){
+        return playerNum;
+    }
 }

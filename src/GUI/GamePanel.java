@@ -1,5 +1,6 @@
 package GUI;
 
+import Control.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import ItemClasses.Item;
@@ -104,6 +105,8 @@ public class GamePanel extends JPanel {
      *
      */
     void refreshComponents() {
+        i++;
+        System.out.println(i.toString());
         components.clear();
         removeAll();
 
@@ -256,20 +259,21 @@ public class GamePanel extends JPanel {
 
     }
 
+    Integer i = 0;
 
     public void paintComponent (Graphics g)
     {
+        if(Game.dirty){
         refreshComponents();
+        }
+        Game.dirty = false;
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        BufferedImage image = null;//new ImageIcon("GUI/Pack/start.jpg");
-        try {
-            image = ImageIO.read(new File("src/GUI/Pack/start.jpg"));
-        } catch (IOException e) {
-        }
+
         for (DrawingGUI dg:components) {
             g2d.drawImage(dg.texture, dg.x, dg.y, dg.width, dg.height, null);
         }
+
         setVisible(true);
 
     }
