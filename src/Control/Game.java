@@ -38,6 +38,9 @@ public class Game {
      */
     int playerNum;
 
+
+    static public boolean dirty = true;
+
     /**
      * Every function of the game logs its output to this stream
      */
@@ -242,6 +245,7 @@ public class Game {
      */
     public void pickUp(Item i){
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).pickUp(i);
+        dirty = true;
     }
 
     /**
@@ -250,6 +254,7 @@ public class Game {
      */
     public void digItemUp(Item i) {
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).digItemUp(i);
+        dirty = true;
     }
 
     /**
@@ -259,6 +264,7 @@ public class Game {
     public void buildIgloo(){
         Eskimo e= (Eskimo) PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         e.buildIgloo();
+        dirty = true;
     }
     /**
      * Researcher detect the capacity of table
@@ -267,6 +273,7 @@ public class Game {
     public void detectCapacity(Direction dir){
         Researcher r = (Researcher) PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         r.detectCapacity(dir);
+        dirty = true;
     }
     /**
      * Player clear snow.
@@ -274,6 +281,7 @@ public class Game {
      */
     public void clearSnow(){
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).clearSnow();
+        dirty = true;
     }
     /**
      * Player saves her pal
@@ -281,6 +289,7 @@ public class Game {
      */
     public void savePlayers(Direction dir){
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).savePlayers(dir);
+        dirty = true;
     }
     /**
      * Player build tent
@@ -289,6 +298,7 @@ public class Game {
     public void buildTent(){
         Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         p.buildTent();
+        dirty = true;
     }
     /**
      * Player put signalflare together
@@ -297,6 +307,7 @@ public class Game {
     public void putSignalTogether(){
         Player p= PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
         p.putSignalTogether(RoundController.getInstance().sg);
+        dirty = true;
     }
     /**
      * Player pass round
@@ -304,5 +315,6 @@ public class Game {
      */
     public void passRound(){
         PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID()).passRound();
+        dirty = true;
     }
 }
