@@ -227,6 +227,7 @@ public class Game {
                     log.print("[ ");
                     log.print(item.getShortName()+", ");
                     log.println("]");
+
                 }
             }
         }

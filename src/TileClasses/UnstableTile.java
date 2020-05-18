@@ -37,6 +37,7 @@ public class UnstableTile extends Tile {
     @Override
     public void steppedOn(Player p) {
         standingHere++;
+        System.out.println(standingHere);
         if(capacity-standingHere<0){
             Game.log.format("# Tile>steppedOn : Player stepped on Tile (%d, %d) capacity %d is not enough for %d players\n", x, y, capacity, standingHere);
             Tile t = PositionLUT.getInstance().getPosition(p);
