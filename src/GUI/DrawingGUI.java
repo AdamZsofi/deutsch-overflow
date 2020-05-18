@@ -14,10 +14,11 @@ public class DrawingGUI {
 
         String name = null;
         try {
-            name = "./src/GUI/Pack/" + textureName + ".png" ;
+            name = "src/GUI/Pack/" + textureName + ".png" ;
             texture = ImageIO.read(new File(name));
         } catch (Exception e) {
-            System.out.println("File cannot opened");
+            System.out.println("File cannot be opened");
+            e.printStackTrace();
         }
     }
     private DrawingGUI(DrawingGUI other) {

@@ -1,6 +1,7 @@
 package PlayerClasses;
 
 import Control.Game;
+import GlobalControllers.GameEndCause;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
 import TileClasses.Direction;
@@ -89,7 +90,7 @@ public class PolarBear {
         players_num = PositionLUT.getInstance().getPlayersOnTile(bearTile).size();
         if (players_num > 0) {
             Game.log.println("! PolarBear>hunt : Bear killed the players on Tile");
-            RoundController.getInstance().lose("The bear's hunt was succesful");
+            RoundController.getInstance().lose(GameEndCause.polarbear);
         }
         else {
             Game.log.println("! PolarBear>hunt : Bear has found no prey on his new Tile");
