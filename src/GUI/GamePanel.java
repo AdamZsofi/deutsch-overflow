@@ -221,12 +221,14 @@ public class GamePanel extends JPanel {
     @Override
     public void paint(Graphics g)
     {
-        Graphics2D g2d = (Graphics2D) g;
+        if(Game.dirty){
         refreshComponents();
+        }
+        Game.dirty = false;
+        Graphics2D g2d = (Graphics2D) g;
         for (DrawingGUI dg : components) {
             g2d.drawImage(dg.texture, dg.x, dg.y, dg.width, dg.height, null);
         }
-        Game.dirty = false;
         setVisible(true);
 
     }
