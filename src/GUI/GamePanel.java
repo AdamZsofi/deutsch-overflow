@@ -207,7 +207,7 @@ public class GamePanel extends JPanel {
         workingPointsLabel.setFont(new Font("Serif", Font.PLAIN, 34));
 
 
-        Label snowLabel= new Label("-");
+        Label snowLabel= new Label(Integer.toString(PositionLUT.getPosition(activePlayer).getSnow()));
         this.add(snowLabel);
         snowLabel.setLocation(8*tileSize+60,5*tileSize+70);
         snowLabel.setSize(30,30);
