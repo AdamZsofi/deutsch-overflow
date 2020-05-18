@@ -125,9 +125,7 @@ public class GamePanel extends JPanel {
                     DrawingGUI dgui = icons.get(p.toString())
                             .getImage(tileCorner + x * (tileSize + 1)+5+count2*25, tileCorner + y * (tileSize + 1)+70-count*30, 25);
                     components.add(dgui);
-                    if(count2==0) {
                         count++;
-                    }
                     if(count%3==0){
                         count2=1;
                         count=0;
