@@ -7,6 +7,9 @@ import PlayerClasses.PolarBear;
 import PlayerClasses.PlayerContainer;
 import SnowStorm.SnowStorm;
 import TileClasses.Tile;
+import javax.swing.JOptionPane;
+
+import javax.swing.*;
 
 public class RoundController {
 
@@ -71,6 +74,8 @@ public class RoundController {
      * @param cause String of reason
      */
     public void lose(String cause) {
+        JFrame frame = new JFrame("Game ended");
+        JOptionPane.showMessageDialog(frame, cause + "\nYou lost the game!");
         Game.log.format("! RoundController>lose : You lose the game, cause: %s\n", cause);
         Game.log.println("$ RoundController>lose : Game lost, ended");
         System.exit(1);
@@ -80,7 +85,8 @@ public class RoundController {
      * Win of game -> System exit
      */
     public void win() {
-        Game.log.println("You win the game, Congratulations!");
+        JFrame frame = new JFrame("Game ended");
+        JOptionPane.showMessageDialog(frame, "You win the game!\nCongratulations!");
         Game.log.println("$ RoundController>win : Game won, ended");
         System.exit(1);
     }
