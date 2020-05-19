@@ -134,8 +134,8 @@ public class GamePanel extends JPanel {
         components.clear();
         removeAll();
         //revalidate();
-        i++;
-        System.out.println(i.toString());
+        // i++;
+        // System.out.println(i.toString());
         rescaleAnchors();
 
         //Tiles grid

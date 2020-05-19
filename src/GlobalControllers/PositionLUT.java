@@ -234,11 +234,11 @@ public class PositionLUT {
                 if( randNum <= 60 ) {
                     tileList.get(y).add(new StableTile(x, y));//60%
                     spawnMatrix[y][x] = 1;
-                }else if(randNum<=80) {
-                    tileList.get(y).add(new UnstableTile(x, y));//20%
+                }else if(randNum<=90) {
+                    tileList.get(y).add(new UnstableTile(x, y));//10%
                     spawnMatrix[y][x] = 1;
                 }else {
-                    tileList.get(y).add(new SnowyHole(x, y));//20%
+                    tileList.get(y).add(new SnowyHole(x, y));//10%
                     spawnMatrix[y][x] = 0;
                 }
             }
