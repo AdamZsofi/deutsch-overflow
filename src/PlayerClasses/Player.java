@@ -75,6 +75,7 @@ public abstract class Player {
     public void buildTent(){
         if(inHand != null)
             inHand.used(this, Activity.putUpTent);
+        inHand = null;
     }
 
     /**
@@ -108,7 +109,6 @@ public abstract class Player {
      * @param i item
      */
     public void pickUp(Item i) {
-
         Tile position = PositionLUT.getInstance().getPosition(i);
         int snow = position.getSnow();
         if(snow==0) {

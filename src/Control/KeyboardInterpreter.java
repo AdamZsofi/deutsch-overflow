@@ -113,20 +113,22 @@ public class KeyboardInterpreter implements KeyListener {
                 Player p = PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                 Tile currentTile = PositionLUT.getInstance().getPosition(p);
                 ArrayList<Item> items = PositionLUT.getInstance().getItemOnTile(currentTile);
-                if(items.size() == 0)
+                if(items.size() == 0) {
                     break;
-                //for(Item i : items) {
-                if(items.get(0).getState().equals(ItemState.thrownDown))
+                }
+                if(items.get(0).getState().equals(ItemState.thrownDown)) {
                     gameInstance.pickUp(items.get(0)); // elvileg már csak egy maradhatott a listában TODO ellenőrizni
+                    break;
                     //todo ellenorizni, elvileg max 1 lehet a hossza
-                //}
+                }
                 break;
             case KeyEvent.VK_D:
                 Player p1 = PlayerContainer.getInstance().getPlayer(RoundController.getInstance().getcurID());
                 Tile currentTile1= PositionLUT.getInstance().getPosition(p1);
                 ArrayList<Item> items1 = PositionLUT.getInstance().getItemOnTile(currentTile1);
-                if(items1.size() == 0)
+                if(items1.size() == 0) {
                     break;
+                }
                 for(Item ii : items1) {
                     if(ii.getState().equals(ItemState.frozen))
                         gameInstance.digItemUp(ii); // elvileg csak egy lehet ott befagyva
