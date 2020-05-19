@@ -306,7 +306,6 @@ public class PositionLUT {
 
             } while (spawnMatrix[y][x] == 0);
             getTile(x,y).setStandingHere(1);
-            System.out.println(Integer.toString(x) + Integer.toString(y) +  getTile(x,y).toString());
             spawnMatrix[y][x] = 0;
         }
 
