@@ -77,6 +77,7 @@ public class RoundController {
      * @param cause String of reason
      */
     public void lose(GameEndCause cause) {
+        Game.dirty = true;
         InGame.gamePanel.repaint();
         GameEndPopup.showPopup(cause);
         Game.log.format("! RoundController>lose : You lose the game, cause: %s\n", cause);
@@ -88,6 +89,7 @@ public class RoundController {
      * Win of game -> System exit
      */
     public void win() {
+        Game.dirty = true;
         InGame.gamePanel.repaint();
         GameEndPopup.showPopup(GameEndCause.win);
         Game.log.println("$ RoundController>win : Game won, ended");
