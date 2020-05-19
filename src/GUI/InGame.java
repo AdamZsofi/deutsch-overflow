@@ -3,6 +3,8 @@ package GUI;
 import Control.Game;
 import Main.Main;
 import javax.swing.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 
 public class InGame extends JFrame {
