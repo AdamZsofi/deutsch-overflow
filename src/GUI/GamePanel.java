@@ -266,7 +266,7 @@ public class GamePanel extends JPanel {
 
 
 
-        Label snowLabel= new Label(Integer.toString(PositionLUT.getPosition(activePlayer).standingHere));
+        Label snowLabel= new Label(Integer.toString(PositionLUT.getPosition(activePlayer).getSnow()));
         this.add(snowLabel);
         snowLabel.setLocation(posRightSideX + statusBoxIconSize +60,posStatusBoxUpSideY+70);
         snowLabel.setSize(30,30);
