@@ -17,7 +17,7 @@ public class Shovel extends Item{
     public void used(Player p, Activity a){
         if(a == Activity.clearingSnow){
             Tile t = PositionLUT.getInstance().getPosition(p);
-            t.changeSnow(-1);//csak egy, mert a Player.clearSnowbol jön, ott már egyet alapbol ás az áson kivul.
+            t.changeSnow(-1);
             Game.log.println("$ Shovel>used : Transaction 'clearingSnow' was successful");
         } else {
             Game.log.println("! Shovel>used : Activity is not 'clearingSnow'");

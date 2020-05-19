@@ -27,7 +27,7 @@ public class FragileShovel extends Shovel{
 
         if(a == Activity.clearingSnow && counter>0){
             Tile t = PositionLUT.getInstance().getPosition(p);
-            t.changeSnow(-1);//csak egy, mert a Player.clearSnowbol jön, ott már egyet alapbol ás az áson kivul.
+            t.changeSnow(-1);
             counter--;
             Game.log.println("$ FragileShovel>used : Transaction 'clearingSnow' was successful");
         } else {

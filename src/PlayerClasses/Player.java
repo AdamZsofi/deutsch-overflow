@@ -18,7 +18,7 @@ public abstract class Player {
     protected int BodyHeat;
     protected int ID;
     public int workPoints;
-    public boolean inWater; // public lett, kesobb ezt átgondolhatjuk még
+    public boolean inWater;
     protected Item inHand;
     protected Item wearing;
     public Direction saveDirection;
@@ -113,7 +113,7 @@ public abstract class Player {
         int snow = position.getSnow();
         if(snow==0) {
             if (inHand != null) {
-                if (inHand.getState() == ItemState.thrownDown) {//wtf ilyen lehet?
+                if (inHand.getState() == ItemState.thrownDown) {
                     inHand.diggedUp();
                 } else {
                     inHand.thrownDown();
@@ -300,8 +300,6 @@ public abstract class Player {
             position.steppedOff(dir);
             PositionLUT.getInstance().setPosition(this, next_tile);
             next_tile.steppedOn(this);
-            // position.standingHere = position.standingHere-1; // TODO ezt steppedOn meg steppedOff csinálja!!!
-            // next_tile.standingHere = next_tile.standingHere+1;
             inWater = false;
         } catch (IndexOutOfBoundsException e) {
             Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) cannot pullOut in that direction(OutBound)\n", ID);

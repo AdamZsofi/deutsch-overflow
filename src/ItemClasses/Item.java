@@ -10,7 +10,7 @@ import PlayerClasses.Player;
  * It has an getSate() method to determine the state of the Item
  */
 public abstract class Item {
-    ItemState state; // state of the item
+    ItemState state;
 
     Item() {
         state = ItemState.frozen;

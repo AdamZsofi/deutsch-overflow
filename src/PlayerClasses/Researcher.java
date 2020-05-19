@@ -27,9 +27,9 @@ public class Researcher extends Player {
             Tile checkedTile = thisTile.getNeighbour(dir);
             int capacity = checkedTile.getCapacity();
             GamePanel.capacityEnabled = true;
-            GamePanel.capacotyOnTile = capacity;
-            GamePanel.capacotyX = checkedTile.getX();
-            GamePanel.capacotyY = checkedTile.getY();
+            GamePanel.capacityOnTile = capacity;
+            GamePanel.capacityX = checkedTile.getX();
+            GamePanel.capacityY = checkedTile.getY();
             Game.log.println("$ Researcher>detectCapacity : Transaction 'detectCapacity' is completed");
             System.out.println("! Researcher>detectCapacity : Tile capacity: " + capacity);
         }

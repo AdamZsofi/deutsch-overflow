@@ -21,9 +21,9 @@ import java.util.Map;
 public class GamePanel extends JPanel {
 
     public static boolean capacityEnabled = false;
-    public static int capacotyOnTile;
-    public static int capacotyX;
-    public static int capacotyY;
+    public static int capacityOnTile;
+    public static int capacityX;
+    public static int capacityY;
 
     private int tileSize;
     private int tilePadding;
@@ -90,7 +90,7 @@ public class GamePanel extends JPanel {
 
     private void initIcons() {
         //loading players
-        //in runtime revealed if a player is eskimo or researcher
+        //in runtime revealed whether a player is eskimo or researcher
         for (int i = 0; i < PlayerContainer.getInstance().getPlayerNum(); i++) {
             String p = PlayerContainer.getInstance().getPlayer(i).toString();
             icons.put(p, new DrawingGUI(p));
@@ -150,8 +150,6 @@ public class GamePanel extends JPanel {
         components.clear();
         removeAll();
         //revalidate();
-        // i++;
-        // System.out.println(i.toString());
         rescaleAnchors();
 
         //Tiles grid
@@ -187,11 +185,9 @@ public class GamePanel extends JPanel {
             for (int y = 0; y < 6; y++) {
                 ArrayList<Item> iList = PositionLUT.getItemOnTile(PositionLUT.getTile(x, y));
                 for (Item item : iList) {
-                    //if ((item.getState() == ItemState.thrownDown || item.getState() == ItemState.frozen) && PositionLUT.getTile(x, y).getSnow() == 0 ) {
                     DrawingGUI dgui = icons.get(item.toString())
                             .getImage(margin + x * (tileSize + tilePadding) + 2*itemSize+5, margin + y * (tileSize + tilePadding) + 2*itemSize+5, itemSize);
                     components.add(dgui);
-                    //}
                 }
             }
         }
@@ -281,7 +277,7 @@ public class GamePanel extends JPanel {
 
         String capacity = "-";
         if(capacityEnabled){
-            capacity = "Capacity on Tile (" +Integer.toString(capacotyX) + ";" +Integer.toString(capacotyY) + " ) is "+ Integer.toString(capacotyOnTile) + ".";
+            capacity = "Capacity on Tile (" +Integer.toString(capacityX) + ";" +Integer.toString(capacityY) + " ) is "+ Integer.toString(capacityOnTile) + ".";
         }
         Label capacityLabel= new Label(capacity);
         this.add(capacityLabel);

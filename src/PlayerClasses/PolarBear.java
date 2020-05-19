@@ -13,7 +13,7 @@ import java.util.Random;
  * Auto special Player
  * Functionalities:
  * - auto-step
- * - ))))))))))))))))))
+ * - if it steps on a tile with a player on it, the game ends
  */
 public class PolarBear {
     /**

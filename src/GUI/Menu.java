@@ -53,12 +53,9 @@ public class Menu extends JPanel  {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO INIteket behuytam
                 PlayerContainer.Initialize(playerNum, 3);
                 RoundController.getInstance();
                 PositionLUT.getInstance().randInit();
-                // InGame.getInstance().initComponents(Integer.parseInt(numLabel.getText()));
-                // InGame.getInstance().changeScreen();
                 InGame.getInstance().changeToGameScreen(playerNum);
             }
         });
@@ -101,7 +98,7 @@ public class Menu extends JPanel  {
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        BufferedImage image = null;//new ImageIcon("GUI/Pack/start.jpg");
+        BufferedImage image = null;
         try {
             image = ImageIO.read(new File("src/GUI/Pack/start.jpg"));
         } catch (IOException e) {

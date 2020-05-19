@@ -101,7 +101,6 @@ public class PositionLUT {
         itemTileMap.put(items2.get(0), getTile(3, 4));
 
 
-        //benne vannak a signalflarepartok is.
         ArrayList<Item> sf1 = new ArrayList<>();
         sf1.add(RoundController.getInstance().sg.signalFlareParts.get(0));
         tileItemMap.put(getTile(1,2),sf1 );//signalflarepart 0ID
@@ -215,7 +214,7 @@ public class PositionLUT {
      * Polarbear can spawn anywhere
      * at the beginning polarbear and player can't be on the same tile
      */
-    public static void randInit(){ //public lett sry, mostmár a menüből van hivva
+    public static void randInit(){
         tileList = new ArrayList<>();
         itemTileMap = new HashMap<>();
         tileItemMap = new HashMap<>();
@@ -235,7 +234,7 @@ public class PositionLUT {
                     tileList.get(y).add(new StableTile(x, y));//60%
                     spawnMatrix[y][x] = 1;
                 }else if(randNum<=90) {
-                    tileList.get(y).add(new UnstableTile(x, y));//10%
+                    tileList.get(y).add(new UnstableTile(x, y));//30%
                     spawnMatrix[y][x] = 1;
                 }else {
                     tileList.get(y).add(new SnowyHole(x, y));//10%
@@ -368,7 +367,7 @@ public class PositionLUT {
      * @return position (Tile)
      */
     public static Tile getTile(int x, int y) {
-        return tileList.get(y).get(x); //indexing convension
+        return tileList.get(y).get(x); //indexing convention
     }
 
     /**
@@ -388,7 +387,7 @@ public class PositionLUT {
      * @param t position (Tile)
      */
     public void setPosition(Item i, Tile t){
-        tileItemMap.get(itemTileMap.get(i)).remove(i);//átlátható. regi hely remove
+        tileItemMap.get(itemTileMap.get(i)).remove(i);
         tileItemMap.get(t).add(i);//uj hely add
         itemTileMap.put(i, t);//put folulirja az elozot
     }
@@ -409,7 +408,7 @@ public class PositionLUT {
      * @param t position(Tile)
      */
     public void setPosition(PolarBear pb, Tile t){
-        tilePolarBearMap.get(polarbearTileMap.get(pb)).remove(pb); //.
+        tilePolarBearMap.get(polarbearTileMap.get(pb)).remove(pb);
         tilePolarBearMap.get(t).add(pb);//uj hely add
         polarbearTileMap.put(pb, t);//put folulirja az elozot
     }

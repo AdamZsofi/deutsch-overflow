@@ -10,9 +10,7 @@ import java.util.Scanner;
 
 public class Rope extends Item{
 
-    // Tile's getNeighbour throws IndexOutOfBounds, catch it here. (See details at Tile.getNeighbours())
-
-    /**
+     /**
      * Called from RoundController
      * Player (p) uses Rope
      * If Activity (a) is 'savingPeople'
