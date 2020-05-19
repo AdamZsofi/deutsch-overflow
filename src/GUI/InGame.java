@@ -3,6 +3,7 @@ package GUI;
 import Control.Game;
 import Main.Main;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -24,7 +25,8 @@ public class InGame extends JFrame {
         setTitle("Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1400, 750);
-        //setResizable(false);
+        setMinimumSize(new Dimension(1400,750));
+        setResizable(true);
         this.getContentPane().add(menu);
         setVisible(true);
     }
