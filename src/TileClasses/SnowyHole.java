@@ -23,9 +23,10 @@ public class SnowyHole extends Tile {
      * Sets Igloo parameter of Tile to TRUE (iglooOn = TRUE)
      */
     @Override
-    public void buildIgloo(){
+    public boolean buildIgloo(){
         iglooOn = false;
         Game.log.format("! SnowyHole>buildIgloo : SnowyHole (%d, %d) cannot have Igloo! Cannot built 'iglooOn=false'\n", x, y);
+        return false;
     }
 
     /**

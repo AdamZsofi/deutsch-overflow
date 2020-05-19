@@ -19,7 +19,14 @@ public class Eskimo extends Player {
     public void buildIgloo() {
         Game.log.format("# Eskimo>buildIgloo : started by PlayerID: %d\n", ID);
         Tile tile = PositionLUT.getInstance().getPosition(this);
-        tile.buildIgloo();
+        boolean successful = tile.buildIgloo();
+        if(successful) {
+            workPoints--;
+            if(workPoints==0) {
+                Game.log.format("# Player>step : Player (PlayerId:%d) has no more workingPoints\n", ID);
+                passRound();
+            }
+        }
         Game.log.println("# Eskimo>buildIgloo : ended");
     }
     @Override
