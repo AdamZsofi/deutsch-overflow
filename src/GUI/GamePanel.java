@@ -163,7 +163,8 @@ public class GamePanel extends JPanel {
         }
         //Players in TileGrid
         for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 6; y++) {
+            for (int y = 0; y < 6;
+                 y++) {
                 ArrayList<Player> players = PositionLUT.getPlayersOnTile(PositionLUT.getTile(x, y));
                 int count=0;
                 int count2=0;
@@ -185,11 +186,11 @@ public class GamePanel extends JPanel {
             for (int y = 0; y < 6; y++) {
                 ArrayList<Item> iList = PositionLUT.getItemOnTile(PositionLUT.getTile(x, y));
                 for (Item item : iList) {
-                    if(PositionLUT.getTile(x, y).getSnow() == 0){
+                    //if(PositionLUT.getTile(x, y).getSnow() == 0){
                         DrawingGUI dgui = icons.get(item.toString())
                                 .getImage(margin + x * (tileSize + tilePadding) + 2*itemSize+5, margin + y * (tileSize + tilePadding) + 2*itemSize+5, itemSize);
                         components.add(dgui);
-                    }
+                    //}
 
                 }
             }

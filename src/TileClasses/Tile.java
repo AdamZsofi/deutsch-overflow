@@ -3,6 +3,7 @@ package TileClasses;
 import Control.Game;
 import GlobalControllers.PositionLUT;
 import GlobalControllers.RoundController;
+import ItemClasses.Tent;
 import PlayerClasses.Player;
 import PlayerClasses.PlayerContainer;
 
@@ -155,6 +156,7 @@ public abstract class Tile {
      */
     public void putOnTent(){
         tentOn=true;
+        RoundController.getInstance().tent = new Tent();
         RoundController.getInstance().tent.counter = PlayerContainer.getInstance().getPlayerNum();
         RoundController.getInstance().tent.x=x;
         RoundController.getInstance().tent.y=y;

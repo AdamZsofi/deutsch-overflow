@@ -251,6 +251,7 @@ public abstract class Player {
      * @param dir Direction where to step
      */
     public void step(Direction dir) {
+
         Game.log.format("$ Player>step : Player (PlayerId:%d) Transaction 'stepping' began\n", ID);
         if(dir.getValue() == 4) {
                 Game.log.format("! Player>step : Player (PlayerId:%d) player has chosen HERE for step\n", ID);

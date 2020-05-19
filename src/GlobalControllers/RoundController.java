@@ -38,7 +38,7 @@ public class RoundController {
         ss = new SnowStorm();
         sg = new SignalFlare(); //feltölti itemekkel a sajat ArrayList-ét, posLUT initnél mapon is ott lesz.
         polarbear= new PolarBear();
-        tent = new Tent();
+        //tent = new Tent();
     }
 
     /**

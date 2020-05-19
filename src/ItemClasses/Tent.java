@@ -2,7 +2,9 @@ package ItemClasses;
 
 import Control.Game;
 import GlobalControllers.PositionLUT;
+import GlobalControllers.RoundController;
 import PlayerClasses.Player;
+import PlayerClasses.PlayerContainer;
 import TileClasses.Tile;
 
 /**
@@ -24,6 +26,10 @@ public class Tent extends Item{
      * @param p Player
      * @param a Activity
      */
+    public Tent(){
+        super();
+        counter = PlayerContainer.getInstance().getPlayerNum();
+    }
     @Override
     public void used(Player p, Activity a){
         Tile t = PositionLUT.getInstance().getPosition(p);
@@ -33,6 +39,9 @@ public class Tent extends Item{
             Game.log.println("$ Tent>used : Transaction 'puttingTent' was successful");
         } else {
             Game.log.format("! Tent>used : Activity is not 'putUpTent' or Tile has Igloo : hasIgloo=%s\n", t.getIglooOn() );
+        }
+        if(p.workPoints<=0){
+            p.passRound();
         }
     }
     @Override
