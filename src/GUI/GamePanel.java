@@ -153,6 +153,21 @@ public class GamePanel extends JPanel {
             }
         }
 
+        //loading shelters
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
+                if(PositionLUT.getTile(x,y).getIglooOn()){
+                    DrawingGUI dgui = icons.get("igloo")
+                            .getImage(tileCorner + x * (tileSize + 1) +tileSize/4, tileCorner + y * (tileSize + 1) + tileSize/4, tileSize/2);
+                    components.add(dgui);
+                }else if(PositionLUT.getTile(x,y).tentOn){
+                    DrawingGUI dgui = icons.get("tent")
+                            .getImage(tileCorner + x * (tileSize + 1) + tileSize/4, tileCorner + y * (tileSize + 1) + tileSize/4, tileSize/2);
+                    components.add(dgui);
+                }
+            }
+        }
+
         Tile tile = PositionLUT.getInstance().getPosition(RoundController.getInstance().polarbear);
         int x= tile.getX();
         int y = tile.getY();
@@ -223,7 +238,7 @@ public class GamePanel extends JPanel {
 
         String capacity = "-";
         if(capacityEnabled){
-            capacity = "Capacity on Tile (" +Integer.toString(capacotyX) + ";" +Integer.toString(capacotyX) + " ) is "+ Integer.toString(capacotyOnTile) + ".";
+            capacity = "Capacity on Tile (" +Integer.toString(capacotyX) + ";" +Integer.toString(capacotyY) + " ) is "+ Integer.toString(capacotyOnTile) + ".";
         }
         Label capacityLabel= new Label(capacity);
         this.add(capacityLabel);

@@ -155,7 +155,6 @@ public abstract class Tile {
      */
     public void putOnTent(){
         tentOn=true;
-        System.out.println(PlayerContainer.getInstance().getPlayerNum());
         RoundController.getInstance().tent.counter = PlayerContainer.getInstance().getPlayerNum();
         RoundController.getInstance().tent.x=x;
         RoundController.getInstance().tent.y=y;
