@@ -35,7 +35,6 @@ public class FragileShovel extends Shovel{
         }
 
         if(counter==0){
-            PositionLUT.getInstance().setPosition(this, PositionLUT.getInstance().getTile(0,2)); //másik tile-ra esik
             p.dropFragileShovel();
             Game.log.println("$ FragileShovel>used : Transaction 'dropFragileShovel' was successful");
         }
