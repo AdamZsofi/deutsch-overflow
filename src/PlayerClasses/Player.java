@@ -269,8 +269,6 @@ public abstract class Player {
                 PositionLUT.getInstance().setPosition(this, next_tile);
 
                 next_tile.steppedOn(this);
-                System.out.println(Integer.toString(position.standingHere) +": " + position.toString());
-                System.out.println(Integer.toString(next_tile.standingHere) +": " + next_tile.toString());
             } catch (IndexOutOfBoundsException e) {
                 Game.log.format("! Player>step : Player (PlayerId:%d) cannot step in that direction(OutBound)\n", ID);
                 return;
