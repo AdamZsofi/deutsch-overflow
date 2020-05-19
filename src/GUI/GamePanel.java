@@ -261,9 +261,9 @@ public class GamePanel extends JPanel {
     public void paint(Graphics g)
     {
 
-        if(Game.dirty){
+        //f(Game.dirty){
         refreshComponents();
-        }
+        //}
         Game.dirty = false;
         Graphics2D g2d = (Graphics2D) g;
         for (DrawingGUI dg : components) {

@@ -31,12 +31,12 @@ public abstract class Player {
         inHand=null;
         inWater=false;
         wearing=null;
-        workPoints=4;
+        workPoints=40;
         ID=id;
     }
 
     public void startRound() {
-        workPoints = 4;
+        workPoints = 40;
         Game.log.format("# Player>startRound : next Player is %d\n", ID);
 
         // check, if the player is freezing to death
