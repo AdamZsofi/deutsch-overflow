@@ -18,6 +18,11 @@ public class Tent extends Item{
      */
     public int x,y;
 
+
+    public Tent(){
+        super();
+        counter = PlayerContainer.getInstance().getPlayerNum();
+    }
     /**
      * Called by RoundController
      * Player(p) puts Tent on Tile
@@ -26,10 +31,6 @@ public class Tent extends Item{
      * @param p Player
      * @param a Activity
      */
-    public Tent(){
-        super();
-        counter = PlayerContainer.getInstance().getPlayerNum();
-    }
     @Override
     public void used(Player p, Activity a){
         Tile t = PositionLUT.getInstance().getPosition(p);
