@@ -14,7 +14,8 @@ public class Food extends Item{
      */
     @Override
     public void pickedUp(Player p) {
-        PositionLUT.getInstance().setPosition(this, PositionLUT.getInstance().getTile(0, 2));
+
+        PositionLUT.getInstance().throwItemDown(this, PositionLUT.getInstance().getTile(0, 2));
         state = ItemState.frozen;
         p.ateFood();
         Game.log.println("$ Food>pickedUp : Transaction 'pickUp' and 'ateFood' was successful");

@@ -55,8 +55,10 @@ public class UnstableTile extends Tile {
 
     @Override
     public String toString() {
-        if (snow > 0) return "tileSnow";
-        if (capacity == 0) return "tileWater";
+        if (capacity < standingHere)
+            return "tileWater";
+        if (snow > 0)
+            return "tileSnow";
         return "tileNoSnow";
     }
 }
