@@ -109,7 +109,7 @@ public abstract class Player {
      * @param i item
      */
     public void pickUp(Item i) {
-        Tile position = PositionLUT.getInstance().getPosition(i);
+        Tile position = PositionLUT.getInstance().getPosition(this);
         int snow = position.getSnow();
         if(snow==0) {
             if (inHand != null) {
