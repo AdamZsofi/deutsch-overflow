@@ -111,7 +111,7 @@ public class GamePanel extends JPanel implements ComponentListener {
         icons.put("passRound", new DrawingGUI("passRound"));
         icons.put("pickUp", new DrawingGUI("pickUp"));
         icons.put("tent", new DrawingGUI("tent"));
-
+        icons.put("tentF", new DrawingGUI("tentF"));
         //loading tiles
         icons.put("tileNoSnow", new DrawingGUI("tileNoSnow"));
         icons.put("tileSnow", new DrawingGUI("tileSnow"));

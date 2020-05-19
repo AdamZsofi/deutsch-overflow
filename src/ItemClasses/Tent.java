@@ -39,5 +39,6 @@ public class Tent extends Item{
     public String getShortName(){ return "T("+state.getShortName(getState())+")";}
 
     @Override
-    public String toString() {return "tent";}
+    public String toString() { return "tent"+state.getShortName(getState());}
+
 }
