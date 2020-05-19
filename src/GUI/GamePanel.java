@@ -300,7 +300,6 @@ public class GamePanel extends JPanel implements ComponentListener {
     @Override
     public void paint(Graphics g)
     {
-        System.out.println("Paint");
         if(Game.dirty){
             refreshComponents();
         }
