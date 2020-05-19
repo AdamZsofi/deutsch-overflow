@@ -33,7 +33,6 @@ public class InGame extends JFrame {
 
     public void changeToGameScreen(int playerNum){
         this.getContentPane().removeAll();
-        //frame.getContentPane().add(new JPanel());
         gamePanel = new GamePanel();
 
         gamePanel.addKeyListener(Main.interpreter);

@@ -70,8 +70,6 @@ public class KeyboardInterpreter implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        // debug:
-        System.out.println("Key " + e.getKeyChar() + " released");
         if(state.equals(InputAcceptingState.disabled)) return;
         switch (state) {
             case waiting_command:
@@ -95,7 +93,7 @@ public class KeyboardInterpreter implements KeyListener {
      * @author Zsófi
      */
     private void commandArrived(KeyEvent e) {
-        state = InputAcceptingState.disabled; // TODO ha a skill meg savePlayers másik key felfogása furán működne (lassan), akkor ezt kell átpakolni (Zsófi)
+        state = InputAcceptingState.disabled;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
                 gameInstance.step(Direction.DOWN);
@@ -117,9 +115,8 @@ public class KeyboardInterpreter implements KeyListener {
                     break;
                 }
                 if(items.get(0).getState().equals(ItemState.thrownDown)) {
-                    gameInstance.pickUp(items.get(0)); // elvileg már csak egy maradhatott a listában TODO ellenőrizni
+                    gameInstance.pickUp(items.get(0)); // elvileg már csak egy maradhatott a listában
                     break;
-                    //todo ellenorizni, elvileg max 1 lehet a hossza
                 }
                 break;
             case KeyEvent.VK_D:

@@ -150,7 +150,6 @@ public class GamePanel extends JPanel {
     void refreshComponents() {
         components.clear();
         removeAll();
-        //revalidate();
         rescaleAnchors();
 
         //Tiles grid
