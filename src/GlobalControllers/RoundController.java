@@ -3,6 +3,7 @@ package GlobalControllers;
 import Control.Game;
 import GUI.GameEndPopup;
 import GUI.GamePanel;
+import GUI.InGame;
 import ItemClasses.SignalFlare;
 import ItemClasses.Tent;
 import PlayerClasses.PolarBear;
@@ -76,6 +77,7 @@ public class RoundController {
      * @param cause String of reason
      */
     public void lose(GameEndCause cause) {
+        InGame.gamePanel.repaint();
         GameEndPopup.showPopup(cause);
         Game.log.format("! RoundController>lose : You lose the game, cause: %s\n", cause);
         Game.log.println("$ RoundController>lose : Game lost, ended");
@@ -86,6 +88,7 @@ public class RoundController {
      * Win of game -> System exit
      */
     public void win() {
+        InGame.gamePanel.repaint();
         GameEndPopup.showPopup(GameEndCause.win);
         Game.log.println("$ RoundController>win : Game won, ended");
         System.exit(1);

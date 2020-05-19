@@ -300,11 +300,12 @@ public abstract class Player {
             position.steppedOff(dir);
             PositionLUT.getInstance().setPosition(this, next_tile);
             next_tile.steppedOn(this);
-            position.standingHere = position.standingHere-1;
-            next_tile.standingHere = next_tile.standingHere+1;
+            // position.standingHere = position.standingHere-1; // TODO ezt steppedOn meg steppedOff csinálja!!!
+            // next_tile.standingHere = next_tile.standingHere+1;
             inWater = false;
         } catch (IndexOutOfBoundsException e) {
             Game.log.format("! Player>pullOut : Error state, Player (PlayerId:%d) cannot pullOut in that direction(OutBound)\n", ID);
+            e.printStackTrace();
             return;
         }
     }
