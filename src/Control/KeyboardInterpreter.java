@@ -157,16 +157,16 @@ public class KeyboardInterpreter implements KeyListener {
                 gameInstance.passRound();
                 break;
             case KeyEvent.VK_S:
-                String string = "Steps: w(up), a(left), s(down), d(right)\n" +
+                String string = "Steps: arrows\n" +
                                 "Pick item up: i\n" +
                                 "Dig item up: d\n" +
                                 "Build igloo or get capacity: u or u + Direction\n" +
                                 "Clear snow: c\n" +
                                 "Saving player: h + Direction \n" +
                                 "Build tent: t\n" +
-                                "Put singal together: w\n" +
+                                "Put signal together: w\n" +
                                 "Pass round: Enter\n";
-                JOptionPane.showMessageDialog(null,string);
+                JOptionPane.showMessageDialog(null,string,"Help", JOptionPane.QUESTION_MESSAGE);
         }
         // ha nem másik billentyűre várunk (-> lásd useSkill, savePlayers), akkor kell blokkolóról waitingre állítani
         if(state.equals(InputAcceptingState.disabled)) state = InputAcceptingState.waiting_command;

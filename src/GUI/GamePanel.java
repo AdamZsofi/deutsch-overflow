@@ -39,7 +39,6 @@ public class GamePanel extends JPanel {
     private int itemSize;
     private int posMessageBoxUpSideY;
 
-
     private Map<String, DrawingGUI> icons = new HashMap<String, DrawingGUI>();
     /**
      * collection of components from positionLUT
@@ -60,8 +59,10 @@ public class GamePanel extends JPanel {
 
             public void componentResized(ComponentEvent evt) {
                 Game.dirty=true;
-                revalidate();
+                Rectangle b = evt.getComponent().getBounds();
+                evt.getComponent().setBounds(b.x, b.y, b.width, b.width*750/1400);
             }
+
         };
         addComponentListener(listener);
         initIcons();
