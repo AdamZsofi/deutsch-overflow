@@ -89,6 +89,8 @@ public class GamePanel extends JPanel {
         posMessageBoxUpSideY = posStatusBoxUpSideY-2*messageBoxY;
     }
 
+
+    String capacity = "-";
     private void initIcons() {
         //loading players
         //in runtime revealed whether a player is eskimo or researcher
@@ -278,7 +280,7 @@ public class GamePanel extends JPanel {
         workingPointsLabel.setSize(30,30);
         workingPointsLabel.setFont(new Font("Serif", Font.PLAIN, 34));
 
-        String capacity = "-";
+
         if(capacityEnabled){
             capacity = "Capacity on Tile (" +Integer.toString(capacityX) + ";" +Integer.toString(capacityY) + " ) is "+ Integer.toString(capacityOnTile) + ".";
         }
