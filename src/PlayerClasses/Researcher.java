@@ -2,6 +2,7 @@ package PlayerClasses;
 
 import Control.Game;
 import GUI.GamePanel;
+import GUI.InGame;
 import GlobalControllers.PositionLUT;
 import TileClasses.Direction;
 import TileClasses.Tile;
@@ -34,6 +35,7 @@ public class Researcher extends Player {
             System.out.println("! Researcher>detectCapacity : Tile capacity: " + capacity);
             this.workPoints--;
             if(this.workPoints<=0){
+                InGame.gamePanel.repaint();
                 this.passRound();
             }
         }

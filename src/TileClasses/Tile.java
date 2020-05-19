@@ -144,9 +144,11 @@ public abstract class Tile {
      * Called by Eskimo
      * Sets Igloo on Tile (iglooOn = true)
      */
-    public void buildIgloo(){
+    public boolean buildIgloo(){
+        boolean successful = !iglooOn;
         iglooOn = true;
         Game.log.format("$ Tile>buildIgloo : Transaction 'buildIgloo' is completed. Igloo built on Tile (%d, %d) 'iglooOn=true'\n", x, y);
+        return successful;
     }
     public boolean getIglooOn(){ return iglooOn;}
 

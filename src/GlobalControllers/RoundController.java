@@ -68,7 +68,6 @@ public class RoundController {
         }
         checkTent(); // vihar után, hogy védjen a viharban
         Game.log.println("# RoundController>endLastRound : Round end ended");
-        GamePanel.capacityEnabled = false;
         PlayerContainer.getInstance().getPlayer(curID).startRound();
     }
 
