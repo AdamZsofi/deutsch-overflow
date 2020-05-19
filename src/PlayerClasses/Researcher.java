@@ -32,6 +32,10 @@ public class Researcher extends Player {
             GamePanel.capacityY = checkedTile.getY();
             Game.log.println("$ Researcher>detectCapacity : Transaction 'detectCapacity' is completed");
             System.out.println("! Researcher>detectCapacity : Tile capacity: " + capacity);
+            this.workPoints--;
+            if(this.workPoints<=0){
+                this.passRound();
+            }
         }
         catch(IndexOutOfBoundsException e){
             Game.log.format("! Researcher>detectCapacity : No tile in that direction(OutBound)\n");
