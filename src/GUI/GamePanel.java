@@ -11,6 +11,7 @@ import TileClasses.Tile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.ArrayList;
@@ -47,7 +48,22 @@ public class GamePanel extends JPanel {
 
     GamePanel(){
         setLayout(new GridBagLayout());
-        //addComponentListener(this);
+        ComponentListener listener = new ComponentAdapter() {
+            public void componentShown(ComponentEvent evt) {
+            }
+
+            public void componentHidden(ComponentEvent evt) {
+            }
+
+            public void componentMoved(ComponentEvent evt) {
+            }
+
+            public void componentResized(ComponentEvent evt) {
+                Game.dirty=true;
+                revalidate();
+            }
+        };
+        addComponentListener(listener);
         initIcons();
     }
 
@@ -276,26 +292,7 @@ public class GamePanel extends JPanel {
     }
 
     Integer i = 0;
-    /*
-    @Override
-    public void componentResized(ComponentEvent e) {
-        Game.dirty=true;
-        revalidate();
-    }
 
-    @Override
-    public void componentMoved(ComponentEvent e) {
-
-    }
-
-    @Override
-    public void componentShown(ComponentEvent e) {
-    }
-
-    @Override
-    public void componentHidden(ComponentEvent e) {
-
-    }*/
 
 
     @Override
