@@ -3,6 +3,10 @@ package ItemClasses;
 import Control.Game;
 import GlobalControllers.PositionLUT;
 import PlayerClasses.Player;
+import TileClasses.Tile;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Food extends Item{
 
@@ -14,8 +18,16 @@ public class Food extends Item{
      */
     @Override
     public void pickedUp(Player p) {
-
-        PositionLUT.getInstance().throwItemDown(this, PositionLUT.getInstance().getTile(0, 2));
+        ArrayList<Tile> possibleRespawnTiles = new ArrayList<>();
+        for(int x = 0; x < PositionLUT.getInstance().getTileRowSize(); x++) {
+            for(int y = 0; y < PositionLUT.getInstance().getTileColumnSize(); y++) {
+                Tile t = PositionLUT.getTile(x,y);
+                if(PositionLUT.getItemOnTile(t).size()==0) { possibleRespawnTiles.add(t); }
+            }
+        }
+        Random r = new Random();
+        int randomTileIndex = r.nextInt(possibleRespawnTiles.size());
+        PositionLUT.getInstance().throwItemDown(this, possibleRespawnTiles.get(randomTileIndex));
         state = ItemState.frozen;
         p.ateFood();
         Game.log.println("$ Food>pickedUp : Transaction 'pickUp' and 'ateFood' was successful");
