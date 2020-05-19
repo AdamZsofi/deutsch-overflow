@@ -6,6 +6,7 @@ import GlobalControllers.RoundController;
 import PlayerClasses.Player;
 import TileClasses.Tile;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -45,6 +46,7 @@ public class SnowStorm {
             }
 
             Game.log.println("# SnowStorm>tryStorm : SnowStorm is coming");
+            JOptionPane.showMessageDialog(null, "A storm is coming!", "Storm", JOptionPane.WARNING_MESSAGE);
             int x,y;
             do {
                 x = rand.nextInt(PositionLUT.getInstance().getTileRowSize());
