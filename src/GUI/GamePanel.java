@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GamePanel extends JPanel implements ComponentListener {
+public class GamePanel extends JPanel {
 
     public static boolean capacityEnabled = false;
     public static int capacotyOnTile;
@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements ComponentListener {
 
     GamePanel(){
         setLayout(new GridBagLayout());
-        addComponentListener(this);
+        //addComponentListener(this);
         initIcons();
     }
 
@@ -276,6 +276,7 @@ public class GamePanel extends JPanel implements ComponentListener {
     }
 
     Integer i = 0;
+    /*
     @Override
     public void componentResized(ComponentEvent e) {
         Game.dirty=true;
@@ -294,7 +295,7 @@ public class GamePanel extends JPanel implements ComponentListener {
     @Override
     public void componentHidden(ComponentEvent e) {
 
-    }
+    }*/
 
 
     @Override
