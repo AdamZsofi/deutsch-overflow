@@ -175,7 +175,6 @@ public class KeyboardInterpreter implements KeyListener {
      * @author Zsófi
      */
     private void savingReady(KeyEvent e) {
-        System.out.println("Saving people, now");
         state = InputAcceptingState.disabled;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
